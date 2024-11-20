@@ -15,10 +15,20 @@
     "link-assets": "npx react-native-asset"
   },
   "dependencies": {
+    "axios": "^1.7.7",
+    "dayjs": "^1.11.13",
+    "i18next": "^23.16.5",
     "lottie-react-native": "^7.1.0",
     "react": "18.3.1",
+    "react-i18next": "^15.1.1",
     "react-native": "0.76.1",
     "react-native-fast-image": "^8.6.3",
+    "react-native-gesture-handler": "^2.21.2",
+    "react-native-localize": "^3.3.0",
+    "react-native-mmkv": "^3.1.0",
+    "react-native-paper": "^5.12.5",
+    "react-native-reanimated": "^3.16.1",
+    "react-native-safe-area-context": "^4.14.0",
     "react-native-svg": "^15.9.0",
     "react-native-vector-icons": "^10.2.0"
   },

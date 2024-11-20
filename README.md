@@ -85,3 +85,4 @@ Update `tsconfig.json`
 
 **navigation** -> check README.md inside `navigations` directory.
 
+assets -> theme -> services -> i18n -> helpers -> components
