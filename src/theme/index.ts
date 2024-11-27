@@ -1,8 +1,9 @@
 import Assets from '@app/assets';
-import {configureFonts, useTheme} from 'react-native-paper';
 import {
+  configureFonts,
   MD3DarkTheme,
   MD3LightTheme,
+  useTheme,
 } from 'react-native-paper';
 import {MD3Type} from 'react-native-paper/lib/typescript/types';
 

@@ -34,8 +34,8 @@ const Container: React.FC<ContainerProps> = ({
     <ContainerTag style={StyleSheet.flatten([
       styles.container,
       {
-        backgroundColor: backgroundColor || theme.colors.background,
-        paddingHorizontal: paddingHorizontal || rpWidth(12),
+        backgroundColor: backgroundColor ??theme.colors.background,
+        paddingHorizontal: paddingHorizontal ?? rpWidth(12),
         padding,
         margin,
       },
@@ -43,7 +43,7 @@ const Container: React.FC<ContainerProps> = ({
     ])}>
       <StatusBar
         barStyle={barStyle}
-        backgroundColor={statusBarColor || theme.colors.background}
+        backgroundColor={statusBarColor ?? theme.colors.background}
       />
       {children}
     </ContainerTag>

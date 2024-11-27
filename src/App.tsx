@@ -6,6 +6,7 @@ import {useAppLangauage} from './i18n';
 import {darkTheme, lightTheme} from './theme';
 import GlobalIndicator from './components/modal/GlobalIndicator';
 import {Text, View} from 'react-native';
+import {SplashScreen} from './views';
 
 const App = () => {
   return (
@@ -33,19 +34,17 @@ const AppContainer = () => {
   // Apply global theme (dark or light)
   const theme = appTheme == 'dark' ? darkTheme : lightTheme;
   return (
-    <>
+    <View>
       <PaperProvider theme={theme}>
         {/* This will start screen of app -> SplashScreen */}
+        <SplashScreen/>
         <View>
-
-          <Text> Welocme to react native</Text>
-        </View>
-        <>
           {/* Inside this tag can put all global modals */}
           <GlobalIndicator />
-        </>
+          <View/>
+        </View>
       </PaperProvider>
-    </>
+    </View>
 
   );
 };
