@@ -5,10 +5,9 @@ import useHomeScreen from './useHomeScreen';
 
 const HomeScreen = () => {
   const { styles } = useHomeScreen();
-
   return (
     <View style={styles.container}>
-      <Text>HomeScreen</Text>
+      <Text style={styles.text} >HomeScreen</Text>
     </View>
   );
 };

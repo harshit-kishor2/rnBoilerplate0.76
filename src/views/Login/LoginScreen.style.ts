@@ -7,7 +7,7 @@ const loginScreenStyles = (theme: AppTheme) =>
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: theme.colors.background,
+      backgroundColor: theme.colors.red,
     },
   });
 

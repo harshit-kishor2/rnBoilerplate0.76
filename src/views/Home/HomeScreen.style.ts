@@ -7,8 +7,11 @@ const homeScreenStyles = (theme: AppTheme) =>
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: theme.colors.background,
+      backgroundColor: theme.colors.blue,
     },
+    text: {
+      color: theme.colors.red,
+    }
   });
 
 export default homeScreenStyles;
