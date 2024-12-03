@@ -3,7 +3,7 @@ import {Appearance} from 'react-native';
 
 const useDeviceTheme = () => {
   // State to store the current color scheme (theme)
-  const [theme, setTheme] = useState(Appearance.getColorScheme());
+  const [theme, setTheme] = useState<ThemeType>(Appearance.getColorScheme());
 
   useEffect(() => {
     // Listener for theme change events

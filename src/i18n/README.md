@@ -34,3 +34,6 @@ This is Configuration files for i18n typically include settings for the default 
    https://shiharadilshan.medium.com/rtl-right-to-left-support-with-internationalization-for-react-native-applications-7ca69e8b68e5
 
 https://reactnative.dev/blog/2016/08/19/right-to-left-support-for-react-native-apps
+
+
+Note -> language-name-map

@@ -88,3 +88,6 @@ module.exports = {
   ],
 };
 ```
+
+
+Note > Also check useDeviceTheme hook inside hook directory

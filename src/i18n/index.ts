@@ -35,12 +35,12 @@ const useLanguageStorage: LanguageDetectorAsyncModule = {
   type: 'languageDetector',
   async: true,
   detect: async (callback: any) => {
-    const lang = sharedPref.getString(storageKeys.langauge);
+    const lang = sharedPref.getString(storageKeys.app_language);
     if (lang) return callback(lang);
   },
   init: () => null,
   cacheUserLanguage: async (language: string) => {
-    sharedPref.set(storageKeys.langauge, language);
+    sharedPref.set(storageKeys.app_language, language);
   },
 };
 

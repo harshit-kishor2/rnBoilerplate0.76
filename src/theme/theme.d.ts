@@ -11,4 +11,6 @@ declare global {
     }
   }
 
+  type ThemeType = 'light' | 'dark' | null | undefined;
+
 }

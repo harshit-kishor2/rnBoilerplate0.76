@@ -14,7 +14,7 @@ import {
 
 import {allCombineReducers} from './combine-reducers';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
-import {storage} from '@app/services';
+import storage from '@app/services/storage';
 
 // ======================================================
 

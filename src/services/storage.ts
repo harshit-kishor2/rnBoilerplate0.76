@@ -5,9 +5,10 @@ import {MMKV} from 'react-native-mmkv';
  * @type {Object<string, string>}
  */
 export const storageKeys = {
-  langauge: '@langauge',
   access_token: '@access_token',
   refresh_token: '@refresh_token',
+  app_language: '@app_language',
+  app_theme: '@app_theme',
 };
 
 /**
