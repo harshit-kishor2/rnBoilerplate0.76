@@ -1,7 +1,7 @@
 
 import {StyleSheet} from 'react-native';
 
-const settingScreenStyles = (theme: AppTheme) =>
+const settingScreenStyles = (theme: IAppTheme) =>
   StyleSheet.create({
     container: {
       flex: 1,

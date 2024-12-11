@@ -3,7 +3,7 @@ export {};
 
 declare global {
 
-  type AppTheme = typeof import('@app/theme').lightTheme | typeof import('@app/theme').darkTheme;
+  type IAppTheme = typeof import('@app/theme').lightTheme | typeof import('@app/theme').darkTheme;
 
   namespace ReactNativePaper {
     interface Theme {
@@ -11,6 +11,6 @@ declare global {
     }
   }
 
-  type ThemeType = 'light' | 'dark' | null | undefined;
+  type IThemeType = 'light' | 'dark' | 'auto' | null | undefined;
 
 }

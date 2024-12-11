@@ -20,7 +20,7 @@ export const loaderGlobalIndicator = createRef<GlobalModalRef>();
 
 const GlobalIndicator: React.FC = () => {
   const theme = useAppTheme();
-  const styles = useMemo(() => useAppStyles(theme), [theme]);
+  const styles = useMemo(() => getAppStyles(theme), [theme]);
   return (
     <GlobalModalContainer isLoading={false} ref={loaderGlobalIndicator}>
       <View style={styles.loaderContainer}>
@@ -39,7 +39,7 @@ const GlobalIndicator: React.FC = () => {
 
 export default GlobalIndicator;
 
-const useAppStyles = (theme: AppTheme) => StyleSheet.create({
+const getAppStyles = (theme: IAppTheme) => StyleSheet.create({
   loaderContainer: {
     alignItems: 'center',
     backgroundColor: theme.colors.background,

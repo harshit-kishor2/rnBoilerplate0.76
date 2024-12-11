@@ -15,8 +15,9 @@ import {getLocales} from 'react-native-localize';
  * Contains the current language and a method to change the language.
  */
 export type AppLocalizationContextType = {
-  languageInApp: string;
-  setLanguageInApp: (lang: string) => void;
+  currentLangauge: ILanguageType;
+  selectedLangaugeType: ILanguageType;
+  setSelectedLangaugeType: (langParam: ILanguageType) => void;
 };
 
 /**
@@ -46,7 +47,7 @@ export const useAppLocalizationContext = () => {
    * @returns {JSX.Element} The LocalizationContextProvider component.
    */
 export const LocalizationContextProvider = ({children}: React.PropsWithChildren) => {
-  const [language, setLanguage] = useState<string>('en');
+  const [selectedLangaugeType, setSelectedLangaugeType] = useState<ILanguageType | 'auto'>('en');
   const deviceLang = getLocales()[0].languageCode;
 
   /**
@@ -56,13 +57,11 @@ export const LocalizationContextProvider = ({children}: React.PropsWithChildren)
  * Defaults to 'en' if no valid saved language is found.
  */
   const loadSavedLangauge = () => {
-    const savedLang = storage.getString(storageKeys.app_language);
-    if (savedLang === 'auto') {
-      setLanguage(deviceLang);
-    } else if (savedLang) {
-      setLanguage(savedLang);
+    const savedLang = storage.getString(storageKeys.app_language) as ILanguageType;
+    if (savedLang) {
+      setSelectedLangaugeType(savedLang);
     } else {
-      setLanguage('en');
+      setSelectedLangaugeType('en');
     }
   };
 
@@ -72,7 +71,7 @@ export const LocalizationContextProvider = ({children}: React.PropsWithChildren)
    */
   useEffect(() => {
     loadSavedLangauge();
-  }, [deviceLang]);
+  }, []);
 
   /**
    * Effect to save the current language to storage and set it to the i18n and dayjs libraries.
@@ -83,18 +82,30 @@ export const LocalizationContextProvider = ({children}: React.PropsWithChildren)
      * Save the current language to storage.
      * This is necessary so that the language is persisted across app restarts.
      */
-    if (language) {
-      storage.set(storageKeys.app_language, language);
+    if (selectedLangaugeType) {
+      storage.set(storageKeys.app_language, selectedLangaugeType);
     }
 
     /**
      * Set the current language to the i18n and dayjs libraries.
      * This will cause any translations and date formatting to be updated based on the new language.
      */
-    if (language) {
-      setAppLanguage(language);
+    if (selectedLangaugeType) {
+      setAppLanguage(selectedLangaugeType);
     }
-  }, [language]);
+  }, [selectedLangaugeType]);
+
+
+  // Determine the applied theme
+  let appliedLanguage: ILanguageType;
+  if (selectedLangaugeType === 'auto') {
+    appliedLanguage = deviceLang as ILanguageType;
+  }else if (selectedLangaugeType) {
+    appliedLanguage = selectedLangaugeType;
+  }else{
+    appliedLanguage = 'en' as ILanguageType;
+  }
+
 
   /**
    * Creates a memoized version of the AppLocalizationContextType.
@@ -108,18 +119,19 @@ export const LocalizationContextProvider = ({children}: React.PropsWithChildren)
      * - setLanguageInApp: a function to set the language
      */
     return {
+      currentLangauge: appliedLanguage,
       /**
        * The current language.
        * This is the language that is currently being used in the app.
        */
-      languageInApp: language,
+      selectedLangaugeType,
       /**
        * A function to set the language.
        * This function is used to update the language state and trigger a re-render.
        */
-      setLanguageInApp: setLanguage,
+      setSelectedLangaugeType,
     };
-  }, [language, setLanguage]);
+  }, [appliedLanguage, selectedLangaugeType, setSelectedLangaugeType]);
 
   return (
     <AppLocalizationContext.Provider value={value}>

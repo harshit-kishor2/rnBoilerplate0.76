@@ -1,7 +1,7 @@
 
 import {StyleSheet} from 'react-native';
 
-const webviewScreenStyles = (theme: AppTheme) =>
+const webviewScreenStyles = (theme: IAppTheme) =>
   StyleSheet.create({
     container: {
       flex: 1,

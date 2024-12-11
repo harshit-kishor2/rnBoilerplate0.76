@@ -1,7 +1,7 @@
 
 import {StyleSheet} from 'react-native';
 
-const networkLoggerScreenStyles = (theme: AppTheme) =>
+const networkLoggerScreenStyles = (theme: IAppTheme) =>
   StyleSheet.create({
     container: {
       flex: 1,

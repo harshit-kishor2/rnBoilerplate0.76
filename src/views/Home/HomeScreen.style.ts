@@ -1,13 +1,13 @@
 
 import {StyleSheet} from 'react-native';
 
-const homeScreenStyles = (theme: AppTheme) =>
+const homeScreenStyles = (theme: IAppTheme) =>
   StyleSheet.create({
     container: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: theme.colors.blue,
+      backgroundColor: theme.colors.background,
     },
     text: {
       color: theme.colors.red,

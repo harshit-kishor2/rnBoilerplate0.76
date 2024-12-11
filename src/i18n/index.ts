@@ -1,4 +1,3 @@
-import sharedPref, {storageKeys} from '@app/services/storage';
 
 import i18n, {LanguageDetectorAsyncModule} from 'i18next';
 import {initReactI18next, useTranslation} from 'react-i18next';
@@ -11,6 +10,7 @@ import {getLocales} from 'react-native-localize';
 import 'dayjs/locale/hi';
 import 'dayjs/locale/en-gb';
 import 'dayjs/locale/es';
+import storage, {storageKeys} from '@app/services/storage';
 /**
  * Mapping of locales to their corresponding translation files.
  *
@@ -35,12 +35,12 @@ const useLanguageStorage: LanguageDetectorAsyncModule = {
   type: 'languageDetector',
   async: true,
   detect: async (callback: any) => {
-    const lang = sharedPref.getString(storageKeys.app_language);
+    const lang = storage.getString(storageKeys.app_language);
     if (lang) return callback(lang);
   },
   init: () => null,
   cacheUserLanguage: async (language: string) => {
-    sharedPref.set(storageKeys.app_language, language);
+    storage.set(storageKeys.app_language, language);
   },
 };
 

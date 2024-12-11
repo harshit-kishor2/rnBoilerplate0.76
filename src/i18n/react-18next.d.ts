@@ -17,3 +17,8 @@ declare module 'i18next' {
     // other
   }
 }
+
+
+declare global {
+  type ILanguageType = 'en' | 'es' | 'hi' | 'auto' | null | undefined;
+}

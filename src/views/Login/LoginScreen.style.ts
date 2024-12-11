@@ -1,7 +1,7 @@
 
 import {StyleSheet} from 'react-native';
 
-const loginScreenStyles = (theme: AppTheme) =>
+const loginScreenStyles = (theme: IAppTheme) =>
   StyleSheet.create({
     container: {
       flex: 1,

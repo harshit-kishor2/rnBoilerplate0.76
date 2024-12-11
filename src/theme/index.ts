@@ -170,7 +170,7 @@ const darkTheme = {
 
 
 const useAppTheme = () => {
-  const theme = useTheme<AppTheme>();
+  const theme = useTheme<IAppTheme>();
   return theme;
 };
 

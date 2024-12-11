@@ -444,7 +444,7 @@ const AppTextInput = React.memo(
 
 export default AppTextInput;
 
-const inputStyles = (theme: AppTheme) =>
+const inputStyles = (theme: IAppTheme) =>
   StyleSheet.create({
     errorView: {
       marginHorizontal: 16,

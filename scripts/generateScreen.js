@@ -61,7 +61,7 @@ export default use${fileName};
   const styleFile = `
 import {StyleSheet} from 'react-native';
 
-const ${styleFileName} = (theme: AppTheme) =>
+const ${styleFileName} = (theme: IAppTheme) =>
   StyleSheet.create({
     container: {
       flex: 1,

@@ -19,12 +19,18 @@ interface AppThemeContextType {
   /**
    * The current theme of the application.
    */
-  themeInApp: AppTheme;
+  currentTheme: IAppTheme;
+
+  /**
+   * The current theme type of the application.
+   */
+  selectedThemeType: IThemeType;
+
   /**
    * Method to change the theme of the application.
-   * @param newTheme - The new theme to set.
+   * @param themeTypeProp - The new theme to set.
    */
-  setThemeInApp: (newTheme: ThemeType) => void;
+  setSelectedThemeType: (themeTypeProp: IThemeType) => void;
 }
 
 /**
@@ -64,26 +70,22 @@ export const AppThemeContextProvider = ({ children }: React.PropsWithChildren) =
   const deviceTheme = useDeviceTheme();
 
   // State to store the current theme, defaults to 'light'
-  const [theme, setTheme] = useState<ThemeType>('light');
+  const [selectedThemeType, setSelectedThemeType] = useState<IThemeType>('light');
 
   useEffect(() => {
-    /**
-     * Loads the saved theme preference from storage.
-     * If 'auto', sets the theme to the device's theme.
-     * If 'light' or 'dark', sets the theme accordingly.
-     * Defaults to 'light' if no valid saved theme is found.
-     */
+  /**
+   * Function to load the saved theme from storage.
+   * If a valid theme is found, sets the theme to it.
+   * Defaults to 'light' if no valid saved theme is found.
+   */
     const loadSavedTheme = () => {
-      const savedTheme = storage.getString(storageKeys.app_theme);
-      if (savedTheme === 'auto') {
-        setTheme(deviceTheme);
-      } else if (savedTheme === 'light' || savedTheme === 'dark') {
-        setTheme(savedTheme);
+      const savedTheme = storage.getString(storageKeys.app_theme)  as IThemeType;
+      if (savedTheme) {
+        setSelectedThemeType(savedTheme);
       } else {
-        setTheme('light');
+        setSelectedThemeType('light');
       }
     };
-
     // Load the saved theme when the component mounts
     loadSavedTheme();
   }, [deviceTheme]);
@@ -92,21 +94,30 @@ export const AppThemeContextProvider = ({ children }: React.PropsWithChildren) =
     /**
      * Saves the current theme to storage whenever it changes.
      */
-    if (theme) {
-      storage.set(storageKeys.app_theme, theme);
+    if (selectedThemeType) {
+      storage.set(storageKeys.app_theme, selectedThemeType);
     }
-  }, [theme]);
+  }, [selectedThemeType]);
 
-  // Determine the theme to apply based on the current theme state
-  const appliedTheme = theme === 'dark' ? darkTheme : lightTheme;
+
+  // Determine the applied theme
+  let appliedTheme;
+  if (selectedThemeType === 'auto') {
+    appliedTheme = deviceTheme === 'dark' ? darkTheme : lightTheme;
+  } else if (selectedThemeType === 'dark') {
+    appliedTheme = darkTheme;
+  } else {
+    appliedTheme = lightTheme;
+  }
 
   // Memoize the context value to optimize performance
   const value = useMemo(
     () => ({
-      themeInApp: appliedTheme,
-      setThemeInApp: setTheme,
+      currentTheme: appliedTheme,
+      setSelectedThemeType,
+      selectedThemeType,
     }),
-    [appliedTheme]
+    [appliedTheme,selectedThemeType]
   );
 
   // Provide the theme context to children components

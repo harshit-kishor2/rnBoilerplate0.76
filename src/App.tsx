@@ -33,9 +33,9 @@ const App = () => {
 
 
 const AppContainer = () => {
-  const {themeInApp} = useAppThemeContext();
+  const {currentTheme} = useAppThemeContext();
   return (
-    <PaperProvider theme={themeInApp}>
+    <PaperProvider theme={currentTheme}>
       {/* This will start screen of app -> SplashScreen */}
       <SplashScreen />
       <View>
