@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import {setAppLanguage} from '@app/i18n';
+import {seti18nLanguage} from '@app/i18n';
 import storage, {storageKeys} from '@app/services/storage';
 import React, {
   createContext,
@@ -10,131 +10,128 @@ import React, {
 } from 'react';
 import {getLocales} from 'react-native-localize';
 
+
 /**
  * Interface representing the shape of the AppLocalizationContext.
- * Contains the current language and a method to change the language.
+ * Contains the currently applied language, the selected language preference and a method to change it.
  */
 export type AppLocalizationContextType = {
-  currentLangauge: ILanguageType;
-  selectedLangaugeType: ILanguageType;
-  setSelectedLangaugeType: (langParam: ILanguageType) => void;
+  currentLanguage: ILanguageType; // Currently applied language
+  selectedLanguageType: ILanguageType; // Selected language preference (e.g., 'auto', 'en', 'fr')
+  setSelectedLanguageType: (langParam: ILanguageType) => void; // Setter function for updating selected language
 };
 
 /**
- * Context to manage the application's language.
- * Provides the current language and a method to change the language.
- * Initially set to undefined and should be used within LocalizationContextProvider.
+ * The AppLocalizationContext is a React context that provides the currently applied language,
+ * the selected language preference and a method to change it.
+ *
+ * The context is created using the `createContext` hook from the React library.
+ * The initial value of the context is `undefined`.
+ *
+ * The context is used by the `useAppLocalizationContext` hook to access the currently applied language,
+ * the selected language preference and a method to change it.
  */
 export const AppLocalizationContext = createContext<AppLocalizationContextType | undefined>(undefined);
 
 /**
- * Hook to access the localization context.
- * This hook will throw an error if it is used outside of AppLocalizationContextProvider.
+ * Hook to access the AppLocalizationContext.
+ * Returns the currently applied language, the selected language preference and a method to change it.
+ * Throws an error if used outside of AppLocalizationContextProvider.
  *
- * @returns The localization context object which contains the current language and a method to change it.
+ * @returns The AppLocalizationContext object which contains the currently applied language and a method to change it.
  */
 export const useAppLocalizationContext = () => {
   const context = useContext(AppLocalizationContext);
-  if (!context) throw Error('useAppLocalizationContext must be used inside AppLocalizationContext');
+  if (!context) throw Error('useAppLocalizationContext must be used inside AppLocalizationContextProvider');
   return context;
 };
 
 /**
-   * LocalizationContextProvider component provides language management functionality.
-   * It determines the language based on device settings and saved preferences,
-   * then provides the language and a function to change it through context.
-   * @param {{children: React.ReactNode | React.ReactNode[]}} props Component props
-   * @returns {JSX.Element} The LocalizationContextProvider component.
-   */
+ * The LocalizationContextProvider component provides the AppLocalizationContext to its children.
+ * It determines the currently applied language by checking the device's language settings and the user's selected language preference.
+ * If the user's selected language preference is 'auto', it uses the device's language setting.
+ * Otherwise, it uses the user's selected language preference.
+ * When the user changes the selected language preference, it updates the currently applied language and saves the preference to storage.
+ *
+ * @param children React components to render within the AppLocalizationContext.
+ * @returns A React component that provides the AppLocalizationContext to its children.
+ */
 export const LocalizationContextProvider = ({children}: React.PropsWithChildren) => {
-  const [selectedLangaugeType, setSelectedLangaugeType] = useState<ILanguageType | 'auto'>('en');
+  const [selectedLanguageType, setSelectedLanguageType] = useState<ILanguageType>('auto');
   const deviceLang = getLocales()[0].languageCode;
 
   /**
- * Function to load the saved language from storage.
- * If 'auto', sets the language to the device's language.
- * If a valid language is found, sets the language to it.
- * Defaults to 'en' if no valid saved language is found.
- */
-  const loadSavedLangauge = () => {
-    const savedLang = storage.getString(storageKeys.app_language) as ILanguageType;
-    if (savedLang) {
-      setSelectedLangaugeType(savedLang);
-    } else {
-      setSelectedLangaugeType('en');
-    }
-  };
-
-  /**
-   * Effect to load the saved language from storage when the component mounts.
-   * This effect is necessary to initialize the language state with the saved language.
+   * On mount, check if a language preference is saved in storage.
+   * If so, set the selected language type to the saved preference.
+   * If not, set the selected language type to 'auto'.
    */
   useEffect(() => {
-    loadSavedLangauge();
+    const savedLangType = storage.getString(storageKeys.app_language_type) as ILanguageType;
+    setSelectedLanguageType(savedLangType ?? 'auto');
   }, []);
 
+
   /**
-   * Effect to save the current language to storage and set it to the i18n and dayjs libraries.
-   * This effect is triggered whenever the language state changes.
+   * Effect hook to save the selected language preference to storage and update the i18n language accordingly.
+   * If the selected language preference is 'auto', it uses the device's language setting.
+   * Otherwise, it uses the user's selected language preference.
    */
   useEffect(() => {
-    /**
-     * Save the current language to storage.
-     * This is necessary so that the language is persisted across app restarts.
-     */
-    if (selectedLangaugeType) {
-      storage.set(storageKeys.app_language, selectedLangaugeType);
+    if (selectedLanguageType) {
+      // Save the selected language preference to storage
+      storage.set(storageKeys.app_language_type, selectedLanguageType);
+
+      // Update the i18n language accordingly
+      if (selectedLanguageType === 'auto') {
+        // If the selected language preference is 'auto', use the device's language setting
+        seti18nLanguage(deviceLang);
+      } else {
+        // Otherwise, use the user's selected language preference
+        seti18nLanguage(selectedLanguageType);
+      }
     }
-
-    /**
-     * Set the current language to the i18n and dayjs libraries.
-     * This will cause any translations and date formatting to be updated based on the new language.
-     */
-    if (selectedLangaugeType) {
-      setAppLanguage(selectedLangaugeType);
-    }
-  }, [selectedLangaugeType]);
-
-
-  // Determine the applied theme
-  let appliedLanguage: ILanguageType;
-  if (selectedLangaugeType === 'auto') {
-    appliedLanguage = deviceLang as ILanguageType;
-  }else if (selectedLangaugeType) {
-    appliedLanguage = selectedLangaugeType;
-  }else{
-    appliedLanguage = 'en' as ILanguageType;
-  }
-
+  }, [selectedLanguageType, deviceLang]);
 
   /**
-   * Creates a memoized version of the AppLocalizationContextType.
-   * The memoization is necessary because the value depends on the language state, which can change.
-   * The useMemo hook ensures that the value is only recreated when the language state changes.
+   * Determine the currently applied language based on the user's selected language preference and the device's language settings.
+   * If the user's selected language preference is 'auto', use the device's language setting.
+   * Otherwise, use the user's selected language preference.
+   *
+   * @type {ILanguageType}
    */
-  const value: AppLocalizationContextType = useMemo(() => {
-    /**
-     * The AppLocalizationContextType value is an object with two properties:
-     * - languageInApp: the current language
-     * - setLanguageInApp: a function to set the language
-     */
-    return {
-      currentLangauge: appliedLanguage,
-      /**
-       * The current language.
-       * This is the language that is currently being used in the app.
-       */
-      selectedLangaugeType,
-      /**
-       * A function to set the language.
-       * This function is used to update the language state and trigger a re-render.
-       */
-      setSelectedLangaugeType,
-    };
-  }, [appliedLanguage, selectedLangaugeType, setSelectedLangaugeType]);
+  const appliedLanguage: ILanguageType = selectedLanguageType === 'auto'
+    ? (deviceLang as ILanguageType)
+    : selectedLanguageType;
 
+  /**
+   * Create a memoized value for the AppLocalizationContext.
+   * The value is an object with the following properties:
+   * - currentLanguage: the currently applied language, determined by the user's selected language preference and the device's language settings.
+   * - selectedLanguageType: the user's selected language preference.
+   * - setSelectedLanguageType: a function to update the user's selected language preference.
+   *
+   * @type {{currentLanguage: ILanguageType, selectedLanguageType: ILanguageType, setSelectedLanguageType: (langParam: ILanguageType) => void}}
+   */
+  const value = useMemo(() => ({
+    currentLanguage: appliedLanguage,
+    selectedLanguageType,
+    setSelectedLanguageType,
+  }), [appliedLanguage, selectedLanguageType]);
+
+  /**
+   * Return the AppLocalizationContextProvider component that wraps the given children.
+   * The AppLocalizationContextProvider component provides the AppLocalizationContext to its children.
+   * It determines the currently applied language by checking the device's language settings and the user's selected language preference.
+   * If the user's selected language preference is 'auto', it uses the device's language setting.
+   * Otherwise, it uses the user's selected language preference.
+   * When the user changes the selected language preference, it updates the currently applied language and saves the preference to storage.
+   *
+   * @param children React components to render within the AppLocalizationContext.
+   * @returns A React component that provides the AppLocalizationContext to its children.
+   */
   return (
     <AppLocalizationContext.Provider value={value}>
+      {/* Render the given children within the AppLocalizationContext */}
       {children}
     </AppLocalizationContext.Provider>
   );

@@ -7,7 +7,9 @@ import {MMKV} from 'react-native-mmkv';
 export const storageKeys = {
   access_token: '@access_token',
   refresh_token: '@refresh_token',
+  app_language_type: '@app_language_type',
   app_language: '@app_language',
+  app_theme_type: '@app_theme_type',
   app_theme: '@app_theme',
 };
 

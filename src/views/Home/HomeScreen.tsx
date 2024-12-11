@@ -9,7 +9,7 @@ import {useAppLocalizationContext} from '@app/store/context/LocalizationContextP
 const HomeScreen = () => {
   const { styles, t } = useHomeScreen();
   const {selectedThemeType,setSelectedThemeType} = useAppThemeContext();
-  const {currentLangauge,setSelectedLangaugeType, selectedLangaugeType} = useAppLocalizationContext();
+  const {currentLanguage,setSelectedLanguageType, selectedLanguageType} = useAppLocalizationContext();
 
   return (
     <View style={styles.container}>
@@ -21,12 +21,12 @@ const HomeScreen = () => {
       <Spacer/>
       <AppButton title="Auto Theme" onPress={()=>setSelectedThemeType('auto')} />
 
-      <Text style={styles.text} >Langauge : ${currentLangauge} and ${selectedLangaugeType} : ${t('welcome')}</Text>
-      <AppButton title="Set Language English" onPress={()=>setSelectedLangaugeType('en')} />
+      <Text style={styles.text} >Langauge : ${currentLanguage} and ${selectedLanguageType} : ${t('welcome')}</Text>
+      <AppButton title="Set Language English" onPress={()=>setSelectedLanguageType('en')} />
       <Spacer/>
-      <AppButton title="Set Language Hindi" onPress={()=>setSelectedLangaugeType('hi')} />
+      <AppButton title="Set Language Hindi" onPress={()=>setSelectedLanguageType('hi')} />
       <Spacer/>
-      <AppButton title="Auto Language" onPress={()=>setSelectedLangaugeType('auto')} />
+      <AppButton title="Auto Language" onPress={()=>setSelectedLanguageType('auto')} />
 
     </View>
   );

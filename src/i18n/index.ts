@@ -3,7 +3,6 @@ import i18n, {LanguageDetectorAsyncModule} from 'i18next';
 import {initReactI18next, useTranslation} from 'react-i18next';
 import {en, es, hi} from './resources';
 import dyajs from 'dayjs';
-import {getLocales} from 'react-native-localize';
 // dayjs locales for i18n
 // Keep this list in sync with the locales in src/i18n/resources
 // See https://github.com/iamkun/dayjs/tree/dev/src/locale
@@ -89,18 +88,8 @@ export const useAppTranslation = () => {
  *
  * @param {string} lang The language to change to.
  */
-export const setAppLanguage = (lang: string) => {
+export const seti18nLanguage = (lang: string) => {
   i18n.changeLanguage(`${lang}`);
   dyajs.locale(`${lang}`);
-};
-
-
-/**
- * Returns the language set on the device and updates the i18n and dayjs locales accordingly.
- *
- * @return {string} The language set on the device.
- */
-export const useAppLangauage = () => {
-  const setLang = getLocales()[0].languageCode;
-  setAppLanguage(setLang);
+  storage.set(storageKeys.app_language, lang); // Save the selected language as the current language.
 };
