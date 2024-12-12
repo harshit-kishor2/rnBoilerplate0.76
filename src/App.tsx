@@ -8,21 +8,24 @@ import {persistor, store} from './store/redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import MultipleContextProvider from './store/context';
 import {AppThemeWrapper} from './theme';
+import {AppI18nProvider} from './i18n';
 const App = () => {
   return (
     <ErrorBoundary catchErrors='always'>
       <GestureHandlerRootView style={{flex: 1}}>
-        {/* wrap context provider */}
-        <MultipleContextProvider>
-          {/* wrap redux store provider */}
-          <ReduxStoreProvider store={store} >
-            {/* wrap persist gate provider */}
-            <PersistGate loading={<Text>Loading...</Text>} persistor={persistor}>
-              {/* wrap app container */}
-              <AppContainer />
-            </PersistGate>
-          </ReduxStoreProvider>
-        </MultipleContextProvider>
+        <AppI18nProvider>
+          {/* wrap context provider */}
+          <MultipleContextProvider>
+            {/* wrap redux store provider */}
+            <ReduxStoreProvider store={store} >
+              {/* wrap persist gate provider */}
+              <PersistGate loading={<Text>Loading...</Text>} persistor={persistor}>
+                {/* wrap app container */}
+                <AppContainer />
+              </PersistGate>
+            </ReduxStoreProvider>
+          </MultipleContextProvider>
+        </AppI18nProvider>
       </GestureHandlerRootView>
     </ErrorBoundary>
   );

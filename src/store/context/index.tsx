@@ -3,7 +3,10 @@ import {DemoContextProvider} from './DemoContextProvider';
 
 // Add all context providers to this array
 const contexts = [
-  DemoContextProvider,
+  {
+    provider: DemoContextProvider,
+    props: {}, // example props for DemoContextProvider
+  },
 ];
 
 /**
@@ -19,8 +22,8 @@ const MultipleContextProvider = ({
   children: React.ReactNode | React.ReactNode[];
 }) => {
   // Reduce over the contexts array to wrap them dynamically
-  return contexts.reduceRight((acc, ContextProvider) => {
-    return <ContextProvider>{acc}</ContextProvider>;
+  return contexts.reduceRight((acc, { provider: ContextProvider, props }) => {
+    return <ContextProvider {...props} >{acc}</ContextProvider>;
   }, children);
 };
 

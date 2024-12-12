@@ -3,16 +3,16 @@ import { I18nextProvider } from 'react-i18next';
 import i18n from './i18n';
 import { AppLocalizationProvider } from './AppLocalizationProvider';
 
-type I18nProviderProps = {
+type IAppI18nProviderProps = {
   autoDetect?: boolean;
 };
 
 /**
- * The I18nProvider component is the top-level component that wraps the entire application with the i18next and AppLocalizationProvider components.
+ * The AppI18nProvider component is the top-level component that wraps the entire application with the i18next and AppLocalizationProvider components.
  * It provides the i18next instance and the language preference management from the AppLocalizationProvider component to all the children components.
  * The autoDetect prop is passed to the AppLocalizationProvider component to decide whether to use the device's language setting or not.
  */
-const I18nProvider: React.FC<React.PropsWithChildren<I18nProviderProps>> = ({
+const AppI18nProvider: React.FC<React.PropsWithChildren<IAppI18nProviderProps>> = ({
   autoDetect = true,
   children,
 }) => {
@@ -25,4 +25,4 @@ const I18nProvider: React.FC<React.PropsWithChildren<I18nProviderProps>> = ({
   );
 };
 
-export default I18nProvider;
+export default AppI18nProvider;

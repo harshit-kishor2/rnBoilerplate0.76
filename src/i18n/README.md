@@ -44,8 +44,8 @@ After adding the i18n module to your project, follow these steps:
 
 #### 1. Configure i18n in your App
 
-In your App.tsx (or main entry file), wrap your app with the `I18nProvider` to enable localization context throughout your app
-`I18nProvider` is the top-level component responsible for initializing i18n and setting up language context. You can optionally enable auto-detection of the device's language.
+In your App.tsx (or main entry file), wrap your app with the `AppI18nProvider` to enable localization context throughout your app
+`AppI18nProvider` is the top-level component responsible for initializing i18n and setting up language context. You can optionally enable auto-detection of the device's language.
 
 **Props:**
 - autoDetect (boolean, default: true): If `true`, it will automatically detect the device's language setting. Otherwise, it will use the user's selected language preference.
@@ -53,12 +53,12 @@ In your App.tsx (or main entry file), wrap your app with the `I18nProvider` to e
 Example usage:
 
 ```javascript
-import { I18nProvider } from '@app/i18n'; // Path to your i18n module
+import { AppI18nProvider } from '@app/i18n'; // Path to your i18n module
 
 const App = () => (
-  <I18nProvider autoDetect={true}>
+  <AppI18nProvider autoDetect={true}>
     {/* Your app's components */}
-  </I18nProvider>
+  </AppI18nProvider>
 );
 
 ```
@@ -123,7 +123,7 @@ i18n/
   │   └── index.ts         # Combines all translation files and exports them
   ├── AppLocalizationProvider.tsx  # Context provider for managing language preferences
   ├── i18n.ts              # i18n initialization and configuration
-  ├── I18nProvider.tsx     # Combines i18n and AppLocalizationProvider for localization
+  ├── AppI18nProvider.tsx     # Combines i18n and AppLocalizationProvider for localization
   ├── index.ts             # Main entry point for exporting functions and hooks
   ├── react-18next.d.ts    # TypeScript definitions for react-i18next
   ├── README.md            # Main usage guide
@@ -138,7 +138,7 @@ i18n/
 
 - **i18n.ts:** This file initializes the i18n instance and configures the language detector, fallback language, and translation resources.
 
-- **I18nProvider.tsx:** A wrapper that combines the i18n instance and the localization provider, enabling the context and translations for the whole app.
+- **AppI18nProvider.tsx:** A wrapper that combines the i18n instance and the localization provider, enabling the context and translations for the whole app.
 
 - **index.ts:** The main entry point for exporting all relevant functions, hooks, and providers for easy use in other projects. It includes hooks like useAppLocalizationContext and useAppTranslation.
 
