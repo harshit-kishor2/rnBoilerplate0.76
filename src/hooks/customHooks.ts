@@ -1,7 +1,5 @@
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {TFunction} from 'i18next';
-import {useTranslation} from 'react-i18next';
 import {useTheme} from 'react-native-paper';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 
@@ -19,25 +17,6 @@ export const useAppDispatch: () => AppDispatch = useDispatch;
  */
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-/**
- * Custom hook to access the current theme.
- *
- * @returns The current theme object.
- */
-export const useAppTheme = () => {
-  const theme = useTheme<IAppTheme>();
-  return theme;
-};
-
-/**
- * Custom hook to access the translation function.
- *
- * @returns A function for translating strings.
- */
-export const useAppTranslation = (): TFunction<'en', undefined> => {
-  const {t: translate} = useTranslation();
-  return translate;
-};
 
 
 /**

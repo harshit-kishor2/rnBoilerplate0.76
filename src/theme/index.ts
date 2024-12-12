@@ -3,6 +3,7 @@ import {
   configureFonts,
   MD3DarkTheme,
   MD3LightTheme,
+  useTheme,
 } from 'react-native-paper';
 import {MD3Type} from 'react-native-paper/lib/typescript/types';
 import AppThemeWrapper from './AppThemeWrapper';
@@ -165,10 +166,21 @@ const darkTheme = {
     },
   },
 };
+/**
+ * Custom hook to access the current theme.
+ *
+ * @returns The current theme object.
+ */
+const useAppTheme = () => {
+  const theme = useTheme<IAppTheme>();
+  return theme;
+};
+
 
 export {
   ColorConst,
   lightTheme,
   darkTheme,
+  useAppTheme,
   AppThemeWrapper
 };

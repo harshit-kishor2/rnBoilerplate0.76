@@ -1,11 +1,9 @@
 import React from 'react';
-import {LocalizationContextProvider} from './LocalizationContextProvider';
-import {AppThemeContextProvider} from './ThemeContextProvider';
+import {DemoContextProvider} from './DemoContextProvider';
 
 // Add all context providers to this array
 const contexts = [
-  LocalizationContextProvider,
-  AppThemeContextProvider,
+  DemoContextProvider,
 ];
 
 /**

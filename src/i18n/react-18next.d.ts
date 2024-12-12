@@ -1,24 +1,55 @@
-// import the original type declarations
 import 'i18next';
-// import all namespaces (for the default language, only)
-import {en, es, hi} from '@app/i18n/resources';
+import {en, es, hi} from './resources';
 
+/**
+ * Extend the i18next namespace to include our custom types.
+ *
+ * This is necessary because i18next does not provide a way to extend the type
+ * of the resources object. We have to manually declare the types for each
+ * resource.
+ *
+ * @see https://github.com/i18next/i18next/issues/1701
+ */
 declare module 'i18next' {
-  // Extend CustomTypeOptions
+  /**
+   * Our custom type options.
+   *
+   * This is an extension of the i18next CustomTypeOptions interface.
+   */
   interface CustomTypeOptions {
-    // custom namespace type, if you changed it
+    /**
+     * The default namespace.
+     */
     defaultNS: 'en';
-    // custom resources type
+    /**
+     * The resources object.
+     *
+     * This object contains the translations for each language.
+     */
     resources: {
+      /**
+       * English translations.
+       */
       en: typeof en;
+      /**
+       * Spanish translations.
+       */
       es: typeof es;
+      /**
+       * Hindi translations.
+       */
       hi: typeof hi;
+
+      //! Add more languages here
     };
-    // other
   }
 }
 
-
-declare global {
-  type ILanguageType = 'en' | 'es' | 'hi' | 'auto' | null | undefined;
+/**
+ * The type of a language.
+ * It can be one of the supported languages ('en', 'es', 'hi') or 'auto' to use the device's language setting.
+ */
+declare global{
+  //! Add your supported languages here.
+  type ILanguageType = 'auto' | 'en' | 'hi' | 'es';
 }

@@ -2,7 +2,7 @@
 import {useAppTheme} from '@app/theme';
 import {useMemo} from 'react';
 import loginScreenStyles from './LoginScreen.style';
-import {useAppTranslation} from '@app/i18n';
+import {useAppTranslation} from '@app/i18n/utils';
 
 const useLoginScreen = () => {
   const theme = useAppTheme();

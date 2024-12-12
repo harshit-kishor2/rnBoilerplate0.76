@@ -2,7 +2,7 @@
 import {useAppTheme} from '@app/theme';
 import {useMemo} from 'react';
 import networkLoggerScreenStyles from './NetworkLoggerScreen.style';
-import {useAppTranslation} from '@app/i18n';
+import {useAppTranslation} from '@app/i18n/utils';
 
 const useNetworkLoggerScreen = () => {
   const theme = useAppTheme();

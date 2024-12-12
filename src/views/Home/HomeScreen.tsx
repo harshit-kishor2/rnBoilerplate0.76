@@ -4,7 +4,7 @@ import { View, Text } from 'react-native';
 import useHomeScreen from './useHomeScreen';
 import {useAppThemeContext} from '@app/store/context/ThemeContextProvider';
 import {AppButton, Spacer} from '@app/components';
-import {useAppLocalizationContext} from '@app/store/context/LocalizationContextProvider';
+import {useAppLocalizationContext} from '@app/i18n/AppLocalizationProvider';
 
 const HomeScreen = () => {
   const { styles, t } = useHomeScreen();

@@ -1,39 +1,158 @@
-# i18n Directory
+# i18n Module Documentation
 
-The internationalization (i18n) setup for the application is housed in this directory. This includes language files, translation utilities, and configuration for supporting multiple languages.
+This module provides a localization solution for React Native apps, enabling easy internationalization (i18n) with support for multiple languages. It integrates with `react-i18next` and supports auto-detection of the user's device language as well as customizable language preferences.
 
-### Example structure:
+##### Features
+- Language detection (based on device settings)
+- Support for multiple languages (e.g., English, Spanish, Hindi)
+- Auto language switching based on user preferences
+- Local storage persistence for language preferences
+- Simple hooks and provider setup for integration in React Native apps
 
-    i18n/
-      resources/
-        en.json
-        es.json
-        hi.json
-        index.ts
-      index.ts
-      react-18next.d.ts
+---
 
-### Subfolders
+## Table of Contents
 
-#### 1. **resources**
+- [Installation](#installation)
+- [Setup and Usage](#setup-and-usage)
+- [File Structure](#file-structure)
+- [Available Functions](#available-functions)
+- [Conclusion](#conclusion)
 
-This folder contains all language JSON files. Each JSON file corresponds to a specific language and contains key-value pairs for translated text.
+---
 
-#### 2. **index.ts**
+## Installation
 
-This is Configuration files for i18n typically include settings for the default language, supported languages, and fallback languages. These settings ensure the application can handle multiple languages smoothly and provide fallbacks if a translation is missing.
+To integrate the i18n module into your React Native project, follow these steps:
 
-1. Install these dependencies if not installed
+1. **Install dependencies**:
 
-   yarn add react-i18next i18next dayjs react-native-localize
+   ```bash
+   yarn add react-i18next i18next dayjs react-native-localize react-native-mmkv
    yarn add --dev @types/i18next
-
-2. check `useAppLangauage` and `useAppTranslation` hook inside `index.ts` file
-3. For import suggetions create `react-18next.d.ts` file.
-4. For RTL support check this article -
-   https://shiharadilshan.medium.com/rtl-right-to-left-support-with-internationalization-for-react-native-applications-7ca69e8b68e5
-
-https://reactnative.dev/blog/2016/08/19/right-to-left-support-for-react-native-apps
+   ```
 
 
-Note -> language-name-map, Also check customhook and LocalizationProvider
+2. **Copy the `i18n` Module**
+
+- Copy the i18n folder (containing all the files) to your project.
+- Ensure that the resources folder contains your language JSON files (en.json, es.json, hi.json).
+
+## Setup and Usage
+
+After adding the i18n module to your project, follow these steps:
+
+#### 1. Configure i18n in your App
+
+In your App.tsx (or main entry file), wrap your app with the `I18nProvider` to enable localization context throughout your app
+`I18nProvider` is the top-level component responsible for initializing i18n and setting up language context. You can optionally enable auto-detection of the device's language.
+
+**Props:**
+- autoDetect (boolean, default: true): If `true`, it will automatically detect the device's language setting. Otherwise, it will use the user's selected language preference.
+
+Example usage:
+
+```javascript
+import { I18nProvider } from '@app/i18n'; // Path to your i18n module
+
+const App = () => (
+  <I18nProvider autoDetect={true}>
+    {/* Your app's components */}
+  </I18nProvider>
+);
+
+```
+
+#### 2. Usage of Translations
+
+The useAppTranslation hook provides the i18n translation function for translating text in your components.
+
+```javascript
+import { useAppTranslation } from './i18n';
+
+const MyComponent = () => {
+  const translate = useAppTranslation();
+
+  return <p>{translate('welcome_message')}</p>;
+};
+
+```
+
+
+#### 3. (Optional) Manually Set the Language
+
+The `useAppLocalizationContext` hook allows you to access the current language and change the selected language preference.
+
+**Returns:**
+- 	currentLanguage: The currently applied language (e.g., 'en', 'es', 'hi').
+- 	selectedLanguageType: The selected language preference (e.g., 'auto', 'en', 'es').
+- 	setSelectedLanguageType: A function to set the selected language.
+
+```javascript
+import { useAppLocalizationContext } from './i18n';
+
+const MyComponent = () => {
+  const { currentLanguage, setSelectedLanguageType } = useAppLocalizationContext();
+
+  return (
+    <div>
+      <p>Current Language: {currentLanguage}</p>
+      <button onClick={() => setSelectedLanguageType('es')}>Switch to Spanish</button>
+    </div>
+  );
+};
+
+```
+### How to Add More Languages
+- Add a new language JSON file in the resources folder, such as fr.json for French.
+- In the `i18n.ts` file, update the resources object to include the new language.
+- In the `react-18next.d.ts` file, update the resources object to include the new language and update `ILanguageType`.
+- In the `utils.ts` file , import dayjs locales for that language.
+
+
+
+## File Structure
+Here’s a breakdown of the folder structure and what each file does:
+
+```graphql
+i18n/
+  ├── resources/
+  │   ├── en.json          # English translations
+  │   ├── es.json          # Spanish translations
+  │   ├── hi.json          # Hindi translations
+  │   └── index.ts         # Combines all translation files and exports them
+  ├── AppLocalizationProvider.tsx  # Context provider for managing language preferences
+  ├── i18n.ts              # i18n initialization and configuration
+  ├── I18nProvider.tsx     # Combines i18n and AppLocalizationProvider for localization
+  ├── index.ts             # Main entry point for exporting functions and hooks
+  ├── react-18next.d.ts    # TypeScript definitions for react-i18next
+  ├── README.md            # Main usage guide
+  └── utils.js             # Utility functions for language storage and handling
+
+```
+
+#### Detailed Explanation:
+- **resources/:** Contains language JSON files (en.json, es.json, hi.json, etc.) that hold the translations for each language. Each JSON file consists of key-value pairs for translated text.
+
+- **AppLocalizationProvider.tsx:** This component provides the context for managing and updating the current language preference. It detects the device language by default and allows users to set a language preference.
+
+- **i18n.ts:** This file initializes the i18n instance and configures the language detector, fallback language, and translation resources.
+
+- **I18nProvider.tsx:** A wrapper that combines the i18n instance and the localization provider, enabling the context and translations for the whole app.
+
+- **index.ts:** The main entry point for exporting all relevant functions, hooks, and providers for easy use in other projects. It includes hooks like useAppLocalizationContext and useAppTranslation.
+
+- **react-18next.d.ts:** TypeScript declarations to extend i18next with custom translation types.
+
+- **utils.js:** Utility functions for handling language preferences in local storage and setting the i18n language.
+
+## Available Functions
+**seti18nLanguage(lang: string):** Sets the i18n language and updates the dayjs locale.
+
+**useAppLocalizationContext:** Provides access to the current language, the selected language preference, and a method to change the selected language.
+
+**useAppTranslation:** A hook that returns the i18n translation function for translating keys in your app.
+
+## Conclusion
+This i18n module provides a powerful and flexible localization solution for React Native apps. It offers automatic language detection, easy-to-use context management, and seamless integration with the react-i18next library. By following the setup instructions and using the provided hooks, you can quickly localize your app for multiple languages.
+

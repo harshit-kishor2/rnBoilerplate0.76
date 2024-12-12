@@ -1,6 +1,4 @@
 /* eslint-disable no-unused-vars */
-import {seti18nLanguage} from '@app/i18n';
-import storage, {storageKeys} from '@app/services/storage';
 import React, {
   createContext,
   useContext,
@@ -8,14 +6,14 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import {getLocales} from 'react-native-localize';
+import {appLanguageLocalStorage, appLanguageLocalStorageKeys, defaultDeviceLang, seti18nLanguage} from './utils';
 
 
 /**
  * Interface representing the shape of the AppLocalizationContext.
  * Contains the currently applied language, the selected language preference and a method to change it.
  */
-export type AppLocalizationContextType = {
+export type IAppLocalizationContext = {
   currentLanguage: ILanguageType; // Currently applied language
   selectedLanguageType: ILanguageType; // Selected language preference (e.g., 'auto', 'en', 'fr')
   setSelectedLanguageType: (langParam: ILanguageType) => void; // Setter function for updating selected language
@@ -31,23 +29,23 @@ export type AppLocalizationContextType = {
  * The context is used by the `useAppLocalizationContext` hook to access the currently applied language,
  * the selected language preference and a method to change it.
  */
-export const AppLocalizationContext = createContext<AppLocalizationContextType | undefined>(undefined);
+export const AppLocalizationContext = createContext<IAppLocalizationContext | undefined>(undefined);
 
 /**
  * Hook to access the AppLocalizationContext.
  * Returns the currently applied language, the selected language preference and a method to change it.
- * Throws an error if used outside of AppLocalizationContextProvider.
+ * Throws an error if used outside of AppLocalizationProvider.
  *
  * @returns The AppLocalizationContext object which contains the currently applied language and a method to change it.
  */
 export const useAppLocalizationContext = () => {
   const context = useContext(AppLocalizationContext);
-  if (!context) throw Error('useAppLocalizationContext must be used inside AppLocalizationContextProvider');
+  if (!context) throw Error('useAppLocalizationContext must be used inside AppLocalizationProvider');
   return context;
 };
 
 /**
- * The LocalizationContextProvider component provides the AppLocalizationContext to its children.
+ * The AppLocalizationProvider component provides the AppLocalizationContext to its children.
  * It determines the currently applied language by checking the device's language settings and the user's selected language preference.
  * If the user's selected language preference is 'auto', it uses the device's language setting.
  * Otherwise, it uses the user's selected language preference.
@@ -56,9 +54,15 @@ export const useAppLocalizationContext = () => {
  * @param children React components to render within the AppLocalizationContext.
  * @returns A React component that provides the AppLocalizationContext to its children.
  */
-export const LocalizationContextProvider = ({children}: React.PropsWithChildren) => {
+export const AppLocalizationProvider = ({
+  autoDetect = true,
+  children,
+}: React.PropsWithChildren<{autoDetect?: boolean;}>) => {
+
+  const deviceLang = useMemo(() => defaultDeviceLang, []); // Memoize deviceLang for stability
+
   const [selectedLanguageType, setSelectedLanguageType] = useState<ILanguageType>('auto');
-  const deviceLang = getLocales()[0].languageCode;
+
 
   /**
    * On mount, check if a language preference is saved in storage.
@@ -66,8 +70,16 @@ export const LocalizationContextProvider = ({children}: React.PropsWithChildren)
    * If not, set the selected language type to 'auto'.
    */
   useEffect(() => {
-    const savedLangType = storage.getString(storageKeys.app_language_type) as ILanguageType;
-    setSelectedLanguageType(savedLangType ?? 'auto');
+    const initializeLanguage = async () => {
+      try {
+        const savedLangType = appLanguageLocalStorage.getString(appLanguageLocalStorageKeys.app_language_type) as ILanguageType;
+        setSelectedLanguageType(savedLangType ?? 'auto');
+      } catch (error) {
+        console.error('Error loading language from storage:', error);
+        setSelectedLanguageType('auto');
+      }
+    };
+    initializeLanguage();
   }, []);
 
 
@@ -77,20 +89,14 @@ export const LocalizationContextProvider = ({children}: React.PropsWithChildren)
    * Otherwise, it uses the user's selected language preference.
    */
   useEffect(() => {
-    if (selectedLanguageType) {
-      // Save the selected language preference to storage
-      storage.set(storageKeys.app_language_type, selectedLanguageType);
-
-      // Update the i18n language accordingly
-      if (selectedLanguageType === 'auto') {
-        // If the selected language preference is 'auto', use the device's language setting
-        seti18nLanguage(deviceLang);
-      } else {
-        // Otherwise, use the user's selected language preference
-        seti18nLanguage(selectedLanguageType);
-      }
+    try {
+      appLanguageLocalStorage.set(appLanguageLocalStorageKeys.app_language_type, selectedLanguageType);
+      const langToApply = (selectedLanguageType === 'auto' && autoDetect) ? deviceLang : selectedLanguageType;
+      seti18nLanguage(langToApply);
+    } catch (error) {
+      console.error('Error saving language to storage or updating i18n:', error);
     }
-  }, [selectedLanguageType, deviceLang]);
+  }, [selectedLanguageType, deviceLang, autoDetect]);
 
   /**
    * Determine the currently applied language based on the user's selected language preference and the device's language settings.
@@ -99,28 +105,27 @@ export const LocalizationContextProvider = ({children}: React.PropsWithChildren)
    *
    * @type {ILanguageType}
    */
-  const appliedLanguage: ILanguageType = selectedLanguageType === 'auto'
+  const appliedLanguage: ILanguageType = (selectedLanguageType === 'auto' && autoDetect)
     ? (deviceLang as ILanguageType)
     : selectedLanguageType;
 
+
   /**
-   * Create a memoized value for the AppLocalizationContext.
-   * The value is an object with the following properties:
-   * - currentLanguage: the currently applied language, determined by the user's selected language preference and the device's language settings.
-   * - selectedLanguageType: the user's selected language preference.
-   * - setSelectedLanguageType: a function to update the user's selected language preference.
+   * Create a memoized value for the AppLocalizationContext object.
+   * The object contains the currently applied language, the selected language preference and a method to change it.
+   * The value is memoized to prevent unnecessary re-renders.
    *
-   * @type {{currentLanguage: ILanguageType, selectedLanguageType: ILanguageType, setSelectedLanguageType: (langParam: ILanguageType) => void}}
+   * @type {IAppLocalizationContext}
    */
-  const value = useMemo(() => ({
+  const value: IAppLocalizationContext = useMemo(() => ({
     currentLanguage: appliedLanguage,
     selectedLanguageType,
     setSelectedLanguageType,
   }), [appliedLanguage, selectedLanguageType]);
 
   /**
-   * Return the AppLocalizationContextProvider component that wraps the given children.
-   * The AppLocalizationContextProvider component provides the AppLocalizationContext to its children.
+   * Return the AppLocalizationProvider component that wraps the given children.
+   * The AppLocalizationProvider component provides the AppLocalizationContext to its children.
    * It determines the currently applied language by checking the device's language settings and the user's selected language preference.
    * If the user's selected language preference is 'auto', it uses the device's language setting.
    * Otherwise, it uses the user's selected language preference.
