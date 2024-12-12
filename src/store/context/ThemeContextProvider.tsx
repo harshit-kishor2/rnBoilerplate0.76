@@ -100,15 +100,12 @@ export const AppThemeContextProvider = ({ children }: React.PropsWithChildren) =
   }, [selectedThemeType]);
 
 
-  // Determine the applied theme
-  let appliedTheme;
-  if (selectedThemeType === 'auto') {
-    appliedTheme = deviceTheme === 'dark' ? darkTheme : lightTheme;
-  } else if (selectedThemeType === 'dark') {
-    appliedTheme = darkTheme;
-  } else {
-    appliedTheme = lightTheme;
-  }
+  const themeMap = {
+    auto: deviceTheme === 'dark' ? darkTheme : lightTheme,
+    dark: darkTheme,
+    light: lightTheme,
+  };
+  const appliedTheme = themeMap[selectedThemeType ?? 'auto']
 
   // Memoize the context value to optimize performance
   const value = useMemo(

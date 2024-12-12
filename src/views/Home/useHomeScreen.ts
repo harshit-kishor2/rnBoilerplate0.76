@@ -1,8 +1,7 @@
 
-import {useAppTheme} from '@app/theme';
+import {useAppTheme, useAppTranslation} from '@app/hooks';
 import {useMemo} from 'react';
 import homeScreenStyles from './HomeScreen.style';
-import {useAppTranslation} from '@app/i18n';
 
 const useHomeScreen = () => {
   const theme = useAppTheme();

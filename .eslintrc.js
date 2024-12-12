@@ -26,6 +26,7 @@ module.exports = {
         allowTemplateLiterals: true,
       },
     ],
+
     'no-empty-function': 'off',
     '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/no-unsafe-assignment': 'off',
@@ -39,13 +40,14 @@ module.exports = {
     '@typescript-eslint/no-misused-promises': 'off',
     'react/display-name': 'off',
     // 'react/prop-types': 'off',
-    'no-unused-vars': 'warn', // Disable the base rule
+    'no-unused-vars': 'off', // Disable the base rule
     '@typescript-eslint/no-unused-vars': [
       'warn', // Change this to 'error' if you prefer errors over warnings
       {
         vars: 'all',
         args: 'after-used',
         ignoreRestSiblings: true,
+        argsIgnorePattern: '^_',
       },
     ],
   },

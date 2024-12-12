@@ -36,4 +36,4 @@ This is Configuration files for i18n typically include settings for the default 
 https://reactnative.dev/blog/2016/08/19/right-to-left-support-for-react-native-apps
 
 
-Note -> language-name-map
+Note -> language-name-map, Also check customhook and LocalizationProvider

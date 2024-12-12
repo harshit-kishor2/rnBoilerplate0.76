@@ -29,8 +29,8 @@ export const rpHeight = (size: number) => {
 };
 //for font  pixel
 export const rpFont = (size: number) => {
-  // return rpHeight(size);
   return Math.ceil(size * scale);
+  // return rpHeight(size)
 };
 
 export const moderateScale = (size: number, factor = 1) => {

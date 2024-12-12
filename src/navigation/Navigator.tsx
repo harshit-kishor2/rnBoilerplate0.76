@@ -6,12 +6,12 @@ import {
 } from '@react-navigation/native';
 import {navigationRef} from './NavigationService';
 import StackNavigator from './StackNavigator';
-import {useDeviceTheme} from '@app/hooks';
+import {useAppThemeContext} from '@app/store/context/ThemeContextProvider';
 
 const Navigator = () => {
-  // Apply global theme (dark or light)
-  const appTheme = useDeviceTheme();
-  const theme = appTheme == 'dark' ? NavigationDarkTheme : NavigationDefaultTheme;
+
+  const {currentTheme} = useAppThemeContext();
+  const theme = currentTheme.themeType === 'dark' ? NavigationDarkTheme : NavigationDefaultTheme;
 
   return (
     <NavigationContainer

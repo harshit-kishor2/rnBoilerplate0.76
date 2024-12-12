@@ -19,4 +19,4 @@ export default AppSvg;
 
 
 // Use->
-{/* <AppSvg icon={Assets.svg.APP} height={30} width={30} /> */}
+/* <AppSvg icon={Assets.svg.APP} height={30} width={30} /> */

@@ -46,7 +46,7 @@ const AppFastImage = React.memo((props: ImageProps) => {
 
   useEffect(() => {
     if (typeof source === 'string') {
-      setImageSource({uri: source, priority: priority || FastImage.priority.normal});
+      setImageSource({uri: source, priority: priority ?? FastImage.priority.normal});
     } else if (typeof source === 'object' && source?.uri) {
       setImageSource(source);
     } else if (typeof source === 'number') {
@@ -72,7 +72,7 @@ const AppFastImage = React.memo((props: ImageProps) => {
     indicator = (
       <View style={styles.indicator}>
         <ActivityIndicator
-          color={loaderColor || 'grey'}
+          color={loaderColor ?? 'grey'}
           size={indicatorSize}
           animating={loading}
         />
@@ -93,7 +93,7 @@ const AppFastImage = React.memo((props: ImageProps) => {
       <FastImage
         style={imageStyle}
         source={imageSource}
-        resizeMode={resizeMode || FastImage.resizeMode.contain}
+        resizeMode={resizeMode ?? FastImage.resizeMode.contain}
         onLoadStart={() => {
           !loading && setLoading(true);
         }}

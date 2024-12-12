@@ -1,4 +1,5 @@
 import React, {ReactNode} from 'react';
+import {View} from 'react-native';
 
 type ConditionProps = {
   children: ReactNode;
@@ -6,7 +7,10 @@ type ConditionProps = {
 };
 
 const If: React.FC<ConditionProps> = ({children, condition}: ConditionProps) => {
-  return condition ? <>{children}</> : null;
+  if(condition) {
+    return <>{children}</>;
+  }
+  return <View/>;
 };
 
 export default If;

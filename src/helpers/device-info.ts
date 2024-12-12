@@ -103,8 +103,8 @@ const hasDynamicIsland = Platform.OS === 'ios' &&
 
 const getStatusBarHeight = Platform.select({
   ios: hasNotch ? 44 : DEFAULT_STATUSBAR_HEIGHT,
-  android: StatusBar.currentHeight || DEFAULT_STATUSBAR_HEIGHT,
-}) || DEFAULT_STATUSBAR_HEIGHT;
+  android: StatusBar.currentHeight ?? DEFAULT_STATUSBAR_HEIGHT,
+}) ?? DEFAULT_STATUSBAR_HEIGHT;
 
 
 

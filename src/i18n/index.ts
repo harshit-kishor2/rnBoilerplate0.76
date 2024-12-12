@@ -1,6 +1,6 @@
 
 import i18n, {LanguageDetectorAsyncModule} from 'i18next';
-import {initReactI18next, useTranslation} from 'react-i18next';
+import {initReactI18next} from 'react-i18next';
 import {en, es, hi} from './resources';
 import dyajs from 'dayjs';
 // dayjs locales for i18n
@@ -69,18 +69,6 @@ i18n
   });
 
 export default i18n;
-
-
-
-/**
- * Returns a function that can be used to translate text using the i18next library.
- *
- * @return {function} A function that takes a translation key as input and returns the translated text.
- */
-export const useAppTranslation = () => {
-  const {t} = useTranslation();
-  return t;
-};
 
 
 /**

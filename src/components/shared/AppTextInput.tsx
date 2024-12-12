@@ -10,6 +10,10 @@ import {
   Text,
   TextInputFocusEventData,
   View,
+  TextInputProps as RNTextInputProps,
+  StyleProp,
+  TextStyle,
+  ViewStyle,
 } from 'react-native';
 
 import Animated, {
@@ -23,12 +27,6 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import {
-  TextInputProps as RNTextInputProps,
-  StyleProp,
-  TextStyle,
-  ViewStyle,
-} from 'react-native';
 import {useAppTheme} from '@app/theme';
 
 export interface TextInputProps extends InputProps {

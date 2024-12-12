@@ -13,8 +13,10 @@ export const numberFormat = (
 
 
 // For first letter capital
-export const capitalizeFirstLetter = (str: string) =>
-  str && str.length ? str.charAt(0).toUpperCase() + str.slice(1) : str;
+export const capitalizeFirstLetter = (str: string): string => {
+  if (!str) return ''; // Handle null, undefined, or empty string explicitly
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
 
 export const isBlankString = (str: string) =>
   !str || str.length === 0 || /^\s*$/.test(str);

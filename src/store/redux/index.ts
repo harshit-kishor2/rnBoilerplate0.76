@@ -13,7 +13,6 @@ import {
 } from 'redux-persist';
 
 import {allCombineReducers} from './combine-reducers';
-import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import storage from '@app/services/storage';
 
 // ======================================================
@@ -111,8 +110,3 @@ export const persistor = persistStore(store);
 export const purgePersistedState = () => {
   persistor.purge();
 };
-
-
-
-export const useAppDispatch: () => AppDispatch = useDispatch;
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
