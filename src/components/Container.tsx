@@ -1,6 +1,5 @@
 import {rpWidth} from '@app/helpers/responsive';
-import {useDeviceTheme} from '@app/hooks';
-import {useAppTheme} from '@app/theme/themes';
+import {useAppTheme} from '@app/theme';
 import React, {ReactNode} from 'react';
 import {DimensionValue, SafeAreaView, StatusBar, StyleSheet, View, ViewStyle} from 'react-native';
 
@@ -25,10 +24,8 @@ const Container: React.FC<ContainerProps> = ({
   style
 }: ContainerProps) => {
   const theme = useAppTheme();
-  // Get App Mode from settings
-  const appTheme = useDeviceTheme();
   // Change bar style according to theme
-  const barStyle = appTheme == 'dark' ? 'light-content' : 'dark-content';
+  const barStyle = theme.themeType == 'dark' ? 'light-content' : 'dark-content';
   const ContainerTag = useSafeArea ? SafeAreaView : View;
   return (
     <ContainerTag style={StyleSheet.flatten([

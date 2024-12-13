@@ -7,6 +7,7 @@ declare global {
        * Custom property added to the React Native Paper theme.
        */
       myRandomProperty: string; // Update type to match your implementation (boolean/string)
+      themeType: 'light' | 'dark';
     }
   }
 

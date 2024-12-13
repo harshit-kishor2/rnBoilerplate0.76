@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, {
   createContext,
   useContext,
@@ -28,7 +27,7 @@ export const DemoContextProvider = ({ children }: React.PropsWithChildren) => {
 
   const [currentState, setCurrentState] = useState<any>('');
 
-  // You can put here extra logic for global state management
+  //! You can put here extra logic for global state management
 
 
   // Memoize the context value to optimize performance

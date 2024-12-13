@@ -21,7 +21,7 @@ const HomeScreen = () => {
       <Spacer/>
       <AppButton title="Auto Theme" onPress={()=>setSelectedThemeType('auto')} />
 
-      <Text style={styles.text} >Langauge : ${currentLanguage} and ${selectedLanguageType} : ${t('welcome')}</Text>
+      <Text style={styles.text} >Langauge : ${currentLanguage} and ${selectedLanguageType} : ${t('greeting')}</Text>
       <AppButton title="Set Language English" onPress={()=>setSelectedLanguageType('en')} />
       <Spacer/>
       <AppButton title="Set Language Hindi" onPress={()=>setSelectedLanguageType('hi')} />

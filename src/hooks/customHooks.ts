@@ -1,22 +1,5 @@
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
-
-/**
- * Custom hook to dispatch actions to the Redux store.
- *
- * @returns A dispatch function for dispatching actions.
- */
-export const useAppDispatch: () => AppDispatch = useDispatch;
-
-/**
- * Custom hook to select state from the Redux store.
- *
- * @type {TypedUseSelectorHook<RootState>}
- */
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-
-
 
 
 /**

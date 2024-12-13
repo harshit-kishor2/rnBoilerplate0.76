@@ -14,6 +14,7 @@ import {
 
 import {allCombineReducers} from './combine-reducers';
 import storage from '@app/services/storage';
+import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 
 // ======================================================
 
@@ -110,3 +111,19 @@ export const persistor = persistStore(store);
 export const purgePersistedState = () => {
   persistor.purge();
 };
+
+
+/**
+ * Custom hook to dispatch actions to the Redux store.
+ *
+ * @returns A dispatch function for dispatching actions.
+ */
+export const useAppDispatch: () => AppDispatch = useDispatch;
+
+/**
+ * Custom hook to select state from the Redux store.
+ *
+ * @type {TypedUseSelectorHook<RootState>}
+ */
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+

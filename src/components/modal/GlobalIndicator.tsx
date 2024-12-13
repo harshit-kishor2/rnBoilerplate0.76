@@ -1,8 +1,8 @@
 import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
 import React, {createRef, useMemo} from 'react';
 import GlobalModalContainer, {GlobalModalRef} from './GlobalModalContainer';
-import {useAppTheme} from '@app/theme/themes';
 import {rpWidth} from '@app/helpers/responsive';
+import {useAppTheme} from '@app/theme';
 
 export const loaderGlobalIndicator = createRef<GlobalModalRef>();
 

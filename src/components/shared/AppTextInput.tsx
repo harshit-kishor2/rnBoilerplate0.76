@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, {useCallback} from 'react';
 import {
@@ -27,7 +26,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import {useAppTheme} from '@app/theme/themes';
+import {useAppTheme} from '@app/theme';
 
 export interface TextInputProps extends InputProps {
   name: string;
