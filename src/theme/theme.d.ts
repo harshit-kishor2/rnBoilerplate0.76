@@ -1,16 +1,20 @@
-// global.d.ts
 export {};
 
 declare global {
-
-  type IAppTheme = typeof import('@app/theme').lightTheme | typeof import('@app/theme').darkTheme;
-
   namespace ReactNativePaper {
     interface Theme {
-      myRandomProperty: boolean;
+      /**
+       * Custom property added to the React Native Paper theme.
+       */
+      myRandomProperty: string; // Update type to match your implementation (boolean/string)
     }
   }
 
-  type IThemeType = 'light' | 'dark' | 'auto' | null | undefined;
+  // Extend the global IAppTheme type to include the light and dark themes
+  type IAppTheme =
+    | typeof import('./themes').lightTheme
+    | typeof import('./themes').darkTheme;
 
+  // Define supported theme selection options
+  type ISelectedTheme = 'light' | 'dark' | 'auto';
 }

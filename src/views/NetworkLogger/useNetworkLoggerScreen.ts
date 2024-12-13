@@ -1,5 +1,5 @@
 
-import {useAppTheme} from '@app/theme';
+import {useAppTheme} from '@app/theme/themes';
 import {useMemo} from 'react';
 import networkLoggerScreenStyles from './NetworkLoggerScreen.style';
 import {useAppTranslation} from '@app/i18n/utils';

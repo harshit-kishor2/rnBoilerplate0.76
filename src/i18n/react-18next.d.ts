@@ -51,5 +51,5 @@ declare module 'i18next' {
  */
 declare global{
   //! Add your supported languages here.
-  type ILanguageType = 'auto' | 'en' | 'hi' | 'es';
+  type ISelectedLangauge = 'auto' | 'en' | 'hi' | 'es';
 }

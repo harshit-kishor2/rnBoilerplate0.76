@@ -1,20 +1,44 @@
-# Theme
+# React Native Theme Module
 
-This folder contains the theme settings and styles for the application using React Native Paper. It defines the color scheme, typography, and other design elements that ensure a consistent and visually appealing user interface across the app. The theme settings can be customized and extended as needed to match the branding and design requirements.
+This module provides a customizable theme management solution for React Native applications. It allows apps to easily switch between light and dark themes and supports automatic detection of the system's theme preference.
 
-**1. Install required dependencies**
+##### Features
+- **Auto Detect Theme:** Automatically detects and applies the system theme (light/dark).
+- **Light/Dark Theme Toggle:** Allows users to choose between light and dark themes.
+- **Theme Persistence:** Saves the selected theme in local storage, so it persists across app restarts.
+- **Customization:** Easily extendable for custom themes or additional configurations.
+- **Optimized for react-native-paper:** This module integrates seamlessly with react-native-paper's Material Design themes.
 
-```javascript
-yarn add react-native-paper
-yarn add react-native-safe-area-context
-```
+---
 
-2. Update `babel.config.js` file
+## Table of Contents
+
+- [Installation](#installation)
+- [Setup and Usage](#setup-and-usage)
+- [File Structure](#file-structure)
+- [Conclusion](#conclusion)
+
+---
+
+## Installation
+
+Follow these steps to install and configure the theme system in your app.
+
+1. **Install dependencies**:
+
+   ```bash
+	yarn add react-native-paper
+	yarn add react-native-safe-area-context
+
+   ```
+2. **Update Babel Configuration**:
+
+Ensure that your babel.config.js is properly configured to support React Native Paper. Add the following plugin configuration to your babel.config.js:
 
 ```javascript
 module.exports = {
   presets: [
-    // presets..
+    // other presets
   ],
   env: {
     production: {
@@ -22,72 +46,98 @@ module.exports = {
     },
   },
 };
+
 ```
 
-3. To support custom themes, paper exports a `PaperProvider` component. You need to wrap your root component with the provider to be able to support themes. If you have another provider (such as Redux), wrap it outside PaperProvider so that the context is available to components rendered inside a Modal from the library
+3. **Copy the `theme` Module**
 
-# Install these helper dependencies
+- Copy the theme folder (containing all the files) to your project.
 
-##### 1. react-native-gesture-handler
+## Setup and Usage
+
+After adding the theme module to your project, follow these steps:
+
+#### 1. Wrap Your App with AppThemeProvider
+
+In your App.tsx (or main entry file), wrap your app with the `I18nProvider` to enable localization context throughout your app
+`I18nProvider` is the top-level component responsible for initializing i18n and setting up language context. You can optionally enable auto-detection of the device's language.
+
+**Props:**
+- autoDetect (boolean, default: true): If `true`, it will automatically detect the device's language setting. Otherwise, it will use the user's selected language preference.
+
+Example usage:
 
 ```javascript
-yarn add react-native-gesture-handler
+import { I18nProvider } from '@app/i18n'; // Path to your i18n module
+
+const App = () => (
+  <I18nProvider autoDetect={true}>
+    {/* Your app's components */}
+  </I18nProvider>
+);
+
 ```
+#### 2. Change your app theme
 
-To finalize the installation of `react-native-gesture-handler`, conditionally import it by creating two files:
-
-`gh.native.js`
-
+The `useAppThemeContext` hook provides access to the current theme and allows you to switch between light, dark, or custom themes.
 ```javascript
-// Only import react-native-gesture-handler on native platforms
-import 'react-native-gesture-handler';
+const { currentTheme, setSelectedThemeType, selectedThemeType } = useAppThemeContext();
+
 ```
+- **currentTheme**: Returns the current theme object (colors, typography, etc.).
+- **setSelectedThemeType(themeType: 'light' | 'dark' | 'auto'):** Sets the theme type.
+- **selectedThemeType:** Returns the current theme type ('light', 'dark', or 'auto').
 
-`gh.js`
 
-```javascript
-// Don't import react-native-gesture-handler on web
-```
+#### 3. Usage of Theme
 
-Add the following line at the top of your entry file, such as `index.js` or `App.js`:
-
-```javascript
-import './gesture-handler';
-```
-
-After installation, wrap your entry point with <GestureHandlerRootView>
+The useAppTheme hook provides the theme object.
 
 ```javascript
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import { useAppTheme } from './theme';
 
-export default function App() {
-  return (
-    <GestureHandlerRootView style={{flex: 1}}>
-      {/* content */}
-    </GestureHandlerRootView>
-  );
-}
-```
+const MyComponent = () => {
+  const theme = useAppTheme();
+  const styles = useMemo(() => homeScreenStyles(theme), [theme]);
 
-##### 2. react-native-reanimated
-
-```javascript
-yarn add react-native-reanimated
-```
-
-Add the `react-native-reanimated/plugin` to your `babel.config.js`:
-
-```javascript
-module.exports = {
-  presets: [
-    // other presets
-  ],
-  plugins: [
-    // other plugins
-    'react-native-reanimated/plugin',
-  ],
+  return <View style={styles.container}/>
 };
+
+const homeScreenStyles = (theme: IAppTheme) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: theme.colors.background,
+    },
+    text: {
+      color: theme.colors.red,
+    }
+  });
+
+```
+
+### How to Customize Theme
+- Update `themes.ts` file according to your theme colors.
+- You can add random properties also inside your theme. If you have added custom properties then you have to also update types in `theme.d.ts` file.
+
+
+
+## File Structure
+The folder structure is organized to facilitate easy management and customization of the theme:
+
+```graphql
+theme/
+│
+├── AppThemeProvider.tsx    # Context provider to manage theme selection
+├── index.ts                # Entry point to export theme settings
+├── theme.d.ts              # TypeScript definitions for theme types
+├── themes.ts               # Light and dark theme definitions
+└── utils.ts                # Utility functions (e.g., for theme persistence)
 ```
 
 
-Note > Also check useDeviceTheme hook inside hook directory
+## Conclusion
+This theme module provides a simple and flexible way to manage theming in your React Native app, with support for both light and dark modes, custom theme options, and automatic system detection. By utilizing the AppThemeProvider and useAppThemeContext, you can easily manage and switch themes across your app.
+

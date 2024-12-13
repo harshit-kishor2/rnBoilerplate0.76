@@ -14,9 +14,9 @@ import {appLanguageLocalStorage, appLanguageLocalStorageKeys, defaultDeviceLang,
  * Contains the currently applied language, the selected language preference and a method to change it.
  */
 export type IAppLocalizationContext = {
-  currentLanguage: ILanguageType; // Currently applied language
-  selectedLanguageType: ILanguageType; // Selected language preference (e.g., 'auto', 'en', 'fr')
-  setSelectedLanguageType: (langParam: ILanguageType) => void; // Setter function for updating selected language
+  currentLanguage: ISelectedLangauge; // Currently applied language
+  selectedLanguageType: ISelectedLangauge; // Selected language preference (e.g., 'auto', 'en', 'fr')
+  setSelectedLanguageType: (langParam: ISelectedLangauge) => void; // Setter function for updating selected language
 };
 
 /**
@@ -57,11 +57,11 @@ export const useAppLocalizationContext = () => {
 export const AppLocalizationProvider = ({
   autoDetect = true,
   children,
-}: React.PropsWithChildren<{autoDetect?: boolean;}>) => {
+}: React.PropsWithChildren<{autoDetect?: boolean}>) => {
 
   const deviceLang = useMemo(() => defaultDeviceLang, []); // Memoize deviceLang for stability
 
-  const [selectedLanguageType, setSelectedLanguageType] = useState<ILanguageType>('auto');
+  const [selectedLanguageType, setSelectedLanguageType] = useState<ISelectedLangauge>('auto');
 
 
   /**
@@ -72,7 +72,7 @@ export const AppLocalizationProvider = ({
   useEffect(() => {
     const initializeLanguage = async () => {
       try {
-        const savedLangType = appLanguageLocalStorage.getString(appLanguageLocalStorageKeys.app_language_type) as ILanguageType;
+        const savedLangType = appLanguageLocalStorage.getString(appLanguageLocalStorageKeys.app_language_type) as ISelectedLangauge;
         setSelectedLanguageType(savedLangType ?? 'auto');
       } catch (error) {
         console.error('Error loading language from storage:', error);
@@ -105,8 +105,8 @@ export const AppLocalizationProvider = ({
    *
    * @type {ILanguageType}
    */
-  const appliedLanguage: ILanguageType = (selectedLanguageType === 'auto' && autoDetect)
-    ? (deviceLang as ILanguageType)
+  const appliedLanguage: ISelectedLangauge = (selectedLanguageType === 'auto' && autoDetect)
+    ? (deviceLang as ISelectedLangauge)
     : selectedLanguageType;
 
 

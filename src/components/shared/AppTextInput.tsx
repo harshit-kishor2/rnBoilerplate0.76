@@ -27,7 +27,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import {useAppTheme} from '@app/theme';
+import {useAppTheme} from '@app/theme/themes';
 
 export interface TextInputProps extends InputProps {
   name: string;

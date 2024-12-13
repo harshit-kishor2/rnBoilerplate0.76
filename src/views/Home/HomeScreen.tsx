@@ -2,7 +2,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import useHomeScreen from './useHomeScreen';
-import {useAppThemeContext} from '@app/store/context/ThemeContextProvider';
+import {useAppThemeContext} from '@app/theme/AppThemeProvider';
 import {AppButton, Spacer} from '@app/components';
 import {useAppLocalizationContext} from '@app/i18n/AppLocalizationProvider';
 

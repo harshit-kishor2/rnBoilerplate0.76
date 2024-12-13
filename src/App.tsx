@@ -7,8 +7,8 @@ import {Provider as ReduxStoreProvider} from 'react-redux';
 import {persistor, store} from './store/redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import MultipleContextProvider from './store/context';
-import {AppThemeWrapper} from './theme';
 import {AppI18nProvider} from './i18n';
+import {AppThemeProvider} from './theme';
 const App = () => {
   return (
     <ErrorBoundary catchErrors='always'>
@@ -41,9 +41,9 @@ const App = () => {
  */
 const AppContainer = () => {
   return (
-    <AppThemeWrapper>
+    <AppThemeProvider autoDetect>
       <SplashScreen />
-    </AppThemeWrapper>
+    </AppThemeProvider>
   );
 };
 

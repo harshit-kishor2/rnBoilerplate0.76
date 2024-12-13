@@ -1,6 +1,6 @@
 import Assets from '@app/assets';
 import {rpFont, rpWidth} from '@app/helpers/responsive';
-import {useAppTheme} from '@app/theme';
+import {useAppTheme} from '@app/theme/themes';
 import React from 'react';
 import {AnimatableNumericValue, StyleSheet, Text, TextProps, TextStyle} from 'react-native';
 

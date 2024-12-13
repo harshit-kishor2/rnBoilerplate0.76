@@ -1,6 +1,6 @@
 import {rpWidth} from '@app/helpers/responsive';
 import {useDeviceTheme} from '@app/hooks';
-import {useAppTheme} from '@app/theme';
+import {useAppTheme} from '@app/theme/themes';
 import React, {ReactNode} from 'react';
 import {DimensionValue, SafeAreaView, StatusBar, StyleSheet, View, ViewStyle} from 'react-native';
 

@@ -1,5 +1,5 @@
 import {rpHeight, rpWidth} from '@app/helpers/responsive';
-import {useAppTheme} from '@app/theme';
+import {useAppTheme} from '@app/theme/themes';
 import React from 'react';
 import {
   StyleProp,

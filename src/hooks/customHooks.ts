@@ -1,6 +1,5 @@
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {useTheme} from 'react-native-paper';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 
 /**
@@ -16,6 +15,7 @@ export const useAppDispatch: () => AppDispatch = useDispatch;
  * @type {TypedUseSelectorHook<RootState>}
  */
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
 
 
 

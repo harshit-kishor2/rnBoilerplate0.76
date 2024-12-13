@@ -1,5 +1,5 @@
 
-import {useAppTheme} from '@app/theme';
+import {useAppTheme} from '@app/theme/themes';
 import {useMemo} from 'react';
 import registerScreenStyles from './RegisterScreen.style';
 import {useAppTranslation} from '@app/i18n/utils';
