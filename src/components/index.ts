@@ -10,7 +10,7 @@ import AppText from './shared/AppText';
 import AppTextInput from './shared/AppTextInput';
 import AppVectorIcon from './shared/AppVectorIcon';
 import Spacer from './Spacer';
-
+import ComposeProviders from './ComposeProvider';
 
 
 export {
@@ -25,6 +25,7 @@ export {
   GlobalIndicator,
   If,
   Spacer,
-  Container
+  Container,
+  ComposeProviders
 };
 

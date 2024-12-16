@@ -1,4 +1,4 @@
-import {store} from './redux';
+import {store} from './redux/utils';
 
 declare global {
   type RootState = ReturnType<typeof store.getState>;

@@ -69,6 +69,8 @@ Update `tsconfig.json`
 
 # Install these helper dependencies
 
+yarn add react-native-safe-area-context
+
 ##### 1. react-native-gesture-handler
 
 ```javascript

@@ -5,25 +5,25 @@ import React, {
   useState
 } from 'react';
 
-interface DemoContextType {
+interface IDemoContext {
   currentState: any;
   setCurrentState: (props: any) => void;
 }
 
-export const DemoContext = createContext<DemoContextType | undefined>(undefined);
+const DemoContext = createContext<IDemoContext | undefined>(undefined);
 
-export const useDemoContext = (): DemoContextType => {
+export const useDemoContext = (): IDemoContext => {
   const context = useContext(DemoContext);
   if (!context) {
     throw new Error(
-      'useDemoContext must be used within DemoContextProvider. ' +
-        'Make sure you have wrapped your app with DemoContextProvider.',
+      'useDemoContext must be used within DemoProvider. ' +
+        'Make sure you have wrapped your app with DemoProvider.',
     );
   }
   return context;
 };
 
-export const DemoContextProvider = ({ children }: React.PropsWithChildren) => {
+export const DemoProvider = ({ children }: React.PropsWithChildren) => {
 
   const [currentState, setCurrentState] = useState<any>('');
 

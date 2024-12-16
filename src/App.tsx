@@ -1,49 +1,27 @@
+import {ErrorBoundary} from '@app/components';
 import React from 'react';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import {ErrorBoundary} from '@app/components';
-import {Text} from 'react-native';
 import {SplashScreen} from './views';
-import {Provider as ReduxStoreProvider} from 'react-redux';
-import {persistor, store} from './store/redux';
-import {PersistGate} from 'redux-persist/integration/react';
-import MultipleContextProvider from './store/context';
 import {AppI18nProvider} from './i18n';
+import CombinedContextProvider from './store/context-providers';
+import PersistedReduxProvider from './store/redux';
 import {AppThemeProvider} from './theme';
+
 const App = () => {
   return (
     <ErrorBoundary catchErrors='always'>
       <GestureHandlerRootView style={{flex: 1}}>
         <AppI18nProvider>
-          {/* wrap context provider */}
-          <MultipleContextProvider>
-            {/* wrap redux store provider */}
-            <ReduxStoreProvider store={store} >
-              {/* wrap persist gate provider */}
-              <PersistGate loading={<Text>Loading...</Text>} persistor={persistor}>
-                {/* wrap app container */}
-                <AppContainer />
-              </PersistGate>
-            </ReduxStoreProvider>
-          </MultipleContextProvider>
+          <CombinedContextProvider>
+            <PersistedReduxProvider>
+              <AppThemeProvider autoDetect>
+                <SplashScreen />
+              </AppThemeProvider>
+            </PersistedReduxProvider>
+          </CombinedContextProvider>
         </AppI18nProvider>
       </GestureHandlerRootView>
     </ErrorBoundary>
-  );
-};
-
-
-/**
- * AppContainer is a component that wraps the main application
- * component with the theme provider.
- *
- * It provides the theme context to the main application
- * component and renders the main application component.
- */
-const AppContainer = () => {
-  return (
-    <AppThemeProvider autoDetect>
-      <SplashScreen />
-    </AppThemeProvider>
   );
 };
 
