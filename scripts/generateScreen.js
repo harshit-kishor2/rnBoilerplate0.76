@@ -36,12 +36,12 @@ import {useAppTranslation} from '@app/i18n';
 
 const use${fileName} = () => {
   const theme = useAppTheme();
-  const t = useAppTranslation();
+  const translate = useAppTranslation();
   const styles = useMemo(() => ${styleFileName}(theme), [theme]);
   return {
     styles,
     theme,
-    t
+    translate
   };
 };
 
