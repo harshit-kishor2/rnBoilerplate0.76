@@ -1,14 +1,13 @@
 import {AppFastImage, AppText, Container} from '@app/components';
-import {rpFont} from '@app/helpers';
+import {DeviceUtils, rpFont} from '@app/helpers';
 import React from 'react';
 import {View, } from 'react-native';
-import DeviceInfo from 'react-native-device-info';
 import useSplashScreen from '../useSplashScreen';
 import Assets from '@app/assets';
 
 const SplashView = () => {
-  const BUILD_VERSION = DeviceInfo.getVersion();
-  const BUILD_NUMBER = DeviceInfo.getBuildNumber();
+  const BUILD_VERSION = DeviceUtils.BUILD_VERSION;
+  const BUILD_NUMBER = DeviceUtils.BUILD_NUMBER;
   const {styles, theme} = useSplashScreen();
 
   return (

@@ -1,7 +1,6 @@
 
 import dayjs from 'dayjs';
 import {useTranslation} from 'react-i18next';
-import {getLocales} from 'react-native-localize';
 import {MMKV} from 'react-native-mmkv';
 import i18n from './i18n';
 // dayjs locales for i18n
@@ -36,17 +35,6 @@ export const appLanguageLocalStorage: MMKV = new MMKV({
   encryptionKey: 'my-random-key-for-encryption'
 });
 
-/**
- * Retrieves the language code of the device's current locale.
- *
- * This code uses the `getLocales` function from `react-native-localize` to fetch
- * the list of locales configured on the device. It then extracts the language code
- * from the first locale in the list, which represents the primary language setting
- * of the device.
- *
- * @type {string} The language code of the device's primary locale.
- */
-export const defaultDeviceLang: string = getLocales()[0].languageCode;
 
 /**
  * Sets the i18n language for the application.

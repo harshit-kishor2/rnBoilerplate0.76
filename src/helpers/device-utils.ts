@@ -195,20 +195,3 @@ export const BUILD_VERSION: string = DeviceInfo.getVersion();
  */
 export const BUILD_NUMBER: string | number = DeviceInfo.getBuildNumber();
 
-
-// ==============================
-/**
- * @description
- * These are the dynamic calculation for the app is on the landscape or portrait mode.
- */
-export const ScreenMin = Math.min(ScreenWidth, ScreenHeight) || ScreenHeight;
-export const ScreenMax = Math.max(ScreenWidth, ScreenHeight) || ScreenWidth;
-
-/**
- * @description
- * These are the viewport units for the web or mobile web who wants to use viewport units.
- */
-export const vh = ScreenHeight / 100;
-export const vw = ScreenWidth / 100;
-export const vmin = Math.min(vh, vw) || vh;
-export const vmax = Math.max(vh, vw) || vw;

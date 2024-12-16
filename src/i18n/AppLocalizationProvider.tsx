@@ -6,7 +6,8 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import {appLanguageLocalStorage, appLanguageLocalStorageKeys, defaultDeviceLang, seti18nLanguage} from './utils';
+import {appLanguageLocalStorage, appLanguageLocalStorageKeys, seti18nLanguage} from './utils';
+import {getLocales} from 'react-native-localize';
 
 
 /**
@@ -59,7 +60,7 @@ export const AppLocalizationProvider = ({
   children,
 }: React.PropsWithChildren<{autoDetect?: boolean}>) => {
 
-  const deviceLang = useMemo(() => defaultDeviceLang, []); // Memoize deviceLang for stability
+  const deviceLang = getLocales()[0].languageCode;
 
   const [selectedLanguageType, setSelectedLanguageType] = useState<ISelectedLangauge>('auto');
 

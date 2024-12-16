@@ -1,8 +1,8 @@
 
 import {useEffect, useMemo, useState} from 'react';
 import splashScreenStyles from './SplashScreen.style';
-import {useAppTheme} from '@app/theme/themes';
-import {useAppTranslation} from '@app/i18n/utils';
+import {useAppTheme} from '@app/theme';
+import {useAppTranslation} from '@app/i18n';
 
 const SPLASH_TIMEOUT = 5000;
 

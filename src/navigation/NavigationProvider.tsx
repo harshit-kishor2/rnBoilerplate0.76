@@ -8,7 +8,7 @@ import {navigationRef} from './NavigationService';
 import StackNavigator from './StackNavigator';
 import {useAppThemeContext} from '@app/theme/AppThemeProvider';
 
-const Navigator = () => {
+const NavigationProvider = () => {
 
   const {currentTheme} = useAppThemeContext();
   const theme = currentTheme.themeType === 'dark' ? NavigationDarkTheme : NavigationDefaultTheme;
@@ -23,4 +23,4 @@ const Navigator = () => {
   );
 };
 
-export default Navigator;
+export default NavigationProvider;
