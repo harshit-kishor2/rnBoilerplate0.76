@@ -1,17 +1,17 @@
 
-import {useAppTheme} from '@app/theme/themes';
 import {useMemo} from 'react';
 import settingScreenStyles from './SettingScreen.style';
-import {useAppTranslation} from '@app/i18n/utils';
+import {useAppTheme} from '@app/theme';
+import {useAppTranslation} from '@app/i18n';
 
 const useSettingScreen = () => {
   const theme = useAppTheme();
-  const t = useAppTranslation();
+  const translate = useAppTranslation();
   const styles = useMemo(() => settingScreenStyles(theme), [theme]);
   return {
     styles,
     theme,
-    t
+    translate
   };
 };
 

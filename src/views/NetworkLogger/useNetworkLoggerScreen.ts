@@ -1,8 +1,8 @@
 
-import {useAppTheme} from '@app/theme/themes';
+import {useAppTheme} from '@app/theme';
 import {useMemo} from 'react';
 import networkLoggerScreenStyles from './NetworkLoggerScreen.style';
-import {useAppTranslation} from '@app/i18n/utils';
+import {useAppTranslation} from '@app/i18n';
 
 const useNetworkLoggerScreen = () => {
   const theme = useAppTheme();

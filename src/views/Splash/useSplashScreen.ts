@@ -10,7 +10,7 @@ const useSplashScreen = () => {
   const styles = useMemo(() => splashScreenStyles(), []);
   const [isSplashEnd, setIsSplashEnd] = useState(false);
   const theme = useAppTheme();
-  const t = useAppTranslation();
+  const translate = useAppTranslation();
   useEffect(() => {
     setTimeout(() => {
       setIsSplashEnd(true);
@@ -21,7 +21,7 @@ const useSplashScreen = () => {
     styles,
     isSplashEnd,
     theme,
-    t,
+    translate,
   };
 };
 
