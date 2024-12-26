@@ -2,7 +2,7 @@ import React from 'react';
 import {Text} from 'react-native';
 import {Provider as ReduxStoreProvider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
-import {persistor, store, useAppDispatch, useAppSelector} from './utils';
+import {persistor, store} from './utils';
 
 const PersistedReduxProvider = ({ children }: React.PropsWithChildren) => {
   return (
@@ -15,11 +15,3 @@ const PersistedReduxProvider = ({ children }: React.PropsWithChildren) => {
 }
 
 export default PersistedReduxProvider
-
-
-export {
-  store,
-  persistor,
-  useAppDispatch,
-  useAppSelector
-}

@@ -36,7 +36,7 @@ appAxios.interceptors.response.use(
       const errorMessage = error.response.data.msg || 'something went wrong';
       console.log('ERROR from Axios===> ', errorMessage);
     }
-    return Promise.reject(error);
+    return Promise.reject(new Error(error));
   },
 );
 
@@ -54,7 +54,7 @@ export const refresh_tokens = async () => {
   } catch (error) {
     console.log('REFRESH TOKEN ERROR');
     sharedPref.clearAll();
-    // resetAndNavigate('LoginScreen');
+    // resetAndNavigate('LoginScreen')
   }
 };
 

@@ -6,11 +6,11 @@ import {useAppThemeContext} from '@app/theme/AppThemeProvider';
 import {AppButton, Spacer} from '@app/components';
 import {useAppLocalizationContext} from '@app/i18n/AppLocalizationProvider';
 
+
 const HomeScreen = () => {
   const { styles, t } = useHomeScreen();
   const {selectedThemeType,setSelectedThemeType} = useAppThemeContext();
   const {currentLanguage,setSelectedLanguageType, selectedLanguageType} = useAppLocalizationContext();
-
   return (
     <View style={styles.container}>
       <Text style={styles.text} >HomeScreen</Text>

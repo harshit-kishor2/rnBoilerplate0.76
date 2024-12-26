@@ -13,49 +13,31 @@ import {
 } from 'redux-persist';
 
 import {allCombineReducers} from './combine-reducers';
-import storage from '@app/services/storage';
-import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
+import {MMKV} from 'react-native-mmkv';
 
 // ======================================================
+const reduxLocalStorage: MMKV = new MMKV({
+  id: `redux-local-storage`,
+  encryptionKey: 'reduxLocalStorageEncryptionKey'
+});
 
-
-//  Common middlewares
+// Common middlewares
 export const middlewares = [
-  // logger
+  //! you can put your middlewares here like redux-logger
 ];
 
-// ======================================================
-// For redux persist with react-native-mmkv
-export const reduxStorage: Storage = {
-  /**
-   * Stores a value in storage.
-   * @param {string} key The key to store the value under.
-   * @param {any} value The value to store.
-   * @return {Promise<boolean>} A Promise that resolves to true if the value was stored successfully.
-   */
+
+const reduxStorage: Storage = {
   setItem: (key, value) => {
-    storage.set(key, value);
+    reduxLocalStorage.set(key, value);
     return Promise.resolve(true);
   },
-
-  /**
-   * Retrieves the value associated with the specified key from storage.
-   * @param {string} key The key to retrieve the value for.
-   * @return {Promise<any>} A Promise that resolves to the value associated with the key.
-   */
   getItem: (key) => {
-    const value = storage.getString(key);
+    const value = reduxLocalStorage.getString(key);
     return Promise.resolve(value);
   },
-
-  /**
-   * Removes the item associated with the specified key from storage.
-   *
-   * @param {string} key The key of the item to be removed.
-   * @return {Promise<void>} A Promise that resolves once the item is successfully removed.
-   */
   removeItem: (key) => {
-    storage.delete(key);
+    reduxLocalStorage.delete(key);
     return Promise.resolve();
   },
 };
@@ -71,7 +53,7 @@ const persistConfig = {
   key: 'root_redux_states',
   storage: reduxStorage,
   version: 1,
-  blacklist: [''],
+  blacklist: [],
 };
 
 // all reducers are persisted here
@@ -113,17 +95,7 @@ export const purgePersistedState = () => {
 };
 
 
-/**
- * Custom hook to dispatch actions to the Redux store.
- *
- * @returns A dispatch function for dispatching actions.
- */
-export const useAppDispatch: () => AppDispatch = useDispatch;
+// ! Export type
 
-/**
- * Custom hook to select state from the Redux store.
- *
- * @type {TypedUseSelectorHook<RootState>}
- */
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

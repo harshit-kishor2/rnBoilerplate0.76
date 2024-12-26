@@ -5,6 +5,7 @@ export * from './strings';
 export * from './time';
 export * from './utils';
 export * from './responsive';
+export * from './enums';
 
 export {
   DeviceUtils
