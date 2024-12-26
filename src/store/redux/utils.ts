@@ -14,18 +14,13 @@ import {
 
 import {allCombineReducers} from './combine-reducers';
 import {MMKV} from 'react-native-mmkv';
+import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 
 // ======================================================
 const reduxLocalStorage: MMKV = new MMKV({
   id: `redux-local-storage`,
   encryptionKey: 'reduxLocalStorageEncryptionKey'
 });
-
-// Common middlewares
-export const middlewares = [
-  //! you can put your middlewares here like redux-logger
-];
-
 
 const reduxStorage: Storage = {
   setItem: (key, value) => {
@@ -58,6 +53,13 @@ const persistConfig = {
 
 // all reducers are persisted here
 const persistedReducer = persistReducer(persistConfig, allCombineReducers);
+
+
+// Common middlewares
+export const middlewares = [
+  //! you can put your middlewares here like redux-logger
+];
+
 
 export const store = configureStore({
   reducer: persistedReducer,
@@ -99,3 +101,24 @@ export const purgePersistedState = () => {
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+
+export enum LoadingStatus {
+  IDLE = 'IDLE',
+  PENDING = 'PENDING',
+  FULLFILLED = 'FULLFILLED',
+  REJECTED = 'REJECTED'
+}
+
+/**
+ * Custom hook to dispatch actions to the Redux store.
+ *
+ * @returns A dispatch function for dispatching actions.
+ */
+export const useAppDispatch: () => AppDispatch = useDispatch;
+
+/**
+ * Custom hook to select state from the Redux store.
+ *
+ * @type {TypedUseSelectorHook<RootState>}
+ */
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
