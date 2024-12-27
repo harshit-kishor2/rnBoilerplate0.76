@@ -1,7 +1,7 @@
 import {initReactI18next} from 'react-i18next';
-import {appLanguageLocalStorage, appLanguageLocalStorageKeys} from './utils';
 import i18n, {LanguageDetectorAsyncModule} from 'i18next';
 import {en, es, hi} from './resources';
+import {appLanguageLocalStorage, appLanguageLocalStorageKeys} from './i18n-local-storage';
 
 /**
  * The resources object contains the translations for each language.

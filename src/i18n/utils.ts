@@ -1,40 +1,15 @@
 
 import dayjs from 'dayjs';
 import {useTranslation} from 'react-i18next';
-import {MMKV} from 'react-native-mmkv';
 import i18n from './i18n';
+import {appLanguageLocalStorage, appLanguageLocalStorageKeys} from './i18n-local-storage';
+
 // dayjs locales for i18n
 // Keep this list in sync with the locales in src/i18n/resources
 // See https://github.com/iamkun/dayjs/tree/dev/src/locale
 import 'dayjs/locale/en-gb';
 import 'dayjs/locale/es';
 import 'dayjs/locale/hi';
-
-
-/**
- * An object containing the keys used to store language-related preferences in local storage.
- *
- * @type {Object<string, string>}
- * @property {string} app_language_type - Key for storing the selected language type preference.
- * @property {string} app_language - Key for storing the current language.
- */
-export const appLanguageLocalStorageKeys: {[key: string]: string;} = {
-  app_language_type: '@app_language_type', // Key for the selected language type
-  app_language: '@app_language', // Key for the current language
-};
-
-/**
- * A local storage instance used to store the user's selected language and language type.
- *
- * @type {MMKV}
- * @property {string} id - The id of the storage instance.
- * @property {string} encryptionKey - The encryption key used to encrypt the stored data.
- */
-export const appLanguageLocalStorage: MMKV = new MMKV({
-  id: `app-langauge-local-storage`,
-  encryptionKey: 'my-random-key-for-encryption'
-});
-
 
 /**
  * Sets the i18n language for the application.
@@ -64,9 +39,6 @@ export const seti18nLanguage = async (lang: string) => {
     console.error('Error saving language to local storage:', error);
   }
 };
-
-
-
 
 /**
  * A hook that returns the i18n translation function.

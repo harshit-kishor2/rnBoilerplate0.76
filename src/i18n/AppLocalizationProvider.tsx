@@ -6,8 +6,9 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import {appLanguageLocalStorage, appLanguageLocalStorageKeys, seti18nLanguage} from './utils';
 import {getLocales} from 'react-native-localize';
+import {appLanguageLocalStorage, appLanguageLocalStorageKeys} from './i18n-local-storage';
+import {seti18nLanguage} from './utils';
 
 
 /**

@@ -122,12 +122,13 @@ i18n/
   │   ├── hi.json          # Hindi translations
   │   └── index.ts         # Combines all translation files and exports them
   ├── AppLocalizationProvider.tsx  # Context provider for managing language preferences
+  ├── i18n-local-storage.ts  # Utility functions for language storage
   ├── i18n.ts              # i18n initialization and configuration
   ├── AppI18nProvider.tsx     # Combines i18n and AppLocalizationProvider for localization
   ├── index.ts             # Main entry point for exporting functions and hooks
   ├── react-18next.d.ts    # TypeScript definitions for react-i18next
   ├── README.md            # Main usage guide
-  └── utils.js             # Utility functions for language storage and handling
+  └── utils.js             # Utility functions handling
 
 ```
 
