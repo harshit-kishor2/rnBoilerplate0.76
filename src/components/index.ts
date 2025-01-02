@@ -1,4 +1,3 @@
-import ErrorBoundary from './ErrorBoundary';
 import Container from './Container';
 import If from './If';
 import GlobalIndicator from './modal/GlobalIndicator';
@@ -11,7 +10,7 @@ import AppTextInput from './shared/AppTextInput';
 import AppVectorIcon from './shared/AppVectorIcon';
 import Spacer from './Spacer';
 import ComposeProviders from './ComposeProvider';
-
+import CrashShield from './crash-shield';
 
 export {
   AppText,
@@ -21,11 +20,11 @@ export {
   AppSvg,
   AppTextInput,
   AppVectorIcon,
-  ErrorBoundary,
   GlobalIndicator,
   If,
   Spacer,
   Container,
-  ComposeProviders
+  ComposeProviders,
+  CrashShield
 };
 

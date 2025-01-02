@@ -14,18 +14,15 @@ src/
   - views/
   - App.tsx
 
-Run this script from terminal -> This will create structure that containe index.ts and Readme.md file.
+Run this script from terminal -> This will create structure. After theat cerate README.md file in necessary directories.
+
 
 ```bash
-mkdir -p src/{assets/{appIcon,fonts,gif,images,lottie,svg},components,helpers,hooks,i18n,navigation,services,store,theme,views} &&
-for dir in src/* src/assets/*; do
-  echo "export {};" > "$dir/index.ts"
-  touch "$dir/README.md"
-done
+mkdir -p src/{assets/{appIcon,fonts,gif,images,lottie,svg},components,helpers,hooks,i18n,navigation,services,store,theme,views}
 ```
 
 
-### 2. Validate commit message using lefthook
+### 2. Eslint setup and Validate commit message using lefthook
 
 Eslint -> https://gist.github.com/harshit-kishor2/ebd41c9781e10826c09d60658f315f89
 

@@ -1,4 +1,4 @@
-import {ErrorBoundary} from '@app/components';
+import {CrashShield} from '@app/components';
 import React from 'react';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {SplashScreen} from './views';
@@ -9,7 +9,7 @@ import {AppThemeProvider} from './theme';
 
 const App = () => {
   return (
-    <ErrorBoundary catchErrors='always'>
+    <CrashShield>
       <GestureHandlerRootView style={{flex: 1}}>
         <AppI18nProvider>
           <CombinedContextProvider>
@@ -21,7 +21,7 @@ const App = () => {
           </CombinedContextProvider>
         </AppI18nProvider>
       </GestureHandlerRootView>
-    </ErrorBoundary>
+    </CrashShield>
   );
 };
 
