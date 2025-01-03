@@ -1,25 +1,16 @@
 
-import React, {useEffect} from 'react';
+import React from 'react';
 import { View, Text } from 'react-native';
 import useHomeScreen from './useHomeScreen';
 import {useAppThemeContext} from '@app/theme/AppThemeProvider';
 import {AppButton, Spacer} from '@app/components';
 import {useAppLocalizationContext} from '@app/i18n/AppLocalizationProvider';
-import {navigationRef} from '@app/navigation/NavigationService';
 
 
 const HomeScreen = () => {
   const { styles, t } = useHomeScreen();
   const {selectedThemeType,setSelectedThemeType} = useAppThemeContext();
   const {currentLanguage,setSelectedLanguageType, selectedLanguageType} = useAppLocalizationContext();
-  React.useEffect(() => {
-    if (navigationRef.current) {
-      const routeAllHistory = navigationRef.current.getState();
-      const crashPage = navigationRef.current.getCurrentRoute();
-      console.log('Route All History:', routeAllHistory);
-      console.log('Crash Page:', crashPage);
-    }
-  }, []);
   return (
     <View style={styles.container}>
       <Text style={styles.text} >HomeScreen</Text>
