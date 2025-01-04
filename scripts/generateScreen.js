@@ -20,48 +20,35 @@ const smallFirstLetter = str => {
 
 // Create screen folder
 const screenFolderName = capitalizeFirstLetter(folderName);
-fs.mkdir(`../src/views/${screenFolderName}`, err => {
+fs.mkdir(`../src/views/${screenFolderName}`, { recursive: true }, err => {
   if (err) throw err;
   console.debug(`Folder ${screenFolderName} created successfully`);
 
   const fileName = screenFolderName + 'Screen';
-  const styleFileName = smallFirstLetter(fileName) + 'Styles';
+  const styleFunctionName = smallFirstLetter(fileName) + 'Styles';
 
-  // Create hook file - useExampleScreen.ts
-  const hookFile = `
-import {useAppTheme} from '@app/theme';
-import {useMemo} from 'react';
-import ${styleFileName} from './${fileName}.style';
-import {useAppTranslation} from '@app/i18n';
+  // Create single index.tsx file
+  const singleFileContent = `
+import React, { useMemo } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { useAppTheme } from '@app/theme';
+import { useAppTranslation } from '@app/i18n';
 
-const use${fileName} = () => {
+const ${fileName} = () => {
   const theme = useAppTheme();
   const translate = useAppTranslation();
-  const styles = useMemo(() => ${styleFileName}(theme), [theme]);
-  return {
-    styles,
-    theme,
-    translate
-  };
+  const styles = useMemo(() => ${styleFunctionName}(theme), [theme]);
+
+  return (
+    <View style={styles.container}>
+      <Text> {translate('greeting')} ${fileName}</Text>
+    </View>
+  );
 };
 
-export default use${fileName};
-`;
+export default ${fileName};
 
-  fs.writeFileSync(
-    path.join(`../src/views/${screenFolderName}`, `use${fileName}.ts`),
-    hookFile,
-    errHook => {
-      if (errHook) throw errHook;
-      console.log(`use${fileName}.ts file created successfully`);
-    },
-  );
-
-  // Create style file - ExampleScreen.style.ts
-  const styleFile = `
-import {StyleSheet} from 'react-native';
-
-const ${styleFileName} = (theme: IAppTheme) =>
+const ${styleFunctionName} = (theme: IAppTheme) =>
   StyleSheet.create({
     container: {
       flex: 1,
@@ -70,49 +57,19 @@ const ${styleFileName} = (theme: IAppTheme) =>
       backgroundColor: theme.colors.background,
     },
   });
-
-export default ${styleFileName};
 `;
 
   fs.writeFileSync(
-    path.join(`../src/views/${screenFolderName}`, `${fileName}.style.ts`),
-    styleFile,
-    errStyles => {
-      if (errStyles) throw errStyles;
-      console.log(`${fileName}.style.ts file created successfully`);
-    },
-  );
-
-  // Create screen component - ExampleScreen.tsx
-  const screenFile = `
-import React from 'react';
-import { View, Text } from 'react-native';
-import use${fileName} from './use${fileName}';
-
-const ${fileName} = () => {
-  const { styles } = use${fileName}();
-
-  return (
-    <View style={styles.container}>
-      <Text>${fileName}</Text>
-    </View>
-  );
-};
-
-export default React.memo(${fileName});
-`;
-
-  fs.writeFileSync(
-    path.join(`../src/views/${screenFolderName}`, `${fileName}.tsx`),
-    screenFile,
-    errScreen => {
-      if (errScreen) throw errScreen;
-      console.log(`${fileName}.tsx file created successfully`);
-    },
+    path.join(`../src/views/${screenFolderName}`, 'index.tsx'),
+    singleFileContent,
+    errWrite => {
+      if (errWrite) throw errWrite;
+      console.log(`index.tsx file created successfully in ${screenFolderName}`);
+    }
   );
 
   // Append export to index.ts
-  const exportToIndex = `export { default as ${fileName} } from './${screenFolderName}/${fileName}';\n`;
+  const exportToIndex = `export { default as ${fileName} } from './${screenFolderName}';\n`;
 
   fs.appendFile(`../src/views/index.ts`, exportToIndex, errExport => {
     if (errExport) throw errExport;

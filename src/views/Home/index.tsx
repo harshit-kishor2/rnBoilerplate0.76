@@ -1,16 +1,21 @@
 
-import React from 'react';
-import { View, Text } from 'react-native';
-import useHomeScreen from './useHomeScreen';
-import {useAppThemeContext} from '@app/theme/AppThemeProvider';
 import {AppButton, Spacer} from '@app/components';
+import {useAppTranslation} from '@app/i18n';
 import {useAppLocalizationContext} from '@app/i18n/AppLocalizationProvider';
+import {useAppTheme} from '@app/theme';
+import {useAppThemeContext} from '@app/theme/AppThemeProvider';
+import React, {useMemo} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
 
 
 const HomeScreen = () => {
-  const { styles, t } = useHomeScreen();
   const {selectedThemeType,setSelectedThemeType} = useAppThemeContext();
   const {currentLanguage,setSelectedLanguageType, selectedLanguageType} = useAppLocalizationContext();
+
+  const theme = useAppTheme();
+  const translate = useAppTranslation();
+  const styles = useMemo(() => homeScreenStyles(theme), [theme]);
+
   return (
     <View style={styles.container}>
       <Text style={styles.text} >HomeScreen</Text>
@@ -21,7 +26,7 @@ const HomeScreen = () => {
       <Spacer/>
       <AppButton title="Auto Theme" onPress={()=>setSelectedThemeType('auto')} />
 
-      <Text style={styles.text} >Langauge : ${currentLanguage} and ${selectedLanguageType} : ${t('greeting')}</Text>
+      <Text style={styles.text} >Langauge : ${currentLanguage} and ${selectedLanguageType} : ${translate('greeting')}</Text>
       <AppButton title="Set Language English" onPress={()=>setSelectedLanguageType('en')} />
       <Spacer/>
       <AppButton title="Set Language Hindi" onPress={()=>setSelectedLanguageType('hi')} />
@@ -32,4 +37,17 @@ const HomeScreen = () => {
   );
 };
 
-export default React.memo(HomeScreen);
+export default HomeScreen;
+
+const homeScreenStyles = (theme: IAppTheme) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: theme.colors.background,
+    },
+    text: {
+      color: theme.colors.red,
+    }
+  });
