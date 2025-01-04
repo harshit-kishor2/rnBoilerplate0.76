@@ -1,87 +1,121 @@
 import {
   CommonActions,
   createNavigationContainerRef,
-  StackActions
+  StackActions,
+  TabActions,
 } from '@react-navigation/native';
-
-import React from 'react';
+import {createRef, MutableRefObject} from 'react';
 
 export const navigationRef = createNavigationContainerRef<RootStackParamList>();
 
-export const isMountedRef = React.createRef<boolean>();
+export const isReadyRef: MutableRefObject<boolean | null> = createRef<boolean | null>();
 
-/**
-* Call this function when you want to navigate to a specific route.
-*
-* @param routeName The name of the route to navigate to. Routes are defined in RootScreen using createStackNavigator()
-* @param params Route parameters.
-*/
+function prepareParams(params: any, fromRouteName: string) {
+  return { ...params, fromRouteName };
+}
+
 function navigate({
-  from,
-  to,
-  params
+  fromRouteName,
+  routeName,
+  params,
 }: NavigateProps) {
-  if (navigationRef.isReady()) {
-    // Perform navigation if the app has mounted
-    navigationRef.navigate(to, {from, ...params});
+  if (isReadyRef.current && navigationRef?.current) {
+    navigationRef.current.navigate(routeName, prepareParams(params, fromRouteName));
   } else {
-    // You can decide what to do if the app hasn't mounted
-    // You can ignore this, or add these actions to a queue you can call later
+    console.warn('Navigation is not ready');
   }
 }
 
 function goBack() {
-  if (navigationRef.isReady() && navigationRef.canGoBack()) {
-    // Perform navigation if the app has mounted
-    navigationRef.goBack();
+  if (isReadyRef.current && navigationRef?.current && navigationRef.current.canGoBack()) {
+    navigationRef.current.goBack();
+  } else {
+    console.warn('Cannot go back. Navigation is not ready or no previous screen');
   }
 }
 
-function resetRoot(params = {index: 0, routes: []}) {
-  if (navigationRef.isReady()) {
-    navigationRef.resetRoot(params);
+const reset = (params: any) => {
+  if (isReadyRef.current && navigationRef?.current) {
+    navigationRef.current?.reset(params);
+  } else {
+    console.warn('Reset cannot be performed. Navigation is not ready');
+  }
+};
+
+function resetRoot(params = { index: 0, routes: [] }) {
+  if (isReadyRef.current && navigationRef?.current) {
+    navigationRef.current?.resetRoot(params);
+  } else {
+    console.warn('Reset root cannot be performed. Navigation is not ready');
   }
 }
 
-/**
-* Call this function when you want to replace route.
-*
-* @param routeName The name of the route to navigate to. Routes are defined in RootScreen using createStackNavigator()
-* @param params Route parameters.
-*/
-function replace({
-  from,
-  to,
-  params
-}: NavigateProps) {
-  if (navigationRef.isReady()) {
-    navigationRef.dispatch(
-      StackActions.replace(to, {from, ...params}),
-    );
-  }
-}
-
-/**
-* Call this function when you want to navigate to a specific route AND reset the navigation history.
-*
-* That means the user cannot go back. This is useful for example to redirect from a splashscreen to
-* the main screen: the user should not be able to go back to the splashscreen.
-*
-* @param routeName The name of the route to navigate to. Routes are defined in RootScreen using createStackNavigator()
-* @param params Route parameters.
-*/
 function navigateAndReset({
-  from,
-  to,
-  params
+  fromRouteName,
+  routeName,
+  params,
 }: NavigateProps) {
-  navigationRef.dispatch(
-    CommonActions.reset({
-      index: 1,
-      routes: [{name: to, params: {from, ...params}}],
-    }),
-  );
+  if (isReadyRef.current && navigationRef?.current) {
+    navigationRef.current?.dispatch(
+      CommonActions.reset({
+        index: 1,
+        routes: [{ name: routeName, params: prepareParams(params, fromRouteName) }],
+      })
+    );
+  } else {
+    console.warn('Navigation is not ready for reset and navigate');
+  }
 }
+
+const push = ({
+  fromRouteName,
+  routeName,
+  params,
+}: NavigateProps) => {
+  if (isReadyRef.current && navigationRef?.current) {
+    navigationRef.current?.dispatch(StackActions.push(routeName, prepareParams(params, fromRouteName)));
+  } else {
+    console.warn('Push cannot be performed. Navigation is not ready');
+  }
+};
+
+const pop = (count?: number) => {
+  if (isReadyRef.current && navigationRef?.current) {
+    navigationRef.current?.dispatch(StackActions.pop(count));
+  } else {
+    console.warn('Pop cannot be performed. Navigation is not ready');
+  }
+};
+
+const popToTop = () => {
+  if (isReadyRef.current && navigationRef?.current) {
+    navigationRef.current?.dispatch(StackActions.popToTop());
+  } else {
+    console.warn('Pop to top cannot be performed. Navigation is not ready');
+  }
+};
+
+function replace({
+  fromRouteName,
+  routeName,
+  params,
+}: NavigateProps) {
+  if (isReadyRef.current && navigationRef?.current) {
+    navigationRef.current?.dispatch(
+      StackActions.replace(routeName, prepareParams(params, fromRouteName))
+    );
+  } else {
+    console.warn('Replace cannot be performed. Navigation is not ready');
+  }
+}
+
+const jumpTo = (params: any) => {
+  if (isReadyRef.current && navigationRef?.current) {
+    navigationRef.current?.dispatch(TabActions.jumpTo(params));
+  } else {
+    console.warn('JumpTo cannot be performed. Navigation is not ready');
+  }
+};
 
 const NavigationService = {
   navigate,
@@ -89,6 +123,11 @@ const NavigationService = {
   navigateAndReset,
   goBack,
   resetRoot,
+  push,
+  pop,
+  popToTop,
+  jumpTo,
+  reset,
 };
 
 export default NavigationService;

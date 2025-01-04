@@ -12,8 +12,8 @@ import {
 declare global {
 
   type NavigateProps = {
-    from?: keyof RootStackParamList,
-    to: any,
+    fromRouteName: keyof RootStackParamList,
+    routeName: keyof RootStackParamList,
     params?: ObjParams;
   };
 

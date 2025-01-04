@@ -16,3 +16,5 @@ yarn add @reduxjs/toolkit redux-persist react-redux
 <!-- ===================== -->
 
 Zustand
+
+yarn add zustand
