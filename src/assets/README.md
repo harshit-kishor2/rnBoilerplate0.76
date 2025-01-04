@@ -20,6 +20,10 @@ And then run the following script:
 npm run app-icon
 ```
 
+Check here for react native launch screen update guide
+https://hybridheroes.de/blog/react-native-splash-screen/
+
+
 2. #### **fonts** -
 
 This subfolder contains all custom font files used in the application. Ensure to include the font files in various formats (e.g., .ttf, .otf) for compatibility across different platforms.
