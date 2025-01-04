@@ -1,11 +1,12 @@
 
 import {rpWidth} from '@app/helpers';
 import {StyleSheet, ViewStyle} from 'react-native';
+import {ImageStyle} from 'react-native-fast-image';
 
 interface Style {
   container: ViewStyle;
   version: ViewStyle;
-  splsh_image: ViewStyle;
+  splsh_image: ImageStyle;
 }
 
 const splashScreenStyles = () =>

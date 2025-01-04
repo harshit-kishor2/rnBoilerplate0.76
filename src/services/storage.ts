@@ -7,8 +7,6 @@ import {MMKV} from 'react-native-mmkv';
 export const storageKeys = {
   access_token: '@access_token',
   refresh_token: '@refresh_token',
-  app_theme_type: '@app_theme_type',
-  app_theme: '@app_theme',
 };
 
 /**
@@ -18,7 +16,7 @@ export const storageKeys = {
 const storage: MMKV = new MMKV({
   id: `app-local-storage`,
   // path: `${'USER_DIRECTORY'}/storage`,
-  encryptionKey: 'hunter2'
+  encryptionKey: 'appLocalStorageEncryptionKey',
 });
 
 // console.log("storage===>", storage)

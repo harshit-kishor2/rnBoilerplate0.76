@@ -13,39 +13,11 @@ import {
 const Stack = createStackNavigator<RootStackParamList>();
 
 const StackNavigator = () => {
-  // get Data from api/store/sharedpref
-  const hasAccountData = true;
-
-  const getInitialRoute = () => {
-    let initialRoute: keyof RootStackParamList;
-    if (hasAccountData) {
-      initialRoute = 'HomeRoute';
-    } else {
-      initialRoute = 'LoginRoute';
-    }
-    return initialRoute;
-
-  };
-
   return <Stack.Navigator
-    initialRouteName={getInitialRoute()}
+    initialRouteName={'SplashRoute'}
   >
-    {/* All routes put here */}
-    <Stack.Group
-      screenOptions={{...stackScreenOptions}}
-    >
-      {hasAccountData ?
-        postAuthRoutes.map((route, index) =>
-          <Stack.Screen key={route.name + index.toString()}  {...route} />
-        ) :
-        preAuthRoutes.map((route, index) =>
-          <Stack.Screen key={route.name + index.toString()}  {...route} />
-        )
-      }
-      {/* <Stack.Screen name='HomeRoute' component={HomeScreen} /> */}
-    </Stack.Group>
 
-    {/*  All common screens put here */}
+    {/* ==== All common screens put here  ==== */}
     <Stack.Group
       screenOptions={{...stackScreenOptions}}
     >
@@ -56,7 +28,29 @@ const StackNavigator = () => {
       }
     </Stack.Group>
 
-    {/* Put all modal routes here */}
+    {/* ==== All PreAuth routes put here ==== */}
+    <Stack.Group
+      screenOptions={{...stackScreenOptions}}
+    >
+      {
+        preAuthRoutes.map((route, index) =>
+          <Stack.Screen key={route.name + index.toString()}  {...route} />
+        )
+      }
+    </Stack.Group>
+
+    {/* ==== All postAuth routes put here ==== */}
+    <Stack.Group
+      screenOptions={{...stackScreenOptions}}
+    >
+      {
+        postAuthRoutes.map((route, index) =>
+          <Stack.Screen key={route.name + index.toString()}  {...route} />
+        )
+      }
+    </Stack.Group>
+
+    {/* ==== Put all modal routes here ==== */}
     <Stack.Group screenOptions={{...modalScreenOptions}}>
       {
         modalRoutes.map((route, index) =>
@@ -64,6 +58,7 @@ const StackNavigator = () => {
         )
       }
     </Stack.Group>
+
   </Stack.Navigator>;
 };
 

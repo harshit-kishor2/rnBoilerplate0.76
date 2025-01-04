@@ -39,6 +39,7 @@ declare global {
 
   //  All Screen Route
   type RootStackParamList = {
+    SplashRoute: undefined;
     WebViewRoute: {webUrl?: string, from?: keyof RootStackParamList, page?: string;} | undefined;
     BottomTabRoute: {from?: keyof RootStackParamList;} | undefined;
     LoginRoute: {from?: keyof RootStackParamList;} | undefined;

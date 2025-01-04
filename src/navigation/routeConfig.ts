@@ -3,7 +3,8 @@ import {
   HomeScreen,
   NetworkLoggerScreen,
   SettingScreen,
-  WebviewScreen
+  WebviewScreen,
+  SplashScreen
 
 } from '@app/views';
 import {CardStyleInterpolators, type StackNavigationOptions} from '@react-navigation/stack';
@@ -53,6 +54,10 @@ export const postAuthRoutes: RootStackRoutesType[] = [
 
 // Put all common routes and respected screen here
 export const commonRoutes: RootStackRoutesType[] = [
+  {
+    name: 'SplashRoute',
+    component: SplashScreen,
+  },
   {
     name: 'WebViewRoute',
     component: WebviewScreen,
