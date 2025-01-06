@@ -15,6 +15,7 @@
     "link-assets": "npx react-native-asset"
   },
   "dependencies": {
+    "@react-native-community/netinfo": "^11.4.1",
     "@react-native-masked-view/masked-view": "^0.3.2",
     "@react-navigation/bottom-tabs": "^7.0.7",
     "@react-navigation/drawer": "^7.0.7",

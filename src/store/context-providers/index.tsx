@@ -1,5 +1,6 @@
 import React from 'react';
 import {DemoProvider} from './DemoProvider';
+import {InternetCheckerProvider} from './InternetCheckerProvider';
 
 export type ContextItem = {
   provider: React.ComponentType<any>; // Type for a React context provider
@@ -9,6 +10,10 @@ export type ContextItem = {
 const contexts: ContextItem[] = [
   {
     provider: DemoProvider,
+    props: {},
+  },
+  {
+    provider: InternetCheckerProvider,
     props: {},
   },
 ];

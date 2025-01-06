@@ -11,6 +11,8 @@ import AppVectorIcon from './shared/AppVectorIcon';
 import Spacer from './Spacer';
 import ComposeProviders from './ComposeProvider';
 import CrashShield from './crash-shield';
+import AppSnackbar from './shared/AppSnackbar';
+import SeeMoreText from './SeeMore';
 
 export {
   AppText,
@@ -25,6 +27,8 @@ export {
   Spacer,
   Container,
   ComposeProviders,
-  CrashShield
+  CrashShield,
+  AppSnackbar,
+  SeeMoreText
 };
 
