@@ -32,6 +32,9 @@ Eslint -> https://gist.github.com/harshit-kishor2/ebd41c9781e10826c09d60658f315f
 
 Lefthook ->  https://medium.com/@harshitkishor2/validating-commit-messages-with-lefthook-in-react-native-199085d2be40
 
+https://gist.github.com/harshit-kishor2/a52b1fc5ba4cee77a4558e6d2bcbabbf
+
+
 
 ### 4.  Install these helper dependencies
 
@@ -118,7 +121,7 @@ module.exports = {
 };
 ```
 
-##### C. react-native-paper
+##### D. react-native-paper
 
 
    ```bash
@@ -170,13 +173,20 @@ module.exports = {
 
 ### 10. Add some serives files (axios, localstorage)
 
-**local-storage** -> check README.md inside `services` directory and `localStorage.ts` file
-
-**axios** -> check README.md inside `services` directory and `appAxios.ts` file
+**axios** -> check README.md inside `services` directory and `apiClient.ts` file
 
 
 ### 11.Useful hooks
 **hooks** -> check README.md inside `hook` directory for custom hooks.
 
+### 12.Useful packages
 For better performance you can use these packages later ->
 react-native-network-logger, fuse.js, @shopify/flash-list, react-hook-form, react-native-keyboard-aware-scroll-view
+
+### 13.Multiple Environment and flavors in React native
+
+https://gist.github.com/harshit-kishor2/6fff6229e43037c5b484dfcd63ca277a
+
+### 14. Generating Signed APK
+
+https://gist.github.com/harshit-kishor2/abfe7f4f9160d219c5ac13c5f0c6438a
