@@ -178,5 +178,5 @@ module.exports = {
 ### 11.Useful hooks
 **hooks** -> check README.md inside `hook` directory for custom hooks.
 
-
-react-native-network-logger, axios-logger, fuse.js, shopify flatlist, react-hook-form
+For better performance you can use these packages later ->
+react-native-network-logger, fuse.js, @shopify/flash-list, react-hook-form, react-native-keyboard-aware-scroll-view

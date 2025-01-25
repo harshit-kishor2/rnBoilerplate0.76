@@ -1,5 +1,5 @@
 import Container from './Container';
-import If from './If';
+import ShowIf from './ShowIf';
 import GlobalIndicator from './modal/GlobalIndicator';
 import AppButton from './atoms/AppButton';
 import AppFastImage from './atoms/AppFastImage';
@@ -12,6 +12,11 @@ import Spacer from './Spacer';
 import CrashShield from './crash-shield';
 import AppSnackbar from './atoms/AppSnackbar';
 import SeeMoreText from './SeeMore';
+import Row from './Row';
+import Column from './Column';
+import Stack from './Stack';
+import Positioned from './Positioned';
+import AppScrollView from './atoms/AppScrollView';
 
 export {
   AppText,
@@ -22,11 +27,16 @@ export {
   AppTextInput,
   AppVectorIcon,
   GlobalIndicator,
-  If,
+  ShowIf,
   Spacer,
   Container,
   CrashShield,
   AppSnackbar,
-  SeeMoreText
-};
+  SeeMoreText,
+  Row,
+  Column,
+  Stack,
+  Positioned,
+  AppScrollView
 
+};
