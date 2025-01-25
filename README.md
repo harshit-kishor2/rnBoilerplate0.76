@@ -14,7 +14,7 @@ src/
   - views/
   - App.tsx
 
-Run this script from terminal -> This will create structure. After theat cerate README.md file in necessary directories.
+Run this script from terminal -> This will create structure. After that create README.md file in necessary directories.
 
 
 ```bash
@@ -64,11 +64,11 @@ Update `tsconfig.json`
 ```
 
 
-# Install these helper dependencies
+### 4.  Install these helper dependencies
 
 yarn add react-native-safe-area-context
 
-##### 1. react-native-gesture-handler
+##### A. react-native-gesture-handler
 
 ```javascript
 yarn add react-native-gesture-handler
@@ -111,7 +111,7 @@ export default function App() {
 }
 ```
 
-##### 2. react-native-reanimated
+##### B. react-native-reanimated
 
 ```javascript
 yarn add react-native-reanimated
@@ -131,24 +131,60 @@ module.exports = {
 };
 ```
 
+##### C. react-native-paper
 
 
-### 4. Add some important packages
+   ```bash
+	yarn add react-native-paper
+	yarn add react-native-safe-area-context
+
+   ```
+
+Add the following plugin configuration to your `babel.config.js`:
+
+```javascript
+module.exports = {
+  presets: [
+    // other presets
+  ],
+  env: {
+    production: {
+      plugins: ['react-native-paper/babel'],
+    },
+  },
+};
+
+```
+
+### 5. Assest setup with vector icons
 
 **svg/image/lottie/gif** -> check README.md inside `assets`
 
 **custom fonts and react-native-vector-icon** -> check README.md inside `assets`
 
+### 6. Add some serives files (axios, localstorage)
+
 **local-storage** -> check README.md inside `services` directory and `localStorage.ts` file
 
 **axios** -> check README.md inside `services` directory and `appAxios.ts` file
 
-**localization** -> check README.md inside `i18n` directory.
+### 7. Theme setup
 
 **theme** -> check README.md inside `theme` directory.
 
-**hooks** -> check README.md inside `hook` directory for custom hooks.
+### 8. Localization setup
+
+**localization** -> check README.md inside `i18n` directory.
+
+### 9. Navigations setup
 
 **navigation** -> check README.md inside `navigations` directory.
 
+### 10.Useful hooks
+**hooks** -> check README.md inside `hook` directory for custom hooks.
+
 Sequence ==> assets -> theme -> services -> i18n -> helpers -> components -> hooks -> views -> navigations -> store
+
+
+
+react-native-network-logger, axios-logger, fuse.js, shopify flatlist, react-hook-form
