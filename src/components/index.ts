@@ -1,17 +1,16 @@
 import Container from './Container';
 import If from './If';
 import GlobalIndicator from './modal/GlobalIndicator';
-import AppButton from './shared/AppButton';
-import AppFastImage from './shared/AppFastImage';
-import AppLottieView from './shared/AppLottieView';
-import AppSvg from './shared/AppSvg';
-import AppText from './shared/AppText';
-import AppTextInput from './shared/AppTextInput';
-import AppVectorIcon from './shared/AppVectorIcon';
+import AppButton from './atoms/AppButton';
+import AppFastImage from './atoms/AppFastImage';
+import AppLottieView from './atoms/AppLottieView';
+import AppSvg from './atoms/AppSvg';
+import AppText from './atoms/AppText';
+import AppTextInput from './atoms/AppTextInput';
+import AppVectorIcon from './atoms/AppVectorIcon';
 import Spacer from './Spacer';
-import ComposeProviders from './ComposeProvider';
 import CrashShield from './crash-shield';
-import AppSnackbar from './shared/AppSnackbar';
+import AppSnackbar from './atoms/AppSnackbar';
 import SeeMoreText from './SeeMore';
 
 export {
@@ -26,7 +25,6 @@ export {
   If,
   Spacer,
   Container,
-  ComposeProviders,
   CrashShield,
   AppSnackbar,
   SeeMoreText
