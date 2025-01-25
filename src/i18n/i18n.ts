@@ -1,7 +1,46 @@
-import {initReactI18next} from 'react-i18next';
 import i18n, {LanguageDetectorAsyncModule} from 'i18next';
+import {initReactI18next} from 'react-i18next';
+import {MMKV} from 'react-native-mmkv';
 import {en, es, hi} from './resources';
-import {appLanguageLocalStorage, appLanguageLocalStorageKeys} from './i18n-local-storage';
+import dayjs from 'dayjs';
+
+// dayjs locales for i18n
+// Keep this list in sync with the locales in src/i18n/resources
+// See https://github.com/iamkun/dayjs/tree/dev/src/locale
+import 'dayjs/locale/en-gb';
+import 'dayjs/locale/es';
+import 'dayjs/locale/hi';
+
+export const APP_LANGUAGE_TYPE_KEY = '@app_language_type'
+export const APP_LANGUAGE_KEY = '@app_language'
+
+const APP_LANGUAGE_LOCAL_STORAGE_ID = 'app-langauge-local-storage-id'
+const APP_LANGUAGE_LOCAL_STORAGE_ENCRYPTION_KEY = 'my-random-key-for-encryption'
+export const appLanguageLocalStorage: MMKV = new MMKV({
+  id: APP_LANGUAGE_LOCAL_STORAGE_ID,
+  encryptionKey: APP_LANGUAGE_LOCAL_STORAGE_ENCRYPTION_KEY
+});
+
+export const seti18nLanguage = async (lang: string) => {
+  try {
+    await i18n.changeLanguage(lang);
+  } catch (error) {
+    console.error('Error changing language in i18n:', error);
+  }
+
+  try {
+    dayjs.locale(lang);
+  } catch (error) {
+    console.error('Error setting dayjs locale:', error);
+  }
+
+  try {
+    appLanguageLocalStorage.set(APP_LANGUAGE_KEY, lang);
+  } catch (error) {
+    console.error('Error saving language to local storage:', error);
+  }
+};
+
 
 /**
  * The resources object contains the translations for each language.
@@ -33,12 +72,12 @@ const useLanguageStorage: LanguageDetectorAsyncModule = {
   type: 'languageDetector',
   async: true,
   detect: async (callback: any) => {
-    const lang = appLanguageLocalStorage.getString(appLanguageLocalStorageKeys.app_language);
+    const lang = appLanguageLocalStorage.getString(APP_LANGUAGE_KEY);
     if (lang) return callback(lang);
   },
   init: () => null,
   cacheUserLanguage: async (language: string) => {
-    appLanguageLocalStorage.set(appLanguageLocalStorageKeys.app_language, language);
+    appLanguageLocalStorage.set(APP_LANGUAGE_KEY, language);
   },
 };
 
@@ -65,4 +104,3 @@ i18n
   });
 
 export default i18n;
-

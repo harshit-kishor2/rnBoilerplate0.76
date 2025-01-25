@@ -18,4 +18,17 @@ declare global {
 
   // Define supported theme selection options
   type ISelectedTheme = 'light' | 'dark' | 'auto';
+
+  interface IAppThemeContext {
+    currentTheme: IAppTheme;
+    selectedThemeType: ISelectedTheme;
+    setSelectedThemeType: (themeTypeProp: ISelectedTheme) => void;
+    resetTheme: () => void;
+  }
+
+  interface IAppThemeProvider {
+    autoDetect?: boolean;
+    children: React.ReactNode;
+  }
 }
+

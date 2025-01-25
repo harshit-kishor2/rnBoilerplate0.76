@@ -44,8 +44,8 @@ After adding the i18n module to your project, follow these steps:
 
 #### 1. Configure i18n in your App
 
-In your App.tsx (or main entry file), wrap your app with the `AppI18nProvider` to enable localization context throughout your app
-`AppI18nProvider` is the top-level component responsible for initializing i18n and setting up language context. You can optionally enable auto-detection of the device's language.
+In your App.tsx (or main entry file), wrap your app with the `AppLocalizationProvider` to enable localization context throughout your app
+`AppLocalizationProvider` is the top-level component responsible for initializing i18n and setting up language context. You can optionally enable auto-detection of the device's language.
 
 **Props:**
 - autoDetect (boolean, default: true): If `true`, it will automatically detect the device's language setting. Otherwise, it will use the user's selected language preference.
@@ -53,12 +53,12 @@ In your App.tsx (or main entry file), wrap your app with the `AppI18nProvider` t
 Example usage:
 
 ```javascript
-import { AppI18nProvider } from '@app/i18n'; // Path to your i18n module
+import { AppLocalizationProvider } from '@app/i18n'; // Path to your i18n module
 
 const App = () => (
-  <AppI18nProvider autoDetect={true}>
+  <AppLocalizationProvider autoDetect={true}>
     {/* Your app's components */}
-  </AppI18nProvider>
+  </AppLocalizationProvider>
 );
 
 ```
@@ -87,6 +87,7 @@ The `useAppLocalizationContext` hook allows you to access the current language a
 - 	currentLanguage: The currently applied language (e.g., 'en', 'es', 'hi').
 - 	selectedLanguageType: The selected language preference (e.g., 'auto', 'en', 'es').
 - 	setSelectedLanguageType: A function to set the selected language.
+- 	resetLanguage: A function to reset the selected language.
 
 ```javascript
 import { useAppLocalizationContext } from './i18n';
@@ -105,9 +106,8 @@ const MyComponent = () => {
 ```
 ### How to Add More Languages
 - Add a new language JSON file in the resources folder, such as fr.json for French.
-- In the `i18n.ts` file, update the resources object to include the new language.
-- In the `react-18next.d.ts` file, update the resources object to include the new language and update `ILanguageType`.
-- In the `utils.ts` file , import dayjs locales for that language.
+- In the `i18n.ts` file, update the resources object to include the new language, and  import dayjs locales for that language
+- In the `react-18next.d.ts` file, update the resources object to include the new language and update `ISelectedLangauge`.
 
 
 
@@ -121,31 +121,25 @@ i18n/
   │   ├── es.json          # Spanish translations
   │   ├── hi.json          # Hindi translations
   │   └── index.ts         # Combines all translation files and exports them
-  ├── AppLocalizationProvider.tsx  # Context provider for managing language preferences
-  ├── i18n-local-storage.ts  # Utility functions for language storage
+  ├── provider.tsx  # Context provider for managing language preferences
   ├── i18n.ts              # i18n initialization and configuration
-  ├── AppI18nProvider.tsx     # Combines i18n and AppLocalizationProvider for localization
   ├── index.ts             # Main entry point for exporting functions and hooks
   ├── react-18next.d.ts    # TypeScript definitions for react-i18next
-  ├── README.md            # Main usage guide
-  └── utils.js             # Utility functions handling
+  └── README.md            # Main usage guide
 
 ```
 
 #### Detailed Explanation:
 - **resources/:** Contains language JSON files (en.json, es.json, hi.json, etc.) that hold the translations for each language. Each JSON file consists of key-value pairs for translated text.
 
-- **AppLocalizationProvider.tsx:** This component provides the context for managing and updating the current language preference. It detects the device language by default and allows users to set a language preference.
+- **provider.tsx:** This component provides the context for managing and updating the current language preference. It detects the device language by default and allows users to set a language preference.
 
 - **i18n.ts:** This file initializes the i18n instance and configures the language detector, fallback language, and translation resources.
-
-- **AppI18nProvider.tsx:** A wrapper that combines the i18n instance and the localization provider, enabling the context and translations for the whole app.
 
 - **index.ts:** The main entry point for exporting all relevant functions, hooks, and providers for easy use in other projects. It includes hooks like useAppLocalizationContext and useAppTranslation.
 
 - **react-18next.d.ts:** TypeScript declarations to extend i18next with custom translation types.
 
-- **utils.js:** Utility functions for handling language preferences in local storage and setting the i18n language.
 
 ## Available Functions
 **seti18nLanguage(lang: string):** Sets the i18n language and updates the dayjs locale.

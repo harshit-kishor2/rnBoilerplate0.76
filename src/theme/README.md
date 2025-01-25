@@ -59,21 +59,21 @@ After adding the theme module to your project, follow these steps:
 
 #### 1. Wrap Your App with AppThemeProvider
 
-In your App.tsx (or main entry file), wrap your app with the `I18nProvider` to enable localization context throughout your app
-`I18nProvider` is the top-level component responsible for initializing i18n and setting up language context. You can optionally enable auto-detection of the device's language.
+In your App.tsx (or main entry file), wrap your app with the `AppThemeProvider` to enable theme context throughout your app
+`AppThemeProvider` is the top-level component responsible for initializing theme and setting up theme context. You can optionally enable auto-detection of the device's theme.
 
 **Props:**
-- autoDetect (boolean, default: true): If `true`, it will automatically detect the device's language setting. Otherwise, it will use the user's selected language preference.
+- autoDetect (boolean, default: true): If `true`, it will automatically detect the device's theme setting. Otherwise, it will use the user's selected theme preference.
 
 Example usage:
 
 ```javascript
-import { I18nProvider } from '@app/i18n'; // Path to your i18n module
+import { AppThemeProvider } from '@app/theme'; // Path to your theme module
 
 const App = () => (
-  <I18nProvider autoDetect={true}>
+  <AppThemeProvider autoDetect={true}>
     {/* Your app's components */}
-  </I18nProvider>
+  </AppThemeProvider>
 );
 
 ```
@@ -87,6 +87,7 @@ const { currentTheme, setSelectedThemeType, selectedThemeType } = useAppThemeCon
 - **currentTheme**: Returns the current theme object (colors, typography, etc.).
 - **setSelectedThemeType(themeType: 'light' | 'dark' | 'auto'):** Sets the theme type.
 - **selectedThemeType:** Returns the current theme type ('light', 'dark', or 'auto').
+- **resetTheme:** Reset theme
 
 
 #### 3. Usage of Theme
@@ -130,11 +131,10 @@ The folder structure is organized to facilitate easy management and customizatio
 ```graphql
 theme/
 │
-├── AppThemeProvider.tsx    # Context provider to manage theme selection
+├── provider.tsx    # Context provider to manage theme selection
 ├── index.ts                # Entry point to export theme settings
 ├── theme.d.ts              # TypeScript definitions for theme types
-├── themes.ts               # Light and dark theme definitions
-└── utils.ts                # Utility functions (e.g., for theme persistence)
+└── themes.ts               # Light and dark theme definitions
 ```
 
 

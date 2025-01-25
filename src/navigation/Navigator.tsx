@@ -6,7 +6,7 @@ import {
 } from '@react-navigation/native';
 import { isReadyRef, navigationRef } from './NavigationService';
 import StackNavigator from './StackNavigator';
-import { useAppThemeContext } from '@app/theme/AppThemeProvider';
+import { useAppThemeContext } from '@app/theme/provider';
 
 const Navigator = () => {
   const { currentTheme } = useAppThemeContext();

@@ -52,4 +52,11 @@ declare module 'i18next' {
 declare global{
   //! Add your supported languages here.
   type ISelectedLangauge = 'auto' | 'en' | 'hi' | 'es';
+
+  type IAppLocalizationContext = {
+    currentLanguage: ISelectedLangauge; // Currently applied language
+    selectedLanguageType: ISelectedLangauge; // Selected language preference (e.g., 'auto', 'en', 'fr')
+    setSelectedLanguageType: (langParam: ISelectedLangauge) => void; // Setter function for updating selected language
+    resetLanguage: () => void; // Function to reset language settings
+  };
 }

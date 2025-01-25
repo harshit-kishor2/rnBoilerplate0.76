@@ -1,9 +1,7 @@
 
 import {AppButton, Spacer} from '@app/components';
-import {useAppTranslation} from '@app/i18n';
-import {useAppLocalizationContext} from '@app/i18n/AppLocalizationProvider';
-import {useAppTheme} from '@app/theme';
-import {useAppThemeContext} from '@app/theme/AppThemeProvider';
+import {useAppLocalizationContext, useAppTranslation} from '@app/i18n';
+import {useAppTheme, useAppThemeContext} from '@app/theme';
 import React, {useMemo} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 

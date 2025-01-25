@@ -5,21 +5,19 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import {appThemeLocalStorage, appThemeLocalStorageKeys} from './utils';
 import {darkTheme, lightTheme} from './themes';
 import {PaperProvider} from 'react-native-paper';
 import {Appearance} from 'react-native';
+import {MMKV} from 'react-native-mmkv';
 
-interface IAppThemeContext {
-  currentTheme: IAppTheme;
-  selectedThemeType: ISelectedTheme;
-  setSelectedThemeType: (themeTypeProp: ISelectedTheme) => void;
-}
+const APP_THEME_LOCAL_STORAGE_KEY = '@app_theme_type';
+const APP_THEME_LOCAL_STORAGE_ID = 'app-theme-local-storage-id';
+const APP_THEME_LOCAL_STORAGE_ENCRYPTION_KEY = 'secure-random-encryption-key';
 
-interface IAppThemeProvider {
-  autoDetect?: boolean;
-  children: React.ReactNode;
-}
+export const appThemeLocalStorage: MMKV = new MMKV({
+  id: APP_THEME_LOCAL_STORAGE_ID,
+  encryptionKey: APP_THEME_LOCAL_STORAGE_ENCRYPTION_KEY,
+});
 
 export const AppThemeContext = createContext<IAppThemeContext | undefined>(undefined);
 
@@ -60,7 +58,7 @@ export const AppThemeProvider = ({
     const loadThemePreference = async () => {
       try {
         const savedTheme = appThemeLocalStorage.getString(
-          appThemeLocalStorageKeys.app_theme_type,
+          APP_THEME_LOCAL_STORAGE_KEY,
         ) as ISelectedTheme;
 
         if (['auto', 'dark', 'light'].includes(savedTheme)) {
@@ -80,11 +78,20 @@ export const AppThemeProvider = ({
 
   useEffect(() => {
     try {
-      appThemeLocalStorage.set(appThemeLocalStorageKeys.app_theme_type, selectedThemeType);
+      appThemeLocalStorage.set(APP_THEME_LOCAL_STORAGE_KEY, selectedThemeType);
     } catch (error) {
       console.error('Error saving theme to storage or updating theme:', error);
     }
   }, [selectedThemeType]);
+
+  const resetTheme = () => {
+    try {
+      appThemeLocalStorage.delete(APP_THEME_LOCAL_STORAGE_KEY);
+      setSelectedThemeType('auto'); // Reset to default
+    } catch (error) {
+      console.error('Error clearing theme preferences:', error);
+    }
+  };
 
   // Compute applied theme
   const appliedTheme = useMemo(() => {
@@ -98,6 +105,7 @@ export const AppThemeProvider = ({
       currentTheme: appliedTheme,
       setSelectedThemeType,
       selectedThemeType,
+      resetTheme,
     }),
     [appliedTheme, selectedThemeType]
   );

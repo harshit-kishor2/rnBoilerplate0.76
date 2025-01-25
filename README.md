@@ -22,53 +22,40 @@ mkdir -p src/{assets/{appIcon,fonts,gif,images,lottie,svg},components,helpers,ho
 ```
 
 
-### 2. Eslint setup and Validate commit message using lefthook
+### 2. React Native Path Aliasing
+
+Path Alias -> https://gist.github.com/harshit-kishor2/efb4fe80251282226eb575d39654ebda
+
+### 3. Eslint setup and Validate commit message using lefthook
 
 Eslint -> https://gist.github.com/harshit-kishor2/ebd41c9781e10826c09d60658f315f89
 
 Lefthook ->  https://medium.com/@harshitkishor2/validating-commit-messages-with-lefthook-in-react-native-199085d2be40
 
 
-### 3. React Native Path Aliasing
-
-    yarn add --dev babel-plugin-module-resolver
-
-Update `babel.config.json`
-
-```javascript
- plugins: [
-    [
-      'module-resolver',
-      {
-        extensions: ['.ios.js', '.android.js', '.ios.jsx', '.android.jsx', '.js', '.jsx', '.json', '.ts', '.tsx'],
-        root: ['.'],
-        alias: {
-          // '@assets': './src/assets',
-          // '@components': './src/components',
-          "@app": "./src",
-        },
-      },
-    ],
-  ],
-```
-
-Update `tsconfig.json`
-
-```javascript
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@app/*": ["src/*"]
-    },
-  }
-```
-
-
 ### 4.  Install these helper dependencies
 
-yarn add react-native-safe-area-context
-
 ##### A. react-native-gesture-handler
+
+```javascript
+yarn add react-native-safe-area-context
+```
+After installation, wrap your entry point with <SafeAreaProvider>
+
+```javascript
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
+export default function App() {
+  return (
+    <SafeAreaProvider style={{flex: 1}}>
+      {/* content */}
+    </SafeAreaProvider>
+  );
+}
+```
+
+
+##### B. react-native-gesture-handler
 
 ```javascript
 yarn add react-native-gesture-handler
@@ -111,7 +98,7 @@ export default function App() {
 }
 ```
 
-##### B. react-native-reanimated
+##### C. react-native-reanimated
 
 ```javascript
 yarn add react-native-reanimated
@@ -155,36 +142,41 @@ module.exports = {
 };
 
 ```
+### 5. Theme setup
 
-### 5. Assest setup with vector icons
+**theme** -> check README.md inside `theme` directory.
+
+
+### 6. Localization setup
+
+**localization** -> check README.md inside `i18n` directory.
+
+
+### 7. Assest setup with vector icons
 
 **svg/image/lottie/gif** -> check README.md inside `assets`
 
-**custom fonts and react-native-vector-icon** -> check README.md inside `assets`
+**custom fonts** -> check README.md inside `assets`
 
-### 6. Add some serives files (axios, localstorage)
+
+### 8. Navigations setup
+
+**navigation** -> check README.md inside `navigations` directory.
+
+### 9. Store setup
+
+**store** -> check README.md inside `store` directory.
+
+
+### 10. Add some serives files (axios, localstorage)
 
 **local-storage** -> check README.md inside `services` directory and `localStorage.ts` file
 
 **axios** -> check README.md inside `services` directory and `appAxios.ts` file
 
-### 7. Theme setup
 
-**theme** -> check README.md inside `theme` directory.
-
-### 8. Localization setup
-
-**localization** -> check README.md inside `i18n` directory.
-
-### 9. Navigations setup
-
-**navigation** -> check README.md inside `navigations` directory.
-
-### 10.Useful hooks
+### 11.Useful hooks
 **hooks** -> check README.md inside `hook` directory for custom hooks.
-
-Sequence ==> assets -> theme -> services -> i18n -> helpers -> components -> hooks -> views -> navigations -> store
-
 
 
 react-native-network-logger, axios-logger, fuse.js, shopify flatlist, react-hook-form
