@@ -1,23 +1,25 @@
-import storage, {storageKeys} from '@app/services/storage';
+import {ApiConst, appTokenLocalStorage, appTokenLocalStorageKeys} from './api-client-utils';
 import axios from 'axios';
-
-const BASE_URL = 'https://api.example.com'; // Replace with your API base URL
-const REFRESH_TOKEN_PATH = '/auth/refresh';
-const TIMEOUT = 10000;  // 10 seconds timeout
+import * as AxiosLogger from 'axios-logger';
 
 // Create Axios Instance
 const apiClient = axios.create({
-  baseURL: BASE_URL,
-  timeout: TIMEOUT,
+  baseURL: ApiConst.BASE_URL,
+  timeout: ApiConst.TIMEOUT,
 });
+
+// Logger for axios
+apiClient.interceptors.request.use(AxiosLogger.requestLogger, AxiosLogger.errorLogger);
+apiClient.interceptors.response.use(AxiosLogger.responseLogger, AxiosLogger.errorLogger);
+
 
 // Request Interceptor
 apiClient.interceptors.request.use(
   (config) => {
     try {
-      const access_token = storage.getString(storageKeys.access_token);
-      if (access_token) {
-        config.headers.Authorization = `Bearer ${access_token}`;
+      const accessToken = appTokenLocalStorage.getString(appTokenLocalStorageKeys.access_token);
+      if (accessToken) {
+        config.headers.Authorization = `Bearer ${accessToken}`;
       }
     } catch (error) {
       console.error('Error adding Authorization header:', error);
@@ -39,7 +41,7 @@ apiClient.interceptors.response.use(
       if (status === 401 && !error.config._retry) {
         // Attempt to refresh token
         error.config._retry = true;
-        const newAccessToken = await refresh_tokens();
+        const newAccessToken = await refreshTokens();
         if (newAccessToken) {
           error.config.headers.Authorization = `Bearer ${newAccessToken}`;
           return apiClient(error.config); // Retry the original request
@@ -89,19 +91,18 @@ const handleApiError = (error: any) => {
 };
 
 // Refresh Token Logic
-export const refresh_tokens = async (): Promise<string | null> => {
+const refreshTokens = async (): Promise<string | null> => {
   try {
-    const refresh_token = storage.getString(storageKeys.refresh_token);
-    if (!refresh_token) {
+    const refreshToken = appTokenLocalStorage.getString(appTokenLocalStorageKeys.refresh_token);
+    if (!refreshToken) {
       throw new Error('No refresh token available.');
     }
-    const response = await axios.post(REFRESH_TOKEN_PATH, {
-      refresh_token,
+    const response = await axios.post(ApiConst.REFRESH_TOKEN_PATH, {
+      refreshToken,
     });
-    const {access_token, refresh_token: new_refresh_token} = response.data;
-    storage.set(storageKeys.access_token, access_token);
-    storage.set(storageKeys.refresh_token, new_refresh_token);
-    return access_token;
+    const {accessToken, refresh_token: newRefreshToken} = response.data;
+    setAllApiTokens(accessToken, newRefreshToken);
+    return accessToken;
   } catch (error) {
     console.error('Token Refresh Error:', error);
     return null;
@@ -109,16 +110,25 @@ export const refresh_tokens = async (): Promise<string | null> => {
 };
 
 // Logout Logic
-const handleLogout = async () => {
+export const handleLogout = () => {
   try {
-    storage.clearAll(); // Clear all stored data
-    console.error('Session Expired', 'You have been logged out.');
+    appTokenLocalStorage.clearAll();
+    console.log('Session Expired', 'You have been logged out.');
     // Clear all stored data
     // Navigate to LoginScreen or restart the app
     // e.g., resetAndNavigate('LoginScreen');
   } catch (error) {
     console.error('Error during logout:', error);
   }
+};
+
+export const setAllApiTokens = (accessToken: string, refreshToken: string) => {
+  appTokenLocalStorage.set(appTokenLocalStorageKeys.refresh_token, refreshToken);
+  appTokenLocalStorage.set(appTokenLocalStorageKeys.access_token, accessToken);
+};
+
+export const clearAllApiTokens = () => {
+  appTokenLocalStorage.clearAll();
 };
 
 export default apiClient;
