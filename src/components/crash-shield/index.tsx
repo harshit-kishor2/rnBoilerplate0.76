@@ -4,7 +4,6 @@ import {setJSExceptionHandler, setNativeExceptionHandler} from 'react-native-exc
 import RNRestart from 'react-native-restart';
 import {createUniqueId, sendCrashReport} from './utils';
 import ErrorBoundary from './ErrorBoundary';
-import {navigationRef} from '@app/navigation/NavigationService';
 
 
 interface ICrashShieldProps {

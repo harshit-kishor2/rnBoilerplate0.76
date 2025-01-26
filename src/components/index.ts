@@ -17,6 +17,8 @@ import Column from './Column';
 import Stack from './Stack';
 import Positioned from './Positioned';
 import AppScrollView from './atoms/AppScrollView';
+import SizedBox from './SizedBox';
+
 
 export {
   AppText,
@@ -37,6 +39,6 @@ export {
   Column,
   Stack,
   Positioned,
-  AppScrollView
-
+  AppScrollView,
+  SizedBox
 };

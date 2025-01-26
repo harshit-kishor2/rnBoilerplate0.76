@@ -1,13 +1,10 @@
-import {rpHeight, rpWidth} from '@app/helpers/responsive';
-import {useAppTheme} from '@app/theme';
-import React from 'react';
+import React, {useMemo} from 'react';
 import {
   StyleProp,
   StyleSheet,
   TextStyle,
   View,
   ViewStyle,
-  Text,
   ActivityIndicator,
   Pressable,
   PressableProps,
@@ -18,6 +15,8 @@ import Animated, {
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
+import AppText from './AppText';
+import {useAppTheme} from '@app/theme';
 
 const AnimatedButtonComponent =
   Animated.createAnimatedComponent(Pressable);
@@ -27,12 +26,13 @@ interface ExtraButtonProps {
   titleContainerStyle?: StyleProp<ViewStyle>;
   titleStyle?: StyleProp<TextStyle>;
   title?: React.ReactNode;
-  rightIcon?: JSX.Element;
-  leftIcon?: JSX.Element;
+  right?: JSX.Element;
+  left?: JSX.Element;
   loading?: boolean;
   disabled?: boolean;
   animated?: boolean;
   outlined?: boolean;
+  backgroundColor?: string;
 }
 
 export type AnimatedButtonProps = Omit<
@@ -47,22 +47,30 @@ export type ButtonProps = AnimatedButtonProps & ExtraButtonProps;
 
 export const AnimatedTouchableOpacity = React.memo(
   (props: AnimatedButtonProps) => {
-    const {containerStyle, animated} = props;
+    const { containerStyle, animated, children } = props;
     const scaleValue = useSharedValue(1);
 
     const animatedButtonStyle = useAnimatedStyle(() => {
       return {
-        transform: [{scale: scaleValue.value}],
+        transform: [{ scale: scaleValue.value }],
       };
     });
+
+    const handlePressIn = () => {
+      if (animated) scaleValue.value = withSpring(0.99);
+    };
+
+    const handlePressOut = () => {
+      if (animated) scaleValue.value = withSpring(1);
+    };
 
     return (
       <AnimatedButtonComponent
         style={[containerStyle, animatedButtonStyle]}
-        onPressIn={() => animated && (scaleValue.value = withSpring(0.99))}
-        onPressOut={() => animated && (scaleValue.value = withSpring(1))}
+        onPressIn={handlePressIn}
+        onPressOut={handlePressOut}
         {...props}>
-        {props.children}
+        {children}
       </AnimatedButtonComponent>
     );
   }
@@ -74,12 +82,18 @@ const AppButton = React.memo((props: ButtonProps) => {
     title,
     titleContainerStyle,
     titleStyle,
+    left,
+    right,
+    backgroundColor,
     disabled = false,
     outlined = false,
     animated = false,
     loading = false,
+    ...rest
   } = props;
+
   const theme = useAppTheme();
+  const styles = useMemo(() => createStyles(theme), [theme]);
 
   return (
     <AnimatedTouchableOpacity
@@ -88,19 +102,18 @@ const AppButton = React.memo((props: ButtonProps) => {
         styles.buttonContainer,
         buttonContainerStyle,
         {
-          backgroundColor: outlined ? theme.colors.background : theme.colors.primary,
-          borderColor: theme.colors.primary,
+          backgroundColor: outlined ? 'transparent' : (backgroundColor ?? theme.colors.primary),
+          borderColor: backgroundColor ?? theme.colors.primary,
           borderWidth: outlined ? 1 : 0,
           opacity: disabled ? 0.6 : 1,
         }]}
-      {...props}>
+      disabled={disabled}
+      {...rest}>
       <View style={[styles.titleContainer, titleContainerStyle]}>
-        {loading ? <ActivityIndicator size={'small'} /> : null}
-        {props.leftIcon}
-        <Text style={[titleStyle]}>
-          {title}
-        </Text>
-        {props.rightIcon}
+        {loading && <ActivityIndicator size="small" />}
+        {left}
+        {title && <AppText style={StyleSheet.flatten([styles.titleStyle, titleStyle])}>{title}</AppText>}
+        {right}
       </View>
     </AnimatedTouchableOpacity>
   );
@@ -108,11 +121,11 @@ const AppButton = React.memo((props: ButtonProps) => {
 
 export default AppButton;
 
-const styles = StyleSheet.create({
+const createStyles = (theme: IAppTheme) => StyleSheet.create({
   buttonContainer: {
     alignItems: 'center',
-    borderRadius: rpWidth(60),
-    height: rpHeight(45),
+    borderRadius: 60,
+    height: 50,
     width: '100%',
   },
   titleContainer: {
@@ -121,5 +134,8 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     width: '100%',
+  },
+  titleStyle: {
+    color: theme.colors.text,
   },
 });

@@ -1,5 +1,4 @@
 import Assets from '@app/assets';
-import {rpFont, rpWidth} from '@app/helpers/responsive';
 import {useAppTheme} from '@app/theme';
 import React from 'react';
 import {AnimatableNumericValue, StyleSheet, Text, TextProps, TextStyle} from 'react-native';
@@ -28,7 +27,7 @@ const AppText: React.FC<AppTextProps> = ({
   children,
   align = 'auto',
   style,
-  fontSize = rpFont(16),
+  fontSize = 16,
   fontFamily = Assets.font.Roboto.regular,
   fontWeight = 'normal',
   lineHeight,
@@ -51,16 +50,16 @@ const AppText: React.FC<AppTextProps> = ({
         {
           textAlign: align,
           textTransform,
-          color: color ? color : theme.colors.text,
+          color: color ?? theme.colors.text,
           opacity,
           fontSize,
           fontFamily,
           fontWeight,
-          lineHeight: lineHeight ?? fontSize + rpWidth(4)
+          lineHeight: lineHeight ?? fontSize + 4
         },
         style,
       ])}>
-      {text ? text : children}
+      {text ?? children}
     </Text>
   );
 };
