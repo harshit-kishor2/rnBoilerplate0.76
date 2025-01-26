@@ -18,6 +18,7 @@ import Stack from './Stack';
 import Positioned from './Positioned';
 import AppScrollView from './atoms/AppScrollView';
 import SizedBox from './SizedBox';
+import KeyboardAvoidingWrapper from './KeyboardAvoidingView';
 
 
 export {
@@ -40,5 +41,6 @@ export {
   Stack,
   Positioned,
   AppScrollView,
-  SizedBox
+  SizedBox,
+  KeyboardAvoidingWrapper
 };

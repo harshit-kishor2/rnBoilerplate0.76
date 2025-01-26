@@ -4,7 +4,8 @@ import {
   NetworkLoggerScreen,
   SettingScreen,
   WebviewScreen,
-  SplashScreen
+  SplashScreen,
+  RegisterScreen
 
 } from '@app/views';
 import {CardStyleInterpolators, type StackNavigationOptions} from '@react-navigation/stack';
@@ -33,6 +34,10 @@ export const preAuthRoutes: RootStackRoutesType[] = [
   {
     name: 'LoginRoute',
     component: LoginScreen,
+  },
+  {
+    name: 'RegisterRoute',
+    component: RegisterScreen,
   }
 ];
 

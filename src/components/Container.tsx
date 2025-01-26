@@ -1,7 +1,8 @@
 import {rpWidth} from '@app/helpers/responsive';
 import {useAppTheme} from '@app/theme';
 import React, {ReactNode} from 'react';
-import {DimensionValue, SafeAreaView, StatusBar, StyleSheet, View, ViewStyle} from 'react-native';
+import {DimensionValue, StatusBar, StyleSheet, View, ViewStyle} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 interface ContainerProps {
   useSafeArea?: boolean,
@@ -11,6 +12,7 @@ interface ContainerProps {
   padding?: DimensionValue,
   paddingHorizontal?: DimensionValue,
   margin?: DimensionValue,
+  alignItems?: AlignItems,
   style?: ViewStyle;
 }
 const Container: React.FC<ContainerProps> = ({
@@ -21,6 +23,7 @@ const Container: React.FC<ContainerProps> = ({
   padding = 0,
   paddingHorizontal,
   margin = 0,
+  alignItems,
   style
 }: ContainerProps) => {
   const theme = useAppTheme();
@@ -32,9 +35,10 @@ const Container: React.FC<ContainerProps> = ({
       styles.container,
       {
         backgroundColor: backgroundColor ??theme.colors.background,
-        paddingHorizontal: paddingHorizontal ?? rpWidth(12),
         padding,
         margin,
+        alignItems: alignItems ?? 'center',
+        paddingHorizontal: paddingHorizontal ?? rpWidth(12),
       },
       style
     ])}>

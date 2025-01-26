@@ -377,7 +377,7 @@ const AppTextInputWithoutRef = (props: InputProps, ref?: React.Ref<RNTextInput>)
   }, [activeAnimation.value]);
 
   return (
-    <View style={style}>
+    <View style={[styles.container, style]}>
       <Animated.View
         style={[
           styles.inputContainer,
@@ -470,6 +470,10 @@ export default AppTextInput;
 
 const inputStyles = (theme: IAppTheme) =>
   StyleSheet.create({
+    container:{
+      width: '100%',
+      paddingVertical:5
+    },
     errorView: {
       marginHorizontal: 16,
       marginTop: 4,

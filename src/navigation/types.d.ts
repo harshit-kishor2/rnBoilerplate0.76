@@ -43,6 +43,7 @@ declare global {
     WebViewRoute: {webUrl?: string, from?: keyof RootStackParamList, page?: string;} | undefined;
     BottomTabRoute: {from?: keyof RootStackParamList;} | undefined;
     LoginRoute: {from?: keyof RootStackParamList;} | undefined;
+    RegisterRoute: {from?: keyof RootStackParamList;} | undefined;
     HomeRoute: {from?: keyof RootStackParamList;} | undefined;
     NetworkLoggerRoute: {from?: keyof RootStackParamList;} | undefined;
     SettingRoute: {from?: keyof RootStackParamList;} | undefined;
