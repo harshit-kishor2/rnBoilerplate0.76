@@ -17,7 +17,7 @@ const RegisterScreen = () => {
 
   return (
     <KeyboardAvoidingWrapper>
-      <Container>
+      <Container paddingHorizontal={10} alignItems='center'>
         <SizedBox height={rpWidth(50)} />
         <AppFastImage
           source={Assets.image.SPLASH_IMAGE}

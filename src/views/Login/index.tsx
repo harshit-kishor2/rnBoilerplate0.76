@@ -23,16 +23,16 @@ const LoginScreen = () => {
     // navigation.navigate('ForgotPasswordRoute', {from: 'LoginRoute'})
   };
   const onTermsOfServicePress = () => {
-    navigation.navigate('WebViewRoute', {from: 'LoginRoute', page: 'Terms of Service', webUrl: 'https://google.com'});
+    navigation.navigate('WebViewRoute', {from: 'LoginRoute', page: 't&c', webUrl: 'https://google.com'});
   };
 
   const onPrivacyPolicyPress = () => {
-    navigation.navigate('WebViewRoute', {from: 'LoginRoute', page: 'Privacy Policy', webUrl: 'https://google.com'});
+    navigation.navigate('WebViewRoute', {from: 'LoginRoute', page: 'p&p', webUrl: 'https://google.com'});
   };
 
   return (
     <KeyboardAvoidingWrapper>
-      <Container>
+      <Container paddingHorizontal={10} alignItems='center'>
         <SizedBox height={rpHeight(50)} />
         <AppFastImage
           source={Assets.image.SPLASH_IMAGE}

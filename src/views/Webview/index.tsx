@@ -1,29 +1,33 @@
+import {Container} from '@app/components';
+import AppWebView from '@app/components/atoms/AppWebView';
+import AppHeader from '@app/components/ui/AppHeader';
+import {useAppTranslation} from '@app/i18n';
+import {useAppRoute} from '@app/navigation/hooks';
+import React from 'react';
 
-import React, { useMemo } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { useAppTheme } from '@app/theme';
-import { useAppTranslation } from '@app/i18n';
-
-const WebviewScreen = () => {
-  const theme = useAppTheme();
-  const translate = useAppTranslation();
-  const styles = useMemo(() => webviewScreenStyles(theme), [theme]);
+const WebViewScreen = () => {
+  const translate = useAppTranslation()
+  const route = useAppRoute('WebViewRoute')
+  const getTitle = (page?: IWebViewPages) : string => {
+    switch (page) {
+      case 't&c':
+        return translate('webview_screen.t&c')
+      case 'p&p':
+        return translate('webview_screen.p&p')
+      default:
+        return '';
+    }
+  }
 
   return (
-    <View style={styles.container}>
-      <Text> {translate('greeting')} WebviewScreen</Text>
-    </View>
+    <Container>
+      <AppHeader title={getTitle(route.params?.page) ??''} />
+      <AppWebView
+        url='https://google.com'
+      />
+    </Container>
   );
-};
+}
 
-export default WebviewScreen;
 
-const webviewScreenStyles = (theme: IAppTheme) =>
-  StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: theme.colors.background,
-    },
-  });
+export default WebViewScreen;

@@ -40,7 +40,7 @@ declare global {
   //  All Screen Route
   type RootStackParamList = {
     SplashRoute: undefined;
-    WebViewRoute: {webUrl?: string, from?: keyof RootStackParamList, page?: string;} | undefined;
+    WebViewRoute: {webUrl?: string, from?: keyof RootStackParamList, page?: IWebViewPages} | undefined;
     BottomTabRoute: {from?: keyof RootStackParamList;} | undefined;
     LoginRoute: {from?: keyof RootStackParamList;} | undefined;
     RegisterRoute: {from?: keyof RootStackParamList;} | undefined;
@@ -48,5 +48,7 @@ declare global {
     NetworkLoggerRoute: {from?: keyof RootStackParamList;} | undefined;
     SettingRoute: {from?: keyof RootStackParamList;} | undefined;
   };
+
+  type IWebViewPages = 't&c' | 'p&p'
 
 }

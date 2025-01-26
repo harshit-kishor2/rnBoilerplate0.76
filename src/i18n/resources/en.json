@@ -20,5 +20,9 @@
     "register":"Register",
     "already_have_account":"Already have an account?",
     "login":"Login"
+  },
+  "webview_screen":{
+    "t&c":"Terms & Conditions",
+    "p&p":"Privacy Policy"
   }
 }

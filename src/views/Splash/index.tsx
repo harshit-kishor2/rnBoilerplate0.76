@@ -1,10 +1,10 @@
 import Assets from '@app/assets';
-import {AppFastImage, AppText, Container, Positioned, Stack} from '@app/components';
+import {AppFastImage, AppText, Container} from '@app/components';
 import {DeviceUtils, rpFont, rpWidth} from '@app/helpers';
 import NavigationService from '@app/navigation/NavigationService';
 import {useAppTheme} from '@app/theme';
 import React, {useEffect, useMemo, useState} from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import Animated, {Easing, useAnimatedStyle, useSharedValue, withRepeat, withTiming} from 'react-native-reanimated';
 
 const SPLASH_TIMEOUT = 5000;
@@ -57,26 +57,23 @@ const SplashScreen: React.FC = () => {
   });
 
   return (
-    <Stack style={{flex: 1}}>
-      <Container style={styles.container}>
-        <Animated.View style={[animatedStyle]}>
-          <AppFastImage
-            source={Assets.image.SPLASH_IMAGE}
-            style={styles.splsh_image}
-          />
-        </Animated.View>
-      </Container>
-      <Positioned
-        right={25}
-        bottom={15}
+    <Container style={styles.container}>
+      <Animated.View style={[animatedStyle]}>
+        <AppFastImage
+          source={Assets.image.SPLASH_IMAGE}
+          style={styles.splsh_image}
+        />
+      </Animated.View>
+      <View
+        style={styles.version}
       >
         <AppText
           fontSize={rpFont(10)}
           text={`v${BUILD_VERSION}(${BUILD_NUMBER})`}
           color={theme.colors.primary}
         />
-      </Positioned>
-    </Stack>
+      </View>
+    </Container>
   );
 };
 

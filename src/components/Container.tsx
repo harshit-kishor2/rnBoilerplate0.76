@@ -34,11 +34,11 @@ const Container: React.FC<ContainerProps> = ({
     <ContainerTag style={StyleSheet.flatten([
       styles.container,
       {
-        backgroundColor: backgroundColor ??theme.colors.background,
+        backgroundColor: backgroundColor ?? theme.colors.background,
         padding,
         margin,
-        alignItems: alignItems ?? 'center',
-        paddingHorizontal: paddingHorizontal ?? rpWidth(12),
+        alignItems: alignItems,
+        paddingHorizontal: paddingHorizontal,
       },
       style
     ])}>
