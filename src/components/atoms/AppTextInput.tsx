@@ -209,7 +209,7 @@ const AppTextInputWithoutRef = (props: IAppTextInputProps, ref?: React.Ref<RNTex
       duration: 200,
       easing: Easing.out(Easing.ease),
     });
-  }, [focused.value, focusAnimation.value]);
+  }, [focused, focusAnimation]);
 
   const active = useDerivedValue(() => {
     const isFocused = focused.value; // Safely read shared value
@@ -224,7 +224,7 @@ const AppTextInputWithoutRef = (props: IAppTextInputProps, ref?: React.Ref<RNTex
       duration: 200,
       easing: Easing.out(Easing.ease),
     });
-  }, [active.value, activeAnimation.value]);
+  }, [active, activeAnimation]);
   const animatedInputContainerStyle = useAnimatedStyle(() => {
     let resolvedBackgroundColor;
     if (variant === 'filled') {
@@ -245,7 +245,7 @@ const AppTextInputWithoutRef = (props: IAppTextInputProps, ref?: React.Ref<RNTex
       borderTopEndRadius: 4,
       borderTopStartRadius: 4,
     };
-  }, [focused.value, hovered.value, variant]);
+  }, [focused, hovered, variant]);
 
   const animatedInput = useAnimatedStyle(() => {
     const paddingIfStandard = isStandardVariant ? 0 : 16;
@@ -290,13 +290,13 @@ const AppTextInputWithoutRef = (props: IAppTextInputProps, ref?: React.Ref<RNTex
       borderTopStartRadius: 4,
       borderWidth: focused.value ? 2 : 1,
     };
-  }, [focused.value, hovered.value]);
+  }, [focused, hovered]);
 
   const animatedOutlineLabelGap = useAnimatedStyle(() => {
     return {
       height: focused.value ? 2 : 1,
     };
-  }, [focused.value]);
+  }, [focused]);
 
   const animatedLabelContainer = useAnimatedStyle(() => {
     const baseHeight = isStandardVariant ? 48 : 56;
@@ -361,7 +361,7 @@ const AppTextInputWithoutRef = (props: IAppTextInputProps, ref?: React.Ref<RNTex
       ),
       transform: [{scaleX: focusAnimation.value}],
     };
-  }, [focusAnimation.value]);
+  }, [focusAnimation]);
 
   const animatedOutlineLabel = useAnimatedStyle(() => {
     return {
@@ -372,7 +372,7 @@ const AppTextInputWithoutRef = (props: IAppTextInputProps, ref?: React.Ref<RNTex
       ),
       transform: [{scaleX: activeAnimation.value}],
     };
-  }, [activeAnimation.value]);
+  }, [activeAnimation]);
 
   return (
     <View style={[styles.container, style]}>
