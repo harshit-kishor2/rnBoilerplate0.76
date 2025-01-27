@@ -1,25 +1,28 @@
 
 import Assets from '@app/assets';
-import {AppButton, AppFastImage, AppText, AppTextInput, AppVectorIcon, Container, KeyboardAvoidingWrapper, Row, SizedBox, Spacer} from '@app/components';
+import {AppButton, AppFastImage, AppFormTextInput, AppText, AppVectorIcon, Container, KeyboardAvoidingWrapper, Row, SizedBox, Spacer} from '@app/components';
 import {IconType} from '@app/components/atoms/AppVectorIcon';
 import {rpHeight, rpWidth} from '@app/helpers';
 import {useAppTranslation} from '@app/i18n';
 import {useAppNavigation} from '@app/navigation/hooks';
 import {useAppTheme} from '@app/theme';
 import React, {useMemo} from 'react';
+import {FormProvider, useForm} from 'react-hook-form';
 import {Pressable, StyleSheet} from 'react-native';
+import Toast from 'react-native-simple-toast';
 
 const LoginScreen = () => {
   const theme = useAppTheme();
   const translate = useAppTranslation();
   const styles = useMemo(() => loginScreenStyles(), []);
   const navigation = useAppNavigation('LoginRoute');
-
+  const {...methods} = useForm({mode: 'onChange'});
   const onLoginPress = () => {
     navigation.replace('RegisterRoute', {from: 'LoginRoute'});
   };
 
   const onForgotPasswordPress = () => {
+    Toast.show('Coming soon', Toast.SHORT);
     // navigation.navigate('ForgotPasswordRoute', {from: 'LoginRoute'})
   };
   const onTermsOfServicePress = () => {
@@ -39,16 +42,39 @@ const LoginScreen = () => {
           style={styles.splsh_image}
         />
         <SizedBox height={rpHeight(50)} />
-        <AppTextInput
-          variant="outlined"
-          label={translate('login_screen.email')}
-          rightIcon={<AppVectorIcon type={IconType.MaterialIcons} name="email" />}
-        />
-        <AppTextInput
-          variant="outlined"
-          label={translate('login_screen.password')}
-          rightIcon={<AppVectorIcon type={IconType.MaterialIcons} name="password" />}
-        />
+        <FormProvider {...methods}>
+          <AppFormTextInput
+            name="email"
+            label="Email"
+            placeholder="jon.doe@email.com"
+            keyboardType="email-address"
+            defaultValue='Hello'
+            rightIcon={<AppVectorIcon type={IconType.MaterialIcons} name="mail" />}
+            rules={{
+              required: 'Email is required!',
+              pattern: {
+                value: /\b[\w\\.+-]+@[\w\\.-]+\.\w{2,4}\b/,
+                message: 'Must be formatted: john.doe@email.com',
+              },
+            }}
+          />
+          <AppFormTextInput
+            name="password"
+            // label="Password"
+            placeholder="Enter your password"
+            keyboardType="email-address"
+            rules={{
+              required: 'Password is required!',
+              pattern: {
+                value: /\b[\w\\.+-]+@[\w\\.-]+\.\w{2,4}\b/,
+                message: 'Must be formatted: john.doe@email.com',
+              },
+            }}
+            rightIcon={<AppVectorIcon type={IconType.MaterialIcons} name="password" />}
+            keyboardAppearance='default'
+            returnKeyType='next'
+          />
+        </FormProvider>
         <SizedBox height={rpHeight(20)} />
         <AppButton title={translate('login_screen.login')} />
         <SizedBox height={rpHeight(25)} />

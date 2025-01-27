@@ -20,8 +20,15 @@ yarn add react-native-webview
 ```javascript
 yarn add react-hook-form
 ```
+#### For Notification and modals-
+```javascript
+yarn add react-native-simple-toast react-native-modal
+```
 
-
+#### For Flatlist and Section List-
+```javascript
+yarn add @shopify/flash-list
+```
 
 Please check global.d.ts file for type related issue inside components.
 

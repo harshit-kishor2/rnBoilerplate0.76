@@ -27,13 +27,9 @@ import Animated, {
 
 import {useAppTheme} from '@app/theme';
 
-export interface TextInputProps extends InputProps {
-  name: string;
-}
-
 export type Variant = 'filled' | 'outlined' | 'standard';
 
-export interface InputProps extends RNTextInputProps {
+export interface IAppTextInputProps extends RNTextInputProps {
   /**
    * The variant of the TextInput style.
    * @default "filled"
@@ -135,7 +131,7 @@ export interface InputProps extends RNTextInputProps {
 
 const AnimatedTextInput = Animated.createAnimatedComponent(RNTextInput);
 
-const AppTextInputWithoutRef = (props: InputProps, ref?: React.Ref<RNTextInput>) => {
+const AppTextInputWithoutRef = (props: IAppTextInputProps, ref?: React.Ref<RNTextInput>) => {
 
   const {
     backgroundColor = 'white',
@@ -215,10 +211,12 @@ const AppTextInputWithoutRef = (props: InputProps, ref?: React.Ref<RNTextInput>)
     });
   }, [focused.value, focusAnimation.value]);
 
-  const active = useDerivedValue(
-    () => focused.value || (rest.value?.length ?? 0) > 0,
-    [focused.value, rest.value]
-  );
+  const active = useDerivedValue(() => {
+    const isFocused = focused.value; // Safely read shared value
+    const isInputFilled = (rest?.value?.length ?? 0) > 0;
+    return isFocused || isInputFilled;
+  });
+
 
 
   useDerivedValue(() => {
@@ -347,7 +345,7 @@ const AppTextInputWithoutRef = (props: InputProps, ref?: React.Ref<RNTextInput>)
     };
   }, [focusAnimation, activeAnimation, variant, labelColor, onFocusLabelColor]);
 
-  const animatedPlaceholder = useAnimatedProps<TextInputProps>(() => {
+  const animatedPlaceholder = useAnimatedProps<IAppTextInputProps>(() => {
     const resolvedPlaceholder = label && !focused.value ? '' : placeholder;
     return {
       placeholder: resolvedPlaceholder,
@@ -454,16 +452,14 @@ const AppTextInputWithoutRef = (props: InputProps, ref?: React.Ref<RNTextInput>)
         ) : null}
       </Animated.View>
       <View style={[styles.errorView, errorContainerStyle]}>
-        {error ? (
-          <Text style={[styles.helperText, errorStyle]}>{error}</Text>
-        ) : null}
+        <Text style={[styles.helperText, errorStyle]}>{error}</Text>
       </View>
     </View>
   );
 };
 
 const AppTextInput = React.memo(
-  React.forwardRef((props: InputProps, ref?: React.Ref<RNTextInput>) => AppTextInputWithoutRef(props, ref))
+  React.forwardRef((props: IAppTextInputProps, ref?: React.Ref<RNTextInput>) => AppTextInputWithoutRef(props, ref))
 );
 
 export default AppTextInput;
@@ -480,6 +476,7 @@ const inputStyles = (theme: IAppTheme) =>
     },
     helperText: {
       fontSize: 14,
+      color: theme.colors.red,
     },
     input: {
       flex: 1,

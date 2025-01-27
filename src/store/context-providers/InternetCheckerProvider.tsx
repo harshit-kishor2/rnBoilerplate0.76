@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect, useContext, ReactNode } from 'react';
 import NetInfo from '@react-native-community/netinfo';
-import {AppSnackbar} from '@app/components';
 
 interface InternetCheckerContextProps {
   isConnected: boolean; // Current connection status
@@ -58,18 +57,6 @@ export const InternetCheckerProvider: React.FC<InternetCheckerProviderProps> = (
         {children}
       </InternetCheckerContext.Provider>
 
-      {/* Display Snackbar only if not in popup mode */}
-      {isPopupEnable && (
-        <AppSnackbar
-          message={snackbarMessage}
-          visible={showSnackbar}
-          duration={3000}
-          position="top"
-          backgroundColor={snackbarColor}
-          textColor="white"
-          onDismiss={handleDismissSnackbar}
-        />
-      )}
     </>
   );
 };

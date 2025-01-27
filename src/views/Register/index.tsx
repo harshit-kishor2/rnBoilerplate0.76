@@ -8,6 +8,7 @@ import {useAppNavigation} from '@app/navigation/hooks';
 import {useAppTheme} from '@app/theme';
 import React, {useMemo} from 'react';
 import {Pressable, StyleSheet} from 'react-native';
+import Toast from 'react-native-simple-toast';
 
 const RegisterScreen = () => {
   const theme = useAppTheme();
@@ -15,6 +16,16 @@ const RegisterScreen = () => {
   const styles = useMemo(() => registerScreenStyles(), [theme]);
   const navigation = useAppNavigation('RegisterRoute');
 
+  const onLoginPress = () => {
+    navigation.replace('LoginRoute', {from: 'RegisterRoute'});
+  };
+
+  const onRegisterPress = () => {
+    //  call register api here
+    Toast.show('Coming soon', Toast.SHORT,{
+      tapToDismissEnabled: true
+    });
+  };
   return (
     <KeyboardAvoidingWrapper>
       <Container paddingHorizontal={10} alignItems='center'>
@@ -32,29 +43,29 @@ const RegisterScreen = () => {
         <AppTextInput
           value=''
           variant="outlined"
-          label= {translate('register_screen.password')}
+          label={translate('register_screen.password')}
           rightIcon={<AppVectorIcon type={IconType.MaterialIcons} name="password" />}
         />
         <AppTextInput
           value=''
           variant="outlined"
-          label= {translate('register_screen.confirm_password')}
+          label={translate('register_screen.confirm_password')}
           rightIcon={<AppVectorIcon type={IconType.MaterialIcons} name="password" />}
         />
         <SizedBox height={rpWidth(20)} />
-        <AppButton title={translate('register_screen.register')} />
+        <AppButton
+          title={translate('register_screen.register')}
+          onPress={onRegisterPress}
+        />
         <SizedBox height={rpWidth(25)} />
         <Row>
           <AppText
             text={translate('register_screen.already_have_account')}
           />
           <SizedBox width={rpWidth(5)} />
-          <Pressable
-            onPress={() => {
-              navigation.replace('LoginRoute', {from: 'RegisterRoute'});
-            }}>
+          <Pressable onPress={onLoginPress}>
             <AppText
-              text =  {translate('register_screen.login')}
+              text={translate('register_screen.login')}
               color={theme.colors.blue}
             />
           </Pressable>

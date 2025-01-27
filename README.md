@@ -181,7 +181,7 @@ module.exports = {
 
 ### 12.Useful packages
 For better performance you can use these packages later ->
-react-native-network-logger, fuse.js, @shopify/flash-list, react-hook-form, react-native-keyboard-aware-scroll-view
+react-native-network-logger, fuse.js,
 
 ### 13.Multiple Environment and flavors in React native
 
