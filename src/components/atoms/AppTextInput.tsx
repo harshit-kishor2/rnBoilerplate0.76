@@ -393,7 +393,7 @@ const AppTextInputWithoutRef = (props: IAppTextInputProps, ref?: React.Ref<RNTex
           ref={ref}
           style={[styles.input, animatedInput, inputStyle]}
           animatedProps={animatedPlaceholder}
-          placeholderTextColor={theme.colors.red}
+          placeholderTextColor={theme.colors.placeholder}
           onFocus={handleFocus}
           onBlur={handleBlur}
           {...({

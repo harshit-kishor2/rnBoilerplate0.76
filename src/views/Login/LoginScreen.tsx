@@ -2,16 +2,17 @@
 import Assets from '@app/assets';
 import {AppButton, AppFastImage, AppFormTextInput, AppText, AppVectorIcon, Container, KeyboardAvoidingWrapper, Row, SizedBox, Spacer} from '@app/components';
 import {IconType} from '@app/components/atoms/AppVectorIcon';
+import {consoleLog} from '@app/helpers/logger';
+import {rpHeight, rpWidth} from '@app/helpers/responsive-utils';
+import showToast, {ToastMessageConst} from '@app/helpers/show-toast';
+import {LoginSchema} from '@app/helpers/validation-schema';
 import {useAppTranslation} from '@app/i18n';
 import {useAppNavigation} from '@app/navigation/hooks';
 import {useAppTheme} from '@app/theme';
+import {zodResolver} from '@hookform/resolvers/zod';
 import React, {useMemo} from 'react';
 import {FormProvider, SubmitErrorHandler, SubmitHandler, useForm} from 'react-hook-form';
 import {Pressable, StyleSheet} from 'react-native';
-import { zodResolver } from '@hookform/resolvers/zod';
-import {LoginSchema} from '@app/helpers/validation-schema';
-import {rpHeight, rpWidth} from '@app/helpers/responsive-utils';
-import {showToast} from '@app/helpers/show-toast';
 
 
 const LoginScreen: React.FC = () => {
@@ -29,7 +30,7 @@ const LoginScreen: React.FC = () => {
   };
 
   const onForgotPasswordPress = () => {
-    showToast('info', 'Under Development', {text2: 'This feature is under development'});
+    showToast('info', ToastMessageConst.UNDER_CONSTRUCTION, {text2: ToastMessageConst.UNDER_CONSTRUCTION_MSG});
     // navigation.navigate('ForgotPasswordRoute', {from: 'LoginRoute'})
   };
   const onTermsOfServicePress = () => {
@@ -41,11 +42,11 @@ const LoginScreen: React.FC = () => {
   };
 
   const onLoginSubmitHandler: SubmitHandler<LoginFormData> = (data: LoginFormData) => {
-    console.log('Formik data====>',data);
+    consoleLog('Formik data====>',data);
   }
 
   const onLoginSubmitErrorHandler: SubmitErrorHandler<LoginFormData> = (errors : any) => {
-    console.log('Formik error====>',errors);
+    consoleLog('Formik error====>',errors);
   }
   return (
     <KeyboardAvoidingWrapper>
@@ -62,12 +63,11 @@ const LoginScreen: React.FC = () => {
             label="Email"
             placeholder="jon.doe@email.com"
             keyboardType="email-address"
-            defaultValue='Hello'
             rightIcon={<AppVectorIcon type={IconType.MaterialIcons} name="mail" />}
           />
           <AppFormTextInput
             name="password"
-            // label="Password"
+            label="Password"
             placeholder="Enter your password"
             keyboardType="email-address"
             rightIcon={<AppVectorIcon type={IconType.MaterialIcons} name="password" />}

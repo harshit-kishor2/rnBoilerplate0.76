@@ -3,7 +3,7 @@ import Assets from '@app/assets';
 import {AppButton, AppFastImage, AppText, AppTextInput, AppVectorIcon, Container, KeyboardAvoidingWrapper, Row, SizedBox} from '@app/components';
 import {IconType} from '@app/components/atoms/AppVectorIcon';
 import {rpWidth} from '@app/helpers/responsive-utils';
-import {showToast} from '@app/helpers/show-toast';
+import showToast, {ToastMessageConst} from '@app/helpers/show-toast';
 import {useAppTranslation} from '@app/i18n';
 import {useAppNavigation} from '@app/navigation/hooks';
 import {useAppTheme} from '@app/theme';
@@ -22,7 +22,7 @@ const RegisterScreen: React.FC = () => {
 
   const onRegisterPress = () => {
     //  call register api here
-    showToast('info', 'Under Development', {text2: 'This feature is under development'});
+    showToast('info', ToastMessageConst.UNDER_CONSTRUCTION, {text2: ToastMessageConst.UNDER_CONSTRUCTION_MSG});
   };
   return (
     <KeyboardAvoidingWrapper>

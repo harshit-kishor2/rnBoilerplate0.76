@@ -1,8 +1,26 @@
 import Toast from 'react-native-toast-message';
 
-type ToastType = 'success' | 'error' | 'info'; // Allowed toast types
+export const ToastMessageConst = {
+  UNDER_CONSTRUCTION: 'Under construction',
+  UNDER_CONSTRUCTION_MSG: 'This feature is under construction',
+  NO_INTERNET: 'No internet connection',
+  INVALID_CREDENTIALS: 'Invalid credentials',
+  GENERIC_ERROR: 'Something went wrong',
+  LOGIN_SUCCESS: 'Login successful',
+  LOGIN_FAILED: 'Login failed',
+  REGISTER_SUCCESS: 'Register successful',
+  REGISTER_FAILED: 'Register failed',
+  FORGOT_PASSWORD_SUCCESS: 'Password reset email sent',
+  FORGOT_PASSWORD_FAILED: 'Failed to send password reset email',
+  RESET_PASSWORD_SUCCESS: 'Password reset successful',
+  RESET_PASSWORD_FAILED: 'Failed to reset password',
+  VERIFY_EMAIL_SUCCESS: 'Email verification successful',
+  VERIFY_EMAIL_FAILED: 'Email verification failed',
+};
 
-interface ShowToastOptions {
+export type ToastType = 'success' | 'error' | 'info'; // Allowed toast types
+
+export interface ShowToastOptions {
   text2?: string; // Optional secondary text
   visibilityTime?: number; // Duration in ms
   autoHide?: boolean; // Whether to auto hide after visibilityTime
@@ -10,7 +28,7 @@ interface ShowToastOptions {
   bottomOffset?: number; // Bottom space
 }
 
-export const showToast = (type: ToastType, message: string, options: ShowToastOptions = {}) => {
+const showToast = (type: ToastType, message: string, options: ShowToastOptions = {}) => {
   Toast.show({
     type, // Toast type: 'success', 'error', 'info'
     position: 'bottom', // Position of the toast
@@ -23,13 +41,4 @@ export const showToast = (type: ToastType, message: string, options: ShowToastOp
   });
 };
 
-
-
-// For success toast
-// showToast('success', 'Your action was successful!');
-
-// For error toast
-// showToast('error', 'An error occurred.', { text2: 'Please try again.' });
-
-// For info toast
-// showToast('info', 'This is some information.');
+export default showToast;
