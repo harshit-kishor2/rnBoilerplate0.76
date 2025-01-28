@@ -34,7 +34,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { useAppTheme } from '@app/theme';
 import { useAppTranslation } from '@app/i18n';
 
-const ${fileName} = () => {
+const ${fileName}: React.FC = () => {
   const theme = useAppTheme();
   const translate = useAppTranslation();
   const styles = useMemo(() => ${styleFunctionName}(theme), [theme]);
@@ -60,16 +60,16 @@ const ${styleFunctionName} = (theme: IAppTheme) =>
 `;
 
   fs.writeFileSync(
-    path.join(`../src/views/${screenFolderName}`, 'index.tsx'),
+    path.join(`../src/views/${screenFolderName}`, `${fileName}.tsx`),
     singleFileContent,
     errWrite => {
       if (errWrite) throw errWrite;
-      console.log(`index.tsx file created successfully in ${screenFolderName}`);
+      console.log(`${fileName}.tsx file created successfully in ${screenFolderName}`);
     }
   );
 
   // Append export to index.ts
-  const exportToIndex = `export { default as ${fileName} } from './${screenFolderName}';\n`;
+  const exportToIndex = `export { default as ${fileName} } from './${screenFolderName}/${fileName}';\n`;
 
   fs.appendFile(`../src/views/index.ts`, exportToIndex, errExport => {
     if (errExport) throw errExport;

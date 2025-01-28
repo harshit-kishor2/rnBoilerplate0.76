@@ -1,5 +1,5 @@
 import {MMKV} from 'react-native-mmkv';
-import {useCounterStore} from './useCounterStore';
+import {useCounterStore} from './use-counter-store';
 
 
 /**

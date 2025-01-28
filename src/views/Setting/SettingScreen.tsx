@@ -4,21 +4,21 @@ import { StyleSheet, Text, View } from 'react-native';
 import { useAppTheme } from '@app/theme';
 import { useAppTranslation } from '@app/i18n';
 
-const NetworkLoggerScreen = () => {
+const SettingScreen: React.FC = () => {
   const theme = useAppTheme();
   const translate = useAppTranslation();
-  const styles = useMemo(() => networkLoggerScreenStyles(theme), [theme]);
+  const styles = useMemo(() => settingScreenStyles(theme), [theme]);
 
   return (
     <View style={styles.container}>
-      <Text> {translate('greeting')} NetworkLoggerScreen</Text>
+      <Text> {translate('greeting')} SettingScreen</Text>
     </View>
   );
 };
 
-export default NetworkLoggerScreen;
+export default SettingScreen;
 
-const networkLoggerScreenStyles = (theme: IAppTheme) =>
+const settingScreenStyles = (theme: IAppTheme) =>
   StyleSheet.create({
     container: {
       flex: 1,

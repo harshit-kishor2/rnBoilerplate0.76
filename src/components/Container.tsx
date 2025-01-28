@@ -1,4 +1,3 @@
-import {rpWidth} from '@app/helpers/responsive';
 import {useAppTheme} from '@app/theme';
 import React, {ReactNode} from 'react';
 import {DimensionValue, StatusBar, StyleSheet, View, ViewStyle} from 'react-native';

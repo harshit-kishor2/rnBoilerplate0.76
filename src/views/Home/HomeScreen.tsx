@@ -5,7 +5,7 @@ import {useAppTheme, useAppThemeContext} from '@app/theme';
 import React, {useMemo} from 'react';
 import {KeyboardAvoidingView, StyleSheet, Text} from 'react-native';
 
-const HomeScreen = () => {
+const HomeScreen: React.FC = () => {
   const {selectedThemeType,setSelectedThemeType} = useAppThemeContext();
   const {currentLanguage,setSelectedLanguageType, selectedLanguageType} = useAppLocalizationContext();
 

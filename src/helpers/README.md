@@ -8,3 +8,11 @@ Install these helper packages
 ```javascript
 yarn add react-native-device-info react-native-iphone-screen-helper react-native-size-matters react-native-responsive-fontsize @react-native-community/netinfo
 ```
+
+
+For toast messages-->
+
+```javascript
+yarn add react-native-toast-message
+```
+

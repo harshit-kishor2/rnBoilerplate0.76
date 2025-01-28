@@ -13,28 +13,28 @@ const Screen: ScaledSize = Dimensions.get('screen');
  * The width of the screen.
  * @type {number}
  */
-export const ScreenWidth: number = Screen.width;
+const ScreenWidth: number = Screen.width;
 
 /**
  * @description
  * The height of the screen.
  * @type {number}
  */
-export const ScreenHeight: number = Screen.height;
+const ScreenHeight: number = Screen.height;
 
 /**
  * @description
  * The scale of the screen.
  * @type {number}
  */
-export const ScreenScale: number = Screen.scale;
+const ScreenScale: number = Screen.scale;
 
 /**
  * @description
  * The font scale of the screen.
  * @type {number}
  */
-export const ScreenFontScale: number = Screen.fontScale;
+const ScreenFontScale: number = Screen.fontScale;
 
 //=============================
 
@@ -48,28 +48,28 @@ const Window: ScaledSize = Dimensions.get('window');
  * The width of the window.
  * @type {number}
  */
-export const WindowWidth: number = Window.width;
+const WindowWidth: number = Window.width;
 
 /**
  * @description
  * The height of the window.
  * @type {number}
  */
-export const WindowHeight: number = Window.height;
+const WindowHeight: number = Window.height;
 
 /**
  * @description
  * The scale of the window.
  * @type {number}
  */
-export const WindowScale: number = Window.scale;
+const WindowScale: number = Window.scale;
 
 /**
  * @description
  * The font scale of the window.
  * @type {number}
  */
-export const WindowFontScale: number = Window.fontScale;
+const WindowFontScale: number = Window.fontScale;
 
 //=============================
 
@@ -80,7 +80,7 @@ export const WindowFontScale: number = Window.fontScale;
  * true if you're running on an iPhone X or a newer model with a notch or dynamic island.
  * @type {boolean}
  */
-export const isIphoneXOrNewer: boolean = isIphoneX();
+const isIphoneXOrNewer: boolean = isIphoneX();
 
 /**
  * @description
@@ -88,7 +88,7 @@ export const isIphoneXOrNewer: boolean = isIphoneX();
  * and 0 for other devices.
  *
  */
-export const bottomSpace: number = getBottomSpace();
+const bottomSpace: number = getBottomSpace();
 
 /**
  *
@@ -109,7 +109,7 @@ export const bottomSpace: number = getBottomSpace();
  * StatusBar.currentHeight for Android.
  *
  */
-export const statusBarHeight: number = getStatusBarHeight();
+const statusBarHeight: number = getStatusBarHeight();
 
 // ==============================
 
@@ -119,20 +119,20 @@ export const statusBarHeight: number = getStatusBarHeight();
  * Determines whether the app is running on iOS.
  * @type {boolean}
  */
-export const isIOS: boolean = Platform.OS === 'ios';
+const isIOS: boolean = Platform.OS === 'ios';
 
 /**
  * @description
  * Determines whether the app is running on android.
  * @type {boolean}
  */
-export const isAndroid: boolean = Platform.OS === 'android';
+const isAndroid: boolean = Platform.OS === 'android';
 
 /**
  * @description
  * Gets the version number of the platform.
  */
-export const PlatformVersion = Platform.Version;
+const PlatformVersion = Platform.Version;
 
 // ==============================
 
@@ -143,21 +143,21 @@ export const PlatformVersion = Platform.Version;
  * Checks if the device has a notch.
  * @type {boolean}
  */
-export const hasNotch: boolean = DeviceInfo.hasNotch();
+const hasNotch: boolean = DeviceInfo.hasNotch();
 
 /**
  * @description
  * Checks if the device has a notch but not a dynamic island.
  * @type {boolean}
  */
-export const hasNotchOnly: boolean = DeviceInfo.hasNotch() && !DeviceInfo.hasDynamicIsland();
+const hasNotchOnly: boolean = DeviceInfo.hasNotch() && !DeviceInfo.hasDynamicIsland();
 
 /**
  * @description
  * Checks if the device has a dynamic island.
  * @type {boolean}
  */
-export const hasDynamicIsland: boolean = DeviceInfo.hasDynamicIsland();
+const hasDynamicIsland: boolean = DeviceInfo.hasDynamicIsland();
 
 
 /**
@@ -165,33 +165,61 @@ export const hasDynamicIsland: boolean = DeviceInfo.hasDynamicIsland();
  * Checks if the device is a tablet.
  * @type {boolean}
  */
-export const isTablet: boolean = DeviceInfo.isTablet();
+const isTablet: boolean = DeviceInfo.isTablet();
 
 /**
  * @description
  * The bundle identifier of the app.
  * @type {string}
  */
-export const BUNDLE_ID: string = DeviceInfo.getBundleId();
+const BUNDLE_ID: string = DeviceInfo.getBundleId();
 
 /**
  * @description
  * The name of the app.
  * @type {string}
  */
-export const APP_NAME: string = DeviceInfo.getApplicationName();
+const APP_NAME: string = DeviceInfo.getApplicationName();
 
 /**
  * @description
  * The version of the app which is set in the app's build configuration.
  * @type {string}
  */
-export const BUILD_VERSION: string = DeviceInfo.getVersion();
+const BUILD_VERSION: string = DeviceInfo.getVersion();
 
 /**
  * @description
  * The build number of the app which is set in the app's build configuration.
  * @type {string | number}
  */
-export const BUILD_NUMBER: string | number = DeviceInfo.getBuildNumber();
+const BUILD_NUMBER: string | number = DeviceInfo.getBuildNumber();
 
+
+// Default the constants as an object
+const DeviceUtils = {
+  ScreenWidth,
+  ScreenHeight,
+  ScreenScale,
+  ScreenFontScale,
+  WindowWidth,
+  WindowHeight,
+  WindowScale,
+  WindowFontScale,
+  isIphoneXOrNewer,
+  bottomSpace,
+  statusBarHeight,
+  isIOS,
+  isAndroid,
+  PlatformVersion,
+  hasNotch,
+  hasNotchOnly,
+  hasDynamicIsland,
+  isTablet,
+  BUNDLE_ID,
+  APP_NAME,
+  BUILD_VERSION,
+  BUILD_NUMBER,
+};
+
+export default DeviceUtils;

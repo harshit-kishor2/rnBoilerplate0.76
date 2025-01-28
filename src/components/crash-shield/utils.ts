@@ -1,4 +1,4 @@
-import {navigationRef} from '@app/navigation/NavigationService';
+import {navigationRef} from '@app/navigation/navigation-service';
 import {getRequests} from 'react-native-network-logger';
 
 export const createUniqueId = (): string => {

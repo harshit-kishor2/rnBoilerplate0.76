@@ -2,15 +2,15 @@
 import Assets from '@app/assets';
 import {AppButton, AppFastImage, AppText, AppTextInput, AppVectorIcon, Container, KeyboardAvoidingWrapper, Row, SizedBox} from '@app/components';
 import {IconType} from '@app/components/atoms/AppVectorIcon';
-import {rpWidth} from '@app/helpers';
+import {rpWidth} from '@app/helpers/responsive-utils';
+import {showToast} from '@app/helpers/show-toast';
 import {useAppTranslation} from '@app/i18n';
 import {useAppNavigation} from '@app/navigation/hooks';
 import {useAppTheme} from '@app/theme';
 import React, {useMemo} from 'react';
 import {Pressable, StyleSheet} from 'react-native';
-import Toast from 'react-native-simple-toast';
 
-const RegisterScreen = () => {
+const RegisterScreen: React.FC = () => {
   const theme = useAppTheme();
   const translate = useAppTranslation();
   const styles = useMemo(() => registerScreenStyles(), [theme]);
@@ -22,9 +22,7 @@ const RegisterScreen = () => {
 
   const onRegisterPress = () => {
     //  call register api here
-    Toast.show('Coming soon', Toast.SHORT,{
-      tapToDismissEnabled: true
-    });
+    showToast('info', 'Under Development', {text2: 'This feature is under development'});
   };
   return (
     <KeyboardAvoidingWrapper>

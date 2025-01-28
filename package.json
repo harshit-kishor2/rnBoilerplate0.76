@@ -15,6 +15,7 @@
     "link-assets": "npx react-native-asset"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.10.0",
     "@react-native-community/netinfo": "^11.4.1",
     "@react-native-masked-view/masked-view": "^0.3.2",
     "@react-navigation/bottom-tabs": "^7.0.7",
@@ -48,13 +49,14 @@
     "react-native-restart": "^0.0.27",
     "react-native-safe-area-context": "^5.0.0",
     "react-native-screens": "^4.3.0",
-    "react-native-simple-toast": "^3.3.2",
     "react-native-size-matters": "^0.4.2",
     "react-native-svg": "^15.9.0",
+    "react-native-toast-message": "^2.2.1",
     "react-native-vector-icons": "^10.2.0",
     "react-native-webview": "^13.13.1",
     "react-redux": "^9.1.2",
     "redux-persist": "^6.0.0",
+    "zod": "^3.24.1",
     "zustand": "^5.0.2"
   },
   "devDependencies": {

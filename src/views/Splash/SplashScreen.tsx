@@ -1,7 +1,8 @@
 import Assets from '@app/assets';
 import {AppFastImage, AppText, Container} from '@app/components';
-import {DeviceUtils, rpFont, rpWidth} from '@app/helpers';
-import NavigationService from '@app/navigation/NavigationService';
+import DeviceUtils from '@app/helpers/device-utils';
+import {rpFont, rpWidth} from '@app/helpers/responsive-utils';
+import NavigationService from '@app/navigation/navigation-service';
 import {useAppTheme} from '@app/theme';
 import React, {useEffect, useMemo, useState} from 'react';
 import {StyleSheet, View} from 'react-native';

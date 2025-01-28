@@ -4,7 +4,7 @@ import {
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
 } from '@react-navigation/native';
-import { isReadyRef, navigationRef } from './NavigationService';
+import { isReadyRef, navigationRef } from './navigation-service';
 import StackNavigator from './StackNavigator';
 import { useAppThemeContext } from '@app/theme/provider';
 

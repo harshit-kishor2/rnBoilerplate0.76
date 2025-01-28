@@ -1,8 +1,8 @@
 export {};
-export { default as SplashScreen } from './Splash';
-export { default as HomeScreen } from './Home';
-export { default as LoginScreen } from './Login';
-export { default as SettingScreen } from './Setting';
-export { default as RegisterScreen } from './Register';
-export { default as WebviewScreen } from './Webview';
-export { default as NetworkLoggerScreen } from './NetworkLogger';
+export { default as SplashScreen } from './Splash/SplashScreen';
+export { default as HomeScreen } from './Home/HomeScreen';
+export { default as LoginScreen } from './Login/LoginScreen';
+export { default as SettingScreen } from './Setting/SettingScreen';
+export { default as RegisterScreen } from './Register/RegisterScreen';
+export { default as WebviewScreen } from './Webview/WebviewScreen';
+export { default as NetworkLoggerScreen } from './NetworkLogger/NetworkLoggerScreen';

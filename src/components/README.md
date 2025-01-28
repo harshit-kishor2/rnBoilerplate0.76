@@ -18,11 +18,11 @@ yarn add react-native-webview
 
 #### For forms-
 ```javascript
-yarn add react-hook-form
+yarn add react-hook-form zod @hookform/resolvers
 ```
 #### For Notification and modals-
 ```javascript
-yarn add react-native-simple-toast react-native-modal
+yarn add react-native-toast-message react-native-modal
 ```
 
 #### For Flatlist and Section List-

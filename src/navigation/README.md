@@ -45,7 +45,7 @@ yarn add @react-navigation/drawer @react-navigation/bottom-tabs react-native-rea
 For installation steps check README.md file inside theme directory.
 
 
-Each time new screen added you have to update two files -> routeConfig.ts and types.d.ts
+Each time new screen added you have to update two files -> route-config.ts and types.d.ts
 
 NavigationService can be used outside of react scope for navigation purpose.
 

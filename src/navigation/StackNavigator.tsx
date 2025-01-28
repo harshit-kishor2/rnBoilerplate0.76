@@ -7,7 +7,7 @@ import {
   postAuthRoutes,
   preAuthRoutes,
   stackScreenOptions
-} from './routeConfig';
+} from './route-config';
 
 
 const Stack = createStackNavigator<RootStackParamList>();

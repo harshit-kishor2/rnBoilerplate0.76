@@ -5,7 +5,7 @@ import {useAppTranslation} from '@app/i18n';
 import {useAppRoute} from '@app/navigation/hooks';
 import React from 'react';
 
-const WebViewScreen = () => {
+const WebViewScreen: React.FC = () => {
   const translate = useAppTranslation()
   const route = useAppRoute('WebViewRoute')
   const getTitle = (page?: IWebViewPages) : string => {
