@@ -1,8 +1,10 @@
 import Assets from '@app/assets';
 import {AppFastImage, AppText, Container} from '@app/components';
+import {wait} from '@app/helpers';
 import DeviceUtils from '@app/helpers/device-utils';
 import {rpFont, rpWidth} from '@app/helpers/responsive-utils';
 import NavigationService from '@app/navigation/navigation-service';
+import {usePersistAuthStore} from '@app/store/zustand/use-auth-store';
 import {useAppTheme} from '@app/theme';
 import React, {useEffect, useMemo, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
@@ -15,9 +17,9 @@ const SplashScreen: React.FC = () => {
   const theme = useAppTheme();
   const styles = useMemo(() => splashScreenStyles(), []);
   const [isSplashEnd, setIsSplashEnd] = useState(false);
+  const {isAuth} = usePersistAuthStore();
 
-  const hasAccountData = false;
-
+  // Animated values
   const rotateValue = useSharedValue(0);
   const scaleValue = useSharedValue(1);
 
@@ -28,23 +30,20 @@ const SplashScreen: React.FC = () => {
 
 
   useEffect(() => {
-    setTimeout(() => {
+    const navigateAfterSplash = async () => {
+      // Wait for the splash screen timeout
+      await wait(SPLASH_TIMEOUT);
       setIsSplashEnd(true);
-    }, SPLASH_TIMEOUT);
+    };
+    navigateAfterSplash();
   }, []);
 
   useEffect(() => {
     if (isSplashEnd) {
-      // Perform navigation logic here
-      if (hasAccountData) {
-        // navigate to home screen
-        NavigationService.replace({routeName: 'HomeRoute', fromRouteName: 'SplashRoute'});
-      } else {
-        // navigate to login screen
-        NavigationService.replace({routeName: 'LoginRoute', fromRouteName: 'SplashRoute'});
-      }
+      const destinationRoute: keyof RootStackParamList = isAuth ? 'HomeRoute' : 'LoginRoute';
+      NavigationService.replace({routeName: destinationRoute, fromRouteName: 'SplashRoute'});
     }
-  }, [isSplashEnd, hasAccountData]);
+  }, [isSplashEnd, isAuth]);
 
   // Animated style for rotation
   const animatedStyle = useAnimatedStyle(() => {
@@ -64,9 +63,7 @@ const SplashScreen: React.FC = () => {
           style={styles.splsh_image}
         />
       </Animated.View>
-      <View
-        style={styles.version}
-      >
+      <View style={styles.version}>
         <AppText
           fontSize={rpFont(10)}
           text={`v${BUILD_VERSION}(${BUILD_NUMBER})`}

@@ -4,7 +4,7 @@ const isDev = __DEV__; // React Native's global variable
 
 const getTimestamp = (): string => {
   const now = new Date();
-  return now.toISOString(); // Example: 2025-01-28T10:30:15.123Z
+  return now.toLocaleString(); // Example: 2025-01-28T10:30:15.123Z
 };
 
 export const consoleLog = (message: string, ...optionalParams: LogParams): void => {

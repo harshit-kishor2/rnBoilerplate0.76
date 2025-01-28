@@ -4,12 +4,15 @@ import {consoleLog} from '@app/helpers/logger';
 import {rpHeight} from '@app/helpers/responsive-utils';
 import {LoginSchema} from '@app/helpers/validation-schema';
 import {useAppTranslation} from '@app/i18n';
+import {useAppNavigation} from '@app/navigation/hooks';
+import {usePersistAuthStore} from '@app/store/zustand/use-auth-store';
 import {zodResolver} from '@hookform/resolvers/zod';
 import React from 'react';
 import {FormProvider, SubmitErrorHandler, SubmitHandler, useForm} from 'react-hook-form';
 
 const LoginForm = () => {
-
+  const {login} = usePersistAuthStore();
+  const navigation = useAppNavigation('LoginRoute');
   const translate = useAppTranslation();
   const {...methods} = useForm<LoginFormData>({
     mode: 'onChange',
@@ -17,7 +20,9 @@ const LoginForm = () => {
   });
 
   const onLoginSubmitHandler: SubmitHandler<LoginFormData> = (data: LoginFormData) => {
-    consoleLog('Formik data====>', data);
+    login(data).then(() => {
+      navigation.replace('HomeRoute', {from: 'LoginRoute'});
+    });
   };
 
   const onLoginSubmitErrorHandler: SubmitErrorHandler<LoginFormData> = (errors: any) => {
