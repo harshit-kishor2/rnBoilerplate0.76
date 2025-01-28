@@ -1,6 +1,6 @@
 
 import Assets from '@app/assets';
-import {AppFastImage, Container, KeyboardAvoidingWrapper, SizedBox} from '@app/components';
+import {AppFastImage, Container, KeyboardAvoidingWrapper, Padding} from '@app/components';
 import {rpWidth} from '@app/helpers/responsive-utils';
 import {useAppTheme} from '@app/theme';
 import React, {useMemo} from 'react';
@@ -15,15 +15,16 @@ const RegisterScreen: React.FC = () => {
   return (
     <KeyboardAvoidingWrapper>
       <Container paddingHorizontal={10} alignItems='center'>
-        <SizedBox height={rpWidth(50)} />
-        <AppFastImage
-          source={Assets.image.SPLASH_IMAGE}
-          style={styles.splsh_image}
-        />
-        <SizedBox height={rpWidth(50)} />
+        <Padding vertical={rpWidth(50)}>
+          <AppFastImage
+            source={Assets.image.SPLASH_IMAGE}
+            style={styles.splsh_image}
+          />
+        </Padding>
         <RegisterForm />
-        <SizedBox height={rpWidth(25)} />
-        <AlreadyHaveAccountLink />
+        <Padding vertical={rpWidth(20)}>
+          <AlreadyHaveAccountLink />
+        </Padding>
       </Container>
     </KeyboardAvoidingWrapper>
   );

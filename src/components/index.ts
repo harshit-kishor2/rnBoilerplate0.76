@@ -16,6 +16,9 @@ import AppScrollView from './atoms/AppScrollView';
 import SizedBox from './SizedBox';
 import KeyboardAvoidingWrapper from './KeyboardAvoidingView';
 import {AppFormTextInput} from './atoms/AppFormTextInput';
+import Padding from './Padding';
+import Divider from './Divider';
+
 
 export {
   AppText,
@@ -35,5 +38,7 @@ export {
   Column,
   AppScrollView,
   SizedBox,
-  KeyboardAvoidingWrapper
+  KeyboardAvoidingWrapper,
+  Padding,
+  Divider
 };

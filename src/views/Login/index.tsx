@@ -1,6 +1,6 @@
 
 import Assets from '@app/assets';
-import {AppFastImage, Container, KeyboardAvoidingWrapper, SizedBox, Spacer} from '@app/components';
+import {AppFastImage, Container, KeyboardAvoidingWrapper, Padding, SizedBox, Spacer} from '@app/components';
 import {rpHeight, rpWidth} from '@app/helpers/responsive-utils';
 import React, {useMemo} from 'react';
 import {StyleSheet} from 'react-native';
@@ -14,16 +14,16 @@ const LoginScreen: React.FC = () => {
   return (
     <KeyboardAvoidingWrapper>
       <Container paddingHorizontal={10} alignItems='center'>
-        <SizedBox height={rpHeight(50)} />
-        <AppFastImage
-          source={Assets.image.SPLASH_IMAGE}
-          style={styles.splsh_image}
-        />
-        <SizedBox height={rpHeight(50)} />
+        <Padding vertical={rpHeight(50)} >
+          <AppFastImage
+            source={Assets.image.SPLASH_IMAGE}
+            style={styles.splsh_image}
+          />
+        </Padding>
         <LoginForm />
-        <SizedBox height={rpHeight(25)} />
-        <DontHaveAccountLink />
-        <SizedBox height={rpHeight(20)} />
+        <Padding vertical={rpHeight(20)} >
+          <DontHaveAccountLink />
+        </Padding>
         <ForgotPasswordLink />
         <Spacer />
         <TermsConditionAndPrivacyPolicyLink from='LoginRoute' />

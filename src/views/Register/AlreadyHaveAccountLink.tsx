@@ -4,7 +4,6 @@ import {useAppTranslation} from '@app/i18n';
 import {useAppNavigation} from '@app/navigation/hooks';
 import {useAppTheme} from '@app/theme';
 import React from 'react';
-import {Pressable} from 'react-native';
 
 const AlreadyHaveAccountLink: React.FC = () => {
   const theme = useAppTheme();
@@ -19,12 +18,11 @@ const AlreadyHaveAccountLink: React.FC = () => {
         text={translate('register_screen.already_have_account')}
       />
       <SizedBox width={rpWidth(5)} />
-      <Pressable onPress={onLoginPress}>
-        <AppText
-          text={translate('register_screen.login')}
-          color={theme.colors.blue}
-        />
-      </Pressable>
+      <AppText
+        onPress={onLoginPress}
+        text={translate('register_screen.login')}
+        color={theme.colors.blue}
+      />
     </Row>
   );
 };

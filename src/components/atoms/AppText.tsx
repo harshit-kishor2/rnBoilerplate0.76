@@ -1,7 +1,15 @@
 import Assets from '@app/assets';
 import {useAppTheme} from '@app/theme';
 import React from 'react';
-import {AnimatableNumericValue, StyleSheet, Text, TextProps, TextStyle} from 'react-native';
+import {
+  AnimatableNumericValue,
+  StyleSheet,
+  Text,
+  TextProps,
+  TextStyle,
+  GestureResponderEvent,
+  Pressable,
+} from 'react-native';
 
 interface AppTextProps {
   text?: string;
@@ -12,14 +20,14 @@ interface AppTextProps {
   ellipsizeMode?: 'head' | 'middle' | 'tail' | 'clip';
   textTransform?: TextTransform;
   adjustsFontSizeToFit?: boolean;
-  props?: TextProps;
-  fontSize?: number,
-  lineHeight?: number,
-  fontFamily?: string,
-  fontWeight?: FontWeight,
+  fontSize?: number;
+  lineHeight?: number;
+  fontFamily?: string;
+  fontWeight?: FontWeight;
   color?: string;
   opacity?: AnimatableNumericValue;
-
+  onPress?: (event: GestureResponderEvent) => void;
+  props?: TextProps;
 }
 
 const AppText: React.FC<AppTextProps> = ({
@@ -37,30 +45,33 @@ const AppText: React.FC<AppTextProps> = ({
   textTransform,
   numberOfLines,
   adjustsFontSizeToFit,
+  onPress,
   ...props
 }: AppTextProps) => {
   const theme = useAppTheme();
   return (
-    <Text
-      {...props}
-      ellipsizeMode={ellipsizeMode}
-      adjustsFontSizeToFit={adjustsFontSizeToFit}
-      numberOfLines={numberOfLines}
-      style={StyleSheet.flatten([
-        {
-          textAlign: align,
-          textTransform,
-          color: color ?? theme.colors.text,
-          opacity,
-          fontSize,
-          fontFamily,
-          fontWeight,
-          lineHeight: lineHeight ?? fontSize + 4
-        },
-        style,
-      ])}>
-      {text ?? children}
-    </Text>
+    <Pressable onPress={onPress} disabled={!onPress}>
+      <Text
+        {...props}
+        ellipsizeMode={ellipsizeMode}
+        adjustsFontSizeToFit={adjustsFontSizeToFit}
+        numberOfLines={numberOfLines}
+        style={StyleSheet.flatten([
+          {
+            textAlign: align,
+            textTransform,
+            color: color ?? (onPress ? theme.colors.blue : theme.colors.text),
+            opacity,
+            fontSize,
+            fontFamily,
+            fontWeight,
+            lineHeight: lineHeight ?? fontSize + 4
+          },
+          style,
+        ])}>
+        {text ?? children}
+      </Text>
+    </Pressable>
   );
 };
 
