@@ -17,12 +17,12 @@ const AppWebView: React.FC<IAppWebViewProps> = ({
   return (
     <>
       <WebView
-        source={{ uri: url }}
+        source={{uri: url}}
         style={styles.webview}
         onLoadStart={() => setLoading(true)}
         onLoadEnd={() => setLoading(false)}
         onError={(syntheticEvent) => {
-          const { nativeEvent } = syntheticEvent;
+          const {nativeEvent} = syntheticEvent;
           onError && onError(nativeEvent.description);
         }}
         pullToRefreshEnabled
@@ -31,22 +31,22 @@ const AppWebView: React.FC<IAppWebViewProps> = ({
         allowFileAccess={true}
         originWhitelist={['*']}
         javaScriptCanOpenWindowsAutomatically={true}
-        // renderLoading={() => <ActivityIndicator size="large" color={theme.colors.primary} />}
-        // startInLoadingState={true}
-        // textZoom={100}
+      // renderLoading={() => <ActivityIndicator size="large" color={theme.colors.primary} />}
+      // startInLoadingState={true}
+      // textZoom={100}
       />
       {
         loading &&
-         <View style={styles.activity}>
-           <ActivityIndicator size="large" color={theme.colors.primary} />
-         </View>
+        <View style={styles.activity}>
+          <ActivityIndicator size="large" color={theme.colors.primary} />
+        </View>
       }
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  activity:{
+  activity: {
     position: 'absolute',
     top: 0,
     bottom: 0,

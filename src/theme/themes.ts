@@ -3,7 +3,7 @@ import {
   MD3DarkTheme,
   MD3LightTheme,
 } from 'react-native-paper';
-import { MD3Type} from 'react-native-paper/lib/typescript/types';
+import {MD3Type} from 'react-native-paper/lib/typescript/types';
 
 const CommonColorConst = {
   transparent: 'transparent',

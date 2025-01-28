@@ -27,7 +27,7 @@ export const LoginSchema: ZodType<LoginFormData> = z
       .max(20, ZodValidationConst.PASSWORD_MAX_LENGTH),
   });
 
-export const RegisterSchema: ZodType<RegisterFormData>  = z
+export const RegisterSchema: ZodType<RegisterFormData> = z
   .object({
     email: z
       .string({required_error: ZodValidationConst.EMAIL_REQUIRED})

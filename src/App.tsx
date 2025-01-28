@@ -28,7 +28,7 @@ const App: React.FC = () => {
           </GestureHandlerRootView>
         </SafeAreaProvider>
       </CrashShield>
-      <Toast/>
+      <Toast />
     </>
   );
 };

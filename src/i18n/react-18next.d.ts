@@ -49,7 +49,7 @@ declare module 'i18next' {
  * The type of a language.
  * It can be one of the supported languages ('en', 'es', 'hi') or 'auto' to use the device's language setting.
  */
-declare global{
+declare global {
   //! Add your supported languages here.
   type ISelectedLangauge = 'auto' | 'en' | 'hi' | 'es';
 

@@ -18,7 +18,7 @@ export interface ImageProps extends FastImageProps {
   fallbackSource?: Source | number;
 }
 
-const AppFastImage = React.memo((props: ImageProps) => {
+const AppFastImage: React.FC<ImageProps> = (props) => {
   const {
     children,
     containerStyle,
@@ -111,7 +111,7 @@ const AppFastImage = React.memo((props: ImageProps) => {
       {indicator}
     </View>
   );
-});
+};
 
 export default AppFastImage;
 

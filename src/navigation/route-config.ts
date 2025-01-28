@@ -6,7 +6,6 @@ import {
   WebviewScreen,
   SplashScreen,
   RegisterScreen
-
 } from '@app/views';
 import {CardStyleInterpolators, type StackNavigationOptions} from '@react-navigation/stack';
 

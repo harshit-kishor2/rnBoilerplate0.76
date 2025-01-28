@@ -1,8 +1,9 @@
+import {AppText, AppVectorIcon} from '@app/components';
+import {IconType} from '@app/components/atoms/AppVectorIcon';
 import {useNavigation} from '@react-navigation/native'; // For navigation to go back
 import React from 'react';
 import {Pressable, StyleSheet, View} from 'react-native';
-import AppText from '../atoms/AppText';
-import AppVectorIcon from '../atoms/AppVectorIcon';
+
 
 interface AppHeaderProps {
   title: string;
@@ -10,16 +11,16 @@ interface AppHeaderProps {
   backgroundColor?: string;
 }
 
-const AppHeader: React.FC<AppHeaderProps> = ({ title, onBackPress, backgroundColor = '#fff' }) => {
+const AppHeader: React.FC<AppHeaderProps> = ({title, onBackPress, backgroundColor = '#fff'}) => {
   const navigation = useNavigation();
 
   // Default behavior for the back button (goes back to previous screen)
   const handleBackPress = onBackPress ?? (() => navigation.goBack());
 
   return (
-    <View style={[styles.header, { backgroundColor }]}>
+    <View style={[styles.header, {backgroundColor}]}>
       <Pressable onPress={handleBackPress} style={styles.backButton}>
-        <AppVectorIcon type="MaterialIcons" name="arrow-back" size={24} color="#000" />
+        <AppVectorIcon type={IconType.MaterialIcons} name="arrow-back" size={24} color="#000" />
       </Pressable>
       <AppText
         text={title}

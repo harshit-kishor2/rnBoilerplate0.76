@@ -47,12 +47,12 @@ export type ButtonProps = AnimatedButtonProps & ExtraButtonProps;
 
 export const AnimatedTouchableOpacity = React.memo(
   (props: AnimatedButtonProps) => {
-    const { containerStyle, animated, children } = props;
+    const {containerStyle, animated, children} = props;
     const scaleValue = useSharedValue(1);
 
     const animatedButtonStyle = useAnimatedStyle(() => {
       return {
-        transform: [{ scale: scaleValue.value }],
+        transform: [{scale: scaleValue.value}],
       };
     });
 
@@ -76,7 +76,7 @@ export const AnimatedTouchableOpacity = React.memo(
   }
 );
 
-const AppButton = React.memo((props: ButtonProps) => {
+const AppButton: React.FC<ButtonProps> = (props) => {
   const {
     buttonContainerStyle,
     title,
@@ -117,7 +117,7 @@ const AppButton = React.memo((props: ButtonProps) => {
       </View>
     </AnimatedTouchableOpacity>
   );
-});
+};
 
 export default AppButton;
 

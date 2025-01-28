@@ -42,8 +42,8 @@ Install the packages needed for drawer navigation, bottom tabs and animations:
 ```sh
 yarn add @react-navigation/drawer @react-navigation/bottom-tabs react-native-reanimated
 ```
-For installation steps check README.md file inside theme directory.
 
+For installation steps check README.md file inside theme directory.
 
 Each time new screen added you have to update two files -> route-config.ts and types.d.ts
 

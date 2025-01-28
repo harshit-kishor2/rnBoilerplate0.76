@@ -1,8 +1,12 @@
 import React from 'react';
-import { View } from 'react-native';
+import {View} from 'react-native';
 
-const SizedBox = ({ width, height }: { width?: number; height?: number }) => (
-  <View style={{ width, height }} />
+interface SizedBoxProps {
+  width?: number;
+  height?: number;
+}
+const SizedBox: React.FC<SizedBoxProps> = ({width, height}) => (
+  <View style={{width, height}} />
 );
 
 export default SizedBox;

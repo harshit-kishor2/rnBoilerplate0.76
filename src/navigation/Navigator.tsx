@@ -4,12 +4,12 @@ import {
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
 } from '@react-navigation/native';
-import { isReadyRef, navigationRef } from './navigation-service';
+import {isReadyRef, navigationRef} from './navigation-service';
 import StackNavigator from './StackNavigator';
-import { useAppThemeContext } from '@app/theme/provider';
+import {useAppThemeContext} from '@app/theme/provider';
 
 const Navigator = () => {
-  const { currentTheme } = useAppThemeContext();
+  const {currentTheme} = useAppThemeContext();
   const theme =
     currentTheme.themeType === 'dark' ? NavigationDarkTheme : NavigationDefaultTheme;
 

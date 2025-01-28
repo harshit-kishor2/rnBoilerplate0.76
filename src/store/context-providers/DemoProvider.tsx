@@ -17,13 +17,13 @@ export const useDemoContext = (): IDemoContext => {
   if (!context) {
     throw new Error(
       'useDemoContext must be used within DemoProvider. ' +
-        'Make sure you have wrapped your app with DemoProvider.',
+      'Make sure you have wrapped your app with DemoProvider.',
     );
   }
   return context;
 };
 
-export const DemoProvider = ({ children }: React.PropsWithChildren) => {
+export const DemoProvider = ({children}: React.PropsWithChildren) => {
 
   const [currentState, setCurrentState] = useState<any>('');
 
@@ -36,7 +36,7 @@ export const DemoProvider = ({ children }: React.PropsWithChildren) => {
       currentState: currentState,
       setCurrentState: setCurrentState,
     }),
-    [currentState,setCurrentState]
+    [currentState, setCurrentState]
   );
 
   // Provide the demo context to children components

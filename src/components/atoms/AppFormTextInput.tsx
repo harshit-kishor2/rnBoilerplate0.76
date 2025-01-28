@@ -3,18 +3,18 @@ import {useController, UseControllerProps, useFormContext} from 'react-hook-form
 import AppTextInput, {IAppTextInputProps} from './AppTextInput';
 
 interface TextInputProps extends IAppTextInputProps, UseControllerProps {
-  name: string
-  defaultValue?: string
+  name: string;
+  defaultValue?: string;
 }
-const ControlledInput = (props: TextInputProps) => {
-  const { formState } = useFormContext();
+const ControlledInput: React.FC<TextInputProps> = (props) => {
+  const {formState} = useFormContext();
   const {
     name,
     rules,
     defaultValue,
     ...inputProps
   } = props;
-  const { field } = useController({ name, rules, defaultValue });
+  const {field} = useController({name, rules, defaultValue});
   const hasError = Boolean(formState?.errors[name]);
   return (
     <AppTextInput
@@ -29,9 +29,9 @@ const ControlledInput = (props: TextInputProps) => {
       {...inputProps}
     />
   );
-}
+};
 
-export const AppFormTextInput = (props: TextInputProps) => {
+export const AppFormTextInput: React.FC<TextInputProps> = (props) => {
 
   const formContext = useFormContext();
 

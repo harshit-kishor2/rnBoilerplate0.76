@@ -17,7 +17,6 @@ import SizedBox from './SizedBox';
 import KeyboardAvoidingWrapper from './KeyboardAvoidingView';
 import {AppFormTextInput} from './atoms/AppFormTextInput';
 
-
 export {
   AppText,
   AppButton,

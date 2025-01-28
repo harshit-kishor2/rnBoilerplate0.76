@@ -11,11 +11,11 @@ import 'dayjs/locale/en-gb';
 import 'dayjs/locale/es';
 import 'dayjs/locale/hi';
 
-export const APP_LANGUAGE_TYPE_KEY = '@app_language_type'
-export const APP_LANGUAGE_KEY = '@app_language'
+export const APP_LANGUAGE_TYPE_KEY = '@app_language_type';
+export const APP_LANGUAGE_KEY = '@app_language';
 
-const APP_LANGUAGE_LOCAL_STORAGE_ID = 'app-langauge-local-storage-id'
-const APP_LANGUAGE_LOCAL_STORAGE_ENCRYPTION_KEY = 'my-random-key-for-encryption'
+const APP_LANGUAGE_LOCAL_STORAGE_ID = 'app-langauge-local-storage-id';
+const APP_LANGUAGE_LOCAL_STORAGE_ENCRYPTION_KEY = 'my-random-key-for-encryption';
 export const appLanguageLocalStorage: MMKV = new MMKV({
   id: APP_LANGUAGE_LOCAL_STORAGE_ID,
   encryptionKey: APP_LANGUAGE_LOCAL_STORAGE_ENCRYPTION_KEY

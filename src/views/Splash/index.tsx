@@ -11,7 +11,6 @@ import Animated, {Easing, useAnimatedStyle, useSharedValue, withRepeat, withTimi
 const SPLASH_TIMEOUT = 5000;
 const {BUILD_VERSION, BUILD_NUMBER} = DeviceUtils;
 
-
 const SplashScreen: React.FC = () => {
   const theme = useAppTheme();
   const styles = useMemo(() => splashScreenStyles(), []);

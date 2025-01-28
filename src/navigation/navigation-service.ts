@@ -11,7 +11,7 @@ export const navigationRef = createNavigationContainerRef<RootStackParamList>();
 export const isReadyRef: MutableRefObject<boolean | null> = createRef<boolean | null>();
 
 function prepareParams(params: any, fromRouteName: string) {
-  return { ...params, fromRouteName };
+  return {...params, fromRouteName};
 }
 
 function navigate({
@@ -42,7 +42,7 @@ const reset = (params: any) => {
   }
 };
 
-function resetRoot(params = { index: 0, routes: [] }) {
+function resetRoot(params = {index: 0, routes: []}) {
   if (isReadyRef.current && navigationRef?.current) {
     navigationRef.current?.resetRoot(params);
   } else {
@@ -59,7 +59,7 @@ function navigateAndReset({
     navigationRef.current?.dispatch(
       CommonActions.reset({
         index: 1,
-        routes: [{ name: routeName, params: prepareParams(params, fromRouteName) }],
+        routes: [{name: routeName, params: prepareParams(params, fromRouteName)}],
       })
     );
   } else {

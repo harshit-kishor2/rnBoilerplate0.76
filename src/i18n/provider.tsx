@@ -21,7 +21,7 @@ export const AppLocalizationProvider = ({
   autoDetect = true,
   defaultLanguage = 'en',
   children,
-}: React.PropsWithChildren<{autoDetect?: boolean;defaultLanguage?: string;}>) => {
+}: React.PropsWithChildren<{autoDetect?: boolean; defaultLanguage?: string;}>) => {
 
   const deviceLang = getLocales()[0].languageCode;
 
@@ -45,7 +45,7 @@ export const AppLocalizationProvider = ({
       appLanguageLocalStorage.set(APP_LANGUAGE_TYPE_KEY, selectedLanguageType);
       if (selectedLanguageType === 'auto') {
         seti18nLanguage(autoDetect ? deviceLang : defaultLanguage);
-      }else{
+      } else {
         seti18nLanguage(selectedLanguageType);
       }
     } catch (error) {
@@ -64,10 +64,10 @@ export const AppLocalizationProvider = ({
   };
 
   const appliedLanguage = useMemo(() => {
-    if(selectedLanguageType === 'auto'){
-      return autoDetect ?  (deviceLang as ISelectedLangauge) : (defaultLanguage as ISelectedLangauge)
+    if (selectedLanguageType === 'auto') {
+      return autoDetect ? (deviceLang as ISelectedLangauge) : (defaultLanguage as ISelectedLangauge);
     }
-    return selectedLanguageType
+    return selectedLanguageType;
   }, [selectedLanguageType, deviceLang, autoDetect, defaultLanguage]);
 
   const value: IAppLocalizationContext = useMemo(() => ({

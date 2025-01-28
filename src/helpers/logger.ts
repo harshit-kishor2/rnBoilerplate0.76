@@ -1,19 +1,26 @@
 type LogParams = any[]; // Define a type alias for optional parameters
 
+const isDev = __DEV__; // React Native's global variable
+
+const getTimestamp = (): string => {
+  const now = new Date();
+  return now.toISOString(); // Example: 2025-01-28T10:30:15.123Z
+};
+
 export const consoleLog = (message: string, ...optionalParams: LogParams): void => {
-  if (__DEV__) {
-    console.log(`[LOG]-${Date.now()}: ${message}`, ...optionalParams);
+  if (isDev) {
+    console.log(`🌟 [LOG: ${getTimestamp()}] :: ${message}`, ...optionalParams);
   }
 };
 
 export const consoleError = (message: string, ...optionalParams: LogParams): void => {
-  if (__DEV__) {
-    console.error(`[ERROR]-${Date.now()}: ${message}`, ...optionalParams);
+  if (isDev) {
+    console.error(`❌ [ERROR: ${getTimestamp()}] :: ${message}`, ...optionalParams);
   }
 };
 
 export const consoleWarn = (message: string, ...optionalParams: LogParams): void => {
-  if (__DEV__) {
-    console.warn(`[WARN]-${Date.now()}: ${message}`, ...optionalParams);
+  if (isDev) {
+    console.warn(`⚠️ [WARN: ${getTimestamp()}] :: ${message}`, ...optionalParams);
   }
 };

@@ -458,7 +458,7 @@ const AppTextInputWithoutRef = (props: IAppTextInputProps, ref?: React.Ref<RNTex
   );
 };
 
-const AppTextInput = React.memo(
+const AppTextInput: React.FC<IAppTextInputProps> = React.memo(
   React.forwardRef((props: IAppTextInputProps, ref?: React.Ref<RNTextInput>) => AppTextInputWithoutRef(props, ref))
 );
 
@@ -466,9 +466,9 @@ export default AppTextInput;
 
 const inputStyles = (theme: IAppTheme) =>
   StyleSheet.create({
-    container:{
+    container: {
       width: '100%',
-      paddingVertical:5
+      paddingVertical: 5
     },
     errorView: {
       marginHorizontal: 16,

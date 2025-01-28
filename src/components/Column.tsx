@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, ViewStyle } from 'react-native';
+import {View, StyleSheet, ViewStyle} from 'react-native';
 
 interface ColumnProps {
   children: React.ReactNode;
@@ -20,7 +20,7 @@ const Column: React.FC<ColumnProps> = ({
     <View
       style={[
         styles.column,
-        { justifyContent, alignItems, backgroundColor },
+        {justifyContent, alignItems, backgroundColor},
         style
       ]}
     >

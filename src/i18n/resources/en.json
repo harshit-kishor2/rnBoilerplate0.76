@@ -1,28 +1,28 @@
 {
   "welcome_message": "Welcome to the app",
   "greeting": "Hello, {{name}}",
-  "login_screen":{
-    "email":"Email",
-    "password":"Password",
-    "login":"Login",
-    "dont_have_account":"Don't have an account?",
-    "register":"Register",
-    "forgot_password":"Forgot Password?",
-    "by_continuing_you_agree_to_our":"By continuing, you agree to our",
-    "terms_of_service":"Terms of Service",
-    "and":"and",
-    "privacy_policy":"Privacy Policy"
+  "login_screen": {
+    "email": "Email",
+    "password": "Password",
+    "login": "Login",
+    "dont_have_account": "Don't have an account?",
+    "register": "Register",
+    "forgot_password": "Forgot Password?",
+    "by_continuing_you_agree_to_our": "By continuing, you agree to our",
+    "terms_of_service": "Terms of Service",
+    "and": "and",
+    "privacy_policy": "Privacy Policy"
   },
-  "register_screen":{
-    "email":"Email",
-    "password":"Password",
-    "confirm_password":"Confirm Password",
-    "register":"Register",
-    "already_have_account":"Already have an account?",
-    "login":"Login"
+  "register_screen": {
+    "email": "Email",
+    "password": "Password",
+    "confirm_password": "Confirm Password",
+    "register": "Register",
+    "already_have_account": "Already have an account?",
+    "login": "Login"
   },
-  "webview_screen":{
-    "t&c":"Terms & Conditions",
-    "p&p":"Privacy Policy"
+  "webview_screen": {
+    "t&c": "Terms & Conditions",
+    "p&p": "Privacy Policy"
   }
 }

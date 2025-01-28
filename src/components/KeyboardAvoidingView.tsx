@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import {StyleSheet} from 'react-native';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 interface IKeyboardAvoidingWrapperProps {
   children: React.ReactNode;
@@ -20,7 +20,7 @@ const KeyboardAvoidingWrapper: React.FC<IKeyboardAvoidingWrapperProps> = ({
   return (
     <KeyboardAwareScrollView
       style={[styles.container, style]}
-      contentContainerStyle={[styles.container,contentContainerStyle]}
+      contentContainerStyle={[styles.container, contentContainerStyle]}
       extraHeight={extraHeight}
       extraScrollHeight={extraScrollHeight}
       enableOnAndroid={true}

@@ -60,16 +60,16 @@ const ${styleFunctionName} = (theme: IAppTheme) =>
 `;
 
   fs.writeFileSync(
-    path.join(`../src/views/${screenFolderName}`, `${fileName}.tsx`),
+    path.join(`../src/views/${screenFolderName}`, 'index.tsx'),
     singleFileContent,
     errWrite => {
       if (errWrite) throw errWrite;
-      console.log(`${fileName}.tsx file created successfully in ${screenFolderName}`);
+      console.log(`index.tsx file created successfully in ${screenFolderName}`);
     }
   );
 
   // Append export to index.ts
-  const exportToIndex = `export { default as ${fileName} } from './${screenFolderName}/${fileName}';\n`;
+  const exportToIndex = `export { default as ${fileName} } from './${screenFolderName}';\n`;
 
   fs.appendFile(`../src/views/index.ts`, exportToIndex, errExport => {
     if (errExport) throw errExport;

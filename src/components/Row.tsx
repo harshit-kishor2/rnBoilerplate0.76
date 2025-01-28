@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, ViewStyle } from 'react-native';
+import {View, StyleSheet, ViewStyle} from 'react-native';
 
 interface RowProps {
   children: React.ReactNode;
@@ -20,7 +20,7 @@ const Row: React.FC<RowProps> = ({
     <View
       style={[
         styles.row,
-        { justifyContent, alignItems, backgroundColor },
+        {justifyContent, alignItems, backgroundColor},
         style
       ]}
     >
