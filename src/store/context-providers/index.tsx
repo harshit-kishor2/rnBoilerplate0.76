@@ -14,7 +14,7 @@ const contexts: ContextItem[] = [
 ];
 
 type ComposeProvidersProps = {
-  children: React.ReactNode;
+  children: React.ReactElement;
 };
 
 const CombinedContextProvider: React.FC<ComposeProvidersProps> = ({
