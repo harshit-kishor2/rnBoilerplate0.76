@@ -3,14 +3,8 @@ export const wait = (ms: number) => {
 };
 // wait(2000)
 
-
-export const numberFormat = (
-  value: any,
-  locale = 'en-GB',
-  options: any = {},
-) => new Intl.NumberFormat(locale, options).format(value);
-
-
+export const numberFormat = (value: any, locale = 'en-GB', options: any = {}) =>
+  new Intl.NumberFormat(locale, options).format(value);
 
 // For first letter capital
 export const capitalizeFirstLetter = (str: string): string => {

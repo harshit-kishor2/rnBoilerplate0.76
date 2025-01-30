@@ -1,16 +1,12 @@
-
-import {
-  createSlice
-} from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 import {LoadingStatus} from '../utils';
 
 const SLICE_FEATURE_KEY = 'demo';
 
-
 interface DemoState {
-  demoLoadingStatus: string,
-  demoData: object | null | undefined,
-  demoError: string,
+  demoLoadingStatus: string;
+  demoData: object | null | undefined;
+  demoError: string;
 }
 
 // Define Initial State
@@ -31,7 +27,7 @@ const reduxSlice = createSlice({
   reducers: {
     resetDemoSliceState: () => {
       return initialState;
-    }
+    },
   },
 });
 
@@ -39,6 +35,6 @@ const reduxSlice = createSlice({
  * Export reducer for store configuration.
  */
 
-export const {resetDemoSliceState, } = reduxSlice.actions;
+export const {resetDemoSliceState} = reduxSlice.actions;
 
 export const demoReducer = reduxSlice.reducer;

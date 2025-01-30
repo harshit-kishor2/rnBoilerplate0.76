@@ -25,7 +25,11 @@ const SimpleLoader: React.FC<SimpleLoaderProps> = ({
     return (
       <View style={[styles.container, style]}>
         {children ? (
-          <View style={[styles.loaderContainer, {backgroundColor: backgroundColor ?? theme.colors.background}]}>
+          <View
+            style={[
+              styles.loaderContainer,
+              {backgroundColor: backgroundColor ?? theme.colors.background},
+            ]}>
             <ActivityIndicator size={size ?? 'large'} color={color} />
           </View>
         ) : (

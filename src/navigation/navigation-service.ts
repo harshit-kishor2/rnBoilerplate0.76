@@ -8,29 +8,36 @@ import {createRef, MutableRefObject} from 'react';
 
 export const navigationRef = createNavigationContainerRef<RootStackParamList>();
 
-export const isReadyRef: MutableRefObject<boolean | null> = createRef<boolean | null>();
+export const isReadyRef: MutableRefObject<boolean | null> = createRef<
+  boolean | null
+>();
 
 function prepareParams(params: any, fromRouteName: string) {
   return {...params, fromRouteName};
 }
 
-function navigate({
-  fromRouteName,
-  routeName,
-  params,
-}: NavigateProps) {
+function navigate({fromRouteName, routeName, params}: NavigateProps) {
   if (isReadyRef.current && navigationRef?.current) {
-    navigationRef.current.navigate(routeName, prepareParams(params, fromRouteName));
+    navigationRef.current.navigate(
+      routeName,
+      prepareParams(params, fromRouteName),
+    );
   } else {
     console.warn('Navigation is not ready');
   }
 }
 
 function goBack() {
-  if (isReadyRef.current && navigationRef?.current && navigationRef.current.canGoBack()) {
+  if (
+    isReadyRef.current &&
+    navigationRef?.current &&
+    navigationRef.current.canGoBack()
+  ) {
     navigationRef.current.goBack();
   } else {
-    console.warn('Cannot go back. Navigation is not ready or no previous screen');
+    console.warn(
+      'Cannot go back. Navigation is not ready or no previous screen',
+    );
   }
 }
 
@@ -50,30 +57,26 @@ function resetRoot(params = {index: 0, routes: []}) {
   }
 }
 
-function navigateAndReset({
-  fromRouteName,
-  routeName,
-  params,
-}: NavigateProps) {
+function navigateAndReset({fromRouteName, routeName, params}: NavigateProps) {
   if (isReadyRef.current && navigationRef?.current) {
     navigationRef.current?.dispatch(
       CommonActions.reset({
         index: 1,
-        routes: [{name: routeName, params: prepareParams(params, fromRouteName)}],
-      })
+        routes: [
+          {name: routeName, params: prepareParams(params, fromRouteName)},
+        ],
+      }),
     );
   } else {
     console.warn('Navigation is not ready for reset and navigate');
   }
 }
 
-const push = ({
-  fromRouteName,
-  routeName,
-  params,
-}: NavigateProps) => {
+const push = ({fromRouteName, routeName, params}: NavigateProps) => {
   if (isReadyRef.current && navigationRef?.current) {
-    navigationRef.current?.dispatch(StackActions.push(routeName, prepareParams(params, fromRouteName)));
+    navigationRef.current?.dispatch(
+      StackActions.push(routeName, prepareParams(params, fromRouteName)),
+    );
   } else {
     console.warn('Push cannot be performed. Navigation is not ready');
   }
@@ -95,14 +98,10 @@ const popToTop = () => {
   }
 };
 
-function replace({
-  fromRouteName,
-  routeName,
-  params,
-}: NavigateProps) {
+function replace({fromRouteName, routeName, params}: NavigateProps) {
   if (isReadyRef.current && navigationRef?.current) {
     navigationRef.current?.dispatch(
-      StackActions.replace(routeName, prepareParams(params, fromRouteName))
+      StackActions.replace(routeName, prepareParams(params, fromRouteName)),
     );
   } else {
     console.warn('Replace cannot be performed. Navigation is not ready');

@@ -38,7 +38,7 @@ const SeeMoreText: React.FC<ReadMoreTextProps> = ({
         setNumLines(numberOfLines);
       }
     },
-    [textShown]
+    [textShown],
   );
 
   return (
@@ -47,8 +47,7 @@ const SeeMoreText: React.FC<ReadMoreTextProps> = ({
         onTextLayout={onTextLayout}
         numberOfLines={numLines}
         style={textStyle}
-        ellipsizeMode="tail"
-      >
+        ellipsizeMode="tail">
         {text}
       </Text>
       {showMoreButton ? (

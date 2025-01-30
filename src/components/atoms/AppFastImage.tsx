@@ -1,7 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import type {LayoutChangeEvent} from 'react-native';
-import {ActivityIndicator, LayoutRectangle, StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
-import FastImage, {FastImageProps as FastImageProp, ImageStyle, Priority, Source} from 'react-native-fast-image';
+import {
+  ActivityIndicator,
+  LayoutRectangle,
+  StyleProp,
+  StyleSheet,
+  View,
+  ViewStyle,
+} from 'react-native';
+import FastImage, {
+  FastImageProps as FastImageProp,
+  ImageStyle,
+  Priority,
+  Source,
+} from 'react-native-fast-image';
 
 export type FastImageProps = Omit<FastImageProp, 'source'>;
 
@@ -18,7 +30,7 @@ export interface ImageProps extends FastImageProps {
   fallbackSource?: Source | number;
 }
 
-const AppFastImage: React.FC<ImageProps> = (props) => {
+const AppFastImage: React.FC<ImageProps> = props => {
   const {
     children,
     containerStyle,
@@ -36,7 +48,9 @@ const AppFastImage: React.FC<ImageProps> = (props) => {
 
   const [loading, setLoading] = useState(false);
   const [layout, setLayout] = useState<LayoutRectangle | null>(null);
-  const [imageSource, setImageSource] = useState<number | Source | undefined>(undefined);
+  const [imageSource, setImageSource] = useState<number | Source | undefined>(
+    undefined,
+  );
 
   useEffect(() => {
     if (typeof uploading !== 'undefined' && uploading !== loading) {
@@ -46,7 +60,10 @@ const AppFastImage: React.FC<ImageProps> = (props) => {
 
   useEffect(() => {
     if (typeof source === 'string') {
-      setImageSource({uri: source, priority: priority ?? FastImage.priority.normal});
+      setImageSource({
+        uri: source,
+        priority: priority ?? FastImage.priority.normal,
+      });
     } else if (typeof source === 'object' && source?.uri) {
       setImageSource(source);
     } else if (typeof source === 'number') {
@@ -56,14 +73,21 @@ const AppFastImage: React.FC<ImageProps> = (props) => {
 
   const onLayout = (e: LayoutChangeEvent) => {
     const {x, y, height, width} = e.nativeEvent.layout;
-    if (layout && layout.x === x && layout.y === y && layout.height === height && layout.width === width) {
+    if (
+      layout &&
+      layout.x === x &&
+      layout.y === y &&
+      layout.height === height &&
+      layout.width === width
+    ) {
       return;
     }
     setLayout(e.nativeEvent.layout);
   };
 
   const shouldShowIndicator =
-    showIndicator && loading &&
+    showIndicator &&
+    loading &&
     typeof source === 'string' &&
     (source.startsWith('http') || source.startsWith('https'));
 
@@ -104,8 +128,7 @@ const AppFastImage: React.FC<ImageProps> = (props) => {
         onLoadEnd={() => {
           setLoading(false);
         }}
-        {...rest}
-      >
+        {...rest}>
         {children}
       </FastImage>
       {indicator}
@@ -123,7 +146,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
 
 /**
  * Examples

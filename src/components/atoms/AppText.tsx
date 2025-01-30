@@ -65,7 +65,7 @@ const AppText: React.FC<AppTextProps> = ({
             fontSize,
             fontFamily,
             fontWeight,
-            lineHeight: lineHeight ?? fontSize + 4
+            lineHeight: lineHeight ?? fontSize + 4,
           },
           style,
         ])}>

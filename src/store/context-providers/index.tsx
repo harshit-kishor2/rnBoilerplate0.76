@@ -21,9 +21,12 @@ const CombinedContextProvider: React.FC<ComposeProvidersProps> = ({
   children,
 }) => {
   // Reduce over the contexts array to wrap them dynamically
-  return contexts.reduceRight((acc, {provider: ProviderWrapper, props = {}}) => {
-    return <ProviderWrapper {...props}>{acc}</ProviderWrapper>;
-  }, children);
+  return contexts.reduceRight(
+    (acc, {provider: ProviderWrapper, props = {}}) => {
+      return <ProviderWrapper {...props}>{acc}</ProviderWrapper>;
+    },
+    children,
+  );
 };
 
 export default CombinedContextProvider;

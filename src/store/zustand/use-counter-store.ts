@@ -21,12 +21,11 @@ const initialState: IState = {
   count: 0,
 };
 
-
 // Creates a slice of the store for managing counter state and actions.
-const createCounterSlice: StateCreator<ICounterSlice> = (set) => ({
+const createCounterSlice: StateCreator<ICounterSlice> = set => ({
   ...initialState,
-  increment: () => set((state) => ({count: state.count + 1})),
-  decrement: () => set((state) => ({count: state.count - 1})),
+  increment: () => set(state => ({count: state.count + 1})),
+  decrement: () => set(state => ({count: state.count - 1})),
   reset: () => set(() => ({...initialState})),
 });
 
@@ -42,8 +41,8 @@ export const usePersistCounterStore = create<ICounterSlice>()(
     {
       name: SLICE_FEATURE_KEY, // Unique name for persistent storage
       storage: createJSONStorage(() => zustandPersistStorage), // Custom persistence storage
-    }
-  )
+    },
+  ),
 );
 
 /**
@@ -52,4 +51,3 @@ export const usePersistCounterStore = create<ICounterSlice>()(
 export const useCounterStore = create<ICounterSlice>((...a) => ({
   ...createCounterSlice(...a),
 }));
-

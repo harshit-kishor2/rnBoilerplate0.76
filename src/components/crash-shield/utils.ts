@@ -9,7 +9,7 @@ export const sendCrashReport = (
   err: Error,
   isFatal: boolean,
   type: string,
-  crashId: string = createUniqueId()
+  crashId: string = createUniqueId(),
 ): void => {
   if (!err) return;
 

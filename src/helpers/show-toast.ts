@@ -28,7 +28,11 @@ export interface ShowToastOptions {
   bottomOffset?: number; // Bottom space
 }
 
-const showToast = (type: ToastType, message: string, options: ShowToastOptions = {}) => {
+const showToast = (
+  type: ToastType,
+  message: string,
+  options: ShowToastOptions = {},
+) => {
   Toast.show({
     type, // Toast type: 'success', 'error', 'info'
     position: 'bottom', // Position of the toast

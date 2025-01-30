@@ -24,7 +24,13 @@ declare global {
     | 'space-between'
     | 'space-around'
     | undefined;
-  type AlignItems = 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline' | undefined;
+  type AlignItems =
+    | 'flex-start'
+    | 'flex-end'
+    | 'center'
+    | 'stretch'
+    | 'baseline'
+    | undefined;
   type EllipsizeMode = 'head' | 'middle' | 'tail' | 'clip';
   type JustifyContent =
     | 'flex-start'
@@ -34,9 +40,19 @@ declare global {
     | 'space-around'
     | 'space-evenly'
     | undefined;
-  type FlexDirection = 'row' | 'column' | 'row-reverse' | 'column-reverse' | undefined;
+  type FlexDirection =
+    | 'row'
+    | 'column'
+    | 'row-reverse'
+    | 'column-reverse'
+    | undefined;
   type FlexWrap = 'wrap' | 'nowrap' | 'wrap-reverse' | undefined;
-  type FlexAlignType = 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline';
+  type FlexAlignType =
+    | 'flex-start'
+    | 'flex-end'
+    | 'center'
+    | 'stretch'
+    | 'baseline';
 
   // Font related style
   type FontVariant =
@@ -45,7 +61,12 @@ declare global {
     | 'lining-nums'
     | 'tabular-nums'
     | 'proportional-nums';
-  type TextDecorationStyle = 'solid' | 'double' | 'dotted' | 'dashed' | undefined;
+  type TextDecorationStyle =
+    | 'solid'
+    | 'double'
+    | 'dotted'
+    | 'dashed'
+    | undefined;
   type FontWeight =
     | 'normal'
     | 'bold'
@@ -64,7 +85,7 @@ declare global {
 
   // Animation related
 
-  type EasingFunction = {(t: number): number;};
+  type EasingFunction = {(t: number): number};
   type Easing =
     | 'linear'
     | 'ease'
@@ -161,5 +182,4 @@ declare global {
     | 'zoomOutRight';
 
   type Direction = 'normal' | 'reverse' | 'alternate' | 'alternate-reverse';
-
 }

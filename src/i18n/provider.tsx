@@ -7,13 +7,22 @@ import React, {
 } from 'react';
 import {I18nextProvider} from 'react-i18next';
 import {getLocales} from 'react-native-localize';
-import i18n, {APP_LANGUAGE_TYPE_KEY, appLanguageLocalStorage, seti18nLanguage} from './i18n';
+import i18n, {
+  APP_LANGUAGE_TYPE_KEY,
+  appLanguageLocalStorage,
+  seti18nLanguage,
+} from './i18n';
 
-export const AppLocalizationContext = createContext<IAppLocalizationContext | undefined>(undefined);
+export const AppLocalizationContext = createContext<
+  IAppLocalizationContext | undefined
+>(undefined);
 
 export const useAppLocalizationContext = () => {
   const context = useContext(AppLocalizationContext);
-  if (!context) throw Error('useAppLocalizationContext must be used inside AppLocalizationProvider');
+  if (!context)
+    throw Error(
+      'useAppLocalizationContext must be used inside AppLocalizationProvider',
+    );
   return context;
 };
 
@@ -21,16 +30,21 @@ export const AppLocalizationProvider = ({
   autoDetect = true,
   defaultLanguage = 'en',
   children,
-}: React.PropsWithChildren<{autoDetect?: boolean; defaultLanguage?: string;}>) => {
-
+}: React.PropsWithChildren<{
+  autoDetect?: boolean;
+  defaultLanguage?: string;
+}>) => {
   const deviceLang = getLocales()[0].languageCode;
 
-  const [selectedLanguageType, setSelectedLanguageType] = useState<ISelectedLangauge>('auto');
+  const [selectedLanguageType, setSelectedLanguageType] =
+    useState<ISelectedLangauge>('auto');
 
   useEffect(() => {
     const initializeLanguage = async () => {
       try {
-        const savedLangType = appLanguageLocalStorage.getString(APP_LANGUAGE_TYPE_KEY) as ISelectedLangauge;
+        const savedLangType = appLanguageLocalStorage.getString(
+          APP_LANGUAGE_TYPE_KEY,
+        ) as ISelectedLangauge;
         setSelectedLanguageType(savedLangType ?? 'auto');
       } catch (error) {
         console.error('Error loading language from storage:', error);
@@ -49,7 +63,10 @@ export const AppLocalizationProvider = ({
         seti18nLanguage(selectedLanguageType);
       }
     } catch (error) {
-      console.error('Error saving language to storage or updating i18n:', error);
+      console.error(
+        'Error saving language to storage or updating i18n:',
+        error,
+      );
     }
   }, [selectedLanguageType, deviceLang, autoDetect, defaultLanguage]);
 
@@ -65,17 +82,22 @@ export const AppLocalizationProvider = ({
 
   const appliedLanguage = useMemo(() => {
     if (selectedLanguageType === 'auto') {
-      return autoDetect ? (deviceLang as ISelectedLangauge) : (defaultLanguage as ISelectedLangauge);
+      return autoDetect
+        ? (deviceLang as ISelectedLangauge)
+        : (defaultLanguage as ISelectedLangauge);
     }
     return selectedLanguageType;
   }, [selectedLanguageType, deviceLang, autoDetect, defaultLanguage]);
 
-  const value: IAppLocalizationContext = useMemo(() => ({
-    currentLanguage: appliedLanguage,
-    selectedLanguageType,
-    setSelectedLanguageType,
-    resetLanguage,
-  }), [appliedLanguage, selectedLanguageType]);
+  const value: IAppLocalizationContext = useMemo(
+    () => ({
+      currentLanguage: appliedLanguage,
+      selectedLanguageType,
+      setSelectedLanguageType,
+      resetLanguage,
+    }),
+    [appliedLanguage, selectedLanguageType],
+  );
 
   return (
     <I18nextProvider i18n={i18n}>

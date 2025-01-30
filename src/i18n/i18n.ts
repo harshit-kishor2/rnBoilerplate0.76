@@ -15,10 +15,11 @@ export const APP_LANGUAGE_TYPE_KEY = '@app_language_type';
 export const APP_LANGUAGE_KEY = '@app_language';
 
 const APP_LANGUAGE_LOCAL_STORAGE_ID = 'app-langauge-local-storage-id';
-const APP_LANGUAGE_LOCAL_STORAGE_ENCRYPTION_KEY = 'my-random-key-for-encryption';
+const APP_LANGUAGE_LOCAL_STORAGE_ENCRYPTION_KEY =
+  'my-random-key-for-encryption';
 export const appLanguageLocalStorage: MMKV = new MMKV({
   id: APP_LANGUAGE_LOCAL_STORAGE_ID,
-  encryptionKey: APP_LANGUAGE_LOCAL_STORAGE_ENCRYPTION_KEY
+  encryptionKey: APP_LANGUAGE_LOCAL_STORAGE_ENCRYPTION_KEY,
 });
 
 export const seti18nLanguage = async (lang: string) => {
@@ -41,7 +42,6 @@ export const seti18nLanguage = async (lang: string) => {
   }
 };
 
-
 /**
  * The resources object contains the translations for each language.
  * The keys are the language codes and the values are objects containing the translations.
@@ -54,7 +54,6 @@ const resources = {
   hi: {translation: hi},
   //! Add more languages here
 };
-
 
 /**
  * A language detector that stores the user's selected language in local storage.
@@ -81,7 +80,6 @@ const useLanguageStorage: LanguageDetectorAsyncModule = {
   },
 };
 
-
 /**
  * Initialize the i18next instance with the necessary settings.
  *
@@ -91,15 +89,15 @@ i18n
   .use(useLanguageStorage) // Use the language storage detector
   .use(initReactI18next) // Use the react-i18next plugin
   .init({
-    compatibilityJSON: 'v3',  // Compatibility mode for the i18next JSON format.
+    compatibilityJSON: 'v3', // Compatibility mode for the i18next JSON format.
     fallbackLng: 'en', // The default language to fall back to if a translation is not found.
     lng: 'en', // The default language to initialize the i18next instance with.
     resources: resources,
     react: {
-      useSuspense: false,  // Whether to use the Suspense feature of React.
+      useSuspense: false, // Whether to use the Suspense feature of React.
     },
     interpolation: {
-      escapeValue: false,  // Whether to escape values when interpolating.
+      escapeValue: false, // Whether to escape values when interpolating.
     },
   });
 

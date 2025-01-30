@@ -1,7 +1,10 @@
 import {Platform, Dimensions, ScaledSize} from 'react-native';
 import DeviceInfo from 'react-native-device-info';
-import {isIphoneX, getStatusBarHeight, getBottomSpace} from 'react-native-iphone-screen-helper';
-
+import {
+  isIphoneX,
+  getStatusBarHeight,
+  getBottomSpace,
+} from 'react-native-iphone-screen-helper';
 
 //=============================
 
@@ -38,7 +41,6 @@ const ScreenFontScale: number = Screen.fontScale;
 
 //=============================
 
-
 // ! Window Constants
 
 const Window: ScaledSize = Dimensions.get('window');
@@ -72,7 +74,6 @@ const WindowScale: number = Window.scale;
 const WindowFontScale: number = Window.fontScale;
 
 //=============================
-
 
 // ! Iphone related from react-native-iphone-screen-helper library
 /**
@@ -150,7 +151,8 @@ const hasNotch: boolean = DeviceInfo.hasNotch();
  * Checks if the device has a notch but not a dynamic island.
  * @type {boolean}
  */
-const hasNotchOnly: boolean = DeviceInfo.hasNotch() && !DeviceInfo.hasDynamicIsland();
+const hasNotchOnly: boolean =
+  DeviceInfo.hasNotch() && !DeviceInfo.hasDynamicIsland();
 
 /**
  * @description
@@ -158,7 +160,6 @@ const hasNotchOnly: boolean = DeviceInfo.hasNotch() && !DeviceInfo.hasDynamicIsl
  * @type {boolean}
  */
 const hasDynamicIsland: boolean = DeviceInfo.hasDynamicIsland();
-
 
 /**
  * @description
@@ -194,7 +195,6 @@ const BUILD_VERSION: string = DeviceInfo.getVersion();
  * @type {string | number}
  */
 const BUILD_NUMBER: string | number = DeviceInfo.getBuildNumber();
-
 
 // Default the constants as an object
 const DeviceUtils = {

@@ -1,6 +1,11 @@
-
 import Assets from '@app/assets';
-import {AppFastImage, Container, KeyboardAvoidingWrapper, Padding, Spacer} from '@app/components';
+import {
+  AppFastImage,
+  Container,
+  KeyboardAvoidingWrapper,
+  Padding,
+  Spacer,
+} from '@app/components';
 import {rpHeight, rpWidth} from '@app/helpers/responsive-utils';
 import React, {useMemo} from 'react';
 import {StyleSheet} from 'react-native';
@@ -13,20 +18,20 @@ const LoginScreen: React.FC = () => {
   const styles = useMemo(() => loginScreenStyles(), []);
   return (
     <KeyboardAvoidingWrapper>
-      <Container paddingHorizontal={10} alignItems='center'>
-        <Padding vertical={rpHeight(50)} >
+      <Container paddingHorizontal={10} alignItems="center">
+        <Padding vertical={rpHeight(50)}>
           <AppFastImage
             source={Assets.image.SPLASH_IMAGE}
             style={styles.splsh_image}
           />
         </Padding>
         <LoginForm />
-        <Padding vertical={rpHeight(20)} >
+        <Padding vertical={rpHeight(20)}>
           <DontHaveAccountLink />
         </Padding>
         <ForgotPasswordLink />
         <Spacer />
-        <TermsConditionAndPrivacyPolicyLink from='LoginRoute' />
+        <TermsConditionAndPrivacyPolicyLink from="LoginRoute" />
       </Container>
     </KeyboardAvoidingWrapper>
   );
@@ -39,6 +44,6 @@ const loginScreenStyles = () =>
     splsh_image: {
       height: rpWidth(80),
       width: rpWidth(80),
-      borderRadius: rpWidth(100)
+      borderRadius: rpWidth(100),
     },
   });

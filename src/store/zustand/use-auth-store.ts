@@ -21,9 +21,8 @@ const initialState: IState = {
   isAuth: false,
 };
 
-
 // Creates a slice of the store for managing Auth state and actions.
-const createAuthSlice: StateCreator<IAuthSlice> = (set) => ({
+const createAuthSlice: StateCreator<IAuthSlice> = set => ({
   ...initialState,
   login: async () => {
     // Wait for 5 seconds before updating the state
@@ -57,7 +56,6 @@ export const usePersistAuthStore = create<IAuthSlice>()(
     {
       name: `auth-store`, // Unique name for persistent storage
       storage: createJSONStorage(() => zustandPersistStorage), // Custom persistence storage
-    }
-  )
+    },
+  ),
 );
-

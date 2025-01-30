@@ -8,10 +8,7 @@ interface IAppWebViewProps {
   onError?: (error: string) => void;
 }
 
-const AppWebView: React.FC<IAppWebViewProps> = ({
-  url,
-  onError,
-}) => {
+const AppWebView: React.FC<IAppWebViewProps> = ({url, onError}) => {
   const [loading, setLoading] = useState(true);
   const theme = useAppTheme();
   return (
@@ -21,7 +18,7 @@ const AppWebView: React.FC<IAppWebViewProps> = ({
         style={styles.webview}
         onLoadStart={() => setLoading(true)}
         onLoadEnd={() => setLoading(false)}
-        onError={(syntheticEvent) => {
+        onError={syntheticEvent => {
           const {nativeEvent} = syntheticEvent;
           onError && onError(nativeEvent.description);
         }}
@@ -31,16 +28,15 @@ const AppWebView: React.FC<IAppWebViewProps> = ({
         allowFileAccess={true}
         originWhitelist={['*']}
         javaScriptCanOpenWindowsAutomatically={true}
-      // renderLoading={() => <ActivityIndicator size="large" color={theme.colors.primary} />}
-      // startInLoadingState={true}
-      // textZoom={100}
+        // renderLoading={() => <ActivityIndicator size="large" color={theme.colors.primary} />}
+        // startInLoadingState={true}
+        // textZoom={100}
       />
-      {
-        loading &&
+      {loading && (
         <View style={styles.activity}>
           <ActivityIndicator size="large" color={theme.colors.primary} />
         </View>
-      }
+      )}
     </>
   );
 };
@@ -57,8 +53,8 @@ const styles = StyleSheet.create({
   },
   webview: {
     backgroundColor: 'transparent',
-    flex: 1
-  }
+    flex: 1,
+  },
 });
 
 export default AppWebView;

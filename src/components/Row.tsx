@@ -14,16 +14,15 @@ const Row: React.FC<RowProps> = ({
   style,
   justifyContent = 'flex-start',
   alignItems = 'center',
-  backgroundColor = 'transparent'
+  backgroundColor = 'transparent',
 }) => {
   return (
     <View
       style={[
         styles.row,
         {justifyContent, alignItems, backgroundColor},
-        style
-      ]}
-    >
+        style,
+      ]}>
       {children}
     </View>
   );

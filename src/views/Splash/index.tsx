@@ -8,7 +8,13 @@ import {usePersistAuthStore} from '@app/store/zustand/use-auth-store';
 import {useAppTheme} from '@app/theme';
 import React, {useEffect, useMemo, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import Animated, {Easing, useAnimatedStyle, useSharedValue, withRepeat, withTiming} from 'react-native-reanimated';
+import Animated, {
+  Easing,
+  useAnimatedStyle,
+  useSharedValue,
+  withRepeat,
+  withTiming,
+} from 'react-native-reanimated';
 
 const SPLASH_TIMEOUT = 5000;
 const {BUILD_VERSION, BUILD_NUMBER} = DeviceUtils;
@@ -24,10 +30,13 @@ const SplashScreen: React.FC = () => {
   const scaleValue = useSharedValue(1);
 
   React.useEffect(() => {
-    rotateValue.value = withRepeat(withTiming(360, {duration: 2000, easing: Easing.linear}), -1, false);
+    rotateValue.value = withRepeat(
+      withTiming(360, {duration: 2000, easing: Easing.linear}),
+      -1,
+      false,
+    );
     scaleValue.value = withRepeat(withTiming(1.2, {duration: 1000}), -1, true);
   }, []);
-
 
   useEffect(() => {
     const navigateAfterSplash = async () => {
@@ -40,8 +49,13 @@ const SplashScreen: React.FC = () => {
 
   useEffect(() => {
     if (isSplashEnd) {
-      const destinationRoute: keyof RootStackParamList = isAuth ? 'HomeRoute' : 'LoginRoute';
-      NavigationService.replace({routeName: destinationRoute, fromRouteName: 'SplashRoute'});
+      const destinationRoute: keyof RootStackParamList = isAuth
+        ? 'HomeRoute'
+        : 'LoginRoute';
+      NavigationService.replace({
+        routeName: destinationRoute,
+        fromRouteName: 'SplashRoute',
+      });
     }
   }, [isSplashEnd, isAuth]);
 
@@ -80,16 +94,16 @@ const splashScreenStyles = () =>
   StyleSheet.create({
     container: {
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
     },
     version: {
       position: 'absolute',
       bottom: 15,
-      right: 25
+      right: 25,
     },
     splsh_image: {
       height: rpWidth(200),
       width: rpWidth(200),
-      borderRadius: rpWidth(100)
-    }
+      borderRadius: rpWidth(100),
+    },
   });

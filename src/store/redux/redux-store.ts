@@ -1,6 +1,16 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import {MMKV} from 'react-native-mmkv';
-import {FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE, Storage} from 'redux-persist';
+import {
+  FLUSH,
+  PAUSE,
+  PERSIST,
+  persistReducer,
+  persistStore,
+  PURGE,
+  REGISTER,
+  REHYDRATE,
+  Storage,
+} from 'redux-persist';
 
 import {demoReducer} from './slices/demo.slice';
 
@@ -12,7 +22,7 @@ export const allCombineReducers = combineReducers({
 
 export const reduxLocalStorage: MMKV = new MMKV({
   id: `redux-local-storage`,
-  encryptionKey: 'reduxLocalStorageEncryptionKey'
+  encryptionKey: 'reduxLocalStorageEncryptionKey',
 });
 
 export const reduxPersistStorage: Storage = {
@@ -20,11 +30,11 @@ export const reduxPersistStorage: Storage = {
     reduxLocalStorage.set(key, value);
     return Promise.resolve(true);
   },
-  getItem: (key) => {
+  getItem: key => {
     const value = reduxLocalStorage.getString(key);
     return Promise.resolve(value);
   },
-  removeItem: (key) => {
+  removeItem: key => {
     reduxLocalStorage.delete(key);
     return Promise.resolve();
   },
@@ -47,12 +57,10 @@ const persistConfig = {
 // all reducers are persisted here
 const persistedReducer = persistReducer(persistConfig, allCombineReducers);
 
-
 // Common middlewares
 export const middlewares = [
   //! you can put your middlewares here like redux-logger
 ];
-
 
 export const reduxStore = configureStore({
   reducer: persistedReducer,
@@ -71,7 +79,7 @@ export const reduxStore = configureStore({
    * The middleware array is concatenated with the `middlewares` array, which is an array
    * of middleware functions that are defined elsewhere in the codebase.
    */
-  middleware: (getDefaultMiddleware) =>
+  middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],

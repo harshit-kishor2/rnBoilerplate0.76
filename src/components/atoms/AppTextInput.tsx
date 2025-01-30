@@ -131,8 +131,10 @@ export interface IAppTextInputProps extends RNTextInputProps {
 
 const AnimatedTextInput = Animated.createAnimatedComponent(RNTextInput);
 
-const AppTextInputWithoutRef = (props: IAppTextInputProps, ref?: React.Ref<RNTextInput>) => {
-
+const AppTextInputWithoutRef = (
+  props: IAppTextInputProps,
+  ref?: React.Ref<RNTextInput>,
+) => {
   const {
     backgroundColor = 'white',
     borderColor = 'black',
@@ -177,7 +179,7 @@ const AppTextInputWithoutRef = (props: IAppTextInputProps, ref?: React.Ref<RNTex
       onMouseEnter?.(event);
       hovered.value = true;
     },
-    [hovered, onMouseEnter]
+    [hovered, onMouseEnter],
   );
 
   const handleMouseLeave = useCallback(
@@ -185,7 +187,7 @@ const AppTextInputWithoutRef = (props: IAppTextInputProps, ref?: React.Ref<RNTex
       onMouseLeave?.(event);
       hovered.value = false;
     },
-    [hovered, onMouseLeave]
+    [hovered, onMouseLeave],
   );
 
   const handleFocus = useCallback(
@@ -193,7 +195,7 @@ const AppTextInputWithoutRef = (props: IAppTextInputProps, ref?: React.Ref<RNTex
       onFocus?.(event);
       focused.value = true;
     },
-    [focused, onFocus]
+    [focused, onFocus],
   );
 
   const handleBlur = useCallback(
@@ -201,7 +203,7 @@ const AppTextInputWithoutRef = (props: IAppTextInputProps, ref?: React.Ref<RNTex
       onBlur?.(event);
       focused.value = false;
     },
-    [focused, onBlur]
+    [focused, onBlur],
   );
 
   useDerivedValue(() => {
@@ -216,8 +218,6 @@ const AppTextInputWithoutRef = (props: IAppTextInputProps, ref?: React.Ref<RNTex
     const isInputFilled = (rest?.value?.length ?? 0) > 0;
     return isFocused || isInputFilled;
   });
-
-
 
   useDerivedValue(() => {
     activeAnimation.value = withTiming(active.value ? 1 : 0, {
@@ -313,13 +313,12 @@ const AppTextInputWithoutRef = (props: IAppTextInputProps, ref?: React.Ref<RNTex
   }, [variant, leftIcon]);
 
   const animatedLabel = useAnimatedStyle(() => {
-
     const fontSizeValue = interpolate(activeAnimation.value, [0, 1], [16, 12]);
 
     const colorValue = interpolateColor(
       focusAnimation.value,
       [0, 1],
-      [labelColor, onFocusLabelColor]
+      [labelColor, onFocusLabelColor],
     );
     let translateYValue = 0;
     if (variant === 'filled') {
@@ -332,10 +331,7 @@ const AppTextInputWithoutRef = (props: IAppTextInputProps, ref?: React.Ref<RNTex
     const translateY = interpolate(
       activeAnimation.value,
       [0, 1],
-      [
-        0,
-        translateYValue,
-      ]
+      [0, translateYValue],
     );
 
     return {
@@ -357,7 +353,7 @@ const AppTextInputWithoutRef = (props: IAppTextInputProps, ref?: React.Ref<RNTex
       backgroundColor: interpolateColor(
         focusAnimation.value,
         [0, 1],
-        [borderColor, onFocusBorderColor]
+        [borderColor, onFocusBorderColor],
       ),
       transform: [{scaleX: focusAnimation.value}],
     };
@@ -368,7 +364,7 @@ const AppTextInputWithoutRef = (props: IAppTextInputProps, ref?: React.Ref<RNTex
       backgroundColor: interpolateColor(
         activeAnimation.value,
         [0, 1],
-        [backgroundColor, outlineGapColor]
+        [backgroundColor, outlineGapColor],
       ),
       transform: [{scaleX: activeAnimation.value}],
     };
@@ -459,7 +455,9 @@ const AppTextInputWithoutRef = (props: IAppTextInputProps, ref?: React.Ref<RNTex
 };
 
 const AppTextInput: React.FC<IAppTextInputProps> = React.memo(
-  React.forwardRef((props: IAppTextInputProps, ref?: React.Ref<RNTextInput>) => AppTextInputWithoutRef(props, ref))
+  React.forwardRef((props: IAppTextInputProps, ref?: React.Ref<RNTextInput>) =>
+    AppTextInputWithoutRef(props, ref),
+  ),
 );
 
 export default AppTextInput;
@@ -468,7 +466,7 @@ const inputStyles = (theme: IAppTheme) =>
   StyleSheet.create({
     container: {
       width: '100%',
-      paddingVertical: 5
+      paddingVertical: 5,
     },
     errorView: {
       marginHorizontal: 16,
@@ -529,8 +527,6 @@ const inputStyles = (theme: IAppTheme) =>
       start: 0,
     },
   });
-
-
 
 /***
       <AppTextInput

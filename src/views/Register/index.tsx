@@ -1,6 +1,10 @@
-
 import Assets from '@app/assets';
-import {AppFastImage, Container, KeyboardAvoidingWrapper, Padding} from '@app/components';
+import {
+  AppFastImage,
+  Container,
+  KeyboardAvoidingWrapper,
+  Padding,
+} from '@app/components';
 import {rpWidth} from '@app/helpers/responsive-utils';
 import {useAppTheme} from '@app/theme';
 import React, {useMemo} from 'react';
@@ -14,7 +18,7 @@ const RegisterScreen: React.FC = () => {
 
   return (
     <KeyboardAvoidingWrapper>
-      <Container paddingHorizontal={10} alignItems='center'>
+      <Container paddingHorizontal={10} alignItems="center">
         <Padding vertical={rpWidth(50)}>
           <AppFastImage
             source={Assets.image.SPLASH_IMAGE}
@@ -37,6 +41,6 @@ const registerScreenStyles = () =>
     splsh_image: {
       height: rpWidth(80),
       width: rpWidth(80),
-      borderRadius: rpWidth(100)
-    }
+      borderRadius: rpWidth(100),
+    },
   });

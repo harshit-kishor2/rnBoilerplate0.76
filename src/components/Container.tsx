@@ -1,17 +1,23 @@
 import {useAppTheme} from '@app/theme';
 import React, {ReactNode} from 'react';
-import {DimensionValue, StatusBar, StyleSheet, View, ViewStyle} from 'react-native';
+import {
+  DimensionValue,
+  StatusBar,
+  StyleSheet,
+  View,
+  ViewStyle,
+} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 interface ContainerProps {
-  useSafeArea?: boolean,
-  children: ReactNode,
-  backgroundColor?: string,
-  statusBarColor?: string,
-  padding?: DimensionValue,
-  paddingHorizontal?: DimensionValue,
-  margin?: DimensionValue,
-  alignItems?: AlignItems,
+  useSafeArea?: boolean;
+  children: ReactNode;
+  backgroundColor?: string;
+  statusBarColor?: string;
+  padding?: DimensionValue;
+  paddingHorizontal?: DimensionValue;
+  margin?: DimensionValue;
+  alignItems?: AlignItems;
   style?: ViewStyle;
 }
 const Container: React.FC<ContainerProps> = ({
@@ -23,24 +29,25 @@ const Container: React.FC<ContainerProps> = ({
   paddingHorizontal,
   margin = 0,
   alignItems,
-  style
+  style,
 }: ContainerProps) => {
   const theme = useAppTheme();
   // Change bar style according to theme
   const barStyle = theme.themeType == 'dark' ? 'light-content' : 'dark-content';
   const ContainerTag = useSafeArea ? SafeAreaView : View;
   return (
-    <ContainerTag style={StyleSheet.flatten([
-      styles.container,
-      {
-        backgroundColor: backgroundColor ?? theme.colors.background,
-        padding,
-        margin,
-        alignItems: alignItems,
-        paddingHorizontal: paddingHorizontal,
-      },
-      style
-    ])}>
+    <ContainerTag
+      style={StyleSheet.flatten([
+        styles.container,
+        {
+          backgroundColor: backgroundColor ?? theme.colors.background,
+          padding,
+          margin,
+          alignItems: alignItems,
+          paddingHorizontal: paddingHorizontal,
+        },
+        style,
+      ])}>
       <StatusBar
         barStyle={barStyle}
         backgroundColor={statusBarColor ?? theme.colors.background}
@@ -55,5 +62,5 @@ export default Container;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  }
+  },
 });

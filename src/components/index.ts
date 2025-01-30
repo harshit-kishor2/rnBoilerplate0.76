@@ -19,7 +19,6 @@ import {AppFormTextInput} from './atoms/AppFormTextInput';
 import Padding from './Padding';
 import Divider from './Divider';
 
-
 export {
   AppText,
   AppButton,
@@ -40,5 +39,5 @@ export {
   SizedBox,
   KeyboardAvoidingWrapper,
   Padding,
-  Divider
+  Divider,
 };

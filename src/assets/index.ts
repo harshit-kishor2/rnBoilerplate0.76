@@ -21,7 +21,6 @@ const FontConst = {
   },
 };
 
-
 //! ==============================================================================
 // Consolidated export for easier access
 const Assets = {

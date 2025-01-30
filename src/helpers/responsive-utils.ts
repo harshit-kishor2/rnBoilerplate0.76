@@ -10,21 +10,24 @@ const guidelineBaseWidth = 375;
 const guidelineBaseHeight = 812;
 
 // Determine short and long dimensions based on orientation
-const [shortDimension, longDimension] = width < height ? [width, height] : [height, width];
+const [shortDimension, longDimension] =
+  width < height ? [width, height] : [height, width];
 
 /**
  * Scale size based on screen width relative to the design guideline width.
  * @param {number} size - Size to scale.
  * @returns {number} Scaled size.
  */
-export const rpWidth = (size: number): number => Math.max(0, (shortDimension / guidelineBaseWidth) * size);
+export const rpWidth = (size: number): number =>
+  Math.max(0, (shortDimension / guidelineBaseWidth) * size);
 
 /**
  * Scale size based on screen height relative to the design guideline height.
  * @param {number} size - Size to scale.
  * @returns {number} Scaled size.
  */
-export const rpHeight = (size: number): number => Math.max(0, (longDimension / guidelineBaseHeight) * size);
+export const rpHeight = (size: number): number =>
+  Math.max(0, (longDimension / guidelineBaseHeight) * size);
 
 /**
  * Moderately scale size based on screen width.
@@ -49,15 +52,16 @@ export const rpHeightModerate = (size: number, factor: number = 0.5): number =>
  * @param {number} percentage - Percentage of the height (e.g., 50 for 50%).
  * @returns {number} Scaled size.
  */
-export const rpHeightPercentage = (percentage: number): number => (longDimension * percentage) / 100;
+export const rpHeightPercentage = (percentage: number): number =>
+  (longDimension * percentage) / 100;
 
 /**
  * Scale size as a percentage of the screen width.
  * @param {number} percentage - Percentage of the width (e.g., 50 for 50%).
  * @returns {number} Scaled size.
  */
-export const rpWidthPercentage = (percentage: number): number => (shortDimension * percentage) / 100;
-
+export const rpWidthPercentage = (percentage: number): number =>
+  (shortDimension * percentage) / 100;
 
 //! From react-native-responsive-fontsize
 /**
@@ -72,7 +76,8 @@ export const rpFont = (size: number): number => RFValue(size, longDimension);
  * @param {number} percentage - Font size as a percentage (e.g., 2.5 for 2.5%).
  * @returns {number} Scaled font size.
  */
-export const rpFontPercentage = (percentage: number): number => RFPercentage(percentage);
+export const rpFontPercentage = (percentage: number): number =>
+  RFPercentage(percentage);
 
 //! From react-native-size-matters
 /**

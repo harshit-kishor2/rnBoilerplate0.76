@@ -12,7 +12,10 @@ dayjs.extend(duration);
 dayjs.extend(relativeTime);
 
 // Format a date to a readable string (e.g., 'January 1, 2024')
-const formatDate = (date: string | Date, format: string = 'MMMM D, YYYY'): string => {
+const formatDate = (
+  date: string | Date,
+  format: string = 'MMMM D, YYYY',
+): string => {
   return dayjs(date).format(format);
 };
 
@@ -22,20 +25,31 @@ const getCurrentTimeInZone = (tz: string = 'UTC'): string => {
 };
 
 // Add time to a date (e.g., add 5 days)
-const addTime = (date: string | Date, value: number, unit: dayjs.ManipulateType = 'day'): string => {
+const addTime = (
+  date: string | Date,
+  value: number,
+  unit: dayjs.ManipulateType = 'day',
+): string => {
   return dayjs(date).add(value, unit).format();
 };
 
 // Subtract time from a date (e.g., subtract 2 hours)
-const subtractTime = (date: string | Date, value: number, unit: dayjs.ManipulateType = 'hour'): string => {
+const subtractTime = (
+  date: string | Date,
+  value: number,
+  unit: dayjs.ManipulateType = 'hour',
+): string => {
   return dayjs(date).subtract(value, unit).format();
 };
 
 // Calculate the difference between two dates in a specific unit (e.g., days)
-const getDifference = (date1: string | Date, date2: string | Date, unit: dayjs.ManipulateType = 'day'): number => {
+const getDifference = (
+  date1: string | Date,
+  date2: string | Date,
+  unit: dayjs.ManipulateType = 'day',
+): number => {
   return dayjs(date1).diff(dayjs(date2), unit);
 };
-
 
 // Get the relative time from now (e.g., '3 days ago', 'in 5 minutes')
 const getRelativeTimeFromNow = (date: string | Date): string => {
@@ -76,7 +90,6 @@ const startOfDay = (date: string | Date): string => {
 const endOfDay = (date: string | Date): string => {
   return dayjs(date).endOf('day').format();
 };
-
 
 const TimeUtils = {
   formatDate,

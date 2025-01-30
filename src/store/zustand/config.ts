@@ -1,13 +1,12 @@
 import {MMKV} from 'react-native-mmkv';
 import {useCounterStore} from './use-counter-store';
 
-
 /**
  * Initialize MMKV instance for Zustand storage.
  */
 const zustandLocalStorage = new MMKV({
   id: 'zustand-local-storage',
-  encryptionKey: 'zustandLocalStorageEncryptionKey'
+  encryptionKey: 'zustandLocalStorageEncryptionKey',
 });
 
 /**

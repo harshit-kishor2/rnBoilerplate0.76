@@ -2,19 +2,19 @@ import React, {ReactNode, useRef, useState} from 'react';
 import {ScrollView, ScrollViewProps, StyleSheet, View} from 'react-native';
 import {useAppTheme} from '@app/theme';
 import AppVectorIcon, {IconType} from './AppVectorIcon';
-import {useAnimatedStyle, withRepeat, withSpring} from 'react-native-reanimated';  // Import necessary reanimated hooks
+import {
+  useAnimatedStyle,
+  withRepeat,
+  withSpring,
+} from 'react-native-reanimated'; // Import necessary reanimated hooks
 
 interface AppScrollViewProps extends ScrollViewProps {
   children?: ReactNode | ReactNode[];
   enableScrollToTop?: boolean;
 }
 
-const AppScrollView: React.FC<AppScrollViewProps> = (props) => {
-  const {
-    children,
-    enableScrollToTop,
-    ...rest
-  } = props;
+const AppScrollView: React.FC<AppScrollViewProps> = props => {
+  const {children, enableScrollToTop, ...rest} = props;
   const theme = useAppTheme();
   const [isMove2TopEnable, setIsMove2TopEnable] = useState(false);
 
@@ -41,7 +41,7 @@ const AppScrollView: React.FC<AppScrollViewProps> = (props) => {
   return (
     <>
       <ScrollView
-        onScroll={(event) => {
+        onScroll={event => {
           const offsetY = event.nativeEvent.contentOffset.y;
           setIsMove2TopEnable(offsetY > 1000);
         }}
@@ -53,8 +53,7 @@ const AppScrollView: React.FC<AppScrollViewProps> = (props) => {
         style={{flex: 1}}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
-        {...rest}
-      >
+        {...rest}>
         {children}
       </ScrollView>
 

@@ -1,8 +1,4 @@
-import {
-  configureFonts,
-  MD3DarkTheme,
-  MD3LightTheme,
-} from 'react-native-paper';
+import {configureFonts, MD3DarkTheme, MD3LightTheme} from 'react-native-paper';
 import {MD3Type} from 'react-native-paper/lib/typescript/types';
 
 const CommonColorConst = {
@@ -53,7 +49,7 @@ export const lightTheme = {
   // Specify custom property in nested object
   myRandomProperty: 'Light Mode',
   fonts: configureFonts({
-    config: fontConfig
+    config: fontConfig,
   }),
   colors: {
     ...MD3LightTheme.colors,
@@ -103,16 +99,14 @@ export const lightTheme = {
       level5: 'rgba(0, 0, 0, 0.5)',
     },
   },
-
 };
-
 
 export const darkTheme = {
   ...MD3DarkTheme,
   themeType: 'dark',
   myRandomProperty: 'Dark Mode',
   fonts: configureFonts({
-    config: fontConfig
+    config: fontConfig,
   }),
   colors: {
     ...MD3DarkTheme.colors,

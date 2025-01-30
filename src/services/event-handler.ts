@@ -14,7 +14,7 @@ class EventEmitter {
   unsubscribe<T>(eventName: EventName, handler: EventHandler<T>): void {
     if (this.eventHandlers[eventName]) {
       this.eventHandlers[eventName] = this.eventHandlers[eventName].filter(
-        existingHandler => existingHandler !== handler
+        existingHandler => existingHandler !== handler,
       );
     }
   }

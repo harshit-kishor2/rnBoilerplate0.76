@@ -20,7 +20,7 @@ const smallFirstLetter = str => {
 
 // Create screen folder
 const screenFolderName = capitalizeFirstLetter(folderName);
-fs.mkdir(`../src/views/${screenFolderName}`, { recursive: true }, err => {
+fs.mkdir(`../src/views/${screenFolderName}`, {recursive: true}, err => {
   if (err) throw err;
   console.debug(`Folder ${screenFolderName} created successfully`);
 
@@ -65,7 +65,7 @@ const ${styleFunctionName} = (theme: IAppTheme) =>
     errWrite => {
       if (errWrite) throw errWrite;
       console.log(`index.tsx file created successfully in ${screenFolderName}`);
-    }
+    },
   );
 
   // Append export to index.ts

@@ -18,8 +18,7 @@ import Animated, {
 import AppText from './AppText';
 import {useAppTheme} from '@app/theme';
 
-const AnimatedButtonComponent =
-  Animated.createAnimatedComponent(Pressable);
+const AnimatedButtonComponent = Animated.createAnimatedComponent(Pressable);
 
 interface ExtraButtonProps {
   buttonContainerStyle?: StyleProp<ViewStyle>;
@@ -73,10 +72,10 @@ export const AnimatedTouchableOpacity = React.memo(
         {children}
       </AnimatedButtonComponent>
     );
-  }
+  },
 );
 
-const AppButton: React.FC<ButtonProps> = (props) => {
+const AppButton: React.FC<ButtonProps> = props => {
   const {
     buttonContainerStyle,
     title,
@@ -102,17 +101,24 @@ const AppButton: React.FC<ButtonProps> = (props) => {
         styles.buttonContainer,
         buttonContainerStyle,
         {
-          backgroundColor: outlined ? 'transparent' : (backgroundColor ?? theme.colors.primary),
+          backgroundColor: outlined
+            ? 'transparent'
+            : backgroundColor ?? theme.colors.primary,
           borderColor: backgroundColor ?? theme.colors.primary,
           borderWidth: outlined ? 1 : 0,
           opacity: disabled ? 0.6 : 1,
-        }]}
+        },
+      ]}
       disabled={disabled}
       {...rest}>
       <View style={[styles.titleContainer, titleContainerStyle]}>
         {loading && <ActivityIndicator size="small" />}
         {left}
-        {title && <AppText style={StyleSheet.flatten([styles.titleStyle, titleStyle])}>{title}</AppText>}
+        {title && (
+          <AppText style={StyleSheet.flatten([styles.titleStyle, titleStyle])}>
+            {title}
+          </AppText>
+        )}
         {right}
       </View>
     </AnimatedTouchableOpacity>
@@ -121,21 +127,22 @@ const AppButton: React.FC<ButtonProps> = (props) => {
 
 export default AppButton;
 
-const createStyles = (theme: IAppTheme) => StyleSheet.create({
-  buttonContainer: {
-    alignItems: 'center',
-    borderRadius: 60,
-    height: 50,
-    width: '100%',
-  },
-  titleContainer: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    height: '100%',
-    justifyContent: 'center',
-    width: '100%',
-  },
-  titleStyle: {
-    color: theme.colors.text,
-  },
-});
+const createStyles = (theme: IAppTheme) =>
+  StyleSheet.create({
+    buttonContainer: {
+      alignItems: 'center',
+      borderRadius: 60,
+      height: 50,
+      width: '100%',
+    },
+    titleContainer: {
+      alignItems: 'center',
+      flexDirection: 'row',
+      height: '100%',
+      justifyContent: 'center',
+      width: '100%',
+    },
+    titleStyle: {
+      color: theme.colors.text,
+    },
+  });

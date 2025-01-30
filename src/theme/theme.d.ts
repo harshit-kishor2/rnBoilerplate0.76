@@ -31,4 +31,3 @@ declare global {
     children: React.ReactNode;
   }
 }
-

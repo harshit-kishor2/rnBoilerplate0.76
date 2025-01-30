@@ -6,7 +6,9 @@ import React from 'react';
 const ForgotPasswordLink: React.FC = () => {
   const translate = useAppTranslation();
   const onForgotPasswordPress = () => {
-    showToast('info', ToastMessageConst.UNDER_CONSTRUCTION, {text2: ToastMessageConst.UNDER_CONSTRUCTION_MSG});
+    showToast('info', ToastMessageConst.UNDER_CONSTRUCTION, {
+      text2: ToastMessageConst.UNDER_CONSTRUCTION_MSG,
+    });
     // navigation.navigate('ForgotPasswordRoute', {from: 'LoginRoute'})
   };
 

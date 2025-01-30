@@ -1,4 +1,9 @@
-import {AppButton, AppFormTextInput, AppVectorIcon, SizedBox} from '@app/components';
+import {
+  AppButton,
+  AppFormTextInput,
+  AppVectorIcon,
+  SizedBox,
+} from '@app/components';
 import {IconType} from '@app/components/atoms/AppVectorIcon';
 import {consoleLog} from '@app/helpers/logger';
 import {rpHeight} from '@app/helpers/responsive-utils';
@@ -8,7 +13,12 @@ import {useAppNavigation} from '@app/navigation/hooks';
 import {usePersistAuthStore} from '@app/store/zustand/use-auth-store';
 import {zodResolver} from '@hookform/resolvers/zod';
 import React from 'react';
-import {FormProvider, SubmitErrorHandler, SubmitHandler, useForm} from 'react-hook-form';
+import {
+  FormProvider,
+  SubmitErrorHandler,
+  SubmitHandler,
+  useForm,
+} from 'react-hook-form';
 
 const LoginForm = () => {
   const {login} = usePersistAuthStore();
@@ -19,13 +29,17 @@ const LoginForm = () => {
     resolver: zodResolver(LoginSchema),
   });
 
-  const onLoginSubmitHandler: SubmitHandler<LoginFormData> = (data: LoginFormData) => {
+  const onLoginSubmitHandler: SubmitHandler<LoginFormData> = (
+    data: LoginFormData,
+  ) => {
     login(data).then(() => {
       navigation.replace('HomeRoute', {from: 'LoginRoute'});
     });
   };
 
-  const onLoginSubmitErrorHandler: SubmitErrorHandler<LoginFormData> = (errors: any) => {
+  const onLoginSubmitErrorHandler: SubmitErrorHandler<LoginFormData> = (
+    errors: any,
+  ) => {
     consoleLog('Formik error====>', errors);
   };
 
@@ -37,22 +51,30 @@ const LoginForm = () => {
           label="Email"
           placeholder="jon.doe@email.com"
           keyboardType="email-address"
-          rightIcon={<AppVectorIcon type={IconType.MaterialIcons} name="mail" />}
+          rightIcon={
+            <AppVectorIcon type={IconType.MaterialIcons} name="mail" />
+          }
         />
         <AppFormTextInput
           name="password"
           label="Password"
           placeholder="Enter your password"
           keyboardType="email-address"
-          rightIcon={<AppVectorIcon type={IconType.MaterialIcons} name="password" />}
-          keyboardAppearance='default'
-          returnKeyType='next'
+          rightIcon={
+            <AppVectorIcon type={IconType.MaterialIcons} name="password" />
+          }
+          keyboardAppearance="default"
+          returnKeyType="next"
         />
       </FormProvider>
       <SizedBox height={rpHeight(20)} />
       <AppButton
-        onPress={methods.handleSubmit(onLoginSubmitHandler, onLoginSubmitErrorHandler)}
-        title={translate('login_screen.login')} />
+        onPress={methods.handleSubmit(
+          onLoginSubmitHandler,
+          onLoginSubmitErrorHandler,
+        )}
+        title={translate('login_screen.login')}
+      />
     </>
   );
 };

@@ -1,4 +1,3 @@
-
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {reduxStore} from './redux-store';
 
@@ -20,7 +19,7 @@ export enum LoadingStatus {
   IDLE = 'IDLE',
   PENDING = 'PENDING',
   FULLFILLED = 'FULLFILLED',
-  REJECTED = 'REJECTED'
+  REJECTED = 'REJECTED',
 }
 
 /**

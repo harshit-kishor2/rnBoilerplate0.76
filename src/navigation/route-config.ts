@@ -5,14 +5,17 @@ import {
   SettingScreen,
   WebviewScreen,
   SplashScreen,
-  RegisterScreen
+  RegisterScreen,
 } from '@app/views';
-import {CardStyleInterpolators, type StackNavigationOptions} from '@react-navigation/stack';
+import {
+  CardStyleInterpolators,
+  type StackNavigationOptions,
+} from '@react-navigation/stack';
 
 // Make changes here for global screen options in stack
 export const stackScreenOptions: StackNavigationOptions = {
   headerShown: false,
-  cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
+  cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
 };
 
 // Make changes here for modal screen options in stack
@@ -24,10 +27,6 @@ export const modalScreenOptions: StackNavigationOptions = {
   cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
 };
 
-
-
-
-
 // Put all Pre Auth routes and respected screen here
 export const preAuthRoutes: RootStackRoutesType[] = [
   {
@@ -37,7 +36,7 @@ export const preAuthRoutes: RootStackRoutesType[] = [
   {
     name: 'RegisterRoute',
     component: RegisterScreen,
-  }
+  },
 ];
 
 // Put all Post Auth routes and respected screen here

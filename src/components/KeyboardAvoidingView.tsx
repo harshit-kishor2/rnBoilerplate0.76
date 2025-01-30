@@ -24,8 +24,7 @@ const KeyboardAvoidingWrapper: React.FC<IKeyboardAvoidingWrapperProps> = ({
       extraHeight={extraHeight}
       extraScrollHeight={extraScrollHeight}
       enableOnAndroid={true}
-      keyboardShouldPersistTaps="handled"
-    >
+      keyboardShouldPersistTaps="handled">
       {children}
     </KeyboardAwareScrollView>
   );

@@ -22,12 +22,9 @@ const WebViewScreen: React.FC = () => {
   return (
     <Container>
       <AppHeader title={getTitle(route.params?.page) ?? ''} />
-      <AppWebView
-        url='https://google.com'
-      />
+      <AppWebView url="https://google.com" />
     </Container>
   );
 };
-
 
 export default WebViewScreen;

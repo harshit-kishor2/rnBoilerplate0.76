@@ -14,16 +14,15 @@ const Column: React.FC<ColumnProps> = ({
   style,
   justifyContent = 'flex-start',
   alignItems = 'center',
-  backgroundColor = 'transparent'
+  backgroundColor = 'transparent',
 }) => {
   return (
     <View
       style={[
         styles.column,
         {justifyContent, alignItems, backgroundColor},
-        style
-      ]}
-    >
+        style,
+      ]}>
       {children}
     </View>
   );

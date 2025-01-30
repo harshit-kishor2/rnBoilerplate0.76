@@ -14,9 +14,7 @@ const AlreadyHaveAccountLink: React.FC = () => {
   };
   return (
     <Row>
-      <AppText
-        text={translate('register_screen.already_have_account')}
-      />
+      <AppText text={translate('register_screen.already_have_account')} />
       <SizedBox width={rpWidth(5)} />
       <AppText
         onPress={onLoginPress}

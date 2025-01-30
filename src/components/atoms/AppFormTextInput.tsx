@@ -1,25 +1,24 @@
 import React from 'react';
-import {useController, UseControllerProps, useFormContext} from 'react-hook-form';
+import {
+  useController,
+  UseControllerProps,
+  useFormContext,
+} from 'react-hook-form';
 import AppTextInput, {IAppTextInputProps} from './AppTextInput';
 
 interface TextInputProps extends IAppTextInputProps, UseControllerProps {
   name: string;
   defaultValue?: string;
 }
-const ControlledInput: React.FC<TextInputProps> = (props) => {
+const ControlledInput: React.FC<TextInputProps> = props => {
   const {formState} = useFormContext();
-  const {
-    name,
-    rules,
-    defaultValue,
-    ...inputProps
-  } = props;
+  const {name, rules, defaultValue, ...inputProps} = props;
   const {field} = useController({name, rules, defaultValue});
   const hasError = Boolean(formState?.errors[name]);
   return (
     <AppTextInput
       error={hasError ? formState.errors[name]?.message?.toString() : ''}
-      variant='outlined'
+      variant="outlined"
       autoCapitalize="none"
       textAlign="left"
       onChangeText={field.onChange}
@@ -31,8 +30,7 @@ const ControlledInput: React.FC<TextInputProps> = (props) => {
   );
 };
 
-export const AppFormTextInput: React.FC<TextInputProps> = (props) => {
-
+export const AppFormTextInput: React.FC<TextInputProps> = props => {
   const formContext = useFormContext();
 
   if (!formContext) {
@@ -45,5 +43,4 @@ export const AppFormTextInput: React.FC<TextInputProps> = (props) => {
   }
 
   return <ControlledInput {...props} />;
-
 };
