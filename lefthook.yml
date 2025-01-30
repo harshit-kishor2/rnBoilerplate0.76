@@ -39,10 +39,10 @@ pre-commit:
   commands:
     eslint:
       glob: '*.{js,ts,jsx,tsx}'
-      run: yarn eslint --fix . && git add {staged_files}
+      run: yarn eslint --fix {staged_files} && git add {staged_files}
     prettier:
       glob: '*.{js,jsx,ts,tsx,json,md,yml}'
-      run: yarn prettier --config .prettierrc.js --write . && git add {staged_files}
+      run: yarn prettier --config .prettierrc.js --write {staged_files} && git add {staged_files}
     tsc:
       run: yarn tsc --noEmit
 
