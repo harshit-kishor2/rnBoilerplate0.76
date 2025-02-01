@@ -1,3 +1,4 @@
+import {UserRoles} from "@app/helpers/enums";
 import {
   ParamListBase,
   RouteConfig,
@@ -11,7 +12,7 @@ import {
 
 type CustomRouteParams = {
   type?: "modal" | "stack";
-  roles?: IUserRole[];
+  roles?: UserRoles[];
 };
 
 export type SecureStackRouteType<ParamList extends ParamListBase> = RouteConfig<
@@ -24,16 +25,32 @@ export type SecureStackRouteType<ParamList extends ParamListBase> = RouteConfig<
 > &
   CustomRouteParams;
 
+export type RouteName = keyof RootStackParamList;
+
+export enum RouteConst {
+  SplashRoute = "SplashRoute",
+  LoginRoute = "LoginRoute",
+  RegisterRoute = "RegisterRoute",
+  HomeRoute = "HomeRoute",
+  BottomTabRoute = "BottomTabRoute",
+  NetworkLoggerRoute = "NetworkLoggerRoute",
+  SettingRoute = "SettingRoute",
+  WebViewRoute = "WebViewRoute",
+  // Add all other routes here
+}
+
 //  All Screen Route
 export type RootStackParamList = {
-  SplashRoute: undefined;
-  WebViewRoute:
+  [RouteConst.SplashRoute]: undefined;
+  [RouteConst.WebViewRoute]:
     | {webUrl?: string; from?: keyof RootStackParamList; page?: IWebViewPages}
     | undefined;
-  BottomTabRoute: {from?: keyof RootStackParamList} | undefined;
-  LoginRoute: {from?: keyof RootStackParamList} | undefined;
-  RegisterRoute: {from?: keyof RootStackParamList} | undefined;
-  HomeRoute: {from?: keyof RootStackParamList} | undefined;
-  NetworkLoggerRoute: {from?: keyof RootStackParamList} | undefined;
-  SettingRoute: {from?: keyof RootStackParamList} | undefined;
+  [RouteConst.BottomTabRoute]: {from?: keyof RootStackParamList} | undefined;
+  [RouteConst.LoginRoute]: {from?: keyof RootStackParamList} | undefined;
+  [RouteConst.RegisterRoute]: {from?: keyof RootStackParamList} | undefined;
+  [RouteConst.HomeRoute]: {from?: keyof RootStackParamList} | undefined;
+  [RouteConst.NetworkLoggerRoute]:
+    | {from?: keyof RootStackParamList}
+    | undefined;
+  [RouteConst.SettingRoute]: {from?: keyof RootStackParamList} | undefined;
 };

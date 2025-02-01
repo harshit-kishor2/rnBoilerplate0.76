@@ -10,6 +10,7 @@ import {rpHeight} from "@app/helpers/responsive-utils";
 import {LoginSchema} from "@app/helpers/validation-schema";
 import {useAppTranslation} from "@app/i18n";
 import {useAppNavigation} from "@app/navigation/hooks";
+import {RouteConst} from "@app/navigation/types";
 import {usePersistAuthStore} from "@app/store/zustand/use-auth-store";
 import {zodResolver} from "@hookform/resolvers/zod";
 import React from "react";
@@ -22,7 +23,7 @@ import {
 
 const LoginForm = () => {
   const {login} = usePersistAuthStore();
-  const navigation = useAppNavigation("LoginRoute");
+  const navigation = useAppNavigation(RouteConst.LoginRoute);
   const translate = useAppTranslation();
   const {...methods} = useForm<LoginFormData>({
     mode: "onChange",
@@ -33,7 +34,7 @@ const LoginForm = () => {
     data: LoginFormData
   ) => {
     login(data).then(() => {
-      navigation.replace("HomeRoute", {from: "LoginRoute"});
+      navigation.replace(RouteConst.HomeRoute, {from: RouteConst.LoginRoute});
     });
   };
 

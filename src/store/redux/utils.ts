@@ -15,13 +15,6 @@ export type RootState = ReturnType<typeof reduxStore.getState>;
  */
 export type AppDispatch = typeof reduxStore.dispatch;
 
-export enum LoadingStatus {
-  IDLE = "IDLE",
-  PENDING = "PENDING",
-  FULLFILLED = "FULLFILLED",
-  REJECTED = "REJECTED",
-}
-
 /**
  * Custom hook to dispatch actions to the Redux store.
  *

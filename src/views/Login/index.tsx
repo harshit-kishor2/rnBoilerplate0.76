@@ -13,6 +13,7 @@ import TermsConditionAndPrivacyPolicyLink from "../atoms/TermsConditionAndPrivac
 import DontHaveAccountLink from "./DontHaveAccountLink";
 import ForgotPasswordLink from "./ForgotPasswordLink";
 import LoginForm from "./LoginForm";
+import {RouteConst} from "@app/navigation/types";
 
 const LoginScreen: React.FC = () => {
   const styles = useMemo(() => loginScreenStyles(), []);
@@ -31,7 +32,7 @@ const LoginScreen: React.FC = () => {
         </Padding>
         <ForgotPasswordLink />
         <Spacer />
-        <TermsConditionAndPrivacyPolicyLink from="LoginRoute" />
+        <TermsConditionAndPrivacyPolicyLink from={RouteConst.LoginRoute} />
       </Container>
     </KeyboardAvoidingWrapper>
   );

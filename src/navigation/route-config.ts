@@ -1,3 +1,4 @@
+import {UserRoles} from "@app/helpers/enums";
 import {
   HomeScreen,
   LoginScreen,
@@ -8,9 +9,9 @@ import {
 } from "@app/views";
 import {
   CardStyleInterpolators,
-  type StackNavigationOptions,
+  StackNavigationOptions,
 } from "@react-navigation/stack";
-import {RootStackParamList, SecureStackRouteType} from "./types";
+import {RootStackParamList, RouteConst, SecureStackRouteType} from "./types";
 
 // Make changes here for global screen options in stack
 export const stackScreenOptions: StackNavigationOptions = {
@@ -29,37 +30,37 @@ export const modalScreenOptions: StackNavigationOptions = {
 
 export const allRoutes: SecureStackRouteType<RootStackParamList>[] = [
   {
-    name: "RegisterRoute",
+    name: RouteConst.RegisterRoute,
     component: RegisterScreen,
     type: "stack",
-    roles: ["guest"],
+    roles: [UserRoles.Guest],
   },
   {
-    name: "LoginRoute",
+    name: RouteConst.LoginRoute,
     component: LoginScreen,
     type: "stack",
-    roles: ["guest"],
+    roles: [UserRoles.Guest],
   },
   {
-    name: "NetworkLoggerRoute",
+    name: RouteConst.NetworkLoggerRoute,
     component: NetworkLoggerScreen,
     type: "stack",
-    roles: ["user", "admin"],
+    roles: [UserRoles.User, UserRoles.Admin],
   },
   {
-    name: "HomeRoute",
+    name: RouteConst.HomeRoute,
     component: HomeScreen,
     type: "stack",
-    roles: ["user"],
+    roles: [UserRoles.User],
   },
   {
-    name: "SettingRoute",
+    name: RouteConst.SettingRoute,
     component: SettingScreen,
     type: "stack",
-    roles: ["user", "admin"],
+    roles: [UserRoles.User, UserRoles.Admin],
   },
   {
-    name: "WebViewRoute",
+    name: RouteConst.WebViewRoute,
     component: WebviewScreen,
     type: "stack",
   },

@@ -1,30 +1,29 @@
 import {useSplashTimeout} from "@app/hooks";
+import {usePersistAuthStore} from "@app/store/zustand/use-auth-store";
+import {SplashScreen} from "@app/views";
 import {createStackNavigator} from "@react-navigation/stack";
-import React, {useMemo, useState} from "react";
+import React, {useCallback, useMemo, useState} from "react";
 import {
   allRoutes,
   modalScreenOptions,
   stackScreenOptions,
 } from "./route-config";
-import {usePersistAuthStore} from "@app/store/zustand/use-auth-store";
-import {SplashScreen} from "@app/views";
-import {RootStackParamList} from "./types";
+import {UserRoles} from "@app/helpers/enums";
+import {RouteConst, RouteName} from "./types";
 
 const Stack = createStackNavigator();
 
 const StackNavigator = () => {
-  const [initialRoute, setInitialRoute] = useState<
-    keyof RootStackParamList | null
-  >(null);
+  const [initialRoute, setInitialRoute] = useState<RouteName | null>(null);
 
   const {isAuth, userRole} = usePersistAuthStore();
 
-  const isSplashEnd = useSplashTimeout(() => {
+  const handleSplashEnd = useCallback(() => {
     console.log("Splash ended! Navigating to the next screen.");
-    // Determine initial route based on user role
-    const routeName = getInitialRouteName(isAuth, userRole);
-    setInitialRoute(routeName);
-  });
+    setInitialRoute(getInitialRouteName(isAuth, userRole));
+  }, [isAuth, userRole]);
+
+  const isSplashEnd = useSplashTimeout(handleSplashEnd);
 
   // Memoize filtered routes to prevent unnecessary re-renders
   const {stackRoutes, modalRoutes} = useMemo(() => {
@@ -51,7 +50,10 @@ const StackNavigator = () => {
       <Stack.Group screenOptions={stackScreenOptions}>
         {stackRoutes.map(({name, component, options}) => {
           // Check if component is valid before passing it
-          if (!component) return null;
+          if (!component) {
+            console.error(`Missing component for route: ${name.toString()}`);
+            return null;
+          }
           return (
             <Stack.Screen
               key={name.toString()}
@@ -67,7 +69,10 @@ const StackNavigator = () => {
       <Stack.Group screenOptions={modalScreenOptions}>
         {modalRoutes.map(({name, component, options}) => {
           // Check if component is valid before passing it
-          if (!component) return null;
+          if (!component) {
+            console.error(`Missing component for route: ${name.toString()}`);
+            return null;
+          }
           return (
             <Stack.Screen
               key={name.toString()}
@@ -85,11 +90,13 @@ const StackNavigator = () => {
 // Helper function for initial route determination
 const getInitialRouteName = (
   isAuth: boolean,
-  userRole: IUserRole
-): keyof RootStackParamList => {
-  if (!isAuth) return "LoginRoute";
+  userRole: UserRoles
+): RouteName => {
+  if (!isAuth) return RouteConst.LoginRoute;
 
-  return userRole === "admin" ? "BottomTabRoute" : "HomeRoute";
+  return userRole === UserRoles.Admin
+    ? RouteConst.BottomTabRoute
+    : RouteConst.HomeRoute;
 };
 
 // Validate only in development environment

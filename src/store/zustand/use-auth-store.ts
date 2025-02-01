@@ -2,10 +2,11 @@ import {create, StateCreator} from "zustand";
 import {createJSONStorage, persist} from "zustand/middleware";
 import {zustandPersistStorage} from "./config";
 import {wait} from "@app/helpers";
+import {UserRoles} from "@app/helpers/enums";
 
 type IState = {
   isAuth: boolean;
-  userRole: IUserRole;
+  userRole: UserRoles;
 };
 
 type IActions = {
@@ -20,7 +21,7 @@ export type IAuthSlice = IState & IActions;
 // Define the initial state
 const initialState: IState = {
   isAuth: false,
-  userRole: "guest",
+  userRole: UserRoles.Guest,
 };
 
 // Creates a slice of the store for managing Auth state and actions.
@@ -32,17 +33,17 @@ const createAuthSlice: StateCreator<IAuthSlice> = set => ({
     // After the delay, update the state check if admin or user
     set(() => ({
       isAuth: true,
-      userRole: "user",
+      userRole: UserRoles.User,
     }));
   },
-  logout: () => set(() => ({isAuth: false, userRole: "guest"})),
+  logout: () => set(() => ({isAuth: false, userRole: UserRoles.Guest})),
   register: async () => {
     // Wait for 5 seconds before updating the state
     wait(5000);
     // After the delay, update the state check if admin or user.
     set(() => ({
       isAuth: true,
-      userRole: "user",
+      userRole: UserRoles.User,
     }));
   },
   reset: () => set(() => ({...initialState})),

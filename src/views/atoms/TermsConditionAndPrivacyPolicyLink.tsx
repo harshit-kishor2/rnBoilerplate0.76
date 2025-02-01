@@ -2,21 +2,21 @@ import {AppText, Padding, Row} from "@app/components";
 import {rpWidth} from "@app/helpers/responsive-utils";
 import {useAppTranslation} from "@app/i18n";
 import {useAppNavigation} from "@app/navigation/hooks";
-import {RootStackParamList} from "@app/navigation/types";
+import {RouteConst, RouteName} from "@app/navigation/types";
 import React from "react";
 
 type ITermsConditionAndPrivacyPolicyLink = {
-  from: keyof RootStackParamList;
+  from: RouteName;
 };
 const TermsConditionAndPrivacyPolicyLink: React.FC<
   ITermsConditionAndPrivacyPolicyLink
 > = props => {
   const {from} = props;
   const translate = useAppTranslation();
-  const navigation = useAppNavigation("LoginRoute");
+  const navigation = useAppNavigation(RouteConst.LoginRoute);
 
   const onTermsOfServicePress = () => {
-    navigation.navigate("WebViewRoute", {
+    navigation.navigate(RouteConst.WebViewRoute, {
       from: from,
       page: "t&c",
       webUrl: "https://google.com",
@@ -24,7 +24,7 @@ const TermsConditionAndPrivacyPolicyLink: React.FC<
   };
 
   const onPrivacyPolicyPress = () => {
-    navigation.navigate("WebViewRoute", {
+    navigation.navigate(RouteConst.WebViewRoute, {
       from: from,
       page: "p&p",
       webUrl: "https://google.com",

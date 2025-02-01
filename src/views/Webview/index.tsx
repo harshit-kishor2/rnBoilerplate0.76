@@ -4,10 +4,11 @@ import {useAppTranslation} from "@app/i18n";
 import {useAppRoute} from "@app/navigation/hooks";
 import React from "react";
 import AppHeader from "../atoms/AppHeader";
+import {RouteConst} from "@app/navigation/types";
 
 const WebViewScreen: React.FC = () => {
   const translate = useAppTranslation();
-  const route = useAppRoute("WebViewRoute");
+  const route = useAppRoute(RouteConst.WebViewRoute);
   const getTitle = (page?: IWebViewPages): string => {
     switch (page) {
       case "t&c":

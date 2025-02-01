@@ -1,5 +1,5 @@
+import {LoadingStatus} from "@app/helpers/enums";
 import {createSlice} from "@reduxjs/toolkit";
-import {LoadingStatus} from "../utils";
 
 const SLICE_FEATURE_KEY = "demo";
 

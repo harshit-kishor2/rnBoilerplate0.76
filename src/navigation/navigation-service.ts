@@ -5,11 +5,11 @@ import {
   TabActions,
 } from "@react-navigation/native";
 import {createRef, MutableRefObject} from "react";
-import {RootStackParamList} from "./types";
+import {RootStackParamList, RouteName} from "./types";
 
 export type NavigateProps = {
-  fromRouteName: keyof RootStackParamList;
-  routeName: keyof RootStackParamList;
+  fromRouteName: RouteName;
+  routeName: RouteName;
   params?: ObjParams;
 };
 export const navigationRef = createNavigationContainerRef<RootStackParamList>();
