@@ -1,4 +1,4 @@
-import {navigationRef} from '@app/navigation/NavigationService';
+import {navigationRef} from '@app/navigation/navigation-service';
 import {getRequests} from 'react-native-network-logger';
 
 export const createUniqueId = (): string => {
@@ -9,7 +9,7 @@ export const sendCrashReport = (
   err: Error,
   isFatal: boolean,
   type: string,
-  crashId: string = createUniqueId()
+  crashId: string = createUniqueId(),
 ): void => {
   if (!err) return;
 

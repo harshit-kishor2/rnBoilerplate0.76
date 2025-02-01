@@ -1,4 +1,8 @@
-import {ApiConst, appTokenLocalStorage, appTokenLocalStorageKeys} from './api-client-utils';
+import {
+  ApiConst,
+  appTokenLocalStorage,
+  appTokenLocalStorageKeys,
+} from './api-client-utils';
 import axios from 'axios';
 import * as AxiosLogger from 'axios-logger';
 
@@ -9,15 +13,22 @@ const apiClient = axios.create({
 });
 
 // Logger for axios
-apiClient.interceptors.request.use(AxiosLogger.requestLogger, AxiosLogger.errorLogger);
-apiClient.interceptors.response.use(AxiosLogger.responseLogger, AxiosLogger.errorLogger);
-
+apiClient.interceptors.request.use(
+  AxiosLogger.requestLogger,
+  AxiosLogger.errorLogger,
+);
+apiClient.interceptors.response.use(
+  AxiosLogger.responseLogger,
+  AxiosLogger.errorLogger,
+);
 
 // Request Interceptor
 apiClient.interceptors.request.use(
-  (config) => {
+  config => {
     try {
-      const accessToken = appTokenLocalStorage.getString(appTokenLocalStorageKeys.access_token);
+      const accessToken = appTokenLocalStorage.getString(
+        appTokenLocalStorageKeys.access_token,
+      );
       if (accessToken) {
         config.headers.Authorization = `Bearer ${accessToken}`;
       }
@@ -26,16 +37,16 @@ apiClient.interceptors.request.use(
     }
     return config;
   },
-  (error) => {
+  error => {
     console.error('Request Error:', error);
     return Promise.reject(new Error(error.message));
-  }
+  },
 );
 
 // Response Interceptor
 apiClient.interceptors.response.use(
-  (response) => response, // Pass successful responses
-  async (error) => {
+  response => response, // Pass successful responses
+  async error => {
     if (error.response) {
       const {status} = error.response;
       if (status === 401 && !error.config._retry) {
@@ -61,7 +72,7 @@ apiClient.interceptors.response.use(
       console.error('Error', 'An unexpected error occurred.');
     }
     return Promise.reject(new Error(error.message));
-  }
+  },
 );
 
 // Global Error Handler Function
@@ -93,7 +104,9 @@ const handleApiError = (error: any) => {
 // Refresh Token Logic
 const refreshTokens = async (): Promise<string | null> => {
   try {
-    const refreshToken = appTokenLocalStorage.getString(appTokenLocalStorageKeys.refresh_token);
+    const refreshToken = appTokenLocalStorage.getString(
+      appTokenLocalStorageKeys.refresh_token,
+    );
     if (!refreshToken) {
       throw new Error('No refresh token available.');
     }
@@ -123,7 +136,10 @@ export const handleLogout = () => {
 };
 
 export const setAllApiTokens = (accessToken: string, refreshToken: string) => {
-  appTokenLocalStorage.set(appTokenLocalStorageKeys.refresh_token, refreshToken);
+  appTokenLocalStorage.set(
+    appTokenLocalStorageKeys.refresh_token,
+    refreshToken,
+  );
   appTokenLocalStorage.set(appTokenLocalStorageKeys.access_token, accessToken);
 };
 

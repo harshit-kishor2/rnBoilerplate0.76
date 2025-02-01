@@ -1,16 +1,23 @@
-import {rpWidth} from '@app/helpers/responsive';
 import {useAppTheme} from '@app/theme';
 import React, {ReactNode} from 'react';
-import {DimensionValue, SafeAreaView, StatusBar, StyleSheet, View, ViewStyle} from 'react-native';
+import {
+  DimensionValue,
+  StatusBar,
+  StyleSheet,
+  View,
+  ViewStyle,
+} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 interface ContainerProps {
-  useSafeArea?: boolean,
-  children: ReactNode,
-  backgroundColor?: string,
-  statusBarColor?: string,
-  padding?: DimensionValue,
-  paddingHorizontal?: DimensionValue,
-  margin?: DimensionValue,
+  useSafeArea?: boolean;
+  children: ReactNode;
+  backgroundColor?: string;
+  statusBarColor?: string;
+  padding?: DimensionValue;
+  paddingHorizontal?: DimensionValue;
+  margin?: DimensionValue;
+  alignItems?: AlignItems;
   style?: ViewStyle;
 }
 const Container: React.FC<ContainerProps> = ({
@@ -21,23 +28,26 @@ const Container: React.FC<ContainerProps> = ({
   padding = 0,
   paddingHorizontal,
   margin = 0,
-  style
+  alignItems,
+  style,
 }: ContainerProps) => {
   const theme = useAppTheme();
   // Change bar style according to theme
   const barStyle = theme.themeType == 'dark' ? 'light-content' : 'dark-content';
   const ContainerTag = useSafeArea ? SafeAreaView : View;
   return (
-    <ContainerTag style={StyleSheet.flatten([
-      styles.container,
-      {
-        backgroundColor: backgroundColor ??theme.colors.background,
-        paddingHorizontal: paddingHorizontal ?? rpWidth(12),
-        padding,
-        margin,
-      },
-      style
-    ])}>
+    <ContainerTag
+      style={StyleSheet.flatten([
+        styles.container,
+        {
+          backgroundColor: backgroundColor ?? theme.colors.background,
+          padding,
+          margin,
+          alignItems: alignItems,
+          paddingHorizontal: paddingHorizontal,
+        },
+        style,
+      ])}>
       <StatusBar
         barStyle={barStyle}
         backgroundColor={statusBarColor ?? theme.colors.background}
@@ -52,5 +62,5 @@ export default Container;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  }
+  },
 });

@@ -1,26 +1,26 @@
 ### 1. Initiate project
+
 Create folder structure to maintain clarity and ease of development. Below is an overview of the directories. Each directory contains README.md file. Check all for initial setup.
 
 src/
-  - assets/
-  - components/
-  - helpers/
-  - hooks/
-  - i18n/
-  - navigation/
-  - services/
-  - store/
-  - theme/
-  - views/
-  - App.tsx
+
+- assets/
+- components/
+- helpers/
+- hooks/
+- i18n/
+- navigation/
+- services/
+- store/
+- theme/
+- views/
+- App.tsx
 
 Run this script from terminal -> This will create structure. After that create README.md file in necessary directories.
-
 
 ```bash
 mkdir -p src/{assets/{appIcon,fonts,gif,images,lottie,svg},components,helpers,hooks,i18n,navigation,services,store,theme,views}
 ```
-
 
 ### 2. React Native Path Aliasing
 
@@ -30,33 +30,27 @@ Path Alias -> https://gist.github.com/harshit-kishor2/efb4fe80251282226eb575d396
 
 Eslint -> https://gist.github.com/harshit-kishor2/ebd41c9781e10826c09d60658f315f89
 
-Lefthook ->  https://medium.com/@harshitkishor2/validating-commit-messages-with-lefthook-in-react-native-199085d2be40
+Lefthook -> https://medium.com/@harshitkishor2/validating-commit-messages-with-lefthook-in-react-native-199085d2be40
 
 https://gist.github.com/harshit-kishor2/a52b1fc5ba4cee77a4558e6d2bcbabbf
 
-
-
-### 4.  Install these helper dependencies
+### 4. Install these helper dependencies
 
 ##### A. react-native-gesture-handler
 
 ```javascript
 yarn add react-native-safe-area-context
 ```
+
 After installation, wrap your entry point with <SafeAreaProvider>
 
 ```javascript
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 export default function App() {
-  return (
-    <SafeAreaProvider style={{flex: 1}}>
-      {/* content */}
-    </SafeAreaProvider>
-  );
+  return <SafeAreaProvider style={{flex: 1}}>{/* content */}</SafeAreaProvider>;
 }
 ```
-
 
 ##### B. react-native-gesture-handler
 
@@ -65,8 +59,9 @@ yarn add react-native-gesture-handler
 ```
 
 To finalize the installation of `react-native-gesture-handler`:
- 1. create a directory inside root folder - `gesture-handler`
- 2. conditionally import `react-native-gesture-handler` by creating two files inside `gesture-handler`
+
+1.  create a directory inside root folder - `gesture-handler`
+2.  conditionally import `react-native-gesture-handler` by creating two files inside `gesture-handler`
 
 `gh.native.js`
 
@@ -123,12 +118,11 @@ module.exports = {
 
 ##### D. react-native-paper
 
-
-   ```bash
+```bash
 	yarn add react-native-paper
 	yarn add react-native-safe-area-context
 
-   ```
+```
 
 Add the following plugin configuration to your `babel.config.js`:
 
@@ -143,24 +137,21 @@ module.exports = {
     },
   },
 };
-
 ```
+
 ### 5. Theme setup
 
 **theme** -> check README.md inside `theme` directory.
 
-
 ### 6. Localization setup
 
 **localization** -> check README.md inside `i18n` directory.
-
 
 ### 7. Assest setup with vector icons
 
 **svg/image/lottie/gif** -> check README.md inside `assets`
 
 **custom fonts** -> check README.md inside `assets`
-
 
 ### 8. Navigations setup
 
@@ -170,18 +161,18 @@ module.exports = {
 
 **store** -> check README.md inside `store` directory.
 
-
 ### 10. Add some serives files (axios, localstorage)
 
 **axios** -> check README.md inside `services` directory and `apiClient.ts` file
 
-
 ### 11.Useful hooks
+
 **hooks** -> check README.md inside `hook` directory for custom hooks.
 
 ### 12.Useful packages
+
 For better performance you can use these packages later ->
-react-native-network-logger, fuse.js, @shopify/flash-list, react-hook-form, react-native-keyboard-aware-scroll-view
+react-native-network-logger, fuse.js,
 
 ### 13.Multiple Environment and flavors in React native
 

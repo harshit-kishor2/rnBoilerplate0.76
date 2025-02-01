@@ -8,7 +8,7 @@ type SVGIconProps = SvgProps & {
   pathFill?: string;
 };
 
-const AppSvg: React.FC<SVGIconProps> = (props) => {
+const AppSvg: React.FC<SVGIconProps> = props => {
   const {icon, pathFill = '#FFF'} = props;
   const IconsImage = SVGIconsMapper[icon];
 
@@ -16,7 +16,6 @@ const AppSvg: React.FC<SVGIconProps> = (props) => {
 };
 
 export default AppSvg;
-
 
 // Use->
 /* <AppSvg icon={Assets.svg.APP} height={30} width={30} /> */

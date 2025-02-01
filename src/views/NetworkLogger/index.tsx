@@ -1,10 +1,9 @@
+import React, {useMemo} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import {useAppTheme} from '@app/theme';
+import {useAppTranslation} from '@app/i18n';
 
-import React, { useMemo } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { useAppTheme } from '@app/theme';
-import { useAppTranslation } from '@app/i18n';
-
-const NetworkLoggerScreen = () => {
+const NetworkLoggerScreen: React.FC = () => {
   const theme = useAppTheme();
   const translate = useAppTranslation();
   const styles = useMemo(() => networkLoggerScreenStyles(theme), [theme]);

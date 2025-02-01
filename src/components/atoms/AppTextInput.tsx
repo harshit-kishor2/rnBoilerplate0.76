@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-import React, {useCallback} from 'react';
+import React, {useCallback, useMemo} from 'react';
 import {
   NativeSyntheticEvent,
   Platform,
@@ -28,13 +27,9 @@ import Animated, {
 
 import {useAppTheme} from '@app/theme';
 
-export interface TextInputProps extends InputProps {
-  name: string;
-}
-
 export type Variant = 'filled' | 'outlined' | 'standard';
 
-export interface InputProps extends RNTextInputProps {
+export interface IAppTextInputProps extends RNTextInputProps {
   /**
    * The variant of the TextInput style.
    * @default "filled"
@@ -136,319 +131,350 @@ export interface InputProps extends RNTextInputProps {
 
 const AnimatedTextInput = Animated.createAnimatedComponent(RNTextInput);
 
-const AppTextInput = React.memo(
-  React.forwardRef((props: InputProps, ref?: React.Ref<RNTextInput | null>) => {
-    const {
-      backgroundColor = 'white',
-      borderColor = 'black',
-      error,
-      errorContainerStyle,
-      errorStyle,
-      inputContainerStyle,
-      inputStyle,
-      label,
-      labelColor = 'black',
-      leftIcon,
-      leftIconContainerStyle,
-      onBlur,
-      onFocus,
-      onFocusBackgroundColor = '#e9e9e9',
-      onFocusBorderColor = '#0c5fed',
-      onFocusLabelColor = '#0c5fed',
-      onHoverBackgroundColor = '#e9e9e9',
-      onMouseEnter,
-      onMouseLeave,
-      outlineGapColor = 'white',
-      placeholder,
-      rightIcon,
-      rightIconContainerStyle,
-      style,
-      variant = 'filled',
-      ...rest
-    } = props;
+const AppTextInputWithoutRef = (
+  props: IAppTextInputProps,
+  ref?: React.Ref<RNTextInput>,
+) => {
+  const {
+    backgroundColor = 'white',
+    borderColor = 'black',
+    error,
+    errorContainerStyle,
+    errorStyle,
+    inputContainerStyle,
+    inputStyle,
+    label,
+    labelColor = 'black',
+    leftIcon,
+    leftIconContainerStyle,
+    onBlur,
+    onFocus,
+    onFocusBackgroundColor = '#e9e9e9',
+    onFocusBorderColor = '#0c5fed',
+    onFocusLabelColor = '#0c5fed',
+    onHoverBackgroundColor = '#e9e9e9',
+    onMouseEnter,
+    onMouseLeave,
+    outlineGapColor = 'white',
+    placeholder,
+    rightIcon,
+    rightIconContainerStyle,
+    style,
+    variant = 'filled',
+    ...rest
+  } = props;
 
-    const theme = useAppTheme();
+  const theme = useAppTheme();
+  const hovered = useSharedValue(false);
+  const focused = useSharedValue(false);
+  const focusAnimation = useSharedValue(0);
+  const activeAnimation = useSharedValue(0);
 
-    const styles = inputStyles(theme);
+  const isStandardVariant = variant === 'standard';
 
-    const hovered = useSharedValue(false);
-    const focused = useSharedValue(false);
+  const styles = useMemo(() => inputStyles(theme), [theme]);
 
-    const handleMouseEnter = useCallback(
-      (event: NativeSyntheticEvent<TargetedEvent>) => {
-        onMouseEnter?.(event);
-        hovered.value = true;
-      },
-      [hovered, onMouseEnter]
+  const handleMouseEnter = useCallback(
+    (event: NativeSyntheticEvent<TargetedEvent>) => {
+      onMouseEnter?.(event);
+      hovered.value = true;
+    },
+    [hovered, onMouseEnter],
+  );
+
+  const handleMouseLeave = useCallback(
+    (event: NativeSyntheticEvent<TargetedEvent>) => {
+      onMouseLeave?.(event);
+      hovered.value = false;
+    },
+    [hovered, onMouseLeave],
+  );
+
+  const handleFocus = useCallback(
+    (event: NativeSyntheticEvent<TextInputFocusEventData>) => {
+      onFocus?.(event);
+      focused.value = true;
+    },
+    [focused, onFocus],
+  );
+
+  const handleBlur = useCallback(
+    (event: NativeSyntheticEvent<TextInputFocusEventData>) => {
+      onBlur?.(event);
+      focused.value = false;
+    },
+    [focused, onBlur],
+  );
+
+  useDerivedValue(() => {
+    focusAnimation.value = withTiming(focused.value ? 1 : 0, {
+      duration: 200,
+      easing: Easing.out(Easing.ease),
+    });
+  }, [focused, focusAnimation]);
+
+  const active = useDerivedValue(() => {
+    const isFocused = focused.value; // Safely read shared value
+    const isInputFilled = (rest?.value?.length ?? 0) > 0;
+    return isFocused || isInputFilled;
+  });
+
+  useDerivedValue(() => {
+    activeAnimation.value = withTiming(active.value ? 1 : 0, {
+      duration: 200,
+      easing: Easing.out(Easing.ease),
+    });
+  }, [active, activeAnimation]);
+  const animatedInputContainerStyle = useAnimatedStyle(() => {
+    let resolvedBackgroundColor;
+    if (variant === 'filled') {
+      if (focused.value) {
+        resolvedBackgroundColor = onFocusBackgroundColor;
+      } else if (hovered.value) {
+        resolvedBackgroundColor = onHoverBackgroundColor;
+      } else {
+        resolvedBackgroundColor = backgroundColor;
+      }
+    } else {
+      resolvedBackgroundColor = backgroundColor;
+    }
+    return {
+      backgroundColor: resolvedBackgroundColor,
+      borderBottomEndRadius: isStandardVariant ? 0 : 4,
+      borderBottomStartRadius: isStandardVariant ? 0 : 4,
+      borderTopEndRadius: 4,
+      borderTopStartRadius: 4,
+    };
+  }, [focused, hovered, variant]);
+
+  const animatedInput = useAnimatedStyle(() => {
+    const paddingIfStandard = isStandardVariant ? 0 : 16;
+    const paddingTop = variant === 'filled' && label ? 18 : 0;
+    return {
+      fontSize: 16,
+      minHeight: isStandardVariant ? 48 : 56,
+      paddingEnd: rightIcon ? 12 : paddingIfStandard,
+      paddingStart: leftIcon ? 12 : paddingIfStandard,
+      paddingTop,
+    };
+  }, [variant, leftIcon, rightIcon]);
+
+  const animatedLeading = useAnimatedStyle(() => {
+    return {
+      marginStart: isStandardVariant ? 0 : 12,
+      marginVertical: isStandardVariant ? 12 : 16,
+    };
+  }, [variant]);
+
+  const animatedTrailing = useAnimatedStyle(() => {
+    return {
+      marginEnd: isStandardVariant ? 0 : 12,
+      marginVertical: isStandardVariant ? 12 : 16,
+    };
+  }, [variant]);
+
+  const animatedOutline = useAnimatedStyle(() => {
+    let resolvedBorderColor;
+    if (focused.value) {
+      resolvedBorderColor = onFocusBorderColor;
+    } else if (hovered.value) {
+      resolvedBorderColor = onFocusBorderColor;
+    } else {
+      resolvedBorderColor = borderColor;
+    }
+    return {
+      borderBottomEndRadius: 4,
+      borderBottomStartRadius: 4,
+      borderColor: resolvedBorderColor,
+      borderTopEndRadius: 4,
+      borderTopStartRadius: 4,
+      borderWidth: focused.value ? 2 : 1,
+    };
+  }, [focused, hovered]);
+
+  const animatedOutlineLabelGap = useAnimatedStyle(() => {
+    return {
+      height: focused.value ? 2 : 1,
+    };
+  }, [focused]);
+
+  const animatedLabelContainer = useAnimatedStyle(() => {
+    const baseHeight = isStandardVariant ? 48 : 56;
+    let startValue = 0;
+    if (isStandardVariant) {
+      startValue = leftIcon ? 36 : 0;
+    } else {
+      startValue = leftIcon ? 48 : 16;
+    }
+    return {
+      height: baseHeight,
+      start: startValue,
+    };
+  }, [variant, leftIcon]);
+
+  const animatedLabel = useAnimatedStyle(() => {
+    const fontSizeValue = interpolate(activeAnimation.value, [0, 1], [16, 12]);
+
+    const colorValue = interpolateColor(
+      focusAnimation.value,
+      [0, 1],
+      [labelColor, onFocusLabelColor],
+    );
+    let translateYValue = 0;
+    if (variant === 'filled') {
+      translateYValue = -12;
+    } else if (variant === 'outlined') {
+      translateYValue = -28;
+    } else {
+      translateYValue = -24;
+    }
+    const translateY = interpolate(
+      activeAnimation.value,
+      [0, 1],
+      [0, translateYValue],
     );
 
-    const handleMouseLeave = useCallback(
-      (event: NativeSyntheticEvent<TargetedEvent>) => {
-        onMouseLeave?.(event);
-        hovered.value = false;
-      },
-      [hovered, onMouseLeave]
-    );
+    return {
+      color: colorValue,
+      fontSize: fontSizeValue,
+      transform: [{translateY}],
+    };
+  }, [focusAnimation, activeAnimation, variant, labelColor, onFocusLabelColor]);
 
-    const handleFocus = useCallback(
-      (event: NativeSyntheticEvent<TextInputFocusEventData>) => {
-        onFocus?.(event);
-        focused.value = true;
-      },
-      [focused, onFocus]
-    );
+  const animatedPlaceholder = useAnimatedProps<IAppTextInputProps>(() => {
+    const resolvedPlaceholder = label && !focused.value ? '' : placeholder;
+    return {
+      placeholder: resolvedPlaceholder,
+    };
+  }, [label, focused, placeholder]);
 
-    const handleBlur = useCallback(
-      (event: NativeSyntheticEvent<TextInputFocusEventData>) => {
-        onBlur?.(event);
-        focused.value = false;
-      },
-      [focused, onBlur]
-    );
+  const animatedUnderline = useAnimatedStyle(() => {
+    return {
+      backgroundColor: interpolateColor(
+        focusAnimation.value,
+        [0, 1],
+        [borderColor, onFocusBorderColor],
+      ),
+      transform: [{scaleX: focusAnimation.value}],
+    };
+  }, [focusAnimation]);
 
-    const focusAnimation = useSharedValue(0);
+  const animatedOutlineLabel = useAnimatedStyle(() => {
+    return {
+      backgroundColor: interpolateColor(
+        activeAnimation.value,
+        [0, 1],
+        [backgroundColor, outlineGapColor],
+      ),
+      transform: [{scaleX: activeAnimation.value}],
+    };
+  }, [activeAnimation]);
 
-    useDerivedValue(() => {
-      focusAnimation.value = withTiming(focused.value ? 1 : 0, {
-        duration: 200,
-        easing: Easing.out(Easing.ease),
-      });
-    }, [focused.value, focusAnimation.value]);
+  return (
+    <View style={[styles.container, style]}>
+      <Animated.View
+        style={[
+          styles.inputContainer,
+          animatedInputContainerStyle,
+          inputContainerStyle,
+        ]}>
+        {leftIcon && (
+          <Animated.View
+            style={[styles.leading, animatedLeading, leftIconContainerStyle]}>
+            {leftIcon}
+          </Animated.View>
+        )}
 
-    const active = useDerivedValue(
-      () => focused.value || (rest.value?.length || 0) > 0,
-      [focused.value, rest.value]
-    );
+        <AnimatedTextInput
+          ref={ref}
+          style={[styles.input, animatedInput, inputStyle]}
+          animatedProps={animatedPlaceholder}
+          placeholderTextColor={theme.colors.placeholder}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          {...({
+            onMouseEnter: handleMouseEnter,
+            onMouseLeave: handleMouseLeave,
+            ...rest,
+          } as any)}
+        />
 
-    const activeAnimation = useSharedValue(0);
+        {rightIcon && (
+          <Animated.View
+            style={[
+              styles.trailing,
+              animatedTrailing,
+              rightIconContainerStyle,
+            ]}>
+            {rightIcon}
+          </Animated.View>
+        )}
 
-    useDerivedValue(() => {
-      activeAnimation.value = withTiming(active.value ? 1 : 0, {
-        duration: 200,
-        easing: Easing.out(Easing.ease),
-      });
-    }, [active.value, activeAnimation.value]);
-
-    const animatedInputContainerStyle = useAnimatedStyle(() => {
-      return {
-        backgroundColor:
-          variant === 'filled'
-            ? focused.value
-              ? onFocusBackgroundColor
-              : hovered.value
-                ? onHoverBackgroundColor
-                : backgroundColor
-            : variant === 'outlined'
-              ? backgroundColor
-              : backgroundColor,
-        borderBottomEndRadius: variant !== 'standard' ? 4 : 0,
-        borderBottomStartRadius: variant !== 'standard' ? 4 : 0,
-        borderTopEndRadius: 4,
-        borderTopStartRadius: 4,
-      };
-    }, [focused.value, hovered.value, variant]);
-
-    const animatedInput = useAnimatedStyle(() => {
-      return {
-        fontSize: 16,
-        minHeight: variant === 'standard' ? 48 : 56,
-        paddingEnd: rightIcon ? 12 : variant === 'standard' ? 0 : 16,
-        paddingStart: leftIcon ? 12 : variant === 'standard' ? 0 : 16,
-        paddingTop: variant === 'filled' && label ? 18 : 0,
-      };
-    }, [variant, leftIcon, rightIcon]);
-
-    const animatedLeading = useAnimatedStyle(() => {
-      return {
-        marginStart: variant === 'standard' ? 0 : 12,
-        marginVertical: variant === 'standard' ? 12 : 16,
-      };
-    }, [variant]);
-
-    const animatedTrailing = useAnimatedStyle(() => {
-      return {
-        marginEnd: variant === 'standard' ? 0 : 12,
-        marginVertical: variant === 'standard' ? 12 : 16,
-      };
-    }, [variant]);
-
-    const animatedOutline = useAnimatedStyle(() => {
-      return {
-        borderBottomEndRadius: 4,
-        borderBottomStartRadius: 4,
-        borderColor: focused.value
-          ? onFocusBorderColor
-          : hovered.value
-            ? onFocusBorderColor
-            : borderColor,
-        borderTopEndRadius: 4,
-        borderTopStartRadius: 4,
-        borderWidth: focused.value ? 2 : 1,
-      };
-    }, [focused.value, hovered.value]);
-
-    const animatedOutlineLabelGap = useAnimatedStyle(() => {
-      return {
-        height: focused.value ? 2 : 1,
-      };
-    }, [focused.value]);
-
-    const animatedLabelContainer = useAnimatedStyle(() => {
-      return {
-        height: variant === 'standard' ? 48 : 56,
-        start:
-          variant === 'standard' ? (leftIcon ? 36 : 0) : leftIcon ? 48 : 16,
-      };
-    }, [variant, leftIcon]);
-
-    const animatedLabel = useAnimatedStyle(() => {
-      return {
-        color: interpolateColor(
-          focusAnimation.value,
-          [0, 1],
-          [labelColor, onFocusLabelColor]
-        ),
-        fontSize: interpolate(activeAnimation.value, [0, 1], [16, 12]),
-        transform: [
-          {
-            translateY: interpolate(
-              activeAnimation.value,
-              [0, 1],
-              [
-                0,
-                variant === 'filled' ? -12 : variant === 'outlined' ? -28 : -24,
-              ]
-            ),
-          },
-        ],
-      };
-    }, [focusAnimation, activeAnimation]);
-
-    const animatedPlaceholder = useAnimatedProps<TextInputProps>(() => {
-      return {
-        placeholder: label ? (focused.value ? placeholder : '') : placeholder,
-      };
-    }, [label, focused, placeholder]);
-
-    const animatedUnderline = useAnimatedStyle(() => {
-      return {
-        backgroundColor: interpolateColor(
-          focusAnimation.value,
-          [0, 1],
-          [borderColor, onFocusBorderColor]
-        ),
-        transform: [{scaleX: focusAnimation.value}],
-      };
-    }, [focusAnimation.value]);
-
-    const animatedOutlineLabel = useAnimatedStyle(() => {
-      return {
-        backgroundColor: interpolateColor(
-          activeAnimation.value,
-          [0, 1],
-          [backgroundColor, outlineGapColor]
-        ),
-        transform: [{scaleX: activeAnimation.value}],
-      };
-    }, [activeAnimation.value]);
-
-    return (
-      <View style={style}>
-        <Animated.View
-          style={[
-            styles.inputContainer,
-            animatedInputContainerStyle,
-            inputContainerStyle,
-          ]}>
-          {leftIcon && (
-            <Animated.View
-              style={[styles.leading, animatedLeading, leftIconContainerStyle]}>
-              {leftIcon}
-            </Animated.View>
-          )}
-
-          <AnimatedTextInput
-            ref={ref}
-            style={[styles.input, animatedInput, inputStyle]}
-            animatedProps={animatedPlaceholder}
-            placeholderTextColor={theme.colors.red}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            {...({
-              onMouseEnter: handleMouseEnter,
-              onMouseLeave: handleMouseLeave,
-              ...rest,
-            } as any)}
-          />
-
-          {rightIcon && (
-            <Animated.View
-              style={[
-                styles.trailing,
-                animatedTrailing,
-                rightIconContainerStyle,
-              ]}>
-              {rightIcon}
-            </Animated.View>
-          )}
-
-          {(variant === 'filled' || variant === 'standard') && (
-            <>
-              <View
-                style={[styles.underline, {backgroundColor: borderColor}]}
-                pointerEvents="none"
-              />
-              <Animated.View
-                style={[styles.underlineFocused, animatedUnderline]}
-                pointerEvents="none"
-              />
-            </>
-          )}
-
-          {variant === 'outlined' && (
-            <Animated.View
-              style={[StyleSheet.absoluteFill, animatedOutline, styles.outline]}
+        {(variant === 'filled' || variant === 'standard') && (
+          <>
+            <View
+              style={[styles.underline, {backgroundColor: borderColor}]}
               pointerEvents="none"
             />
-          )}
-
-          {label ? (
             <Animated.View
-              style={[styles.labelContainer, animatedLabelContainer]}
-              pointerEvents="none">
-              {variant === 'outlined' && (
-                <Animated.View
-                  style={[
-                    styles.outlineLabelGap,
-                    animatedOutlineLabel,
-                    animatedOutlineLabelGap,
-                  ]}
-                />
-              )}
-              <Animated.Text style={animatedLabel}>{label}</Animated.Text>
-            </Animated.View>
-          ) : null}
-        </Animated.View>
-        <View style={[styles.errorView, errorContainerStyle]}>
-          {error ? (
-            <Text style={[styles.helperText, errorStyle]}>{error}</Text>
-          ) : null}
-        </View>
+              style={[styles.underlineFocused, animatedUnderline]}
+              pointerEvents="none"
+            />
+          </>
+        )}
+
+        {variant === 'outlined' && (
+          <Animated.View
+            style={[StyleSheet.absoluteFill, animatedOutline, styles.outline]}
+            pointerEvents="none"
+          />
+        )}
+
+        {label ? (
+          <Animated.View
+            style={[styles.labelContainer, animatedLabelContainer]}
+            pointerEvents="none">
+            {variant === 'outlined' && (
+              <Animated.View
+                style={[
+                  styles.outlineLabelGap,
+                  animatedOutlineLabel,
+                  animatedOutlineLabelGap,
+                ]}
+              />
+            )}
+            <Animated.Text style={animatedLabel}>{label}</Animated.Text>
+          </Animated.View>
+        ) : null}
+      </Animated.View>
+      <View style={[styles.errorView, errorContainerStyle]}>
+        <Text style={[styles.helperText, errorStyle]}>{error}</Text>
       </View>
-    );
-  })
+    </View>
+  );
+};
+
+const AppTextInput: React.FC<IAppTextInputProps> = React.memo(
+  React.forwardRef((props: IAppTextInputProps, ref?: React.Ref<RNTextInput>) =>
+    AppTextInputWithoutRef(props, ref),
+  ),
 );
 
 export default AppTextInput;
 
 const inputStyles = (theme: IAppTheme) =>
   StyleSheet.create({
+    container: {
+      width: '100%',
+      paddingVertical: 5,
+    },
     errorView: {
       marginHorizontal: 16,
       marginTop: 4,
     },
     helperText: {
       fontSize: 14,
+      color: theme.colors.red,
     },
     input: {
       flex: 1,
@@ -501,3 +527,14 @@ const inputStyles = (theme: IAppTheme) =>
       start: 0,
     },
   });
+
+/***
+      <AppTextInput
+        style={{width: 300}}
+        variant="outlined"
+        label="Email"
+        placeholder="Enter your email"
+        leftIcon={<AppVectorIcon type='Feather' name="mail" />}
+        rightIcon={<AppVectorIcon type='Feather' name="mail" />}
+      />
+   */

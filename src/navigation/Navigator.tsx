@@ -4,14 +4,16 @@ import {
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
 } from '@react-navigation/native';
-import { isReadyRef, navigationRef } from './NavigationService';
+import {isReadyRef, navigationRef} from './navigation-service';
 import StackNavigator from './StackNavigator';
-import { useAppThemeContext } from '@app/theme/provider';
+import {useAppThemeContext} from '@app/theme/provider';
 
 const Navigator = () => {
-  const { currentTheme } = useAppThemeContext();
+  const {currentTheme} = useAppThemeContext();
   const theme =
-    currentTheme.themeType === 'dark' ? NavigationDarkTheme : NavigationDefaultTheme;
+    currentTheme.themeType === 'dark'
+      ? NavigationDarkTheme
+      : NavigationDefaultTheme;
 
   // Cleanup effect to reset `isReadyRef` on unmount
   React.useEffect(() => {
@@ -26,8 +28,7 @@ const Navigator = () => {
       theme={theme}
       onReady={() => {
         isReadyRef.current = true; // Set `isReadyRef.current` to true when navigation is ready
-      }}
-    >
+      }}>
       <StackNavigator />
     </NavigationContainer>
   );

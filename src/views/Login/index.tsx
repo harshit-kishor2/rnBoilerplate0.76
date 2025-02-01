@@ -1,29 +1,49 @@
+import Assets from '@app/assets';
+import {
+  AppFastImage,
+  Container,
+  KeyboardAvoidingWrapper,
+  Padding,
+  Spacer,
+} from '@app/components';
+import {rpHeight, rpWidth} from '@app/helpers/responsive-utils';
+import React, {useMemo} from 'react';
+import {StyleSheet} from 'react-native';
+import TermsConditionAndPrivacyPolicyLink from '../atoms/TermsConditionAndPrivacyPolicyLink';
+import DontHaveAccountLink from './DontHaveAccountLink';
+import ForgotPasswordLink from './ForgotPasswordLink';
+import LoginForm from './LoginForm';
 
-import React, { useMemo } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { useAppTheme } from '@app/theme';
-import { useAppTranslation } from '@app/i18n';
-
-const LoginScreen = () => {
-  const theme = useAppTheme();
-  const translate = useAppTranslation();
-  const styles = useMemo(() => loginScreenStyles(theme), [theme]);
-
+const LoginScreen: React.FC = () => {
+  const styles = useMemo(() => loginScreenStyles(), []);
   return (
-    <View style={styles.container}>
-      <Text>{translate('greeting')} LoginScreen</Text>
-    </View>
+    <KeyboardAvoidingWrapper>
+      <Container paddingHorizontal={10} alignItems="center">
+        <Padding vertical={rpHeight(50)}>
+          <AppFastImage
+            source={Assets.image.SPLASH_IMAGE}
+            style={styles.splsh_image}
+          />
+        </Padding>
+        <LoginForm />
+        <Padding vertical={rpHeight(20)}>
+          <DontHaveAccountLink />
+        </Padding>
+        <ForgotPasswordLink />
+        <Spacer />
+        <TermsConditionAndPrivacyPolicyLink from="LoginRoute" />
+      </Container>
+    </KeyboardAvoidingWrapper>
   );
 };
 
 export default LoginScreen;
 
-const loginScreenStyles = (theme: IAppTheme) =>
+const loginScreenStyles = () =>
   StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: theme.colors.background,
+    splsh_image: {
+      height: rpWidth(80),
+      width: rpWidth(80),
+      borderRadius: rpWidth(100),
     },
   });

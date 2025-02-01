@@ -1,9 +1,4 @@
-import React, {
-  createContext,
-  useContext,
-  useMemo,
-  useState
-} from 'react';
+import React, {createContext, useContext, useMemo, useState} from 'react';
 
 interface IDemoContext {
   currentState: any;
@@ -23,12 +18,10 @@ export const useDemoContext = (): IDemoContext => {
   return context;
 };
 
-export const DemoProvider = ({ children }: React.PropsWithChildren) => {
-
+export const DemoProvider = ({children}: React.PropsWithChildren) => {
   const [currentState, setCurrentState] = useState<any>('');
 
   //! You can put here extra logic for global state management
-
 
   // Memoize the context value to optimize performance
   const value = useMemo(
@@ -36,13 +29,9 @@ export const DemoProvider = ({ children }: React.PropsWithChildren) => {
       currentState: currentState,
       setCurrentState: setCurrentState,
     }),
-    [currentState,setCurrentState]
+    [currentState, setCurrentState],
   );
 
   // Provide the demo context to children components
-  return (
-    <DemoContext.Provider value={value}>
-      {children}
-    </DemoContext.Provider>
-  );
+  return <DemoContext.Provider value={value}>{children}</DemoContext.Provider>;
 };

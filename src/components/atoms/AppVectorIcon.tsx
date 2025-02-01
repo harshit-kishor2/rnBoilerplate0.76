@@ -43,8 +43,16 @@ export interface IconProps extends TextProps {
   style?: TextStyle;
 }
 
-const AppVectorIcon: React.FC<IconProps> = (props) => {
-  const {type, name, color = '#757575', size = 20, style, onPress, ...textProps} = props;
+const AppVectorIcon: React.FC<IconProps> = props => {
+  const {
+    type,
+    name,
+    color = '#757575',
+    size = 20,
+    style,
+    onPress,
+    ...textProps
+  } = props;
 
   let Element: React.ComponentType<any>;
   switch (type) {

@@ -20,7 +20,7 @@ const smallFirstLetter = str => {
 
 // Create screen folder
 const screenFolderName = capitalizeFirstLetter(folderName);
-fs.mkdir(`../src/views/${screenFolderName}`, { recursive: true }, err => {
+fs.mkdir(`../src/views/${screenFolderName}`, {recursive: true}, err => {
   if (err) throw err;
   console.debug(`Folder ${screenFolderName} created successfully`);
 
@@ -34,7 +34,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { useAppTheme } from '@app/theme';
 import { useAppTranslation } from '@app/i18n';
 
-const ${fileName} = () => {
+const ${fileName}: React.FC = () => {
   const theme = useAppTheme();
   const translate = useAppTranslation();
   const styles = useMemo(() => ${styleFunctionName}(theme), [theme]);
@@ -65,7 +65,7 @@ const ${styleFunctionName} = (theme: IAppTheme) =>
     errWrite => {
       if (errWrite) throw errWrite;
       console.log(`index.tsx file created successfully in ${screenFolderName}`);
-    }
+    },
   );
 
   // Append export to index.ts

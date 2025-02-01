@@ -1,29 +1,46 @@
+import Assets from '@app/assets';
+import {
+  AppFastImage,
+  Container,
+  KeyboardAvoidingWrapper,
+  Padding,
+} from '@app/components';
+import {rpWidth} from '@app/helpers/responsive-utils';
+import {useAppTheme} from '@app/theme';
+import React, {useMemo} from 'react';
+import {StyleSheet} from 'react-native';
+import AlreadyHaveAccountLink from './AlreadyHaveAccountLink';
+import RegisterForm from './RegisterForm';
 
-import React, { useMemo } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { useAppTheme } from '@app/theme';
-import { useAppTranslation } from '@app/i18n';
-
-const RegisterScreen = () => {
+const RegisterScreen: React.FC = () => {
   const theme = useAppTheme();
-  const translate = useAppTranslation();
-  const styles = useMemo(() => registerScreenStyles(theme), [theme]);
+  const styles = useMemo(() => registerScreenStyles(), [theme]);
 
   return (
-    <View style={styles.container}>
-      <Text> {translate('greeting')} RegisterScreen</Text>
-    </View>
+    <KeyboardAvoidingWrapper>
+      <Container paddingHorizontal={10} alignItems="center">
+        <Padding vertical={rpWidth(50)}>
+          <AppFastImage
+            source={Assets.image.SPLASH_IMAGE}
+            style={styles.splsh_image}
+          />
+        </Padding>
+        <RegisterForm />
+        <Padding vertical={rpWidth(20)}>
+          <AlreadyHaveAccountLink />
+        </Padding>
+      </Container>
+    </KeyboardAvoidingWrapper>
   );
 };
 
 export default RegisterScreen;
 
-const registerScreenStyles = (theme: IAppTheme) =>
+const registerScreenStyles = () =>
   StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: theme.colors.background,
+    splsh_image: {
+      height: rpWidth(80),
+      width: rpWidth(80),
+      borderRadius: rpWidth(100),
     },
   });

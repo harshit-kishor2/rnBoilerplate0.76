@@ -23,14 +23,16 @@ const CrashFallbackScreen: React.FC<ICrashFallbackScreenProps> = ({
   errorCode,
   error,
   stackTrace,
-  onReset
+  onReset,
 }) => (
   <View style={styles.fallbackContainer}>
     <Text style={styles.fallbackTitle}>Oops! Something went wrong.</Text>
     <Text style={styles.errorText}>{error?.message ?? 'Unknown Error'}</Text>
     <Text style={styles.errorCode}>Error Code: {errorCode}</Text>
     {stackTrace && (
-      <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.scrollContent}>
         <Text style={styles.errorInfo}>{stackTrace}</Text>
       </ScrollView>
     )}
@@ -38,7 +40,10 @@ const CrashFallbackScreen: React.FC<ICrashFallbackScreenProps> = ({
   </View>
 );
 
-class ErrorBoundary extends React.Component<IErrorBoundaryProps, IErrorBoundaryState> {
+class ErrorBoundary extends React.Component<
+  IErrorBoundaryProps,
+  IErrorBoundaryState
+> {
   state = {error: null, stackTrace: null};
 
   // If an error in a child is encountered, this will run
@@ -48,7 +53,11 @@ class ErrorBoundary extends React.Component<IErrorBoundaryProps, IErrorBoundaryS
       error: error,
       stackTrace: errorInfo.componentStack ?? '',
     });
-    this.props.onError(error, errorInfo?.componentStack ?? '', 'Error Boundary');
+    this.props.onError(
+      error,
+      errorInfo?.componentStack ?? '',
+      'Error Boundary',
+    );
   }
 
   // Reset the error back to null
@@ -59,21 +68,25 @@ class ErrorBoundary extends React.Component<IErrorBoundaryProps, IErrorBoundaryS
   //   return nextState.error !== this.state.error;
   // }
 
-
   // Render an error UI if there's an error; otherwise, render children
   render() {
     const {children, errorCode} = this.props;
     const {error, stackTrace} = this.state;
     if (error) {
-      return <CrashFallbackScreen errorCode={errorCode ?? 'Unknown'} error={error} stackTrace={stackTrace} onReset={this.resetError} />;
+      return (
+        <CrashFallbackScreen
+          errorCode={errorCode ?? 'Unknown'}
+          error={error}
+          stackTrace={stackTrace}
+          onReset={this.resetError}
+        />
+      );
     }
     return children;
   }
 }
 
 export default ErrorBoundary;
-
-
 
 const styles = StyleSheet.create({
   fallbackContainer: {

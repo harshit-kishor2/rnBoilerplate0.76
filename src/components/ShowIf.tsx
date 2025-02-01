@@ -6,7 +6,8 @@ type RenderIfProps = {
   children: ReactNode;
 };
 
-const ShowIf = ({children, condition}: RenderIfProps) => {
+const ShowIf: React.FC<RenderIfProps> = props => {
+  const {condition, children} = props;
   if (condition) {
     return <>{children}</>;
   }

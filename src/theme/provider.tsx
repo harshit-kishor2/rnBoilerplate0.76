@@ -19,14 +19,16 @@ export const appThemeLocalStorage: MMKV = new MMKV({
   encryptionKey: APP_THEME_LOCAL_STORAGE_ENCRYPTION_KEY,
 });
 
-export const AppThemeContext = createContext<IAppThemeContext | undefined>(undefined);
+export const AppThemeContext = createContext<IAppThemeContext | undefined>(
+  undefined,
+);
 
 export const useAppThemeContext = (): IAppThemeContext => {
   const context = useContext(AppThemeContext);
   if (!context) {
     throw new Error(
       'useAppThemeContext must be used within AppThemeProvider. ' +
-      'Make sure you have wrapped your app with AppThemeProvider.',
+        'Make sure you have wrapped your app with AppThemeProvider.',
     );
   }
   return context;
@@ -36,11 +38,10 @@ export const AppThemeProvider = ({
   autoDetect = true,
   children,
 }: IAppThemeProvider) => {
-
   const [deviceTheme, setDeviceTheme] = useState<ISelectedTheme>('light');
 
-  const [selectedThemeType, setSelectedThemeType] = useState<ISelectedTheme>('auto');
-
+  const [selectedThemeType, setSelectedThemeType] =
+    useState<ISelectedTheme>('auto');
 
   useEffect(() => {
     const updateDeviceTheme = () => {
@@ -75,7 +76,6 @@ export const AppThemeProvider = ({
     loadThemePreference();
   }, []);
 
-
   useEffect(() => {
     try {
       appThemeLocalStorage.set(APP_THEME_LOCAL_STORAGE_KEY, selectedThemeType);
@@ -107,14 +107,12 @@ export const AppThemeProvider = ({
       selectedThemeType,
       resetTheme,
     }),
-    [appliedTheme, selectedThemeType]
+    [appliedTheme, selectedThemeType],
   );
 
   return (
     <AppThemeContext.Provider value={value}>
-      <PaperProvider theme={appliedTheme}>
-        {children}
-      </PaperProvider>
+      <PaperProvider theme={appliedTheme}>{children}</PaperProvider>
     </AppThemeContext.Provider>
   );
 };

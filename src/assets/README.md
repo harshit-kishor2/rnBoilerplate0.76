@@ -23,7 +23,6 @@ npm run app-icon
 Check here for react native launch screen update guide
 https://hybridheroes.de/blog/react-native-splash-screen/
 
-
 2. #### **fonts** -
 
 This subfolder contains all custom font files used in the application. Ensure to include the font files in various formats (e.g., .ttf, .otf) for compatibility across different platforms.
@@ -40,7 +39,6 @@ https://github.com/oblador/react-native-vector-icons#installation
 
 Check here for custom fonts installation
 https://medium.com/@harshitkishor2/harnessing-custom-fonts-in-your-react-native-project-5ae98fbaa98c
-
 
 Add this file in root directory -` react-native.config.js`
 
@@ -154,7 +152,6 @@ All assets are imported through the `index.ts` file for better management and cl
 Create an `index.ts` file inside the `assets` folder and export all assets from it:
 
 ```typescript
-
 // Import all assets files here
 import GIFS from './gif';
 import IMAGES from './images';
@@ -190,14 +187,19 @@ export default Assets;
 ```
 
 Note -> We have created a script to auto-generate imports using a Yarn command. To use this script, you need to install the inquirer package.
+
 ```bash
 yarn add -D inquirer
 ```
+
 Write this script inside your package.json
+
 ```bash
 "assets": "cd scripts && node generateAssets.js",
 ```
+
 and then run
+
 ```bash
 yarn assets
 ```
