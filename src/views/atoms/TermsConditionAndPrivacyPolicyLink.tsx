@@ -2,11 +2,11 @@ import {AppText, Padding, Row} from "@app/components";
 import {rpWidth} from "@app/helpers/responsive-utils";
 import {useAppTranslation} from "@app/i18n";
 import {useAppNavigation} from "@app/navigation/hooks";
-import {RouteConst, RouteName} from "@app/navigation/types";
+import {RootStackParamList, RouteConst} from "@app/navigation/types";
 import React from "react";
 
 type ITermsConditionAndPrivacyPolicyLink = {
-  from: RouteName;
+  from: keyof RootStackParamList;
 };
 const TermsConditionAndPrivacyPolicyLink: React.FC<
   ITermsConditionAndPrivacyPolicyLink

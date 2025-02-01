@@ -9,12 +9,14 @@ import {
   stackScreenOptions,
 } from "./route-config";
 import {UserRoles} from "@app/helpers/enums";
-import {RouteConst, RouteName, RouteType} from "./types";
+import {RootStackParamList, RouteConst, RouteType} from "./types";
 
 const Stack = createStackNavigator();
 
+type InitialRouteName = keyof RootStackParamList | null;
+
 const StackNavigator = () => {
-  const [initialRoute, setInitialRoute] = useState<RouteName | null>(null);
+  const [initialRoute, setInitialRoute] = useState<InitialRouteName>(null);
 
   const {isAuth, userRole} = usePersistAuthStore();
 
@@ -95,7 +97,7 @@ const StackNavigator = () => {
 const getInitialRouteName = (
   isAuth: boolean,
   userRole: UserRoles
-): RouteName => {
+): InitialRouteName => {
   if (!isAuth) return RouteConst.LoginRoute;
 
   return userRole === UserRoles.Admin
