@@ -10,8 +10,13 @@ import {
   StackNavigationProp,
 } from "@react-navigation/stack";
 
+export enum RouteType {
+  modal = "modal",
+  stack = "stack",
+}
+
 type CustomRouteParams = {
-  type?: "modal" | "stack";
+  type?: RouteType;
   roles?: UserRoles[];
 };
 

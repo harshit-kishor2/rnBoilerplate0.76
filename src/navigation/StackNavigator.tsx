@@ -9,7 +9,7 @@ import {
   stackScreenOptions,
 } from "./route-config";
 import {UserRoles} from "@app/helpers/enums";
-import {RouteConst, RouteName} from "./types";
+import {RouteConst, RouteName, RouteType} from "./types";
 
 const Stack = createStackNavigator();
 
@@ -32,8 +32,12 @@ const StackNavigator = () => {
     );
 
     return {
-      stackRoutes: filteredRoutes.filter(route => route.type === "stack"),
-      modalRoutes: filteredRoutes.filter(route => route.type === "modal"),
+      stackRoutes: filteredRoutes.filter(
+        route => route.type === RouteType.stack
+      ),
+      modalRoutes: filteredRoutes.filter(
+        route => route.type === RouteType.modal
+      ),
     };
   }, [userRole]);
 
@@ -121,7 +125,7 @@ if (__DEV__) {
     });
 
     // Validate route types
-    const validTypes = ["modal", "stack"];
+    const validTypes = [RouteType.modal, RouteType.stack];
     allRoutes.forEach(route => {
       if (route.type && !validTypes.includes(route.type)) {
         throw new Error(`Invalid type '${route.type}' for route ${route.name}`);
@@ -129,7 +133,7 @@ if (__DEV__) {
     });
 
     // Validate role configurations
-    const validRoles = ["guest", "user", "admin"];
+    const validRoles = [UserRoles.Guest, UserRoles.User, UserRoles.Admin];
     allRoutes.forEach(route => {
       if (route.roles) {
         route.roles.forEach(role => {
