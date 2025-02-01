@@ -30,8 +30,6 @@ export type SecureStackRouteType<ParamList extends ParamListBase> = RouteConfig<
 > &
   CustomRouteParams;
 
-export type RouteName = keyof RootStackParamList;
-
 export enum RouteConst {
   SplashRoute = "SplashRoute",
   LoginRoute = "LoginRoute",
