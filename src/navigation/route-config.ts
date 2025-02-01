@@ -1,15 +1,16 @@
 import {
-  LoginScreen,
   HomeScreen,
+  LoginScreen,
   NetworkLoggerScreen,
+  RegisterScreen,
   SettingScreen,
   WebviewScreen,
-  RegisterScreen,
 } from "@app/views";
 import {
   CardStyleInterpolators,
   type StackNavigationOptions,
 } from "@react-navigation/stack";
+import {RootStackParamList, SecureStackRouteType} from "./types";
 
 // Make changes here for global screen options in stack
 export const stackScreenOptions: StackNavigationOptions = {
@@ -26,48 +27,47 @@ export const modalScreenOptions: StackNavigationOptions = {
   cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
 };
 
-export const allRoutes: RootStackRoutesType[] = [
+export const allRoutes: SecureStackRouteType<RootStackParamList>[] = [
   {
     name: "RegisterRoute",
     component: RegisterScreen,
     type: "stack",
-    role: ["guest"],
+    roles: ["guest"],
   },
   {
     name: "LoginRoute",
     component: LoginScreen,
     type: "stack",
-    role: ["guest"],
+    roles: ["guest"],
   },
   {
     name: "NetworkLoggerRoute",
     component: NetworkLoggerScreen,
     type: "stack",
-    role: ["user", "admin"],
+    roles: ["user", "admin"],
   },
   {
     name: "HomeRoute",
     component: HomeScreen,
     type: "stack",
-    role: ["user"],
+    roles: ["user"],
   },
   {
     name: "SettingRoute",
     component: SettingScreen,
     type: "stack",
-    role: ["user", "admin"],
+    roles: ["user", "admin"],
   },
   {
     name: "WebViewRoute",
     component: WebviewScreen,
     type: "stack",
-    role: ["guest", "user", "admin"],
   },
 
   // {
   //   name: 'CountryCodeRoute',
   //   component: CountryCodeScreen,
   //   type: "modal",
-  //   role: ["guest", "user", "admin"],
+  //   roles: ["guest", "user", "admin"],
   // },
 ];

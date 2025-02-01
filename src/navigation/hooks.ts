@@ -1,5 +1,6 @@
 import {RouteProp, useNavigation, useRoute} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
+import {RootStackParamList} from "./types";
 
 /**
  * Custom hook to access the navigation object for a specific screen.

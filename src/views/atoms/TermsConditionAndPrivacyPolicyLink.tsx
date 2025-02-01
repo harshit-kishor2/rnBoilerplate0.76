@@ -2,6 +2,7 @@ import {AppText, Padding, Row} from "@app/components";
 import {rpWidth} from "@app/helpers/responsive-utils";
 import {useAppTranslation} from "@app/i18n";
 import {useAppNavigation} from "@app/navigation/hooks";
+import {RootStackParamList} from "@app/navigation/types";
 import React from "react";
 
 type ITermsConditionAndPrivacyPolicyLink = {
