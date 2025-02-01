@@ -1,5 +1,5 @@
-import React from 'react';
-import {View, StyleSheet, ViewStyle} from 'react-native';
+import React from "react";
+import {View, StyleSheet, ViewStyle} from "react-native";
 
 interface ColumnProps {
   children: React.ReactNode;
@@ -12,9 +12,9 @@ interface ColumnProps {
 const Column: React.FC<ColumnProps> = ({
   children,
   style,
-  justifyContent = 'flex-start',
-  alignItems = 'center',
-  backgroundColor = 'transparent',
+  justifyContent = "flex-start",
+  alignItems = "center",
+  backgroundColor = "transparent",
 }) => {
   return (
     <View
@@ -30,7 +30,7 @@ const Column: React.FC<ColumnProps> = ({
 
 const styles = StyleSheet.create({
   column: {
-    flexDirection: 'column',
+    flexDirection: "column",
   },
 });
 

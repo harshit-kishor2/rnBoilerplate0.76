@@ -1,15 +1,15 @@
-import {Platform, Dimensions, ScaledSize} from 'react-native';
-import DeviceInfo from 'react-native-device-info';
+import {Platform, Dimensions, ScaledSize} from "react-native";
+import DeviceInfo from "react-native-device-info";
 import {
   isIphoneX,
   getStatusBarHeight,
   getBottomSpace,
-} from 'react-native-iphone-screen-helper';
+} from "react-native-iphone-screen-helper";
 
 //=============================
 
 // ! Screen Constants
-const Screen: ScaledSize = Dimensions.get('screen');
+const Screen: ScaledSize = Dimensions.get("screen");
 
 /**
  * @description
@@ -43,7 +43,7 @@ const ScreenFontScale: number = Screen.fontScale;
 
 // ! Window Constants
 
-const Window: ScaledSize = Dimensions.get('window');
+const Window: ScaledSize = Dimensions.get("window");
 
 /**
  * @description
@@ -120,14 +120,14 @@ const statusBarHeight: number = getStatusBarHeight();
  * Determines whether the app is running on iOS.
  * @type {boolean}
  */
-const isIOS: boolean = Platform.OS === 'ios';
+const isIOS: boolean = Platform.OS === "ios";
 
 /**
  * @description
  * Determines whether the app is running on android.
  * @type {boolean}
  */
-const isAndroid: boolean = Platform.OS === 'android';
+const isAndroid: boolean = Platform.OS === "android";
 
 /**
  * @description

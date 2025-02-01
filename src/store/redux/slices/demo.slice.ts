@@ -1,7 +1,7 @@
-import {createSlice} from '@reduxjs/toolkit';
-import {LoadingStatus} from '../utils';
+import {createSlice} from "@reduxjs/toolkit";
+import {LoadingStatus} from "../utils";
 
-const SLICE_FEATURE_KEY = 'demo';
+const SLICE_FEATURE_KEY = "demo";
 
 interface DemoState {
   demoLoadingStatus: string;
@@ -13,7 +13,7 @@ interface DemoState {
 const initialState: DemoState = {
   demoLoadingStatus: LoadingStatus.IDLE,
   demoData: null,
-  demoError: '',
+  demoError: "",
 };
 
 //! =============================== Redux : Slice ==================================

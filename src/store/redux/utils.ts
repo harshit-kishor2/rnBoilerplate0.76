@@ -1,5 +1,5 @@
-import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
-import {reduxStore} from './redux-store';
+import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
+import {reduxStore} from "./redux-store";
 
 /**
  * The root state of the Redux store.
@@ -16,10 +16,10 @@ export type RootState = ReturnType<typeof reduxStore.getState>;
 export type AppDispatch = typeof reduxStore.dispatch;
 
 export enum LoadingStatus {
-  IDLE = 'IDLE',
-  PENDING = 'PENDING',
-  FULLFILLED = 'FULLFILLED',
-  REJECTED = 'REJECTED',
+  IDLE = "IDLE",
+  PENDING = "PENDING",
+  FULLFILLED = "FULLFILLED",
+  REJECTED = "REJECTED",
 }
 
 /**

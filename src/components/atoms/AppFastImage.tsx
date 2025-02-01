@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import type {LayoutChangeEvent} from 'react-native';
+import React, {useEffect, useState} from "react";
+import type {LayoutChangeEvent} from "react-native";
 import {
   ActivityIndicator,
   LayoutRectangle,
@@ -7,15 +7,15 @@ import {
   StyleSheet,
   View,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 import FastImage, {
   FastImageProps as FastImageProp,
   ImageStyle,
   Priority,
   Source,
-} from 'react-native-fast-image';
+} from "react-native-fast-image";
 
-export type FastImageProps = Omit<FastImageProp, 'source'>;
+export type FastImageProps = Omit<FastImageProp, "source">;
 
 export interface ImageProps extends FastImageProps {
   containerStyle?: StyleProp<ViewStyle>;
@@ -49,24 +49,24 @@ const AppFastImage: React.FC<ImageProps> = props => {
   const [loading, setLoading] = useState(false);
   const [layout, setLayout] = useState<LayoutRectangle | null>(null);
   const [imageSource, setImageSource] = useState<number | Source | undefined>(
-    undefined,
+    undefined
   );
 
   useEffect(() => {
-    if (typeof uploading !== 'undefined' && uploading !== loading) {
+    if (typeof uploading !== "undefined" && uploading !== loading) {
       setLoading(uploading);
     }
   }, [loading, uploading]);
 
   useEffect(() => {
-    if (typeof source === 'string') {
+    if (typeof source === "string") {
       setImageSource({
         uri: source,
         priority: priority ?? FastImage.priority.normal,
       });
-    } else if (typeof source === 'object' && source?.uri) {
+    } else if (typeof source === "object" && source?.uri) {
       setImageSource(source);
-    } else if (typeof source === 'number') {
+    } else if (typeof source === "number") {
       setImageSource(source);
     }
   }, [source]);
@@ -88,15 +88,15 @@ const AppFastImage: React.FC<ImageProps> = props => {
   const shouldShowIndicator =
     showIndicator &&
     loading &&
-    typeof source === 'string' &&
-    (source.startsWith('http') || source.startsWith('https'));
+    typeof source === "string" &&
+    (source.startsWith("http") || source.startsWith("https"));
 
   let indicator = null;
   if (shouldShowIndicator) {
     indicator = (
       <View style={styles.indicator}>
         <ActivityIndicator
-          color={loaderColor ?? 'grey'}
+          color={loaderColor ?? "grey"}
           size={indicatorSize}
           animating={loading}
         />
@@ -142,8 +142,8 @@ const styles = StyleSheet.create({
   container: {},
   indicator: {
     ...StyleSheet.absoluteFillObject,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 

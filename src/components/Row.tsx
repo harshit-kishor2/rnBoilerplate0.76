@@ -1,5 +1,5 @@
-import React from 'react';
-import {View, StyleSheet, ViewStyle} from 'react-native';
+import React from "react";
+import {View, StyleSheet, ViewStyle} from "react-native";
 
 interface RowProps {
   children: React.ReactNode;
@@ -12,9 +12,9 @@ interface RowProps {
 const Row: React.FC<RowProps> = ({
   children,
   style,
-  justifyContent = 'flex-start',
-  alignItems = 'center',
-  backgroundColor = 'transparent',
+  justifyContent = "flex-start",
+  alignItems = "center",
+  backgroundColor = "transparent",
 }) => {
   return (
     <View
@@ -30,7 +30,7 @@ const Row: React.FC<RowProps> = ({
 
 const styles = StyleSheet.create({
   row: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
 });
 

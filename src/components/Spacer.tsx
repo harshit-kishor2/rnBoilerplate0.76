@@ -1,5 +1,5 @@
-import React from 'react';
-import {View} from 'react-native';
+import React from "react";
+import {View} from "react-native";
 
 const Spacer: React.FC = () => <View style={{flex: 1}} />;
 

@@ -3,11 +3,11 @@ import type {
   DefaultNavigatorOptions,
   ParamListBase,
   StackNavigationState,
-} from '@react-navigation/core';
+} from "@react-navigation/core";
 import {
   StackNavigationEventMap,
   StackNavigationOptions,
-} from '@react-navigation/stack';
+} from "@react-navigation/stack";
 
 declare global {
   type NavigateProps = {
@@ -48,6 +48,4 @@ declare global {
     NetworkLoggerRoute: {from?: keyof RootStackParamList} | undefined;
     SettingRoute: {from?: keyof RootStackParamList} | undefined;
   };
-
-  type IWebViewPages = 't&c' | 'p&p';
 }

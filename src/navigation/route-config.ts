@@ -4,13 +4,12 @@ import {
   NetworkLoggerScreen,
   SettingScreen,
   WebviewScreen,
-  SplashScreen,
   RegisterScreen,
-} from '@app/views';
+} from "@app/views";
 import {
   CardStyleInterpolators,
   type StackNavigationOptions,
-} from '@react-navigation/stack';
+} from "@react-navigation/stack";
 
 // Make changes here for global screen options in stack
 export const stackScreenOptions: StackNavigationOptions = {
@@ -20,57 +19,55 @@ export const stackScreenOptions: StackNavigationOptions = {
 
 // Make changes here for modal screen options in stack
 export const modalScreenOptions: StackNavigationOptions = {
-  presentation: 'modal',
+  presentation: "modal",
   headerShown: false,
   gestureEnabled: true,
-  gestureDirection: 'vertical',
+  gestureDirection: "vertical",
   cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
 };
 
-// Put all Pre Auth routes and respected screen here
-export const preAuthRoutes: RootStackRoutesType[] = [
+export const allRoutes: RootStackRoutesType[] = [
   {
-    name: 'LoginRoute',
-    component: LoginScreen,
-  },
-  {
-    name: 'RegisterRoute',
+    name: "RegisterRoute",
     component: RegisterScreen,
-  },
-];
-
-// Put all Post Auth routes and respected screen here
-export const postAuthRoutes: RootStackRoutesType[] = [
-  {
-    name: 'HomeRoute',
-    component: HomeScreen,
+    type: "stack",
+    role: ["guest"],
   },
   {
-    name: 'NetworkLoggerRoute',
+    name: "LoginRoute",
+    component: LoginScreen,
+    type: "stack",
+    role: ["guest"],
+  },
+  {
+    name: "NetworkLoggerRoute",
     component: NetworkLoggerScreen,
+    type: "stack",
+    role: ["user", "admin"],
   },
   {
-    name: 'SettingRoute',
+    name: "HomeRoute",
+    component: HomeScreen,
+    type: "stack",
+    role: ["user"],
+  },
+  {
+    name: "SettingRoute",
     component: SettingScreen,
-  },
-];
-
-// Put all common routes and respected screen here
-export const commonRoutes: RootStackRoutesType[] = [
-  {
-    name: 'SplashRoute',
-    component: SplashScreen,
+    type: "stack",
+    role: ["user", "admin"],
   },
   {
-    name: 'WebViewRoute',
+    name: "WebViewRoute",
     component: WebviewScreen,
+    type: "stack",
+    role: ["guest", "user", "admin"],
   },
-];
 
-// Put all Modal routes and respected screen here
-export const modalRoutes: RootStackRoutesType[] = [
   // {
-  //     name: 'CountryCodeRoute',
-  //     component: CountryCodeScreen,
+  //   name: 'CountryCodeRoute',
+  //   component: CountryCodeScreen,
+  //   type: "modal",
+  //   role: ["guest", "user", "admin"],
   // },
 ];

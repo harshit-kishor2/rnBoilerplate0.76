@@ -1,5 +1,5 @@
-import {combineReducers, configureStore} from '@reduxjs/toolkit';
-import {MMKV} from 'react-native-mmkv';
+import {combineReducers, configureStore} from "@reduxjs/toolkit";
+import {MMKV} from "react-native-mmkv";
 import {
   FLUSH,
   PAUSE,
@@ -10,9 +10,9 @@ import {
   REGISTER,
   REHYDRATE,
   Storage,
-} from 'redux-persist';
+} from "redux-persist";
 
-import {demoReducer} from './slices/demo.slice';
+import {demoReducer} from "./slices/demo.slice";
 
 // ======================================================
 //! Combine all reducers and export
@@ -22,7 +22,7 @@ export const allCombineReducers = combineReducers({
 
 export const reduxLocalStorage: MMKV = new MMKV({
   id: `redux-local-storage`,
-  encryptionKey: 'reduxLocalStorageEncryptionKey',
+  encryptionKey: "reduxLocalStorageEncryptionKey",
 });
 
 export const reduxPersistStorage: Storage = {
@@ -48,7 +48,7 @@ export const reduxPersistStorage: Storage = {
  * blacklist: An array of reducer keys to exclude from persistence
  */
 const persistConfig = {
-  key: 'root_redux_states',
+  key: "root_redux_states",
   storage: reduxPersistStorage,
   version: 1,
   blacklist: [],

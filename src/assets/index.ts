@@ -1,23 +1,23 @@
 //! ==============================================================================
 
-import GIFS from './gif';
-import IMAGES from './images';
-import LOTTIES from './lottie';
-import {SVGIcons} from './svg';
+import GIFS from "./gif";
+import IMAGES from "./images";
+import LOTTIES from "./lottie";
+import {SVGIcons} from "./svg";
 
 // Import all Fonts  from here
 const FontConst = {
   Roboto: {
-    light: 'Roboto-Light',
-    regular: 'Roboto-Regular',
-    medium: 'Roboto-Medium',
-    bold: 'Roboto-Bold',
+    light: "Roboto-Light",
+    regular: "Roboto-Regular",
+    medium: "Roboto-Medium",
+    bold: "Roboto-Bold",
   },
   Satoshi: {
-    light: 'Satoshi-Light',
-    regular: 'Satoshi-Regular',
-    medium: 'Satoshi-Medium',
-    bold: 'Satoshi-Bold',
+    light: "Satoshi-Light",
+    regular: "Satoshi-Regular",
+    medium: "Satoshi-Medium",
+    bold: "Satoshi-Bold",
   },
 };
 

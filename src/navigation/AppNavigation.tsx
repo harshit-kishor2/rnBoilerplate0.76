@@ -1,17 +1,17 @@
-import React from 'react';
+import React from "react";
 import {
   NavigationContainer,
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
-} from '@react-navigation/native';
-import {isReadyRef, navigationRef} from './navigation-service';
-import StackNavigator from './StackNavigator';
-import {useAppThemeContext} from '@app/theme/provider';
+} from "@react-navigation/native";
+import {isReadyRef, navigationRef} from "./navigation-service";
+import StackNavigator from "./StackNavigator";
+import {useAppThemeContext} from "@app/theme/provider";
 
-const Navigator = () => {
+const AppNavigation = () => {
   const {currentTheme} = useAppThemeContext();
   const theme =
-    currentTheme.themeType === 'dark'
+    currentTheme.themeType === "dark"
       ? NavigationDarkTheme
       : NavigationDefaultTheme;
 
@@ -34,4 +34,4 @@ const Navigator = () => {
   );
 };
 
-export default Navigator;
+export default AppNavigation;

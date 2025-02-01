@@ -1,4 +1,4 @@
-import React, {useCallback, useMemo} from 'react';
+import React, {useCallback, useMemo} from "react";
 import {
   NativeSyntheticEvent,
   Platform,
@@ -12,7 +12,7 @@ import {
   StyleProp,
   TextStyle,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
 import Animated, {
   Easing,
@@ -23,11 +23,11 @@ import Animated, {
   useDerivedValue,
   useSharedValue,
   withTiming,
-} from 'react-native-reanimated';
+} from "react-native-reanimated";
 
-import {useAppTheme} from '@app/theme';
+import {useAppTheme} from "@app/theme";
 
-export type Variant = 'filled' | 'outlined' | 'standard';
+export type Variant = "filled" | "outlined" | "standard";
 
 export interface IAppTextInputProps extends RNTextInputProps {
   /**
@@ -70,7 +70,7 @@ export interface IAppTextInputProps extends RNTextInputProps {
   /**
    * The style of the text input.
    */
-  inputStyle?: RNTextInputProps['style'];
+  inputStyle?: RNTextInputProps["style"];
   /**
    * The style of the text input's leading element container.
    */
@@ -133,34 +133,34 @@ const AnimatedTextInput = Animated.createAnimatedComponent(RNTextInput);
 
 const AppTextInputWithoutRef = (
   props: IAppTextInputProps,
-  ref?: React.Ref<RNTextInput>,
+  ref?: React.Ref<RNTextInput>
 ) => {
   const {
-    backgroundColor = 'white',
-    borderColor = 'black',
+    backgroundColor = "white",
+    borderColor = "black",
     error,
     errorContainerStyle,
     errorStyle,
     inputContainerStyle,
     inputStyle,
     label,
-    labelColor = 'black',
+    labelColor = "black",
     leftIcon,
     leftIconContainerStyle,
     onBlur,
     onFocus,
-    onFocusBackgroundColor = '#e9e9e9',
-    onFocusBorderColor = '#0c5fed',
-    onFocusLabelColor = '#0c5fed',
-    onHoverBackgroundColor = '#e9e9e9',
+    onFocusBackgroundColor = "#e9e9e9",
+    onFocusBorderColor = "#0c5fed",
+    onFocusLabelColor = "#0c5fed",
+    onHoverBackgroundColor = "#e9e9e9",
     onMouseEnter,
     onMouseLeave,
-    outlineGapColor = 'white',
+    outlineGapColor = "white",
     placeholder,
     rightIcon,
     rightIconContainerStyle,
     style,
-    variant = 'filled',
+    variant = "filled",
     ...rest
   } = props;
 
@@ -170,7 +170,7 @@ const AppTextInputWithoutRef = (
   const focusAnimation = useSharedValue(0);
   const activeAnimation = useSharedValue(0);
 
-  const isStandardVariant = variant === 'standard';
+  const isStandardVariant = variant === "standard";
 
   const styles = useMemo(() => inputStyles(theme), [theme]);
 
@@ -179,7 +179,7 @@ const AppTextInputWithoutRef = (
       onMouseEnter?.(event);
       hovered.value = true;
     },
-    [hovered, onMouseEnter],
+    [hovered, onMouseEnter]
   );
 
   const handleMouseLeave = useCallback(
@@ -187,7 +187,7 @@ const AppTextInputWithoutRef = (
       onMouseLeave?.(event);
       hovered.value = false;
     },
-    [hovered, onMouseLeave],
+    [hovered, onMouseLeave]
   );
 
   const handleFocus = useCallback(
@@ -195,7 +195,7 @@ const AppTextInputWithoutRef = (
       onFocus?.(event);
       focused.value = true;
     },
-    [focused, onFocus],
+    [focused, onFocus]
   );
 
   const handleBlur = useCallback(
@@ -203,7 +203,7 @@ const AppTextInputWithoutRef = (
       onBlur?.(event);
       focused.value = false;
     },
-    [focused, onBlur],
+    [focused, onBlur]
   );
 
   useDerivedValue(() => {
@@ -227,7 +227,7 @@ const AppTextInputWithoutRef = (
   }, [active, activeAnimation]);
   const animatedInputContainerStyle = useAnimatedStyle(() => {
     let resolvedBackgroundColor;
-    if (variant === 'filled') {
+    if (variant === "filled") {
       if (focused.value) {
         resolvedBackgroundColor = onFocusBackgroundColor;
       } else if (hovered.value) {
@@ -249,7 +249,7 @@ const AppTextInputWithoutRef = (
 
   const animatedInput = useAnimatedStyle(() => {
     const paddingIfStandard = isStandardVariant ? 0 : 16;
-    const paddingTop = variant === 'filled' && label ? 18 : 0;
+    const paddingTop = variant === "filled" && label ? 18 : 0;
     return {
       fontSize: 16,
       minHeight: isStandardVariant ? 48 : 56,
@@ -318,12 +318,12 @@ const AppTextInputWithoutRef = (
     const colorValue = interpolateColor(
       focusAnimation.value,
       [0, 1],
-      [labelColor, onFocusLabelColor],
+      [labelColor, onFocusLabelColor]
     );
     let translateYValue = 0;
-    if (variant === 'filled') {
+    if (variant === "filled") {
       translateYValue = -12;
-    } else if (variant === 'outlined') {
+    } else if (variant === "outlined") {
       translateYValue = -28;
     } else {
       translateYValue = -24;
@@ -331,7 +331,7 @@ const AppTextInputWithoutRef = (
     const translateY = interpolate(
       activeAnimation.value,
       [0, 1],
-      [0, translateYValue],
+      [0, translateYValue]
     );
 
     return {
@@ -342,7 +342,7 @@ const AppTextInputWithoutRef = (
   }, [focusAnimation, activeAnimation, variant, labelColor, onFocusLabelColor]);
 
   const animatedPlaceholder = useAnimatedProps<IAppTextInputProps>(() => {
-    const resolvedPlaceholder = label && !focused.value ? '' : placeholder;
+    const resolvedPlaceholder = label && !focused.value ? "" : placeholder;
     return {
       placeholder: resolvedPlaceholder,
     };
@@ -353,7 +353,7 @@ const AppTextInputWithoutRef = (
       backgroundColor: interpolateColor(
         focusAnimation.value,
         [0, 1],
-        [borderColor, onFocusBorderColor],
+        [borderColor, onFocusBorderColor]
       ),
       transform: [{scaleX: focusAnimation.value}],
     };
@@ -364,7 +364,7 @@ const AppTextInputWithoutRef = (
       backgroundColor: interpolateColor(
         activeAnimation.value,
         [0, 1],
-        [backgroundColor, outlineGapColor],
+        [backgroundColor, outlineGapColor]
       ),
       transform: [{scaleX: activeAnimation.value}],
     };
@@ -410,7 +410,7 @@ const AppTextInputWithoutRef = (
           </Animated.View>
         )}
 
-        {(variant === 'filled' || variant === 'standard') && (
+        {(variant === "filled" || variant === "standard") && (
           <>
             <View
               style={[styles.underline, {backgroundColor: borderColor}]}
@@ -423,7 +423,7 @@ const AppTextInputWithoutRef = (
           </>
         )}
 
-        {variant === 'outlined' && (
+        {variant === "outlined" && (
           <Animated.View
             style={[StyleSheet.absoluteFill, animatedOutline, styles.outline]}
             pointerEvents="none"
@@ -434,7 +434,7 @@ const AppTextInputWithoutRef = (
           <Animated.View
             style={[styles.labelContainer, animatedLabelContainer]}
             pointerEvents="none">
-            {variant === 'outlined' && (
+            {variant === "outlined" && (
               <Animated.View
                 style={[
                   styles.outlineLabelGap,
@@ -456,8 +456,8 @@ const AppTextInputWithoutRef = (
 
 const AppTextInput: React.FC<IAppTextInputProps> = React.memo(
   React.forwardRef((props: IAppTextInputProps, ref?: React.Ref<RNTextInput>) =>
-    AppTextInputWithoutRef(props, ref),
-  ),
+    AppTextInputWithoutRef(props, ref)
+  )
 );
 
 export default AppTextInput;
@@ -465,7 +465,7 @@ export default AppTextInput;
 const inputStyles = (theme: IAppTheme) =>
   StyleSheet.create({
     container: {
-      width: '100%',
+      width: "100%",
       paddingVertical: 5,
     },
     errorView: {
@@ -480,50 +480,50 @@ const inputStyles = (theme: IAppTheme) =>
       flex: 1,
       ...Platform.select({
         web: {
-          outlineStyle: 'none',
+          outlineStyle: "none",
         },
       }),
     },
     inputContainer: {
-      flexDirection: 'row',
+      flexDirection: "row",
     },
     labelContainer: {
-      justifyContent: 'center',
-      position: 'absolute',
+      justifyContent: "center",
+      position: "absolute",
       top: 0,
     },
     leading: {
-      alignItems: 'center',
+      alignItems: "center",
       height: 24,
-      justifyContent: 'center',
+      justifyContent: "center",
       width: 24,
     },
     outline: {},
     outlineLabelGap: {
       backgroundColor: theme.colors.background,
       end: -4,
-      position: 'absolute',
+      position: "absolute",
       start: -4,
       top: 0,
     },
     trailing: {
-      alignItems: 'center',
+      alignItems: "center",
       height: 24,
-      justifyContent: 'center',
+      justifyContent: "center",
       width: 24,
     },
     underline: {
       bottom: 0,
       end: 0,
       height: 1,
-      position: 'absolute',
+      position: "absolute",
       start: 0,
     },
     underlineFocused: {
       bottom: 0,
       end: 0,
       height: 2,
-      position: 'absolute',
+      position: "absolute",
       start: 0,
     },
   });

@@ -14,7 +14,7 @@ class EventEmitter {
   unsubscribe<T>(eventName: EventName, handler: EventHandler<T>): void {
     if (this.eventHandlers[eventName]) {
       this.eventHandlers[eventName] = this.eventHandlers[eventName].filter(
-        existingHandler => existingHandler !== handler,
+        existingHandler => existingHandler !== handler
       );
     }
   }
@@ -31,7 +31,7 @@ export const eventEmitter = new EventEmitter();
 
 // Enum for event names
 export enum EventName {
-  TEST_EVENT = 'TEST_EVENT',
+  TEST_EVENT = "TEST_EVENT",
 }
 
 // Usage Example:

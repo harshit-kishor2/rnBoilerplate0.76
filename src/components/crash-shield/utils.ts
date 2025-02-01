@@ -1,5 +1,5 @@
-import {navigationRef} from '@app/navigation/navigation-service';
-import {getRequests} from 'react-native-network-logger';
+import {navigationRef} from "@app/navigation/navigation-service";
+import {getRequests} from "react-native-network-logger";
 
 export const createUniqueId = (): string => {
   return new Date(Math.ceil(Math.random() * 1e13)).valueOf().toString(36);
@@ -9,7 +9,7 @@ export const sendCrashReport = (
   err: Error,
   isFatal: boolean,
   type: string,
-  crashId: string = createUniqueId(),
+  crashId: string = createUniqueId()
 ): void => {
   if (!err) return;
 
@@ -26,7 +26,7 @@ export const sendCrashReport = (
     type,
     crashId,
   };
-  console.log('crashData======> ', crashData);
+  console.log("crashData======> ", crashData);
 
   //  Send the error to your server
   // axios.post('https://your-server-url.com/crash-reports', crashData)

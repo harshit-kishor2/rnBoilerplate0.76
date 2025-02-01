@@ -3,39 +3,39 @@ import {
   AppFormTextInput,
   AppVectorIcon,
   SizedBox,
-} from '@app/components';
-import {IconType} from '@app/components/atoms/AppVectorIcon';
-import {consoleLog} from '@app/helpers/logger';
-import {rpHeight} from '@app/helpers/responsive-utils';
-import {RegisterSchema} from '@app/helpers/validation-schema';
-import {useAppTranslation} from '@app/i18n';
-import {zodResolver} from '@hookform/resolvers/zod';
-import React from 'react';
+} from "@app/components";
+import {IconType} from "@app/components/atoms/AppVectorIcon";
+import {consoleLog} from "@app/helpers/logger";
+import {rpHeight} from "@app/helpers/responsive-utils";
+import {RegisterSchema} from "@app/helpers/validation-schema";
+import {useAppTranslation} from "@app/i18n";
+import {zodResolver} from "@hookform/resolvers/zod";
+import React from "react";
 import {
   FormProvider,
   SubmitErrorHandler,
   SubmitHandler,
   useForm,
-} from 'react-hook-form';
+} from "react-hook-form";
 
 const RegisterForm: React.FC = () => {
   const translate = useAppTranslation();
 
   const {...methods} = useForm<RegisterFormData>({
-    mode: 'onChange',
+    mode: "onChange",
     resolver: zodResolver(RegisterSchema),
   });
 
   const onRegisterSubmitHandler: SubmitHandler<RegisterFormData> = (
-    data: LoginFormData,
+    data: LoginFormData
   ) => {
-    consoleLog('Formik register data====>', data);
+    consoleLog("Formik register data====>", data);
   };
 
   const onRegisterSubmitErrorHandler: SubmitErrorHandler<RegisterFormData> = (
-    errors: any,
+    errors: any
   ) => {
-    consoleLog('Formik register error====>', errors);
+    consoleLog("Formik register error====>", errors);
   };
 
   return (
@@ -76,9 +76,9 @@ const RegisterForm: React.FC = () => {
       <AppButton
         onPress={methods.handleSubmit(
           onRegisterSubmitHandler,
-          onRegisterSubmitErrorHandler,
+          onRegisterSubmitErrorHandler
         )}
-        title={translate('login_screen.login')}
+        title={translate("login_screen.login")}
       />
     </>
   );

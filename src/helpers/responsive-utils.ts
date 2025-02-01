@@ -1,9 +1,9 @@
-import {Dimensions} from 'react-native';
-import {s, vs, ms, mvs} from 'react-native-size-matters';
-import {RFPercentage, RFValue} from 'react-native-responsive-fontsize';
+import {Dimensions} from "react-native";
+import {s, vs, ms, mvs} from "react-native-size-matters";
+import {RFPercentage, RFValue} from "react-native-responsive-fontsize";
 
 // Get screen dimensions
-const {width, height} = Dimensions.get('window');
+const {width, height} = Dimensions.get("window");
 
 // Base design dimensions (update these to match your design)
 const guidelineBaseWidth = 375;

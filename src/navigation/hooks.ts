@@ -1,5 +1,5 @@
-import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
+import {RouteProp, useNavigation, useRoute} from "@react-navigation/native";
+import {StackNavigationProp} from "@react-navigation/stack";
 
 /**
  * Custom hook to access the navigation object for a specific screen.
@@ -8,7 +8,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
  * @returns The navigation object for the specified screen.
  */
 export const useAppNavigation = <T extends keyof RootStackParamList>(
-  _screenName: T,
+  _screenName: T
 ) => {
   const navigation =
     useNavigation<StackNavigationProp<RootStackParamList, T>>();
@@ -22,7 +22,7 @@ export const useAppNavigation = <T extends keyof RootStackParamList>(
  * @returns The route object for the specified screen.
  */
 export const useAppRoute = <T extends keyof RootStackParamList>(
-  _screenName: T,
+  _screenName: T
 ) => {
   const route = useRoute<RouteProp<RootStackParamList, T>>();
   return route;
