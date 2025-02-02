@@ -1,11 +1,11 @@
-import {useSplashTimeout} from "@app/hooks";
-import {usePersistAuthStore} from "@app/store/zustand/use-auth-store";
-import {SplashScreen} from "@app/views";
-import {createStackNavigator} from "@react-navigation/stack";
-import React, {useCallback, useMemo, useState} from "react";
-import {allRoutes, filterRoutesByRole, SCREEN_OPTIONS} from "./route-config";
-import {UserRoles} from "@app/helpers/enums";
-import {RootStackParamList, RouteConst, RouteType} from "./types";
+import {useSplashTimeout} from '@app/hooks';
+import {usePersistAuthStore} from '@app/store/zustand/use-auth-store';
+import {SplashScreen} from '@app/views';
+import {createStackNavigator} from '@react-navigation/stack';
+import React, {useCallback, useMemo, useState} from 'react';
+import {allRoutes, filterRoutesByRole, SCREEN_OPTIONS} from './route-config';
+import {UserRoles} from '@app/helpers/enums';
+import {RootStackParamList, RouteConst, RouteType} from './types';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -139,10 +139,10 @@ if (__DEV__) {
         });
       }
     });
-    console.log("✅ Route configuration validated successfully");
+    console.log('✅ Route configuration validated successfully');
     // console.log(JSON.stringify(allRoutes, null, 2))
   } catch (error) {
-    console.error("❌ Route configuration error:", error);
+    console.error('❌ Route configuration error:', error);
     // Optional: Crash the app in development to force fixing the issue
     throw error;
   }

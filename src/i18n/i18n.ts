@@ -1,22 +1,22 @@
-import i18n, {LanguageDetectorAsyncModule} from "i18next";
-import {initReactI18next} from "react-i18next";
-import {MMKV} from "react-native-mmkv";
-import {en, es, hi} from "./resources";
-import dayjs from "dayjs";
+import i18n, {LanguageDetectorAsyncModule} from 'i18next';
+import {initReactI18next} from 'react-i18next';
+import {MMKV} from 'react-native-mmkv';
+import {en, es, hi} from './resources';
+import dayjs from 'dayjs';
 
 // dayjs locales for i18n
 // Keep this list in sync with the locales in src/i18n/resources
 // See https://github.com/iamkun/dayjs/tree/dev/src/locale
-import "dayjs/locale/en-gb";
-import "dayjs/locale/es";
-import "dayjs/locale/hi";
+import 'dayjs/locale/en-gb';
+import 'dayjs/locale/es';
+import 'dayjs/locale/hi';
 
-export const APP_LANGUAGE_TYPE_KEY = "@app_language_type";
-export const APP_LANGUAGE_KEY = "@app_language";
+export const APP_LANGUAGE_TYPE_KEY = '@app_language_type';
+export const APP_LANGUAGE_KEY = '@app_language';
 
-const APP_LANGUAGE_LOCAL_STORAGE_ID = "app-langauge-local-storage-id";
+const APP_LANGUAGE_LOCAL_STORAGE_ID = 'app-langauge-local-storage-id';
 const APP_LANGUAGE_LOCAL_STORAGE_ENCRYPTION_KEY =
-  "my-random-key-for-encryption";
+  'my-random-key-for-encryption';
 export const appLanguageLocalStorage: MMKV = new MMKV({
   id: APP_LANGUAGE_LOCAL_STORAGE_ID,
   encryptionKey: APP_LANGUAGE_LOCAL_STORAGE_ENCRYPTION_KEY,
@@ -26,19 +26,19 @@ export const seti18nLanguage = async (lang: string) => {
   try {
     await i18n.changeLanguage(lang);
   } catch (error) {
-    console.error("Error changing language in i18n:", error);
+    console.error('Error changing language in i18n:', error);
   }
 
   try {
     dayjs.locale(lang);
   } catch (error) {
-    console.error("Error setting dayjs locale:", error);
+    console.error('Error setting dayjs locale:', error);
   }
 
   try {
     appLanguageLocalStorage.set(APP_LANGUAGE_KEY, lang);
   } catch (error) {
-    console.error("Error saving language to local storage:", error);
+    console.error('Error saving language to local storage:', error);
   }
 };
 
@@ -68,7 +68,7 @@ const resources = {
  * @type {LanguageDetectorAsyncModule}
  */
 const useLanguageStorage: LanguageDetectorAsyncModule = {
-  type: "languageDetector",
+  type: 'languageDetector',
   async: true,
   detect: async (callback: any) => {
     const lang = appLanguageLocalStorage.getString(APP_LANGUAGE_KEY);
@@ -89,9 +89,9 @@ i18n
   .use(useLanguageStorage) // Use the language storage detector
   .use(initReactI18next) // Use the react-i18next plugin
   .init({
-    compatibilityJSON: "v3", // Compatibility mode for the i18next JSON format.
-    fallbackLng: "en", // The default language to fall back to if a translation is not found.
-    lng: "en", // The default language to initialize the i18next instance with.
+    compatibilityJSON: 'v3', // Compatibility mode for the i18next JSON format.
+    fallbackLng: 'en', // The default language to fall back to if a translation is not found.
+    lng: 'en', // The default language to initialize the i18next instance with.
     resources: resources,
     react: {
       useSuspense: false, // Whether to use the Suspense feature of React.

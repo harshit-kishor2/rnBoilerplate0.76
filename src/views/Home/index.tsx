@@ -5,11 +5,11 @@ import {
   AppVectorIcon,
   Container,
   SizedBox,
-} from "@app/components";
-import {useAppLocalizationContext, useAppTranslation} from "@app/i18n";
-import {useAppTheme, useAppThemeContext} from "@app/theme";
-import React, {useMemo} from "react";
-import {KeyboardAvoidingView, StyleSheet, Text} from "react-native";
+} from '@app/components';
+import {useAppLocalizationContext, useAppTranslation} from '@app/i18n';
+import {useAppTheme, useAppThemeContext} from '@app/theme';
+import React, {useMemo} from 'react';
+import {KeyboardAvoidingView, StyleSheet, Text} from 'react-native';
 
 const HomeScreen: React.FC = () => {
   const {selectedThemeType, setSelectedThemeType} = useAppThemeContext();
@@ -30,37 +30,37 @@ const HomeScreen: React.FC = () => {
           <AppButton
             outlined
             title="Dark Theme"
-            onPress={() => setSelectedThemeType("dark")}
+            onPress={() => setSelectedThemeType('dark')}
           />
           <SizedBox height={20} />
           <AppButton
             title="Light Theme"
-            onPress={() => setSelectedThemeType("light")}
+            onPress={() => setSelectedThemeType('light')}
           />
           <SizedBox height={20} />
           <AppButton
             title="Auto Theme"
-            onPress={() => setSelectedThemeType("auto")}
+            onPress={() => setSelectedThemeType('auto')}
           />
           <SizedBox height={20} />
           <Text style={styles.text}>
             Langauge : ${currentLanguage} and ${selectedLanguageType} : $
-            {translate("greeting")}
+            {translate('greeting')}
           </Text>
           <SizedBox height={20} />
           <AppButton
             title="Set Language English"
-            onPress={() => setSelectedLanguageType("en")}
+            onPress={() => setSelectedLanguageType('en')}
           />
           <SizedBox height={20} />
           <AppButton
             title="Set Language Hindi"
-            onPress={() => setSelectedLanguageType("hi")}
+            onPress={() => setSelectedLanguageType('hi')}
           />
           <SizedBox height={20} />
           <AppButton
             title="Auto Language"
-            onPress={() => setSelectedLanguageType("auto")}
+            onPress={() => setSelectedLanguageType('auto')}
           />
           <SizedBox height={20} />
           <AppTextInput
@@ -90,8 +90,8 @@ const homeScreenStyles = (theme: IAppTheme) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
+      justifyContent: 'center',
+      alignItems: 'center',
       backgroundColor: theme.colors.background,
     },
     text: {

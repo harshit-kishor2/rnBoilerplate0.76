@@ -1,1 +1,1 @@
-type IWebViewPages = "t&c" | "p&p";
+type IWebViewPages = 't&c' | 'p&p';

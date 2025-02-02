@@ -45,7 +45,7 @@ yarn add react-native-safe-area-context
 After installation, wrap your entry point with <SafeAreaProvider>
 
 ```javascript
-import {SafeAreaProvider} from "react-native-safe-area-context";
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 export default function App() {
   return <SafeAreaProvider style={{flex: 1}}>{/* content */}</SafeAreaProvider>;
@@ -67,7 +67,7 @@ To finalize the installation of `react-native-gesture-handler`:
 
 ```javascript
 // Only import react-native-gesture-handler on native platforms
-import "react-native-gesture-handler";
+import 'react-native-gesture-handler';
 ```
 
 `gh.js`
@@ -79,13 +79,13 @@ import "react-native-gesture-handler";
 Add the following line at the top of your entry file, such as `index.js` or `App.js`:
 
 ```javascript
-import "./gesture-handler/gh";
+import './gesture-handler/gh';
 ```
 
 After installation, wrap your entry point with <GestureHandlerRootView>
 
 ```javascript
-import {GestureHandlerRootView} from "react-native-gesture-handler";
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 export default function App() {
   return (
@@ -111,7 +111,7 @@ module.exports = {
   ],
   plugins: [
     // other plugins
-    "react-native-reanimated/plugin",
+    'react-native-reanimated/plugin',
   ],
 };
 ```
@@ -133,7 +133,7 @@ module.exports = {
   ],
   env: {
     production: {
-      plugins: ["react-native-paper/babel"],
+      plugins: ['react-native-paper/babel'],
     },
   },
 };

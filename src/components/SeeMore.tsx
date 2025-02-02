@@ -1,10 +1,10 @@
-import React, {useState, useEffect, useCallback} from "react";
+import React, {useState, useEffect, useCallback} from 'react';
 import {
   Text,
   TextStyle,
   NativeSyntheticEvent,
   TextLayoutEventData,
-} from "react-native";
+} from 'react-native';
 
 interface ReadMoreTextProps {
   readMoreStyle?: TextStyle;
@@ -52,7 +52,7 @@ const SeeMoreText: React.FC<ReadMoreTextProps> = ({
       </Text>
       {showMoreButton ? (
         <Text onPress={toggleTextShown} style={readMoreStyle}>
-          {textShown ? "See Less" : "See More"}
+          {textShown ? 'See Less' : 'See More'}
         </Text>
       ) : null}
     </>

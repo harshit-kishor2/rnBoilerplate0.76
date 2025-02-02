@@ -1,12 +1,12 @@
-import {useAppThemeContext} from "@app/theme/provider";
+import {useAppThemeContext} from '@app/theme/provider';
 import {
   NavigationContainer,
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
-} from "@react-navigation/native";
-import React from "react";
-import {navigationRef} from "./navigation-service";
-import StackNavigator from "./StackNavigator";
+} from '@react-navigation/native';
+import React from 'react';
+import {navigationRef} from './navigation-service';
+import StackNavigator from './StackNavigator';
 
 /**
  * AppNavigation component responsible for managing the navigation container.
@@ -23,7 +23,7 @@ const AppNavigation = () => {
   // Memoize theme selection to prevent unnecessary recalculations
   const theme = React.useMemo(
     () =>
-      currentTheme.themeType === "dark"
+      currentTheme.themeType === 'dark'
         ? NavigationDarkTheme
         : NavigationDefaultTheme,
     [currentTheme.themeType] // Only recalculate when themeType changes

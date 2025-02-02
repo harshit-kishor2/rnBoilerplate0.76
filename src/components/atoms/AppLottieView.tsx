@@ -1,6 +1,6 @@
-import LottieView from "lottie-react-native";
-import React, {Component, useEffect, useRef, useState} from "react";
-import {AppState, AppStateStatus} from "react-native";
+import LottieView from 'lottie-react-native';
+import React, {Component, useEffect, useRef, useState} from 'react';
+import {AppState, AppStateStatus} from 'react-native';
 
 type extractComponentPropsType<Type> = Type extends Component<infer X>
   ? X
@@ -18,7 +18,7 @@ const AppLottieView: React.FC<LottieProps> = ({...rest}) => {
 
   useEffect(() => {
     const appStateSubscription = AppState.addEventListener(
-      "change",
+      'change',
       handleAppStateChange
     );
     return () => {
@@ -27,7 +27,7 @@ const AppLottieView: React.FC<LottieProps> = ({...rest}) => {
   });
 
   const handleAppStateChange = (nextAppState: AppStateStatus) => {
-    if (appState.match(/inactive|background/) && nextAppState === "active") {
+    if (appState.match(/inactive|background/) && nextAppState === 'active') {
       if (lottieRef.current) {
         lottieRef.current.play();
       }

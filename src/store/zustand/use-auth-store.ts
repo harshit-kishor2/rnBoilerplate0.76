@@ -1,8 +1,8 @@
-import {create, StateCreator} from "zustand";
-import {createJSONStorage, persist} from "zustand/middleware";
-import {zustandPersistStorage} from "./config";
-import {wait} from "@app/helpers";
-import {UserRoles} from "@app/helpers/enums";
+import {create, StateCreator} from 'zustand';
+import {createJSONStorage, persist} from 'zustand/middleware';
+import {zustandPersistStorage} from './config';
+import {wait} from '@app/helpers';
+import {UserRoles} from '@app/helpers/enums';
 
 type IState = {
   userRole: UserRoles;

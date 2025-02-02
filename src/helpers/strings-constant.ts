@@ -1,3 +1,3 @@
 export const StringConst = {
-  appName: "Demo",
+  appName: 'Demo',
 };

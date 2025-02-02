@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect} from 'react';
 
 const SPLASH_TIMEOUT = 5000;
 

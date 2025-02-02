@@ -1,4 +1,4 @@
-import {UserRoles} from "@app/helpers/enums";
+import {UserRoles} from '@app/helpers/enums';
 import {
   HomeScreen,
   LoginScreen,
@@ -6,17 +6,17 @@ import {
   RegisterScreen,
   SettingScreen,
   WebviewScreen,
-} from "@app/views";
+} from '@app/views';
 import {
   CardStyleInterpolators,
   StackNavigationOptions,
-} from "@react-navigation/stack";
+} from '@react-navigation/stack';
 import {
   RootStackParamList,
   RouteConst,
   RouteType,
   SecureStackRouteType,
-} from "./types";
+} from './types';
 
 // Global screen options for stack and modal navigation
 export const SCREEN_OPTIONS = {
@@ -25,10 +25,10 @@ export const SCREEN_OPTIONS = {
     cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
   } as StackNavigationOptions,
   modal: {
-    presentation: "modal",
+    presentation: 'modal',
     headerShown: false,
     gestureEnabled: true,
-    gestureDirection: "vertical",
+    gestureDirection: 'vertical',
     cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
   } as StackNavigationOptions,
 };

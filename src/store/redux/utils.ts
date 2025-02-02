@@ -1,5 +1,5 @@
-import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
-import {reduxStore} from "./redux-store";
+import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
+import {reduxStore} from './redux-store';
 
 /**
  * The root state of the Redux store.

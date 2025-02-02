@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-console */
-const fs = require("fs");
-const path = require("path");
+const fs = require('fs');
+const path = require('path');
 
 // Get folder name from terminal argument
 const folderName = process.argv[2];
 if (!folderName) {
-  console.error("Please provide a folder name");
+  console.error('Please provide a folder name');
   process.exit(1);
 }
 
@@ -24,8 +24,8 @@ fs.mkdir(`../src/views/${screenFolderName}`, err => {
   if (err) throw err;
   console.debug(`Folder ${screenFolderName} created successfully`);
 
-  const fileName = screenFolderName + "Screen";
-  const styleFileName = smallFirstLetter(fileName) + "Styles";
+  const fileName = screenFolderName + 'Screen';
+  const styleFileName = smallFirstLetter(fileName) + 'Styles';
 
   // Create hook file - useExampleScreen.ts
   const hookFile = `

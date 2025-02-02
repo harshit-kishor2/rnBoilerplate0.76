@@ -1,17 +1,17 @@
-import Assets from "@app/assets";
-import {AppFastImage, AppText, Container} from "@app/components";
-import DeviceUtils from "@app/helpers/device-utils";
-import {rpFont, rpWidth} from "@app/helpers/responsive-utils";
-import {useAppTheme} from "@app/theme";
-import React, {useMemo} from "react";
-import {StyleSheet, View} from "react-native";
+import Assets from '@app/assets';
+import {AppFastImage, AppText, Container} from '@app/components';
+import DeviceUtils from '@app/helpers/device-utils';
+import {rpFont, rpWidth} from '@app/helpers/responsive-utils';
+import {useAppTheme} from '@app/theme';
+import React, {useMemo} from 'react';
+import {StyleSheet, View} from 'react-native';
 import Animated, {
   Easing,
   useAnimatedStyle,
   useSharedValue,
   withRepeat,
   withTiming,
-} from "react-native-reanimated";
+} from 'react-native-reanimated';
 
 const SplashView = () => {
   const theme = useAppTheme();
@@ -64,11 +64,11 @@ export default SplashView;
 const splashScreenStyles = () =>
   StyleSheet.create({
     container: {
-      justifyContent: "center",
-      alignItems: "center",
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     version: {
-      position: "absolute",
+      position: 'absolute',
       bottom: 15,
       right: 25,
     },
