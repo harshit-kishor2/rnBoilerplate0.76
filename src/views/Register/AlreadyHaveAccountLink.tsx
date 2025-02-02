@@ -9,7 +9,7 @@ import React from "react";
 const AlreadyHaveAccountLink: React.FC = () => {
   const theme = useAppTheme();
   const translate = useAppTranslation();
-  const navigation = useAppNavigation(RouteConst.RegisterRoute);
+  const navigation = useAppNavigation<RouteConst.RegisterRoute>();
   const onLoginPress = () => {
     navigation.replace(RouteConst.LoginRoute, {from: RouteConst.RegisterRoute});
   };

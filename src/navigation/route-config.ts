@@ -18,7 +18,7 @@ import {
   SecureStackRouteType,
 } from "./types";
 
-// Make changes here for global screen options in stack and modal
+// Global screen options for stack and modal navigation
 export const SCREEN_OPTIONS = {
   stack: {
     headerShown: false,
@@ -33,43 +33,45 @@ export const SCREEN_OPTIONS = {
   } as StackNavigationOptions,
 };
 
+// Define all application routes with associated roles for access control
 export const allRoutes: SecureStackRouteType<RootStackParamList>[] = [
   {
     name: RouteConst.RegisterRoute,
     component: RegisterScreen,
     type: RouteType.stack,
-    roles: [UserRoles.Guest],
+    roles: [UserRoles.Guest], // Accessible only to guest users
   },
   {
     name: RouteConst.LoginRoute,
     component: LoginScreen,
     type: RouteType.stack,
-    roles: [UserRoles.Guest],
+    roles: [UserRoles.Guest], // Accessible only to guest users
   },
   {
     name: RouteConst.NetworkLoggerRoute,
     component: NetworkLoggerScreen,
     type: RouteType.stack,
-    roles: [UserRoles.User, UserRoles.Admin],
+    roles: [UserRoles.User, UserRoles.Admin], // Accessible to users and admins
   },
   {
     name: RouteConst.HomeRoute,
     component: HomeScreen,
     type: RouteType.stack,
-    roles: [UserRoles.User],
+    roles: [UserRoles.User], // Accessible only to regular users
   },
   {
     name: RouteConst.SettingRoute,
     component: SettingScreen,
     type: RouteType.stack,
-    roles: [UserRoles.User, UserRoles.Admin],
+    roles: [UserRoles.User, UserRoles.Admin], // Accessible to users and admins
   },
   {
     name: RouteConst.WebViewRoute,
     component: WebviewScreen,
-    type: RouteType.stack,
+    type: RouteType.stack, // No role restriction, accessible to all users
   },
 
+  // Example of a modal route (commented out for now)
   // {
   //   name: 'CountryCodeRoute',
   //   component: CountryCodeScreen,
@@ -78,6 +80,12 @@ export const allRoutes: SecureStackRouteType<RootStackParamList>[] = [
   // },
 ];
 
+/**
+ * Returns a filtered array of routes that the user with the specified role is allowed to access.
+ * Includes routes without a `roles` property, which are considered public.
+ * @param {UserRoles} role The role to filter routes by.
+ * @return {Array<RouteConfig>} An array of route configurations.
+ */
 export const filterRoutesByRole = (role: UserRoles) => {
   return allRoutes.filter(
     route =>

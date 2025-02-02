@@ -1,37 +1,39 @@
-import React from "react";
+import {useAppThemeContext} from "@app/theme/provider";
 import {
   NavigationContainer,
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
 } from "@react-navigation/native";
-import {isReadyRef, navigationRef} from "./navigation-service";
+import React from "react";
+import {navigationRef} from "./navigation-service";
 import StackNavigator from "./StackNavigator";
-import {useAppThemeContext} from "@app/theme/provider";
+
+/**
+ * AppNavigation component responsible for managing the navigation container.
+ * It uses the current theme from the theme context to determine the navigation theme.
+ *
+ * The component returns a NavigationContainer wrapping the StackNavigator.
+ * The navigation container reference is passed to allow for top-level navigation actions.
+ *
+ * The theme is memoized based on the current theme type ('dark' or 'light') to optimize performance.
+ */
 
 const AppNavigation = () => {
   const {currentTheme} = useAppThemeContext();
-  const theme =
-    currentTheme.themeType === "dark"
-      ? NavigationDarkTheme
-      : NavigationDefaultTheme;
-
-  // Cleanup effect to reset `isReadyRef` on unmount
-  React.useEffect(() => {
-    return () => {
-      isReadyRef.current = false; // Reset the readiness flag on unmount
-    };
-  }, []); // Empty dependency array ensures it runs once when component unmounts
+  // Memoize theme selection to prevent unnecessary recalculations
+  const theme = React.useMemo(
+    () =>
+      currentTheme.themeType === "dark"
+        ? NavigationDarkTheme
+        : NavigationDefaultTheme,
+    [currentTheme.themeType] // Only recalculate when themeType changes
+  );
 
   return (
-    <NavigationContainer
-      ref={navigationRef}
-      theme={theme}
-      onReady={() => {
-        isReadyRef.current = true; // Set `isReadyRef.current` to true when navigation is ready
-      }}>
+    <NavigationContainer ref={navigationRef} theme={theme}>
       <StackNavigator />
     </NavigationContainer>
   );
 };
 
-export default AppNavigation;
+export default React.memo(AppNavigation);

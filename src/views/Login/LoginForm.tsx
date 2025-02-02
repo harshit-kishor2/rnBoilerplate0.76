@@ -23,7 +23,7 @@ import {
 
 const LoginForm = () => {
   const {login} = usePersistAuthStore();
-  const navigation = useAppNavigation(RouteConst.LoginRoute);
+  const navigation = useAppNavigation<RouteConst.LoginRoute>();
   const translate = useAppTranslation();
   const {...methods} = useForm<LoginFormData>({
     mode: "onChange",

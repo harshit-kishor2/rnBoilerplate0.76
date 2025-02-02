@@ -13,7 +13,7 @@ const TermsConditionAndPrivacyPolicyLink: React.FC<
 > = props => {
   const {from} = props;
   const translate = useAppTranslation();
-  const navigation = useAppNavigation(RouteConst.LoginRoute);
+  const navigation = useAppNavigation<RouteConst.LoginRoute>();
 
   const onTermsOfServicePress = () => {
     navigation.navigate(RouteConst.WebViewRoute, {

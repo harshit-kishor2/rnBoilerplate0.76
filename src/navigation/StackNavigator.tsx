@@ -95,7 +95,11 @@ const StackNavigator = () => {
   );
 };
 
-// Helper function for initial route determination
+/**
+ * Determines the initial route based on the user's role
+ * @param {UserRoles} userRole - The role of the user
+ * @returns {keyof RootStackParamList} - The initial route name
+ */
 const getInitialRouteName = (userRole: UserRoles): keyof RootStackParamList => {
   if (!roleRouteMap[userRole]) {
     console.warn(
