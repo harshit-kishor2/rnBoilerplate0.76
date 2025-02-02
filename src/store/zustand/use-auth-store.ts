@@ -5,7 +5,6 @@ import {wait} from "@app/helpers";
 import {UserRoles} from "@app/helpers/enums";
 
 type IState = {
-  isAuth: boolean;
   userRole: UserRoles;
 };
 
@@ -20,7 +19,6 @@ export type IAuthSlice = IState & IActions;
 
 // Define the initial state
 const initialState: IState = {
-  isAuth: false,
   userRole: UserRoles.Guest,
 };
 
@@ -32,17 +30,15 @@ const createAuthSlice: StateCreator<IAuthSlice> = set => ({
     await wait(5000);
     // After the delay, update the state check if admin or user
     set(() => ({
-      isAuth: true,
       userRole: UserRoles.User,
     }));
   },
-  logout: () => set(() => ({isAuth: false, userRole: UserRoles.Guest})),
+  logout: () => set(() => ({userRole: UserRoles.Guest})),
   register: async () => {
     // Wait for 5 seconds before updating the state
     wait(5000);
     // After the delay, update the state check if admin or user.
     set(() => ({
-      isAuth: true,
       userRole: UserRoles.User,
     }));
   },

@@ -33,6 +33,12 @@ export const modalScreenOptions: StackNavigationOptions = {
   cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
 };
 
+export const filterRoutesByRole = (
+  role: UserRoles
+): SecureStackRouteType<RootStackParamList>[] => {
+  return allRoutes.filter(route => route.roles?.includes(role) ?? true); // Allow routes without roles
+};
+
 export const allRoutes: SecureStackRouteType<RootStackParamList>[] = [
   {
     name: RouteConst.RegisterRoute,

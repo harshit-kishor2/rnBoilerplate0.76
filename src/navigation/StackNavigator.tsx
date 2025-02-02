@@ -5,34 +5,41 @@ import {createStackNavigator} from "@react-navigation/stack";
 import React, {useCallback, useMemo, useState} from "react";
 import {
   allRoutes,
+  filterRoutesByRole,
   modalScreenOptions,
   stackScreenOptions,
 } from "./route-config";
 import {UserRoles} from "@app/helpers/enums";
 import {RootStackParamList, RouteConst, RouteType} from "./types";
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<RootStackParamList>();
 
-type InitialRouteName = keyof RootStackParamList | null;
+// Predefined route map for initial route determination
+const roleRouteMap: Record<UserRoles, RouteConst> = {
+  [UserRoles.Admin]: RouteConst.BottomTabRoute,
+  [UserRoles.User]: RouteConst.HomeRoute,
+  [UserRoles.Guest]: RouteConst.LoginRoute,
+};
 
 const StackNavigator = () => {
-  const [initialRoute, setInitialRoute] = useState<InitialRouteName>(null);
+  const [initialRoute, setInitialRoute] = useState<
+    keyof RootStackParamList | null
+  >(null);
 
-  const {isAuth, userRole} = usePersistAuthStore();
+  const {userRole} = usePersistAuthStore();
 
   const handleSplashEnd = useCallback(() => {
-    console.log("Splash ended! Navigating to the next screen.");
-    setInitialRoute(getInitialRouteName(isAuth, userRole));
-  }, [isAuth, userRole]);
+    const effectiveRole = userRole || UserRoles.Guest;
+    const initialRouteName = getInitialRouteName(effectiveRole);
+    console.log(`🚀 Splash ended! Navigating to the ${initialRouteName}.`);
+    setInitialRoute(initialRouteName);
+  }, [userRole]);
 
   const isSplashEnd = useSplashTimeout(handleSplashEnd);
 
   // Memoize filtered routes to prevent unnecessary re-renders
   const {stackRoutes, modalRoutes} = useMemo(() => {
-    const filteredRoutes = allRoutes.filter(
-      route => route.roles?.includes(userRole) ?? true // Allow routes without roles
-    );
-
+    const filteredRoutes = filterRoutesByRole(userRole);
     return {
       stackRoutes: filteredRoutes.filter(
         route => route.type === RouteType.stack
@@ -57,12 +64,12 @@ const StackNavigator = () => {
         {stackRoutes.map(({name, component, options}) => {
           // Check if component is valid before passing it
           if (!component) {
-            console.error(`Missing component for route: ${name.toString()}`);
+            console.error(`Missing component for route: ${name}`);
             return null;
           }
           return (
             <Stack.Screen
-              key={name.toString()}
+              key={name}
               name={name}
               component={component}
               options={options}
@@ -76,12 +83,12 @@ const StackNavigator = () => {
         {modalRoutes.map(({name, component, options}) => {
           // Check if component is valid before passing it
           if (!component) {
-            console.error(`Missing component for route: ${name.toString()}`);
+            console.error(`Missing component for route: ${name}`);
             return null;
           }
           return (
             <Stack.Screen
-              key={name.toString()}
+              key={name}
               name={name}
               component={component}
               options={options}
@@ -94,49 +101,37 @@ const StackNavigator = () => {
 };
 
 // Helper function for initial route determination
-const getInitialRouteName = (
-  isAuth: boolean,
-  userRole: UserRoles
-): InitialRouteName => {
-  if (!isAuth) return RouteConst.LoginRoute;
-
-  return userRole === UserRoles.Admin
-    ? RouteConst.BottomTabRoute
-    : RouteConst.HomeRoute;
+const getInitialRouteName = (userRole: UserRoles): keyof RootStackParamList => {
+  if (!roleRouteMap[userRole]) {
+    console.warn(
+      `⚠️ Unknown user role: ${userRole}, defaulting to LoginRoute.`
+    );
+    return RouteConst.LoginRoute;
+  }
+  return roleRouteMap[userRole];
 };
 
-// Validate only in development environment
+// **🔹 Runtime Route Validations (Development Only)**
 if (__DEV__) {
   try {
-    const uniqueNames = new Set(allRoutes.map(r => r.name));
-    if (uniqueNames.size !== allRoutes.length) {
-      const duplicates = allRoutes
-        .map(r => r.name)
-        .filter((name, index, arr) => arr.indexOf(name) !== index);
+    const validTypes = [RouteType.modal, RouteType.stack];
+    const validRoles = [UserRoles.Guest, UserRoles.User, UserRoles.Admin];
+    const seenNames = new Set();
 
-      throw new Error(
-        `Duplicate route names detected: ${duplicates.join(", ")}`
-      );
-    }
-
-    // Ensure all routes have valid components
+    // Ensure all routes have valid properties
     allRoutes.forEach(route => {
       if (!route.component) {
         throw new Error(`Route ${route.name} is missing a component`);
       }
-    });
+      // Validate unique route names
+      if (seenNames.has(route.name)) {
+        throw new Error(`Duplicate route name: ${route.name}`);
+      }
+      seenNames.add(route.name);
 
-    // Validate route types
-    const validTypes = [RouteType.modal, RouteType.stack];
-    allRoutes.forEach(route => {
       if (route.type && !validTypes.includes(route.type)) {
         throw new Error(`Invalid type '${route.type}' for route ${route.name}`);
       }
-    });
-
-    // Validate role configurations
-    const validRoles = [UserRoles.Guest, UserRoles.User, UserRoles.Admin];
-    allRoutes.forEach(route => {
       if (route.roles) {
         route.roles.forEach(role => {
           if (!validRoles.includes(role)) {
@@ -145,9 +140,10 @@ if (__DEV__) {
         });
       }
     });
-    console.log("All available routes:", JSON.stringify(allRoutes));
+    console.log("✅ Route configuration validated successfully");
+    // console.log(JSON.stringify(allRoutes, null, 2))
   } catch (error) {
-    console.error("Route configuration error:", {error});
+    console.error("❌ Route configuration error:", error);
     // Optional: Crash the app in development to force fixing the issue
     throw error;
   }
