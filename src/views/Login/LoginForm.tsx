@@ -3,44 +3,45 @@ import {
   AppFormTextInput,
   AppVectorIcon,
   SizedBox,
-} from '@app/components';
-import {IconType} from '@app/components/atoms/AppVectorIcon';
-import {consoleLog} from '@app/helpers/logger';
-import {rpHeight} from '@app/helpers/responsive-utils';
-import {LoginSchema} from '@app/helpers/validation-schema';
-import {useAppTranslation} from '@app/i18n';
-import {useAppNavigation} from '@app/navigation/hooks';
-import {usePersistAuthStore} from '@app/store/zustand/use-auth-store';
-import {zodResolver} from '@hookform/resolvers/zod';
-import React from 'react';
+} from "@app/components";
+import {IconType} from "@app/components/atoms/AppVectorIcon";
+import {consoleLog} from "@app/helpers/logger";
+import {rpHeight} from "@app/helpers/responsive-utils";
+import {LoginSchema} from "@app/helpers/validation-schema";
+import {useAppTranslation} from "@app/i18n";
+import {useAppNavigation} from "@app/navigation/hooks";
+import {RouteConst} from "@app/navigation/types";
+import {usePersistAuthStore} from "@app/store/zustand/use-auth-store";
+import {zodResolver} from "@hookform/resolvers/zod";
+import React from "react";
 import {
   FormProvider,
   SubmitErrorHandler,
   SubmitHandler,
   useForm,
-} from 'react-hook-form';
+} from "react-hook-form";
 
 const LoginForm = () => {
   const {login} = usePersistAuthStore();
-  const navigation = useAppNavigation('LoginRoute');
+  const navigation = useAppNavigation<RouteConst.LoginRoute>();
   const translate = useAppTranslation();
   const {...methods} = useForm<LoginFormData>({
-    mode: 'onChange',
+    mode: "onChange",
     resolver: zodResolver(LoginSchema),
   });
 
   const onLoginSubmitHandler: SubmitHandler<LoginFormData> = (
-    data: LoginFormData,
+    data: LoginFormData
   ) => {
     login(data).then(() => {
-      navigation.replace('HomeRoute', {from: 'LoginRoute'});
+      navigation.replace(RouteConst.HomeRoute, {from: RouteConst.LoginRoute});
     });
   };
 
   const onLoginSubmitErrorHandler: SubmitErrorHandler<LoginFormData> = (
-    errors: any,
+    errors: any
   ) => {
-    consoleLog('Formik error====>', errors);
+    consoleLog("Formik error====>", errors);
   };
 
   return (
@@ -71,9 +72,9 @@ const LoginForm = () => {
       <AppButton
         onPress={methods.handleSubmit(
           onLoginSubmitHandler,
-          onLoginSubmitErrorHandler,
+          onLoginSubmitErrorHandler
         )}
-        title={translate('login_screen.login')}
+        title={translate("login_screen.login")}
       />
     </>
   );

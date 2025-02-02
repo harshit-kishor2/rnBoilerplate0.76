@@ -1,29 +1,40 @@
-import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
+import {RouteProp, useNavigation, useRoute} from "@react-navigation/native";
+import {StackNavigationProp} from "@react-navigation/stack";
+import {RootStackParamList} from "./types";
 
 /**
- * Custom hook to access the navigation object for a specific screen.
+ * Type-safe hook to access navigation object for stack navigation.
+ * Provides autocomplete and type checking for screen names and parameters.
  *
- * @param _screenName The name of the screen in the root stack.
- * @returns The navigation object for the specified screen.
+ * @template T - Screen name key from RootStackParamList
+ * @returns {StackNavigationProp<RootStackParamList, T>} Navigation prop with type safety
+ *
+ * @example
+ * // In a screen component:
+ * const navigation = useAppNavigation<'HomeRoute'>();
+ * navigation.navigate('DetailRoute', { itemId: '123' });
  */
-export const useAppNavigation = <T extends keyof RootStackParamList>(
-  _screenName: T,
-) => {
-  const navigation =
-    useNavigation<StackNavigationProp<RootStackParamList, T>>();
-  return navigation;
+export const useAppNavigation = <
+  T extends keyof RootStackParamList
+>(): StackNavigationProp<RootStackParamList, T> => {
+  return useNavigation<StackNavigationProp<RootStackParamList, T>>();
 };
 
 /**
- * Custom hook to access the route object for a specific screen.
+ * Type-safe hook to access route parameters for the current screen.
+ * Ensures proper type checking of route parameters based on screen name.
  *
- * @param _screenName The name of the screen in the root stack.
- * @returns The route object for the specified screen.
+ * @template T - Screen name key from RootStackParamList
+ * @returns {RouteProp<RootStackParamList, T>} Route prop with type-safe parameters
+ *
+ * @example
+ * // In a screen component expecting an 'itemId' parameter:
+ * const route = useAppRoute<'HomeRoute'>();
+ * const itemId = route.params.itemId; // Correctly typed as string
  */
-export const useAppRoute = <T extends keyof RootStackParamList>(
-  _screenName: T,
-) => {
-  const route = useRoute<RouteProp<RootStackParamList, T>>();
-  return route;
+export const useAppRoute = <T extends keyof RootStackParamList>(): RouteProp<
+  RootStackParamList,
+  T
+> => {
+  return useRoute<RouteProp<RootStackParamList, T>>();
 };

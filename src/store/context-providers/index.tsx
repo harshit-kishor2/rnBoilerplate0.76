@@ -1,5 +1,5 @@
-import React from 'react';
-import {DemoProvider} from './DemoProvider';
+import React from "react";
+import {DemoProvider} from "./DemoProvider";
 
 export type ContextItem = {
   provider: React.ComponentType<any>; // Type for a React context provider
@@ -25,7 +25,7 @@ const CombinedContextProvider: React.FC<ComposeProvidersProps> = ({
     (acc, {provider: ProviderWrapper, props = {}}) => {
       return <ProviderWrapper {...props}>{acc}</ProviderWrapper>;
     },
-    children,
+    children
   );
 };
 

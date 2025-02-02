@@ -1,6 +1,6 @@
-import {create, StateCreator} from 'zustand';
-import {createJSONStorage, persist} from 'zustand/middleware';
-import {zustandPersistStorage} from './config';
+import {create, StateCreator} from "zustand";
+import {createJSONStorage, persist} from "zustand/middleware";
+import {zustandPersistStorage} from "./config";
 
 const SLICE_FEATURE_KEY = `counter-store`; // Key for persistent storage
 
@@ -41,8 +41,8 @@ export const usePersistCounterStore = create<ICounterSlice>()(
     {
       name: SLICE_FEATURE_KEY, // Unique name for persistent storage
       storage: createJSONStorage(() => zustandPersistStorage), // Custom persistence storage
-    },
-  ),
+    }
+  )
 );
 
 /**

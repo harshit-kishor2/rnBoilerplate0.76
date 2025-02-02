@@ -1,132 +1,187 @@
 import {
   CommonActions,
   createNavigationContainerRef,
+  NavigationState,
+  PartialState,
   StackActions,
   TabActions,
-} from '@react-navigation/native';
-import {createRef, MutableRefObject} from 'react';
+} from "@react-navigation/native";
 
+import {RootStackParamList} from "./types";
+
+/**
+ * Navigation container reference used for top-level navigation actions.
+ * Should be passed to the NavigationContainer component.
+ */
 export const navigationRef = createNavigationContainerRef<RootStackParamList>();
 
-export const isReadyRef: MutableRefObject<boolean | null> = createRef<
-  boolean | null
->();
-
-function prepareParams(params: any, fromRouteName: string) {
-  return {...params, fromRouteName};
+/**
+ * Checks if the navigation container is ready and logs a warning if not.
+ * @returns {boolean} True if navigation is ready, false otherwise
+ */
+function checkNavigationReady(): boolean {
+  const isReady = navigationRef.isReady();
+  if (!isReady) console.warn("Navigation service not initialized");
+  return isReady;
 }
 
-function navigate({fromRouteName, routeName, params}: NavigateProps) {
-  if (isReadyRef.current && navigationRef?.current) {
-    navigationRef.current.navigate(
-      routeName,
-      prepareParams(params, fromRouteName),
-    );
-  } else {
-    console.warn('Navigation is not ready');
+/**
+ * Navigate to a screen in the current navigation tree.
+ * @template T - Screen name from RootStackParamList
+ * @param {T} screen - Name of the screen to navigate to
+ * @param {RootStackParamList[T]} [params] - Screen parameters
+ */
+function navigate<T extends keyof RootStackParamList>(
+  ...args: T extends unknown
+    ? undefined extends RootStackParamList[T]
+      ? [screen: T] | [screen: T, params: RootStackParamList[T]]
+      : [screen: T, params: RootStackParamList[T]]
+    : never
+) {
+  if (navigationRef.isReady()) {
+    navigationRef.navigate(...args);
   }
 }
 
+/**
+ * Navigate back to the previous screen in the stack.
+ * Fails gracefully if there's no navigation history.
+ */
 function goBack() {
-  if (
-    isReadyRef.current &&
-    navigationRef?.current &&
-    navigationRef.current.canGoBack()
+  if (checkNavigationReady() && navigationRef.canGoBack()) {
+    navigationRef.goBack();
+  } else {
+    console.warn("Cannot go back - no available navigation history");
+  }
+}
+
+/**
+ * Stack navigation actions.
+ */
+const stackActions = {
+  /**
+   * Push a new screen onto the stack.
+   * @template T - Screen name from RootStackParamList
+   * @param {T} screen - Screen name to push
+   * @param {RootStackParamList[T]} params - Screen parameters
+   */
+  push<T extends keyof RootStackParamList>(
+    routeName: T,
+    params: RootStackParamList[T]
   ) {
-    navigationRef.current.goBack();
-  } else {
-    console.warn(
-      'Cannot go back. Navigation is not ready or no previous screen',
-    );
-  }
-}
+    if (checkNavigationReady()) {
+      navigationRef.dispatch(StackActions.push(routeName, params));
+    }
+  },
 
-const reset = (params: any) => {
-  if (isReadyRef.current && navigationRef?.current) {
-    navigationRef.current?.reset(params);
-  } else {
-    console.warn('Reset cannot be performed. Navigation is not ready');
-  }
+  /**
+   * Pop screens from the stack.
+   * @param {number} [count=1] - Number of screens to pop
+   */
+  pop(count: number = 1) {
+    if (checkNavigationReady()) {
+      navigationRef.dispatch(StackActions.pop(count));
+    }
+  },
+
+  /**
+   * Pop all screens except the first in the stack.
+   */
+  popToTop() {
+    if (checkNavigationReady()) {
+      navigationRef.dispatch(StackActions.popToTop());
+    }
+  },
+
+  /**
+   * Replace the current screen with a new one.
+   * @template T - Screen name from RootStackParamList
+   * @param {T} routeName The name of the screen to replace with.
+   * @param {RootStackParamList[T]} [params] The params to pass to the new screen.
+   */
+  replace<T extends keyof RootStackParamList>(
+    routeName: T,
+    params: RootStackParamList[T]
+  ) {
+    if (checkNavigationReady()) {
+      navigationRef.dispatch(StackActions.replace(routeName, params));
+    }
+  },
 };
 
-function resetRoot(params = {index: 0, routes: []}) {
-  if (isReadyRef.current && navigationRef?.current) {
-    navigationRef.current?.resetRoot(params);
-  } else {
-    console.warn('Reset root cannot be performed. Navigation is not ready');
-  }
-}
-
-function navigateAndReset({fromRouteName, routeName, params}: NavigateProps) {
-  if (isReadyRef.current && navigationRef?.current) {
-    navigationRef.current?.dispatch(
-      CommonActions.reset({
-        index: 1,
-        routes: [
-          {name: routeName, params: prepareParams(params, fromRouteName)},
-        ],
-      }),
-    );
-  } else {
-    console.warn('Navigation is not ready for reset and navigate');
-  }
-}
-
-const push = ({fromRouteName, routeName, params}: NavigateProps) => {
-  if (isReadyRef.current && navigationRef?.current) {
-    navigationRef.current?.dispatch(
-      StackActions.push(routeName, prepareParams(params, fromRouteName)),
-    );
-  } else {
-    console.warn('Push cannot be performed. Navigation is not ready');
-  }
+/**
+ * Tab navigation actions.
+ */
+const tabActions = {
+  /**
+   * Jump to the specified tab.
+   * @template T - Screen name from RootStackParamList
+   * @param {T} routeName The name of the tab to jump to.
+   * @param {RootStackParamList[T]} [params] The params to pass to the tab.
+   */
+  jumpTo<T extends keyof RootStackParamList>(
+    routeName: T,
+    params?: RootStackParamList[T]
+  ) {
+    if (checkNavigationReady()) {
+      navigationRef.dispatch(TabActions.jumpTo(routeName, params));
+    }
+  },
 };
 
-const pop = (count?: number) => {
-  if (isReadyRef.current && navigationRef?.current) {
-    navigationRef.current?.dispatch(StackActions.pop(count));
-  } else {
-    console.warn('Pop cannot be performed. Navigation is not ready');
-  }
-};
+/**
+ * State management functions.
+ */
+const stateActions = {
+  /**
+   * Reset the navigation state completely.
+   * @param {PartialState<NavigationState>} state - New navigation state
+   */
+  reset(state: PartialState<NavigationState>) {
+    if (checkNavigationReady()) {
+      navigationRef.reset(state);
+    }
+  },
 
-const popToTop = () => {
-  if (isReadyRef.current && navigationRef?.current) {
-    navigationRef.current?.dispatch(StackActions.popToTop());
-  } else {
-    console.warn('Pop to top cannot be performed. Navigation is not ready');
-  }
-};
+  /**
+   * Navigate to the specified screen and reset the navigation state.
+   * @param {T} routeName The name of the screen to navigate to.
+   * @param {RootStackParamList[T]} [params] The params to pass to the screen.
+   */
+  navigateAndReset<T extends keyof RootStackParamList>(
+    routeName: T,
+    params: RootStackParamList[T]
+  ) {
+    if (checkNavigationReady()) {
+      navigationRef.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{name: routeName, params}],
+        })
+      );
+    }
+  },
 
-function replace({fromRouteName, routeName, params}: NavigateProps) {
-  if (isReadyRef.current && navigationRef?.current) {
-    navigationRef.current?.dispatch(
-      StackActions.replace(routeName, prepareParams(params, fromRouteName)),
-    );
-  } else {
-    console.warn('Replace cannot be performed. Navigation is not ready');
-  }
-}
-
-const jumpTo = (params: any) => {
-  if (isReadyRef.current && navigationRef?.current) {
-    navigationRef.current?.dispatch(TabActions.jumpTo(params));
-  } else {
-    console.warn('JumpTo cannot be performed. Navigation is not ready');
-  }
+  /**
+   * Reset the root navigation state (use cautiously).
+   * @param {PartialState<NavigationState>} [state] - Optional initial state
+   * @default { index: 0, routes: [] } - Empty navigation state
+   */
+  resetRoot(
+    state: PartialState<NavigationState> = {index: 0, routes: []}
+  ): void {
+    if (checkNavigationReady()) {
+      navigationRef.resetRoot(state);
+    }
+  },
 };
 
 const NavigationService = {
   navigate,
-  replace,
-  navigateAndReset,
   goBack,
-  resetRoot,
-  push,
-  pop,
-  popToTop,
-  jumpTo,
-  reset,
+  ...stackActions,
+  ...tabActions,
+  ...stateActions,
 };
 
 export default NavigationService;

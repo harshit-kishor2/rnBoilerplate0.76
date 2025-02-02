@@ -23,7 +23,7 @@ export const consoleError = (
   if (isDev) {
     console.error(
       `❌ [ERROR: ${getTimestamp()}] :: ${message}`,
-      ...optionalParams,
+      ...optionalParams
     );
   }
 };
@@ -35,7 +35,7 @@ export const consoleWarn = (
   if (isDev) {
     console.warn(
       `⚠️ [WARN: ${getTimestamp()}] :: ${message}`,
-      ...optionalParams,
+      ...optionalParams
     );
   }
 };

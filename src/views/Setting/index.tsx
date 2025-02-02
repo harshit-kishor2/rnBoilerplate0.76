@@ -1,7 +1,7 @@
-import React, {useMemo} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {useAppTheme} from '@app/theme';
-import {useAppTranslation} from '@app/i18n';
+import React, {useMemo} from "react";
+import {StyleSheet, Text, View} from "react-native";
+import {useAppTheme} from "@app/theme";
+import {useAppTranslation} from "@app/i18n";
 
 const SettingScreen: React.FC = () => {
   const theme = useAppTheme();
@@ -10,7 +10,7 @@ const SettingScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Text> {translate('greeting')} SettingScreen</Text>
+      <Text> {translate("greeting")} SettingScreen</Text>
     </View>
   );
 };
@@ -21,8 +21,8 @@ const settingScreenStyles = (theme: IAppTheme) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
+      justifyContent: "center",
+      alignItems: "center",
       backgroundColor: theme.colors.background,
     },
   });

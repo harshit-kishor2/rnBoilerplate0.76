@@ -1,18 +1,19 @@
-import Assets from '@app/assets';
+import Assets from "@app/assets";
 import {
   AppFastImage,
   Container,
   KeyboardAvoidingWrapper,
   Padding,
   Spacer,
-} from '@app/components';
-import {rpHeight, rpWidth} from '@app/helpers/responsive-utils';
-import React, {useMemo} from 'react';
-import {StyleSheet} from 'react-native';
-import TermsConditionAndPrivacyPolicyLink from '../atoms/TermsConditionAndPrivacyPolicyLink';
-import DontHaveAccountLink from './DontHaveAccountLink';
-import ForgotPasswordLink from './ForgotPasswordLink';
-import LoginForm from './LoginForm';
+} from "@app/components";
+import {rpHeight, rpWidth} from "@app/helpers/responsive-utils";
+import React, {useMemo} from "react";
+import {StyleSheet} from "react-native";
+import TermsConditionAndPrivacyPolicyLink from "../atoms/TermsConditionAndPrivacyPolicyLink";
+import DontHaveAccountLink from "./DontHaveAccountLink";
+import ForgotPasswordLink from "./ForgotPasswordLink";
+import LoginForm from "./LoginForm";
+import {RouteConst} from "@app/navigation/types";
 
 const LoginScreen: React.FC = () => {
   const styles = useMemo(() => loginScreenStyles(), []);
@@ -31,7 +32,7 @@ const LoginScreen: React.FC = () => {
         </Padding>
         <ForgotPasswordLink />
         <Spacer />
-        <TermsConditionAndPrivacyPolicyLink from="LoginRoute" />
+        <TermsConditionAndPrivacyPolicyLink from={RouteConst.LoginRoute} />
       </Container>
     </KeyboardAvoidingWrapper>
   );

@@ -1,6 +1,6 @@
-import {SVGIcons, SVGIconsMapper} from '@app/assets/svg';
-import {SvgProps} from 'react-native-svg';
-import React from 'react';
+import {SVGIcons, SVGIconsMapper} from "@app/assets/svg";
+import {SvgProps} from "react-native-svg";
+import React from "react";
 type SVGIconProps = SvgProps & {
   icon: SVGIcons;
   height?: number | string;
@@ -9,7 +9,7 @@ type SVGIconProps = SvgProps & {
 };
 
 const AppSvg: React.FC<SVGIconProps> = props => {
-  const {icon, pathFill = '#FFF'} = props;
+  const {icon, pathFill = "#FFF"} = props;
   const IconsImage = SVGIconsMapper[icon];
 
   return <IconsImage pathFill={pathFill} {...props} />;

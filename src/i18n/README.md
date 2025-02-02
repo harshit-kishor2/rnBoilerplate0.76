@@ -54,7 +54,7 @@ In your App.tsx (or main entry file), wrap your app with the `AppLocalizationPro
 Example usage:
 
 ```javascript
-import {AppLocalizationProvider} from '@app/i18n'; // Path to your i18n module
+import {AppLocalizationProvider} from "@app/i18n"; // Path to your i18n module
 
 const App = () => (
   <AppLocalizationProvider autoDetect={true}>
@@ -68,12 +68,12 @@ const App = () => (
 The useAppTranslation hook provides the i18n translation function for translating text in your components.
 
 ```javascript
-import {useAppTranslation} from './i18n';
+import {useAppTranslation} from "./i18n";
 
 const MyComponent = () => {
   const translate = useAppTranslation();
 
-  return <p>{translate('welcome_message')}</p>;
+  return <p>{translate("welcome_message")}</p>;
 };
 ```
 
@@ -89,7 +89,7 @@ The `useAppLocalizationContext` hook allows you to access the current language a
 -     resetLanguage: A function to reset the selected language.
 
 ```javascript
-import {useAppLocalizationContext} from './i18n';
+import {useAppLocalizationContext} from "./i18n";
 
 const MyComponent = () => {
   const {currentLanguage, setSelectedLanguageType} =
@@ -98,7 +98,7 @@ const MyComponent = () => {
   return (
     <div>
       <p>Current Language: {currentLanguage}</p>
-      <button onClick={() => setSelectedLanguageType('es')}>
+      <button onClick={() => setSelectedLanguageType("es")}>
         Switch to Spanish
       </button>
     </div>

@@ -1,8 +1,8 @@
-import {useTranslation} from 'react-i18next';
+import {useTranslation} from "react-i18next";
 
-export {AppLocalizationProvider, useAppLocalizationContext} from './provider';
+export {AppLocalizationProvider, useAppLocalizationContext} from "./provider";
 
-export {default as i18n} from './i18n';
+export {default as i18n} from "./i18n";
 
 export const useAppTranslation = () => {
   const {t: translate} = useTranslation();

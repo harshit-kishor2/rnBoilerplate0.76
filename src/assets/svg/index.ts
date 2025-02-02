@@ -1,4 +1,4 @@
-import APP_ICON from './app.svg';
+import APP_ICON from "./app.svg";
 
 export enum SVGIcons {
   APP = 1,

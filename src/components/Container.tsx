@@ -1,13 +1,13 @@
-import {useAppTheme} from '@app/theme';
-import React, {ReactNode} from 'react';
+import {useAppTheme} from "@app/theme";
+import React, {ReactNode} from "react";
 import {
   DimensionValue,
   StatusBar,
   StyleSheet,
   View,
   ViewStyle,
-} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
+} from "react-native";
+import {SafeAreaView} from "react-native-safe-area-context";
 
 interface ContainerProps {
   useSafeArea?: boolean;
@@ -33,7 +33,7 @@ const Container: React.FC<ContainerProps> = ({
 }: ContainerProps) => {
   const theme = useAppTheme();
   // Change bar style according to theme
-  const barStyle = theme.themeType == 'dark' ? 'light-content' : 'dark-content';
+  const barStyle = theme.themeType == "dark" ? "light-content" : "dark-content";
   const ContainerTag = useSafeArea ? SafeAreaView : View;
   return (
     <ContainerTag

@@ -2,10 +2,10 @@
  * @format
  */
 
-import './gesture-handler/gh';
-import {AppRegistry, Text, TextInput} from 'react-native';
-import App from './src/App';
-import {name as appName} from './app.json';
+import "./gesture-handler/gh";
+import {AppRegistry, Text, TextInput} from "react-native";
+import App from "./src/App";
+import {name as appName} from "./app.json";
 
 // Override Text scaling
 if (Text.defaultProps) {
