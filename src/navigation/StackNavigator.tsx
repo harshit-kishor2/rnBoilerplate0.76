@@ -3,12 +3,7 @@ import {usePersistAuthStore} from "@app/store/zustand/use-auth-store";
 import {SplashScreen} from "@app/views";
 import {createStackNavigator} from "@react-navigation/stack";
 import React, {useCallback, useMemo, useState} from "react";
-import {
-  allRoutes,
-  filterRoutesByRole,
-  modalScreenOptions,
-  stackScreenOptions,
-} from "./route-config";
+import {allRoutes, filterRoutesByRole, SCREEN_OPTIONS} from "./route-config";
 import {UserRoles} from "@app/helpers/enums";
 import {RootStackParamList, RouteConst, RouteType} from "./types";
 
@@ -60,7 +55,7 @@ const StackNavigator = () => {
       initialRouteName={initialRoute}
       screenOptions={{headerShown: false}}>
       {/* Stack-based routes */}
-      <Stack.Group screenOptions={stackScreenOptions}>
+      <Stack.Group screenOptions={SCREEN_OPTIONS.stack}>
         {stackRoutes.map(({name, component, options}) => {
           // Check if component is valid before passing it
           if (!component) {
@@ -79,7 +74,7 @@ const StackNavigator = () => {
       </Stack.Group>
 
       {/* Modal-based routes */}
-      <Stack.Group screenOptions={modalScreenOptions}>
+      <Stack.Group screenOptions={SCREEN_OPTIONS.modal}>
         {modalRoutes.map(({name, component, options}) => {
           // Check if component is valid before passing it
           if (!component) {

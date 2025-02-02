@@ -18,25 +18,19 @@ import {
   SecureStackRouteType,
 } from "./types";
 
-// Make changes here for global screen options in stack
-export const stackScreenOptions: StackNavigationOptions = {
-  headerShown: false,
-  cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-};
-
-// Make changes here for modal screen options in stack
-export const modalScreenOptions: StackNavigationOptions = {
-  presentation: "modal",
-  headerShown: false,
-  gestureEnabled: true,
-  gestureDirection: "vertical",
-  cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
-};
-
-export const filterRoutesByRole = (
-  role: UserRoles
-): SecureStackRouteType<RootStackParamList>[] => {
-  return allRoutes.filter(route => route.roles?.includes(role) ?? true); // Allow routes without roles
+// Make changes here for global screen options in stack and modal
+export const SCREEN_OPTIONS = {
+  stack: {
+    headerShown: false,
+    cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+  } as StackNavigationOptions,
+  modal: {
+    presentation: "modal",
+    headerShown: false,
+    gestureEnabled: true,
+    gestureDirection: "vertical",
+    cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+  } as StackNavigationOptions,
 };
 
 export const allRoutes: SecureStackRouteType<RootStackParamList>[] = [
@@ -83,3 +77,11 @@ export const allRoutes: SecureStackRouteType<RootStackParamList>[] = [
   //   roles: [UserRoles.Guest, UserRoles.User, UserRoles.Admin],
   // },
 ];
+
+export const filterRoutesByRole = (role: UserRoles) => {
+  return allRoutes.filter(
+    route =>
+      !route.roles || // Include role-less routes
+      route.roles.includes(role)
+  ); // Include routes with matching role
+};
