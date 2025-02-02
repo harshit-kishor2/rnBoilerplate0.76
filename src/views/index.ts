@@ -6,3 +6,5 @@ export {default as SettingScreen} from './Setting';
 export {default as RegisterScreen} from './Register';
 export {default as WebviewScreen} from './Webview';
 export {default as NetworkLoggerScreen} from './NetworkLogger';
+export {default as ProfileScreen} from './Profile';
+export {default as FilterScreen} from './Filter';

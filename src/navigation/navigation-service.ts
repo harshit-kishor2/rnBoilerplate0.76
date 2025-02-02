@@ -8,6 +8,24 @@ import {
 } from '@react-navigation/native';
 
 import {RootStackParamList} from './types';
+import {
+  CardStyleInterpolators,
+  StackNavigationOptions,
+} from '@react-navigation/stack';
+
+export const SCREEN_OPTIONS = {
+  stack: {
+    headerShown: false,
+    cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+  } as StackNavigationOptions,
+  modal: {
+    presentation: 'modal',
+    headerShown: false,
+    gestureEnabled: true,
+    gestureDirection: 'vertical',
+    cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+  } as StackNavigationOptions,
+};
 
 /**
  * Navigation container reference used for top-level navigation actions.

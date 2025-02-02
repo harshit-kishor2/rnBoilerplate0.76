@@ -26,7 +26,7 @@ export const sendCrashReport = (
     type,
     crashId,
   };
-  console.log('crashData======> ', crashData);
+  // console.log('crashData======> ', crashData);
 
   //  Send the error to your server
   // axios.post('https://your-server-url.com/crash-reports', crashData)

@@ -6,7 +6,7 @@ import {
 } from '@react-navigation/native';
 import React from 'react';
 import {navigationRef} from './navigation-service';
-import StackNavigator from './StackNavigator';
+import StackNavigator from './stack/StackNavigator';
 
 /**
  * AppNavigation component responsible for managing the navigation container.
