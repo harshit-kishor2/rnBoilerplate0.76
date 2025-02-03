@@ -1,8 +1,7 @@
 import {HomeScreen} from '@app/views';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import {RootStackParamList, RouteConst} from '../types';
-import {SCREEN_OPTIONS} from '../navigation-service';
+import {RootStackParamList, RouteConst, SCREEN_OPTIONS} from '../utils';
 
 const HomeStack = createStackNavigator<RootStackParamList>();
 

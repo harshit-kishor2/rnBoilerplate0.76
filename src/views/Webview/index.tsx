@@ -1,10 +1,9 @@
 import {Container} from '@app/components';
 import AppWebView from '@app/components/atoms/AppWebView';
 import {useAppTranslation} from '@app/i18n';
-import {useAppRoute} from '@app/navigation/hooks';
+import {RouteConst, useAppRoute} from '@app/navigation';
 import React from 'react';
 import AppHeader from '../atoms/AppHeader';
-import {RouteConst} from '@app/navigation/types';
 
 const WebViewScreen: React.FC = () => {
   const translate = useAppTranslation();

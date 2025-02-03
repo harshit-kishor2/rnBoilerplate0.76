@@ -1,8 +1,7 @@
 import {AppText, Row, SizedBox} from '@app/components';
 import {rpWidth} from '@app/helpers/responsive-utils';
 import {useAppTranslation} from '@app/i18n';
-import {useAppNavigation} from '@app/navigation/hooks';
-import {RouteConst} from '@app/navigation/types';
+import {RouteConst, useAppNavigation} from '@app/navigation';
 import React from 'react';
 
 const DontHaveAccountLink: React.FC = () => {

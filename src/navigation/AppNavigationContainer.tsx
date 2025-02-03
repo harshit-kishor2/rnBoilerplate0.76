@@ -6,7 +6,7 @@ import {
 } from '@react-navigation/native';
 import React from 'react';
 import {navigationRef} from './navigation-service';
-import StackNavigator from './stack/StackNavigator';
+import {MainStackNavigator} from './stack';
 
 /**
  * AppNavigation component responsible for managing the navigation container.
@@ -18,7 +18,7 @@ import StackNavigator from './stack/StackNavigator';
  * The theme is memoized based on the current theme type ('dark' or 'light') to optimize performance.
  */
 
-const AppNavigation = () => {
+const AppNavigationContainer: React.FC = () => {
   const {currentTheme} = useAppThemeContext();
   // Memoize theme selection to prevent unnecessary recalculations
   const theme = React.useMemo(
@@ -31,9 +31,9 @@ const AppNavigation = () => {
 
   return (
     <NavigationContainer ref={navigationRef} theme={theme}>
-      <StackNavigator />
+      <MainStackNavigator />
     </NavigationContainer>
   );
 };
 
-export default React.memo(AppNavigation);
+export default React.memo(AppNavigationContainer);

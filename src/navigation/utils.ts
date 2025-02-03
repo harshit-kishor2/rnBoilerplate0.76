@@ -1,34 +1,21 @@
-import {UserRoles} from '@app/helpers/enums';
 import {
-  ParamListBase,
-  RouteConfig,
-  StackNavigationState,
-} from '@react-navigation/native';
-import {
-  StackNavigationEventMap,
+  CardStyleInterpolators,
   StackNavigationOptions,
-  StackNavigationProp,
 } from '@react-navigation/stack';
 
-export enum RouteType {
-  modal = 'modal',
-  stack = 'stack',
-}
-
-type CustomRouteParams = {
-  type?: RouteType;
-  roles?: UserRoles[];
+export const SCREEN_OPTIONS = {
+  stack: {
+    headerShown: false,
+    cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+  } as StackNavigationOptions,
+  modal: {
+    presentation: 'modal',
+    headerShown: false,
+    gestureEnabled: true,
+    gestureDirection: 'vertical',
+    cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+  } as StackNavigationOptions,
 };
-
-export type SecureStackRouteType<ParamList extends ParamListBase> = RouteConfig<
-  ParamList,
-  keyof ParamList,
-  StackNavigationState<ParamList>,
-  StackNavigationOptions,
-  StackNavigationEventMap,
-  StackNavigationProp<ParamListBase, string, undefined>
-> &
-  CustomRouteParams;
 
 export enum RouteConst {
   LoginRoute = 'LoginRoute',

@@ -1,12 +1,11 @@
 import {ProfileScreen} from '@app/views';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import {RootStackParamList, RouteConst} from '../types';
-import {SCREEN_OPTIONS} from '../navigation-service';
+import {RootStackParamList, RouteConst, SCREEN_OPTIONS} from '../utils';
 
 const ProfileStack = createStackNavigator<RootStackParamList>();
 
-const HomeStackNavigator = () => {
+const ProfileStackNavigator: React.FC = () => {
   return (
     <ProfileStack.Navigator
       initialRouteName={RouteConst.ProfileRoute}
@@ -19,4 +18,4 @@ const HomeStackNavigator = () => {
   );
 };
 
-export default HomeStackNavigator;
+export default ProfileStackNavigator;

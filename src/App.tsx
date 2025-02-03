@@ -8,7 +8,7 @@ import {StyleSheet} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
-import AppNavigation from './navigation/AppNavigation';
+import {AppNavigationContainer} from './navigation';
 
 const App: React.FC = () => {
   return (
@@ -20,7 +20,7 @@ const App: React.FC = () => {
               <AppLocalizationProvider defaultLanguage="en">
                 <CombinedContextProvider>
                   <PersistedReduxProvider>
-                    <AppNavigation />
+                    <AppNavigationContainer />
                   </PersistedReduxProvider>
                 </CombinedContextProvider>
               </AppLocalizationProvider>

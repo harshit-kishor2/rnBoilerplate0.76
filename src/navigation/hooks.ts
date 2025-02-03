@@ -1,6 +1,6 @@
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {RootStackParamList} from './types';
+import {RootStackParamList} from './utils';
 
 /**
  * Type-safe hook to access navigation object for stack navigation.

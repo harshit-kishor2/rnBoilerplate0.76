@@ -13,7 +13,7 @@ import TermsConditionAndPrivacyPolicyLink from '../atoms/TermsConditionAndPrivac
 import DontHaveAccountLink from './DontHaveAccountLink';
 import ForgotPasswordLink from './ForgotPasswordLink';
 import LoginForm from './LoginForm';
-import {RouteConst} from '@app/navigation/types';
+import {RouteConst} from '@app/navigation';
 
 const LoginScreen: React.FC = () => {
   const styles = useMemo(() => loginScreenStyles(), []);

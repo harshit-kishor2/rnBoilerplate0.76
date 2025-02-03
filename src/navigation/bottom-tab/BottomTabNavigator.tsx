@@ -10,21 +10,22 @@ import {
 import React from 'react';
 import HomeStackNavigator from '../stack/HomeStackNavigator';
 import SettingStackNavigator from '../stack/SettingStackNavigator';
-import {RootStackParamList, RouteConst} from '../types';
+import {RootStackParamList, RouteConst} from '../utils';
+import CustomBottomTab from './CustomBottomTab';
 
 const Tab = createBottomTabNavigator<RootStackParamList>();
 const BottomTabNavigator = () => {
   const theme = useAppTheme();
   const screenOptions: BottomTabNavigationOptions = {
     headerShown: false,
-    tabBarActiveTintColor: theme.colors.blue,
-    tabBarInactiveTintColor: theme.colors.black,
+    tabBarActiveTintColor: theme.colors.yellow,
+    tabBarInactiveTintColor: theme.colors.onPrimary,
     tabBarShowLabel: true,
     tabBarHideOnKeyboard: true,
     tabBarStyle: {
       width: 'auto',
-      backgroundColor: theme.colors.yellow,
-      borderColor: theme.colors.green,
+      backgroundColor: theme.colors.primary,
+      borderColor: theme.colors.secondary,
       height: rpHeight(75),
     },
     tabBarItemStyle: {
@@ -70,12 +71,13 @@ const BottomTabNavigator = () => {
     <Tab.Navigator
       backBehavior="initialRoute"
       initialRouteName={RouteConst.ProfileTab}
-      screenOptions={screenOptions}>
+      screenOptions={screenOptions}
+      tabBar={CustomBottomTab}>
       <Tab.Screen
         name={RouteConst.HomeTab}
         component={HomeStackNavigator}
         options={{
-          tabBarLabel: 'Home',
+          title: 'Home',
           tabBarIcon: ({color}) => getTabIcon('Home', color),
         }}
       />
@@ -83,7 +85,7 @@ const BottomTabNavigator = () => {
         name={RouteConst.ProfileTab}
         component={ProfileScreen}
         options={{
-          tabBarLabel: 'Profile',
+          title: 'Profile',
           tabBarIcon: ({color}) => getTabIcon('Profile', color),
         }}
       />
@@ -91,7 +93,7 @@ const BottomTabNavigator = () => {
         name={RouteConst.SettingTab}
         component={SettingStackNavigator}
         options={{
-          tabBarLabel: 'Settings',
+          title: 'Settings',
           tabBarIcon: ({color}) => getTabIcon('Settings', color),
         }}
       />

@@ -44,59 +44,54 @@ const fontConfig: Record<string, MD3Type> = {
 
 export const lightTheme = {
   ...MD3LightTheme,
-  // Specify custom property
   themeType: 'light',
-  // Specify custom property in nested object
   myRandomProperty: 'Light Mode',
-  fonts: configureFonts({
-    config: fontConfig,
-  }),
+  fonts: configureFonts({config: fontConfig}),
   colors: {
     ...MD3LightTheme.colors,
     ...CommonColorConst,
     primary: '#EF2A39',
-    primaryContainer: '#FF6F6F', // Lighter variant for the primary container
-    secondary: '#1c2511',
-    secondaryContainer: '#C8E6C9', // Light green for secondary container
-    tertiary: '#002725',
-    tertiaryContainer: '#B2DFDB', // Lighter green for tertiary container
+    primaryContainer: '#FFDAD6',
+    secondary: '#006A69',
+    secondaryContainer: '#6FF7F5',
+    tertiary: '#9C413E',
+    tertiaryContainer: '#FFDAD6',
     surface: '#FFFFFF',
-    surfaceVariant: '#F5F5F5', // Light grey for surface variant
-    surfaceDisabled: '#D1D1D1', // Disabled surface color
+    surfaceVariant: '#F5F5F5',
+    surfaceDisabled: 'rgba(28, 27, 31, 0.12)',
     background: '#FFFFFF',
-    error: '#4e0002', // Error color
-    errorContainer: '#FFCDD2', // Light error background
-    onPrimary: '#FFFFFF', // Text color on primary
-    onPrimaryContainer: '#000000', // Text color on primary container
-    onSecondary: '#FFFFFF', // Text color on secondary
-    onSecondaryContainer: '#000000', // Text color on secondary container
-    onTertiary: '#FFFFFF', // Text color on tertiary
-    onTertiaryContainer: '#000000', // Text color on tertiary container
-    onSurface: '#000000', // Text color on surface
-    onSurfaceVariant: '#000000', // Text color on surface variant
-    onSurfaceDisabled: '#A0A0A0', // Disabled text color
-    onError: '#FFFFFF', // Text color on error
-    onErrorContainer: '#000000', // Text color on error container
-    onBackground: '#000000', // Text color on background
-    outline: '#BDBDBD', // Outline color
-    outlineVariant: '#9E9E9E', // Variant outline color
-    inverseSurface: '#000000', // Inverse surface color
-    inverseOnSurface: '#FFFFFF', // Inverse text color on surface
-    inversePrimary: '#FF6F6F', // Inverse primary color
-    shadow: '#000000', // Shadow color
-    scrim: '#000000', // Scrim color
-    backdrop: '#000000', // Backdrop color
-    accent: '#FF6F6F',
-    text: '#000000',
-    disabled: '#D1D1D1',
-    placeholder: '#9E9E9E',
+    error: '#BA1A1A',
+    errorContainer: '#FFDAD6',
+    onPrimary: '#FFFFFF',
+    onPrimaryContainer: '#410006',
+    onSecondary: '#FFFFFF',
+    onSecondaryContainer: '#00201F',
+    onTertiary: '#FFFFFF',
+    onTertiaryContainer: '#410004',
+    onSurface: '#1C1B1F',
+    onSurfaceVariant: '#44474E',
+    onSurfaceDisabled: 'rgba(28, 27, 31, 0.38)',
+    onError: '#FFFFFF',
+    onErrorContainer: '#410002',
+    onBackground: '#1C1B1F',
+    outline: '#857370',
+    outlineVariant: '#D8C2BE',
+    inverseSurface: '#313033',
+    inverseOnSurface: '#F3EFF4',
+    inversePrimary: '#FFB3AC',
+    shadow: '#000000',
+    scrim: '#000000',
+    backdrop: 'rgba(0, 0, 0, 0.4)',
+    text: '#1C1B1F',
+    disabled: '#938F90',
+    placeholder: '#6C6A6D',
     elevation: {
       level0: 'transparent',
-      level1: 'rgba(0, 0, 0, 0.1)',
-      level2: 'rgba(0, 0, 0, 0.2)',
-      level3: 'rgba(0, 0, 0, 0.3)',
-      level4: 'rgba(0, 0, 0, 0.4)',
-      level5: 'rgba(0, 0, 0, 0.5)',
+      level1: 'rgba(239, 42, 57, 0.05)',
+      level2: 'rgba(239, 42, 57, 0.08)',
+      level3: 'rgba(239, 42, 57, 0.11)',
+      level4: 'rgba(239, 42, 57, 0.12)',
+      level5: 'rgba(239, 42, 57, 0.14)',
     },
   },
 };
@@ -105,55 +100,52 @@ export const darkTheme = {
   ...MD3DarkTheme,
   themeType: 'dark',
   myRandomProperty: 'Dark Mode',
-  fonts: configureFonts({
-    config: fontConfig,
-  }),
+  fonts: configureFonts({config: fontConfig}),
   colors: {
     ...MD3DarkTheme.colors,
     ...CommonColorConst,
-    primary: '#EF2A39',
-    primaryContainer: '#FF6F6F', // Same as light for consistency
-    secondary: '#1c2511',
-    secondaryContainer: '#1F2D1A', // Darker shade for secondary container
-    tertiary: '#002725',
-    tertiaryContainer: '#004D4D', // Darker shade for tertiary container
-    surface: '#121212',
-    surfaceVariant: '#1E1E1E', // Dark grey for surface variant
-    surfaceDisabled: '#666666', // Disabled surface color
-    background: '#121212',
-    error: '#4e0002', // Same error color
-    errorContainer: '#FF6F6F', // Light error background
-    onPrimary: '#FFFFFF', // Text color on primary
-    onPrimaryContainer: '#000000', // Text color on primary container
-    onSecondary: '#FFFFFF', // Text color on secondary
-    onSecondaryContainer: '#000000', // Text color on secondary container
-    onTertiary: '#FFFFFF', // Text color on tertiary
-    onTertiaryContainer: '#000000', // Text color on tertiary container
-    onSurface: '#FFFFFF', // Text color on surface
-    onSurfaceVariant: '#FFFFFF', // Text color on surface variant
-    onSurfaceDisabled: '#A0A0A0', // Disabled text color
-    onError: '#FFFFFF', // Text color on error
-    onErrorContainer: '#000000', // Text color on error container
-    onBackground: '#FFFFFF', // Text color on background
-    outline: '#BDBDBD', // Outline color
-    outlineVariant: '#9E9E9E', // Variant outline color
-    inverseSurface: '#FFFFFF', // Inverse surface color
-    inverseOnSurface: '#000000', // Inverse text color on surface
-    inversePrimary: '#FF6F6F', // Inverse primary color
-    shadow: '#000000', // Shadow color
-    scrim: '#000000', // Scrim color
-    backdrop: '#000000', // Backdrop color
-    accent: '#FF6F6F',
-    text: '#FFFFFF',
-    disabled: '#666666',
-    placeholder: '#BDBDBD',
+    primary: '#FFB3AC',
+    primaryContainer: '#CC0E1F',
+    secondary: '#4DDAD8',
+    secondaryContainer: '#004F4E',
+    tertiary: '#FFB3AC',
+    tertiaryContainer: '#7E2A28',
+    surface: '#1C1B1F',
+    surfaceVariant: '#514342',
+    surfaceDisabled: 'rgba(228, 225, 230, 0.12)',
+    background: '#1C1B1F',
+    error: '#FFB4AB',
+    errorContainer: '#93000A',
+    onPrimary: '#680010',
+    onPrimaryContainer: '#FFDAD6',
+    onSecondary: '#003736',
+    onSecondaryContainer: '#6FF7F5',
+    onTertiary: '#4C0709',
+    onTertiaryContainer: '#FFDAD6',
+    onSurface: '#E6E1E5',
+    onSurfaceVariant: '#D8C2BE',
+    onSurfaceDisabled: 'rgba(228, 225, 230, 0.38)',
+    onError: '#690005',
+    onErrorContainer: '#FFDAD6',
+    onBackground: '#E6E1E5',
+    outline: '#A08C89',
+    outlineVariant: '#514342',
+    inverseSurface: '#E6E1E5',
+    inverseOnSurface: '#313033',
+    inversePrimary: '#EF2A39',
+    shadow: '#000000',
+    scrim: '#000000',
+    backdrop: 'rgba(0, 0, 0, 0.4)',
+    text: '#E6E1E5',
+    disabled: '#5C5B5D',
+    placeholder: '#959396',
     elevation: {
       level0: 'transparent',
-      level1: 'rgba(255, 255, 255, 0.1)',
-      level2: 'rgba(255, 255, 255, 0.2)',
-      level3: 'rgba(255, 255, 255, 0.3)',
-      level4: 'rgba(255, 255, 255, 0.4)',
-      level5: 'rgba(255, 255, 255, 0.5)',
+      level1: 'rgba(29, 27, 29, 0.5)',
+      level2: 'rgba(29, 27, 29, 0.7)',
+      level3: 'rgba(29, 27, 29, 0.8)',
+      level4: 'rgba(29, 27, 29, 0.9)',
+      level5: 'rgba(29, 27, 29, 1)',
     },
   },
 };

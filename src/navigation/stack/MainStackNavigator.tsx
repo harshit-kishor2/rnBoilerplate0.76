@@ -10,8 +10,7 @@ import {
 } from '@app/views';
 import {createStackNavigator} from '@react-navigation/stack';
 import React, {useCallback, useState} from 'react';
-import {SCREEN_OPTIONS} from '../navigation-service';
-import {RootStackParamList, RouteConst} from '../types';
+import {RootStackParamList, RouteConst, SCREEN_OPTIONS} from '../utils';
 import AppDrawer from '../drawer/AppDrawer';
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -23,7 +22,7 @@ const roleRouteMap: Record<UserRoles, RouteConst> = {
   [UserRoles.Guest]: RouteConst.LoginRoute,
 };
 
-const StackNavigator = () => {
+const MainStackNavigator: React.FC = () => {
   const [initialRoute, setInitialRoute] = useState<
     keyof RootStackParamList | null
   >(null);
@@ -73,6 +72,8 @@ const StackNavigator = () => {
   );
 };
 
+export default MainStackNavigator;
+
 /**
  * Determines the initial route based on the user's role
  * @param {UserRoles} userRole - The role of the user
@@ -87,5 +88,3 @@ const getInitialRouteName = (userRole: UserRoles): keyof RootStackParamList => {
   }
   return roleRouteMap[userRole];
 };
-
-export default StackNavigator;

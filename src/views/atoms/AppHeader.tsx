@@ -1,6 +1,6 @@
 import {AppText, AppVectorIcon} from '@app/components';
 import {IconType} from '@app/components/atoms/AppVectorIcon';
-import {useNavigation} from '@react-navigation/native'; // For navigation to go back
+import {useAppNavigation} from '@app/navigation';
 import React from 'react';
 import {Pressable, StyleSheet, View} from 'react-native';
 
@@ -15,7 +15,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({
   onBackPress,
   backgroundColor = '#fff',
 }) => {
-  const navigation = useNavigation();
+  const navigation = useAppNavigation();
 
   // Default behavior for the back button (goes back to previous screen)
   const handleBackPress = onBackPress ?? (() => navigation.goBack());
