@@ -5,9 +5,9 @@ import {
   PartialState,
   StackActions,
   TabActions,
-} from "@react-navigation/native";
+} from '@react-navigation/native';
 
-import {RootStackParamList} from "./types";
+import {RootStackParamList} from './utils';
 
 /**
  * Navigation container reference used for top-level navigation actions.
@@ -21,7 +21,7 @@ export const navigationRef = createNavigationContainerRef<RootStackParamList>();
  */
 function checkNavigationReady(): boolean {
   const isReady = navigationRef.isReady();
-  if (!isReady) console.warn("Navigation service not initialized");
+  if (!isReady) console.warn('Navigation service not initialized');
   return isReady;
 }
 
@@ -51,7 +51,7 @@ function goBack() {
   if (checkNavigationReady() && navigationRef.canGoBack()) {
     navigationRef.goBack();
   } else {
-    console.warn("Cannot go back - no available navigation history");
+    console.warn('Cannot go back - no available navigation history');
   }
 }
 

@@ -1,8 +1,8 @@
-import {useAppTheme} from "@app/theme";
-import React, {PropsWithChildren} from "react";
-import {ActivityIndicator, StyleSheet, View, ViewStyle} from "react-native";
+import {useAppTheme} from '@app/theme';
+import React, {PropsWithChildren} from 'react';
+import {ActivityIndicator, StyleSheet, View, ViewStyle} from 'react-native';
 
-type Size = "large" | "small" | undefined;
+type Size = 'large' | 'small' | undefined;
 
 interface SimpleLoaderProps extends PropsWithChildren {
   loading: boolean;
@@ -13,7 +13,7 @@ interface SimpleLoaderProps extends PropsWithChildren {
 }
 
 const SimpleLoader: React.FC<SimpleLoaderProps> = ({
-  size = "large",
+  size = 'large',
   loading = false,
   style,
   color,
@@ -30,7 +30,7 @@ const SimpleLoader: React.FC<SimpleLoaderProps> = ({
               styles.loaderContainer,
               {backgroundColor: backgroundColor ?? theme.colors.background},
             ]}>
-            <ActivityIndicator size={size ?? "large"} color={color} />
+            <ActivityIndicator size={size ?? 'large'} color={color} />
           </View>
         ) : (
           <ActivityIndicator size={size} color={color} />
@@ -45,17 +45,17 @@ const SimpleLoader: React.FC<SimpleLoaderProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   loaderContainer: {
-    position: "absolute",
+    position: 'absolute',
     top: 0,
     bottom: 0,
     left: 0,
     right: 0,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

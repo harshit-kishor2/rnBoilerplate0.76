@@ -31,7 +31,7 @@ export const eventEmitter = new EventEmitter();
 
 // Enum for event names
 export enum EventName {
-  TEST_EVENT = "TEST_EVENT",
+  TEST_EVENT = 'TEST_EVENT',
 }
 
 // Usage Example:

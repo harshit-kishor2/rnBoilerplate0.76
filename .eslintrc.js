@@ -6,55 +6,55 @@ module.exports = {
     jest: true,
   },
   extends: [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
   ],
   parserOptions: {
-    project: "./tsconfig.json",
+    project: './tsconfig.json',
   },
-  plugins: ["react", "react-hooks", "@typescript-eslint"],
+  plugins: ['react', 'react-hooks', '@typescript-eslint'],
   rules: {
-    indent: ["error", 2, {SwitchCase: 1}],
+    indent: ['error', 2, {SwitchCase: 1}],
     quotes: [
-      "error",
-      "double",
+      'error',
+      'single',
       {
         avoidEscape: true,
         allowTemplateLiterals: true,
       },
     ],
 
-    "no-empty-function": "off",
-    "@typescript-eslint/no-empty-function": "off",
-    "@typescript-eslint/no-unsafe-assignment": "off",
-    "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/no-unsafe-member-access": "off",
-    "@typescript-eslint/no-unsafe-call": "off",
-    "@typescript-eslint/no-unsafe-argument": "off",
-    "@typescript-eslint/no-unsafe-return": "off",
-    "@typescript-eslint/require-await": "off",
-    "@typescript-eslint/no-floating-promises": "off",
-    "@typescript-eslint/no-misused-promises": "off",
-    "react/display-name": "off",
+    'no-empty-function': 'off',
+    '@typescript-eslint/no-empty-function': 'off',
+    '@typescript-eslint/no-unsafe-assignment': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-unsafe-member-access': 'off',
+    '@typescript-eslint/no-unsafe-call': 'off',
+    '@typescript-eslint/no-unsafe-argument': 'off',
+    '@typescript-eslint/no-unsafe-return': 'off',
+    '@typescript-eslint/require-await': 'off',
+    '@typescript-eslint/no-floating-promises': 'off',
+    '@typescript-eslint/no-misused-promises': 'off',
+    'react/display-name': 'off',
     // 'react/prop-types': 'off',
-    "no-unused-vars": "off", // Disable the base rule
-    "@typescript-eslint/no-unused-vars": [
-      "warn", // Change this to 'error' if you prefer errors over warnings
+    'no-unused-vars': 'off', // Disable the base rule
+    '@typescript-eslint/no-unused-vars': [
+      'warn', // Change this to 'error' if you prefer errors over warnings
       {
-        vars: "all",
-        args: "after-used",
+        vars: 'all',
+        args: 'after-used',
         ignoreRestSiblings: true,
-        argsIgnorePattern: "^_",
+        argsIgnorePattern: '^_',
       },
     ],
   },
   settings: {
     react: {
-      version: "detect",
+      version: 'detect',
     },
   },
-  ignorePatterns: ["!.eslintrc.js"],
+  ignorePatterns: ['!.eslintrc.js'],
 };

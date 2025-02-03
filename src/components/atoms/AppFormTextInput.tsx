@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 import {
   useController,
   UseControllerProps,
   useFormContext,
-} from "react-hook-form";
-import AppTextInput, {IAppTextInputProps} from "./AppTextInput";
+} from 'react-hook-form';
+import AppTextInput, {IAppTextInputProps} from './AppTextInput';
 
 interface TextInputProps extends IAppTextInputProps, UseControllerProps {
   name: string;
@@ -17,7 +17,7 @@ const ControlledInput: React.FC<TextInputProps> = props => {
   const hasError = Boolean(formState?.errors[name]);
   return (
     <AppTextInput
-      error={hasError ? formState.errors[name]?.message?.toString() : ""}
+      error={hasError ? formState.errors[name]?.message?.toString() : ''}
       variant="outlined"
       autoCapitalize="none"
       textAlign="left"
@@ -34,11 +34,11 @@ export const AppFormTextInput: React.FC<TextInputProps> = props => {
   const formContext = useFormContext();
 
   if (!formContext) {
-    console.error("TextInput must be wrapped by the FormProvider");
+    console.error('TextInput must be wrapped by the FormProvider');
     return null;
   }
   if (!props.name) {
-    console.error("Name must be defined for TextInput");
+    console.error('Name must be defined for TextInput');
     return null;
   }
 

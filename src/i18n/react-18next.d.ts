@@ -1,5 +1,5 @@
-import "i18next";
-import {en, es, hi} from "./resources";
+import 'i18next';
+import {en, es, hi} from './resources';
 
 /**
  * Extend the i18next namespace to include our custom types.
@@ -10,7 +10,7 @@ import {en, es, hi} from "./resources";
  *
  * @see https://github.com/i18next/i18next/issues/1701
  */
-declare module "i18next" {
+declare module 'i18next' {
   /**
    * Our custom type options.
    *
@@ -20,7 +20,7 @@ declare module "i18next" {
     /**
      * The default namespace.
      */
-    defaultNS: "en";
+    defaultNS: 'en';
     /**
      * The resources object.
      *
@@ -51,7 +51,7 @@ declare module "i18next" {
  */
 declare global {
   //! Add your supported languages here.
-  type ISelectedLangauge = "auto" | "en" | "hi" | "es";
+  type ISelectedLangauge = 'auto' | 'en' | 'hi' | 'es';
 
   type IAppLocalizationContext = {
     currentLanguage: ISelectedLangauge; // Currently applied language

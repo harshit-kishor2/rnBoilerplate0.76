@@ -1,8 +1,8 @@
-import {AppText, AppVectorIcon} from "@app/components";
-import {IconType} from "@app/components/atoms/AppVectorIcon";
-import {useNavigation} from "@react-navigation/native"; // For navigation to go back
-import React from "react";
-import {Pressable, StyleSheet, View} from "react-native";
+import {AppText, AppVectorIcon} from '@app/components';
+import {IconType} from '@app/components/atoms/AppVectorIcon';
+import {useAppNavigation} from '@app/navigation';
+import React from 'react';
+import {Pressable, StyleSheet, View} from 'react-native';
 
 interface AppHeaderProps {
   title: string;
@@ -13,9 +13,9 @@ interface AppHeaderProps {
 const AppHeader: React.FC<AppHeaderProps> = ({
   title,
   onBackPress,
-  backgroundColor = "#fff",
+  backgroundColor = '#fff',
 }) => {
-  const navigation = useNavigation();
+  const navigation = useAppNavigation();
 
   // Default behavior for the back button (goes back to previous screen)
   const handleBackPress = onBackPress ?? (() => navigation.goBack());
@@ -38,22 +38,22 @@ const AppHeader: React.FC<AppHeaderProps> = ({
 
 const styles = StyleSheet.create({
   header: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     height: 60,
     paddingHorizontal: 16,
-    borderBottomColor: "#ccc",
+    borderBottomColor: '#ccc',
     borderBottomWidth: 0.4,
     marginBottom: 8,
   },
   backButton: {
-    position: "absolute",
+    position: 'absolute',
     left: 16,
     padding: 8,
   },
   placeholder: {
-    position: "absolute",
+    position: 'absolute',
     right: 16,
     width: 24, // Placeholder width
   },

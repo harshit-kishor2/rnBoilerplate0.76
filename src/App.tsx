@@ -1,14 +1,14 @@
-import {CrashShield} from "@app/components";
-import {AppLocalizationProvider} from "@app/i18n";
-import CombinedContextProvider from "@app/store/context-providers";
-import PersistedReduxProvider from "@app/store/redux";
-import {AppThemeProvider} from "@app/theme";
-import React from "react";
-import {StyleSheet} from "react-native";
-import {GestureHandlerRootView} from "react-native-gesture-handler";
-import {SafeAreaProvider} from "react-native-safe-area-context";
-import Toast from "react-native-toast-message";
-import AppNavigation from "./navigation/AppNavigation";
+import {CrashShield} from '@app/components';
+import {AppLocalizationProvider} from '@app/i18n';
+import CombinedContextProvider from '@app/store/context-providers';
+import PersistedReduxProvider from '@app/store/redux';
+import {AppThemeProvider} from '@app/theme';
+import React from 'react';
+import {StyleSheet} from 'react-native';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import Toast from 'react-native-toast-message';
+import {AppNavigationContainer} from './navigation';
 
 const App: React.FC = () => {
   return (
@@ -20,7 +20,7 @@ const App: React.FC = () => {
               <AppLocalizationProvider defaultLanguage="en">
                 <CombinedContextProvider>
                   <PersistedReduxProvider>
-                    <AppNavigation />
+                    <AppNavigationContainer />
                   </PersistedReduxProvider>
                 </CombinedContextProvider>
               </AppLocalizationProvider>

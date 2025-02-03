@@ -1,7 +1,7 @@
-import {useAppTheme} from "@app/theme";
-import React, {useState} from "react";
-import {ActivityIndicator, StyleSheet, View} from "react-native";
-import {WebView} from "react-native-webview";
+import {useAppTheme} from '@app/theme';
+import React, {useState} from 'react';
+import {ActivityIndicator, StyleSheet, View} from 'react-native';
+import {WebView} from 'react-native-webview';
 
 interface IAppWebViewProps {
   url: string;
@@ -26,7 +26,7 @@ const AppWebView: React.FC<IAppWebViewProps> = ({url, onError}) => {
         allowsBackForwardNavigationGestures
         scalesPageToFit={true}
         allowFileAccess={true}
-        originWhitelist={["*"]}
+        originWhitelist={['*']}
         javaScriptCanOpenWindowsAutomatically={true}
         // renderLoading={() => <ActivityIndicator size="large" color={theme.colors.primary} />}
         // startInLoadingState={true}
@@ -43,16 +43,16 @@ const AppWebView: React.FC<IAppWebViewProps> = ({url, onError}) => {
 
 const styles = StyleSheet.create({
   activity: {
-    position: "absolute",
+    position: 'absolute',
     top: 0,
     bottom: 0,
     left: 0,
     right: 0,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   webview: {
-    backgroundColor: "transparent",
+    backgroundColor: 'transparent',
     flex: 1,
   },
 });

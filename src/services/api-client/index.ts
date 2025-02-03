@@ -2,9 +2,9 @@ import {
   ApiConst,
   appTokenLocalStorage,
   appTokenLocalStorageKeys,
-} from "./api-client-utils";
-import axios from "axios";
-import * as AxiosLogger from "axios-logger";
+} from './api-client-utils';
+import axios from 'axios';
+import * as AxiosLogger from 'axios-logger';
 
 // Create Axios Instance
 const apiClient = axios.create({
@@ -33,12 +33,12 @@ apiClient.interceptors.request.use(
         config.headers.Authorization = `Bearer ${accessToken}`;
       }
     } catch (error) {
-      console.error("Error adding Authorization header:", error);
+      console.error('Error adding Authorization header:', error);
     }
     return config;
   },
   error => {
-    console.error("Request Error:", error);
+    console.error('Request Error:', error);
     return Promise.reject(new Error(error.message));
   }
 );
@@ -65,11 +65,11 @@ apiClient.interceptors.response.use(
         handleApiError(error);
       }
     } else if (error.request) {
-      console.error("No Response from Server:", error.request);
-      console.error("Network Error", "Please check your internet connection.");
+      console.error('No Response from Server:', error.request);
+      console.error('Network Error', 'Please check your internet connection.');
     } else {
-      console.error("Request Setup Error:", error.message);
-      console.error("Error", "An unexpected error occurred.");
+      console.error('Request Setup Error:', error.message);
+      console.error('Error', 'An unexpected error occurred.');
     }
     return Promise.reject(new Error(error.message));
   }
@@ -78,26 +78,26 @@ apiClient.interceptors.response.use(
 // Global Error Handler Function
 const handleApiError = (error: any) => {
   const {status, data} = error.response;
-  const errorMessage = data?.message || "An unexpected error occurred.";
+  const errorMessage = data?.message || 'An unexpected error occurred.';
   switch (status) {
     case 400:
-      console.error("Bad Request", errorMessage);
+      console.error('Bad Request', errorMessage);
       break;
     case 401:
-      console.error("Unauthorized", "Please log in again.");
+      console.error('Unauthorized', 'Please log in again.');
       handleLogout();
       break;
     case 403:
-      console.error("Forbidden", "You do not have access to this resource.");
+      console.error('Forbidden', 'You do not have access to this resource.');
       break;
     case 404:
-      console.error("Not Found", "The requested resource could not be found.");
+      console.error('Not Found', 'The requested resource could not be found.');
       break;
     case 500:
-      console.error("Server Error", "An internal server error occurred.");
+      console.error('Server Error', 'An internal server error occurred.');
       break;
     default:
-      console.error("Error", errorMessage);
+      console.error('Error', errorMessage);
   }
 };
 
@@ -108,7 +108,7 @@ const refreshTokens = async (): Promise<string | null> => {
       appTokenLocalStorageKeys.refresh_token
     );
     if (!refreshToken) {
-      throw new Error("No refresh token available.");
+      throw new Error('No refresh token available.');
     }
     const response = await axios.post(ApiConst.REFRESH_TOKEN_PATH, {
       refreshToken,
@@ -117,7 +117,7 @@ const refreshTokens = async (): Promise<string | null> => {
     setAllApiTokens(accessToken, newRefreshToken);
     return accessToken;
   } catch (error) {
-    console.error("Token Refresh Error:", error);
+    console.error('Token Refresh Error:', error);
     return null;
   }
 };
@@ -126,12 +126,12 @@ const refreshTokens = async (): Promise<string | null> => {
 export const handleLogout = () => {
   try {
     appTokenLocalStorage.clearAll();
-    console.log("Session Expired", "You have been logged out.");
+    console.log('Session Expired', 'You have been logged out.');
     // Clear all stored data
     // Navigate to LoginScreen or restart the app
     // e.g., resetAndNavigate('LoginScreen');
   } catch (error) {
-    console.error("Error during logout:", error);
+    console.error('Error during logout:', error);
   }
 };
 

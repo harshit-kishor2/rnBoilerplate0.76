@@ -44,7 +44,7 @@ module.exports = {
   ],
   env: {
     production: {
-      plugins: ["react-native-paper/babel"],
+      plugins: ['react-native-paper/babel'],
     },
   },
 };
@@ -70,7 +70,7 @@ In your App.tsx (or main entry file), wrap your app with the `AppThemeProvider` 
 Example usage:
 
 ```javascript
-import {AppThemeProvider} from "@app/theme"; // Path to your theme module
+import {AppThemeProvider} from '@app/theme'; // Path to your theme module
 
 const App = () => (
   <AppThemeProvider autoDetect={true}>
@@ -98,7 +98,7 @@ const {currentTheme, setSelectedThemeType, selectedThemeType} =
 The useAppTheme hook provides the theme object.
 
 ```javascript
-import {useAppTheme} from "./theme";
+import {useAppTheme} from './theme';
 
 const MyComponent = () => {
   const theme = useAppTheme();
@@ -111,8 +111,8 @@ const homeScreenStyles = (theme: IAppTheme) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
+      justifyContent: 'center',
+      alignItems: 'center',
       backgroundColor: theme.colors.background,
     },
     text: {

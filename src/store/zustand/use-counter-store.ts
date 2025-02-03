@@ -1,6 +1,6 @@
-import {create, StateCreator} from "zustand";
-import {createJSONStorage, persist} from "zustand/middleware";
-import {zustandPersistStorage} from "./config";
+import {create, StateCreator} from 'zustand';
+import {createJSONStorage, persist} from 'zustand/middleware';
+import {zustandPersistStorage} from './config';
 
 const SLICE_FEATURE_KEY = `counter-store`; // Key for persistent storage
 

@@ -91,7 +91,7 @@ This subfolder contains SVG files. SVG (Scalable Vector Graphics) files are used
 `Update metro.config.js`
 
 ```javascript
-const {getDefaultConfig, mergeConfig} = require("@react-native/metro-config");
+const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
 
 const defaultConfig = getDefaultConfig(__dirname);
 const {assetExts, sourceExts} = defaultConfig.resolver;
@@ -104,11 +104,11 @@ const {assetExts, sourceExts} = defaultConfig.resolver;
  */
 const config = {
   transformer: {
-    babelTransformerPath: require.resolve("react-native-svg-transformer"),
+    babelTransformerPath: require.resolve('react-native-svg-transformer'),
   },
   resolver: {
-    assetExts: assetExts.filter(ext => ext !== "svg"),
-    sourceExts: [...sourceExts, "svg"],
+    assetExts: assetExts.filter(ext => ext !== 'svg'),
+    sourceExts: [...sourceExts, 'svg'],
   },
 };
 
@@ -153,24 +153,24 @@ Create an `index.ts` file inside the `assets` folder and export all assets from 
 
 ```typescript
 // Import all assets files here
-import GIFS from "./gif";
-import IMAGES from "./images";
-import LOTTIES from "./lottie";
-import {SVGIcons} from "./svg";
+import GIFS from './gif';
+import IMAGES from './images';
+import LOTTIES from './lottie';
+import {SVGIcons} from './svg';
 
 // Import all Fonts  from here
 const FontConst = {
   Roboto: {
-    light: "Roboto-Light",
-    regular: "Roboto-Regular",
-    medium: "Roboto-Medium",
-    bold: "Roboto-Bold",
+    light: 'Roboto-Light',
+    regular: 'Roboto-Regular',
+    medium: 'Roboto-Medium',
+    bold: 'Roboto-Bold',
   },
   Satoshi: {
-    light: "Satoshi-Light",
-    regular: "Satoshi-Regular",
-    medium: "Satoshi-Medium",
-    bold: "Satoshi-Bold",
+    light: 'Satoshi-Light',
+    regular: 'Satoshi-Regular',
+    medium: 'Satoshi-Medium',
+    bold: 'Satoshi-Bold',
   },
 };
 

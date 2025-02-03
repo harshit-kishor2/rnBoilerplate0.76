@@ -1,6 +1,6 @@
-import Assets from "@app/assets";
-import {useAppTheme} from "@app/theme";
-import React from "react";
+import Assets from '@app/assets';
+import {useAppTheme} from '@app/theme';
+import React from 'react';
 import {
   AnimatableNumericValue,
   StyleSheet,
@@ -9,7 +9,7 @@ import {
   TextStyle,
   GestureResponderEvent,
   Pressable,
-} from "react-native";
+} from 'react-native';
 
 interface AppTextProps {
   text?: string;
@@ -17,7 +17,7 @@ interface AppTextProps {
   align?: TextAlign;
   style?: TextStyle | TextStyle[];
   numberOfLines?: number;
-  ellipsizeMode?: "head" | "middle" | "tail" | "clip";
+  ellipsizeMode?: 'head' | 'middle' | 'tail' | 'clip';
   textTransform?: TextTransform;
   adjustsFontSizeToFit?: boolean;
   fontSize?: number;
@@ -33,11 +33,11 @@ interface AppTextProps {
 const AppText: React.FC<AppTextProps> = ({
   text,
   children,
-  align = "auto",
+  align = 'auto',
   style,
   fontSize = 16,
   fontFamily = Assets.font.Roboto.regular,
-  fontWeight = "normal",
+  fontWeight = 'normal',
   lineHeight,
   color,
   opacity,

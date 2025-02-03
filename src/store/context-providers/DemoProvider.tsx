@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useMemo, useState} from "react";
+import React, {createContext, useContext, useMemo, useState} from 'react';
 
 interface IDemoContext {
   currentState: any;
@@ -11,15 +11,15 @@ export const useDemoContext = (): IDemoContext => {
   const context = useContext(DemoContext);
   if (!context) {
     throw new Error(
-      "useDemoContext must be used within DemoProvider. " +
-        "Make sure you have wrapped your app with DemoProvider."
+      'useDemoContext must be used within DemoProvider. ' +
+        'Make sure you have wrapped your app with DemoProvider.'
     );
   }
   return context;
 };
 
 export const DemoProvider = ({children}: React.PropsWithChildren) => {
-  const [currentState, setCurrentState] = useState<any>("");
+  const [currentState, setCurrentState] = useState<any>('');
 
   //! You can put here extra logic for global state management
 

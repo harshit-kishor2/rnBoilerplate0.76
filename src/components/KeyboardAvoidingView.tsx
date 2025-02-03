@@ -1,6 +1,6 @@
-import React from "react";
-import {StyleSheet} from "react-native";
-import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
+import React from 'react';
+import {StyleSheet} from 'react-native';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 interface IKeyboardAvoidingWrapperProps {
   children: React.ReactNode;

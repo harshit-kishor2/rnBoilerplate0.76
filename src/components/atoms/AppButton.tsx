@@ -1,4 +1,4 @@
-import React, {useMemo} from "react";
+import React, {useMemo} from 'react';
 import {
   StyleProp,
   StyleSheet,
@@ -8,15 +8,15 @@ import {
   ActivityIndicator,
   Pressable,
   PressableProps,
-} from "react-native";
+} from 'react-native';
 
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withSpring,
-} from "react-native-reanimated";
-import AppText from "./AppText";
-import {useAppTheme} from "@app/theme";
+} from 'react-native-reanimated';
+import AppText from './AppText';
+import {useAppTheme} from '@app/theme';
 
 const AnimatedButtonComponent = Animated.createAnimatedComponent(Pressable);
 
@@ -36,7 +36,7 @@ interface ExtraButtonProps {
 
 export type AnimatedButtonProps = Omit<
   PressableProps,
-  "onPressIn" | "onPressOut" | "style"
+  'onPressIn' | 'onPressOut' | 'style'
 > & {
   containerStyle?: StyleProp<ViewStyle>;
   animated?: boolean;
@@ -102,7 +102,7 @@ const AppButton: React.FC<ButtonProps> = props => {
         buttonContainerStyle,
         {
           backgroundColor: outlined
-            ? "transparent"
+            ? 'transparent'
             : backgroundColor ?? theme.colors.primary,
           borderColor: backgroundColor ?? theme.colors.primary,
           borderWidth: outlined ? 1 : 0,
@@ -130,17 +130,17 @@ export default AppButton;
 const createStyles = (theme: IAppTheme) =>
   StyleSheet.create({
     buttonContainer: {
-      alignItems: "center",
+      alignItems: 'center',
       borderRadius: 60,
       height: 50,
-      width: "100%",
+      width: '100%',
     },
     titleContainer: {
-      alignItems: "center",
-      flexDirection: "row",
-      height: "100%",
-      justifyContent: "center",
-      width: "100%",
+      alignItems: 'center',
+      flexDirection: 'row',
+      height: '100%',
+      justifyContent: 'center',
+      width: '100%',
     },
     titleStyle: {
       color: theme.colors.text,

@@ -1,6 +1,6 @@
-import {useTheme} from "react-native-paper";
+import {useTheme} from 'react-native-paper';
 
-export {AppThemeProvider, useAppThemeContext} from "./provider";
+export {AppThemeProvider, useAppThemeContext} from './provider';
 
 export const useAppTheme = () => {
   const theme = useTheme<IAppTheme>();

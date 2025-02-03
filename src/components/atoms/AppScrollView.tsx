@@ -1,12 +1,12 @@
-import React, {ReactNode, useRef, useState} from "react";
-import {ScrollView, ScrollViewProps, StyleSheet, View} from "react-native";
-import {useAppTheme} from "@app/theme";
-import AppVectorIcon, {IconType} from "./AppVectorIcon";
+import React, {ReactNode, useRef, useState} from 'react';
+import {ScrollView, ScrollViewProps, StyleSheet, View} from 'react-native';
+import {useAppTheme} from '@app/theme';
+import AppVectorIcon, {IconType} from './AppVectorIcon';
 import {
   useAnimatedStyle,
   withRepeat,
   withSpring,
-} from "react-native-reanimated"; // Import necessary reanimated hooks
+} from 'react-native-reanimated'; // Import necessary reanimated hooks
 
 interface AppScrollViewProps extends ScrollViewProps {
   children?: ReactNode | ReactNode[];
@@ -49,7 +49,7 @@ const AppScrollView: React.FC<AppScrollViewProps> = props => {
         scrollEventThrottle={16}
         keyboardShouldPersistTaps="handled"
         ref={scrollRef}
-        contentContainerStyle={{flexGrow: 1, alignItems: "center"}}
+        contentContainerStyle={{flexGrow: 1, alignItems: 'center'}}
         style={{flex: 1}}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
@@ -77,12 +77,12 @@ export default AppScrollView;
 
 const styles = StyleSheet.create({
   iconContainer: {
-    position: "absolute",
+    position: 'absolute',
     zIndex: 10,
     bottom: 10,
     right: 10,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   icon: {
     width: 40,

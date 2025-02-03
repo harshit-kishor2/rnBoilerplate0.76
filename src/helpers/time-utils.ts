@@ -1,9 +1,9 @@
 // time related utils using dayjs library https://day.js.org/
-import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
-import timezone from "dayjs/plugin/timezone";
-import duration from "dayjs/plugin/duration";
-import relativeTime from "dayjs/plugin/relativeTime";
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+import duration from 'dayjs/plugin/duration';
+import relativeTime from 'dayjs/plugin/relativeTime';
 
 // Extend dayjs with the necessary plugins
 dayjs.extend(utc);
@@ -14,21 +14,21 @@ dayjs.extend(relativeTime);
 // Format a date to a readable string (e.g., 'January 1, 2024')
 const formatDate = (
   date: string | Date,
-  format: string = "MMMM D, YYYY"
+  format: string = 'MMMM D, YYYY'
 ): string => {
   return dayjs(date).format(format);
 };
 
 // Get the current time in a specific timezone
-const getCurrentTimeInZone = (tz: string = "UTC"): string => {
-  return dayjs().tz(tz).format("YYYY-MM-DD HH:mm:ss");
+const getCurrentTimeInZone = (tz: string = 'UTC'): string => {
+  return dayjs().tz(tz).format('YYYY-MM-DD HH:mm:ss');
 };
 
 // Add time to a date (e.g., add 5 days)
 const addTime = (
   date: string | Date,
   value: number,
-  unit: dayjs.ManipulateType = "day"
+  unit: dayjs.ManipulateType = 'day'
 ): string => {
   return dayjs(date).add(value, unit).format();
 };
@@ -37,7 +37,7 @@ const addTime = (
 const subtractTime = (
   date: string | Date,
   value: number,
-  unit: dayjs.ManipulateType = "hour"
+  unit: dayjs.ManipulateType = 'hour'
 ): string => {
   return dayjs(date).subtract(value, unit).format();
 };
@@ -46,7 +46,7 @@ const subtractTime = (
 const getDifference = (
   date1: string | Date,
   date2: string | Date,
-  unit: dayjs.ManipulateType = "day"
+  unit: dayjs.ManipulateType = 'day'
 ): number => {
   return dayjs(date1).diff(dayjs(date2), unit);
 };
@@ -68,7 +68,7 @@ const isPast = (date: string | Date): boolean => {
 
 // Check if a date is today
 const isToday = (date: string | Date): boolean => {
-  return dayjs(date).isSame(dayjs(), "day");
+  return dayjs(date).isSame(dayjs(), 'day');
 };
 
 // Convert a date to UTC format
@@ -77,18 +77,18 @@ const toUTC = (date: string | Date): string => {
 };
 
 // Convert a date to a specific timezone
-const toTimezone = (date: string | Date, tz: string = "UTC"): string => {
-  return dayjs(date).tz(tz).format("YYYY-MM-DD HH:mm:ss");
+const toTimezone = (date: string | Date, tz: string = 'UTC'): string => {
+  return dayjs(date).tz(tz).format('YYYY-MM-DD HH:mm:ss');
 };
 
 // Get the start of the day for a date
 const startOfDay = (date: string | Date): string => {
-  return dayjs(date).startOf("day").format();
+  return dayjs(date).startOf('day').format();
 };
 
 // Get the end of the day for a date
 const endOfDay = (date: string | Date): string => {
-  return dayjs(date).endOf("day").format();
+  return dayjs(date).endOf('day').format();
 };
 
 const TimeUtils = {

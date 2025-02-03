@@ -1,3 +1,3 @@
-import useSplashTimeout from "./useSplashTimeout";
+import useSplashTimeout from './useSplashTimeout';
 
 export {useSplashTimeout};
