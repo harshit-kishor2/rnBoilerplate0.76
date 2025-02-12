@@ -1,5 +1,7 @@
-copy gesture-handler, githook, scripts, src, types folder
-Replace these files
+### copy these folders
+gesture-handler, githook, scripts, src, types 
+
+### Replace these files
 .eslintignore
 .eslintrc.js
 .prettierrc.js
@@ -11,11 +13,16 @@ lefthook.yml
 react-native.config.js
 MainActivity.kt
 
+```bash
 yarn add react-native-safe-area-context react-native-gesture-handler react-native-reanimated react-native-paper react-i18next i18next dayjs react-native-localize react-native-mmkv react-native-vector-icons react-native-fast-image lottie-react-native react-native-svg @react-navigation/native react-native-screens @react-navigation/stack @react-native-masked-view/masked-view @react-navigation/drawer @react-navigation/bottom-tabs zustand react-native-exception-handler react-native-restart react-native-network-logger react-native-keyboard-aware-scroll-view react-native-webview react-hook-form zod @hookform/resolvers react-native-toast-message react-native-modal @shopify/flash-list react-native-device-info react-native-iphone-screen-helper react-native-size-matters react-native-responsive-fontsize @react-native-community/netinfo @reduxjs/toolkit redux-persist react-redux
+```
 
+```bash
 yarn add --dev babel-plugin-module-resolver @evilmartians/lefthook @types/i18next @types/react-native-vector-icons react-native-svg-transformer inquirer
+```
 
-Update there scripts inside package.json
+### Update there scripts inside package.json
+```shell
 
 "android": "react-native run-android",
 "ios": "react-native run-ios",
@@ -50,3 +57,4 @@ Update there scripts inside package.json
 "assets": "cd scripts && node generateAssets.js",
 "refresh": "bash ./scripts/refresh.sh",
 "link-assets": "npx react-native-asset"
+```
